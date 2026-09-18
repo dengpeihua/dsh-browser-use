@@ -57,14 +57,14 @@ test("quota-interrupted execution remains unjudged until it is rerun", async () 
   assert.equal(result.cost, 0)
 })
 
-test("both judge modes see browser evidence and one schema repair is bounded and accounted", async () => {
+test("evidence judge sees browser evidence and one schema repair is bounded and accounted", async () => {
   const directory = mkdtempSync(join(tmpdir(), "dsh-judge-repair-"))
   try {
     writeFileSync(join(directory, "session.json"), JSON.stringify([event(85, "New model. Available September 18. From $1199.")]))
     const prompts = []
-    const result = await judgeResult(completed, config, "reference", directory, async () => response('{}'))
+    const result = await judgeResult(completed, config, "evidence", directory, async () => response('{}'))
     assert.equal(result.pass, null)
-    const repaired = await judgeResult(completed, config, "reference", directory, async (_config, messages) => {
+    const repaired = await judgeResult(completed, config, "evidence", directory, async (_config, messages) => {
       prompts.push(JSON.stringify(messages))
       return response(prompts.length === 1 ? '{"pass":true,"reason":"observed","confidence": high}' : '{"pass":true,"reason":"observed","confidence":"high","evidence_seqs":[85]}')
     })
