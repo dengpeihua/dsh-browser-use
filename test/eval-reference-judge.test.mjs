@@ -106,6 +106,6 @@ test("judge reset removes only prior judge content and preserves the latest agen
     assert.equal(existsSync(join(directory, "a", "session.json")), true)
     assert.equal(existsSync(join(directory, "a", "judge-evidence.ndjson")), false)
     assert.equal(existsSync(join(directory, "summary.json")), false)
-    assert.equal(readJson(join(directory, "manifest.json")).judge_mode, "none")
+    assert.equal(readJson(join(directory, "manifest.json")).judge_mode, "reference")
   } finally { rmSync(directory, { recursive: true, force: true }) }
 })
