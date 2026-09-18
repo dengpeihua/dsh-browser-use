@@ -1,10 +1,13 @@
 import assert from "node:assert/strict"
 import { createHash } from "node:crypto"
-import { readFileSync, mkdtempSync, rmSync } from "node:fs"
+import { readFileSync, mkdtempSync, rmSync, mkdirSync, writeFileSync, existsSync, readdirSync } from "node:fs"
 import test from "node:test"
 import { tmpdir } from "node:os"
 import { join } from "node:path"
 import { judgeResult } from "../scripts/eval/judge.mjs"
+import { hash, readJson, writeJson } from "../scripts/eval/core.mjs"
+import { readRunResults, writeResultIndex } from "../scripts/eval/state.mjs"
+import { resetJudgeArtifacts } from "../scripts/eval/reset-judge.mjs"
 
 const promptPath = new URL("../assets/benchmark/judge-prompt.md", import.meta.url)
 const promptSha256 = "bcdf403484823037eaeb6cec7918b966fe90ee31a30bc8d69094d2ff42747ccf"
@@ -76,3 +79,33 @@ test("reference judge asks the LLM to grade every result and rejects non-array o
   } finally { rmSync(directory, { recursive: true, force: true }) }
 })
 
+test("judge reset removes only prior judge content and preserves the latest agent attempt", () => {
+  const directory = mkdtempSync(join(tmpdir(), "dsh-judge-reset-"))
+  try {
+    const original = { task_id: "a", status: "completed", final_answer: "first", attempt_number: 1, attempt_directory: "a", judge_mode: "evidence", judge_result: { pass: true, reason: "old" } }
+    const replacement = { ...original, final_answer: "second", attempt_number: 2, attempt_directory: join("a", "attempts", "2"), judge_result: { pass: false, reason: "old replacement" } }
+    writeResultIndex(directory, [original])
+    mkdirSync(join(directory, "result-revisions"))
+    writeJson(join(directory, "result-revisions", "00000001.json"), { previous: hash(original), result: replacement })
+    writeJson(join(directory, "manifest.json"), { version: 3, judge_mode: "evidence", tasks: [{ task_id: "a", confirmed_task: "answer", website: "https://example.com" }] })
+    mkdirSync(join(directory, "a", "attempts", "2"), { recursive: true })
+    writeFileSync(join(directory, "a", "session.json"), "[]")
+    writeFileSync(join(directory, "a", "judge-evidence.ndjson"), "old judge trace\n")
+    writeFileSync(join(directory, "a", "attempts", "2", "judge-reference.ndjson"), "old judge trace\n")
+    for (const file of ["summary.json", "report.md", "task-metrics.json", "task-metrics.csv", "task-metrics.md", "recovery.json", "judged-evidence.json"]) writeFileSync(join(directory, file), "old judge aggregate\n")
+
+    const reset = resetJudgeArtifacts(directory)
+    assert.equal(reset.results, 1)
+    assert.equal(reset.judge_logs_removed, 2)
+    const current = readRunResults(directory)
+    assert.equal(current[0].final_answer, "second")
+    assert.equal(current[0].attempt_number, 2)
+    assert.equal("judge_result" in current[0], false)
+    assert.equal("judge_mode" in current[0], false)
+    assert.equal(readdirSync(join(directory, "result-revisions")).length, 1)
+    assert.equal(existsSync(join(directory, "a", "session.json")), true)
+    assert.equal(existsSync(join(directory, "a", "judge-evidence.ndjson")), false)
+    assert.equal(existsSync(join(directory, "summary.json")), false)
+    assert.equal(readJson(join(directory, "manifest.json")).judge_mode, "none")
+  } finally { rmSync(directory, { recursive: true, force: true }) }
+})
