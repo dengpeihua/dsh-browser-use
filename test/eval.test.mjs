@@ -42,7 +42,7 @@ test("failure, timeout and unjudged tasks remain in the selected denominator", (
   assert.equal(result.avg_cost_usd, null)
   assert.throws(() => summarize([...rows, rows[0]], tasks), /duplicate/)
 })
-test("judge never coerces string false to true", () => {
+test("evidence judge schema parser never coerces string false to true", () => {
   assert.throws(() => parseJudgment('{"pass":"false","reason":"bad","confidence":"high"}'))
   assert.throws(() => parseJudgment('{"pass":true}'))
   assert.equal(parseJudgment('```json\n{"pass":false,"reason":"missing requirement","confidence":"high"}\n```').pass, false)
