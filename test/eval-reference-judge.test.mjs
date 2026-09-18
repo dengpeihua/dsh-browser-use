@@ -98,7 +98,8 @@ test("reference judge asks the LLM to grade every result and rejects non-array o
 test("judge reset removes only prior judge content and preserves the latest agent attempt", () => {
   const directory = mkdtempSync(join(tmpdir(), "dsh-judge-reset-"))
   try {
-    const original = { task_id: "a", status: "completed", final_answer: "first", attempt_number: 1, attempt_directory: "a", judge_mode: "evidence", judge_result: { pass: true, reason: "old" } }
+    const oldMetrics = { metrics_version: 1, agent_cost_usd: 0.5, judge_cost_usd: 0.1, total_cost_usd: 0.6, judge_duration_ms: 1000 }
+    const original = { task_id: "a", status: "completed", final_answer: "first", attempt_number: 1, attempt_directory: "a", cost: 0.5, duration_ms: 2000, metrics: oldMetrics, evaluation_finished_at: "old-judge-time", judge_mode: "evidence", judge_result: { pass: true, reason: "old" } }
     const replacement = { ...original, final_answer: "second", attempt_number: 2, attempt_directory: join("a", "attempts", "2"), judge_result: { pass: false, reason: "old replacement" } }
     writeResultIndex(directory, [original])
     mkdirSync(join(directory, "result-revisions"))
@@ -118,6 +119,10 @@ test("judge reset removes only prior judge content and preserves the latest agen
     assert.equal(current[0].attempt_number, 2)
     assert.equal("judge_result" in current[0], false)
     assert.equal("judge_mode" in current[0], false)
+    assert.equal("evaluation_finished_at" in current[0], false)
+    assert.equal(current[0].metrics.agent_cost_usd, 0.5)
+    assert.equal(current[0].metrics.judge_cost_usd, null)
+    assert.equal(current[0].metrics.judge_duration_ms, null)
     assert.equal(readdirSync(join(directory, "result-revisions")).length, 1)
     assert.equal(existsSync(join(directory, "a", "session.json")), true)
     assert.equal(existsSync(join(directory, "a", "judge-evidence.ndjson")), false)
