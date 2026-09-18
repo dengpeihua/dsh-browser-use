@@ -30,6 +30,16 @@ export function executionFailure(result) {
   return result.infrastructure_error || infrastructureFailure(result.error) || result.model_calls?.at(-1)?.errorKind || null
 }
 
+export function judgeOnlyPlan(results, judgeMode) {
+  return results
+    .filter(result => result.judge_mode !== judgeMode || typeof result.judge_result?.pass !== "boolean")
+    .map(result => ({ task_id: result.task_id, action: "judge" }))
+}
+
+export function resultHaltReason(result, action) {
+  return (action === "run" ? executionFailure(result) : null) || result.judge_result?.infrastructure_error || null
+}
+
 export function resumeAction(result, judgeMode = "evidence") {
   if (!result) return "run"
   if (result.status !== "completed" && (executionFailure(result) || result.error_kind === "dispatcher_interrupted" || result.error === "Run interrupted")) return "run"
