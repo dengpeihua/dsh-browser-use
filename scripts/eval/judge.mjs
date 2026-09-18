@@ -5,7 +5,7 @@ import { parseJudgment, normalizeUsage, estimateCost, appendJson, hash, infrastr
 import { summarizeCalls, outputCacheTokens } from "./metrics.mjs"
 
 function referenceJudgePrompt(task) {
-  const summary = task.tool_trace.map(t => `- ${t.tool}(${JSON.stringify(t.input).slice(0, 100)})`).join("\n")
+  const toolSummary = task.tool_trace.map(t => `- ${t.tool}(${JSON.stringify(t.input).slice(0, 100)})`).join("\n")
   return `You are evaluating whether an AI agent successfully completed a web browsing task.
 
 ## Task
@@ -13,7 +13,7 @@ Website: ${task.website}
 Instruction: ${task.task}
 
 ## Agent's Tool Usage (summary)
-${summary || "(no tools used)"}
+${toolSummary || "(no tools used)"}
 
 ## Agent's Final Answer
 ${task.final_answer.slice(0, 3000)}
