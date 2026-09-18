@@ -5,6 +5,7 @@ import { parseArgs } from "node:util"
 import { hash, readJson, readLines, writeJson } from "./core.mjs"
 import { readRunResults } from "./state.mjs"
 import { acquireRunLock } from "./backfill.mjs"
+import { taskMetrics } from "./metrics.mjs"
 
 const aggregateNames = new Set(["summary.json", "report.md", "task-metrics.json", "task-metrics.csv", "task-metrics.md", "recovery.json"])
 
@@ -14,8 +15,8 @@ function assertInside(directory, target) {
 }
 
 function stripJudge(result) {
-  const { judge_result: _judgeResult, judge_mode: _judgeMode, ...agentResult } = result
-  return agentResult
+  const { judge_result: _judgeResult, judge_mode: _judgeMode, evaluation_finished_at: _evaluationFinishedAt, metrics: _metrics, ...agentResult } = result
+  return { ...agentResult, metrics: taskMetrics(agentResult) }
 }
 
 function judgeLogs(directory) {
