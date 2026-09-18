@@ -51,7 +51,7 @@ try {
   assert.ok(ref.width > 0 && ref.height > 0)
   const observation = readLines(`${directory}/trace.ndjson`).find(t => t.type === "session/event" && t.event.type === "tool/result" && t.event.data.meta?.browserContext?.observation && t.event.data.meta.status !== "error")
   assert.ok(observation, "Fixture must produce a browser observation for the judge")
-  const judged = await judgeResult(result, config, "reference", directory, async () => ({ choices: [{ finish_reason: "stop", message: { content: JSON.stringify({ pass: true, reason: "Fixture heading matches", confidence: "high" }) } }] }))
+  const judged = await judgeResult(result, config, "reference", directory, async () => ({ choices: [{ finish_reason: "stop", message: { content: JSON.stringify([{ task_id: result.task_id, pass: true, reason: "Fixture heading matches" }]) } }] }))
   assert.equal(judged.pass, true)
   const timeout = await runHost({ ...task, task_id: "fixture-timeout" }, `${directory}/timeout`, { maxRounds: 8, timeout: 250 }, config, async (_c, _m, { signal }) => new Promise((_, reject) => {
     if (signal.aborted) reject(signal.reason)

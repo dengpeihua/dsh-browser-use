@@ -4,30 +4,17 @@ import { complete } from "./provider.mjs"
 import { parseJudgment, normalizeUsage, estimateCost, appendJson, hash, infrastructureFailure, judgeEvidence, executionFailure } from "./core.mjs"
 import { summarizeCalls, outputCacheTokens } from "./metrics.mjs"
 
-function referenceJudgePrompt(task) {
-  const toolSummary = task.tool_trace.map(t => `- ${t.tool}(${JSON.stringify(t.input).slice(0, 100)})`).join("\n")
-  return `You are evaluating whether an AI agent successfully completed a web browsing task.
+const referenceJudgePrompt = readFileSync(new URL("../../assets/benchmark/judge-prompt.md", import.meta.url), "utf8")
 
-## Task
-Website: ${task.website}
-Instruction: ${task.task}
+function referenceJudgeData(result) {
+  const task = { task_id: result.task_id, confirmed_task: result.task, website: result.website }
+  const fields = ["task_id", "website", "task", "session_id", "status", "duration_ms", "steps", "tokens", "cost", "final_answer", "tool_trace", "error", "model", "provider"]
+  const clean = Object.fromEntries(fields.filter(field => result[field] !== undefined).map(field => [field, result[field]]))
+  return `WebVoyager_data.json
+${JSON.stringify([task])}
 
-## Agent's Tool Usage (summary)
-${toolSummary || "(no tools used)"}
-
-## Agent's Final Answer
-${task.final_answer.slice(0, 3000)}
-
-## Evaluation Criteria
-Judge whether the agent's final answer satisfactorily addresses the task requirements.
-- The answer must contain the specific information requested.
-- Minor formatting differences are acceptable.
-- If the task asks for a recipe with certain criteria, the answer must reference a recipe that plausibly meets those criteria.
-- If the task asks to "find" something, the agent must have found and reported it.
-
-## Response Format
-Respond with EXACTLY one JSON object (no markdown, no extra text):
-{"pass": true/false, "reason": "brief explanation", "confidence": "high/medium/low"}`
+results.ndjson
+${JSON.stringify(clean)}`
 }
 
 function evidenceJudgePrompt(task, mode, evidence) {
@@ -46,57 +33,34 @@ Return EXACTLY one JSON object, for example {"pass":false,"reason":"Required pri
 }
 
 export function judgePrompt(task, mode, evidence = "") {
-  return mode === "reference" ? referenceJudgePrompt(task) : evidenceJudgePrompt(task, mode, evidence)
+  return mode === "reference" ? referenceJudgePrompt : evidenceJudgePrompt(task, mode, evidence)
 }
 
 async function judgeReferenceResult(result, config, mode, directory, request, calls, metrics) {
-  const rubricVersion = "opencode-browser-856867996e73f7dcc5e39827bf2af7555bd63d40-judge.ts"
-  if (result.status !== "completed" || !result.final_answer) return {
-    task_id: result.task_id,
-    mode,
-    rubric_version: rubricVersion,
-    pass: false,
-    reason: result.status === "timeout" ? "Task timed out" : result.error ?? "No answer produced",
-    confidence: "high",
-    status: "deterministic",
-    ...metrics(),
-  }
-
+  const rubricVersion = "opencode-browser-856867996e73f7dcc5e39827bf2af7555bd63d40-judge-prompt.md"
   const prompt = judgePrompt(result, mode)
-  const messages = [{ role: "user", content: prompt }]
+  const messages = [{ role: "system", content: prompt }, { role: "user", content: referenceJudgeData(result) }]
   const callStarted = Date.now()
   const call = { call_index: 1, started_at: new Date(callStarted).toISOString(), usage: null, cost: null, status: "incomplete" }
   calls.push(call)
   try {
-    const response = await request(config, messages, { signal: AbortSignal.timeout(60000) })
+    const response = await request(config, messages, { signal: AbortSignal.timeout(120000) })
     const currentUsage = normalizeUsage(response.usage)
     const currentCost = estimateCost(currentUsage, config.model, config.pricing)
     call.output_cache_tokens = outputCacheTokens(response.usage)
     Object.assign(call, { usage: currentUsage, raw_usage: response.usage ?? null, cost: currentCost, status: "success", finished_at: new Date().toISOString(), duration_ms: Date.now() - callStarted })
     appendJson(join(directory, `judge-${mode}.ndjson`), { rubric_version: rubricVersion, attempt: 1, prompt: messages, prompt_sha256: hash(messages), response, ...call }, [config.apiKey])
 
-    const raw = response.choices[0].message.content
-    const jsonMatch = raw.match(/\{[\s\S]*\}/)
-    if (jsonMatch) {
-      const parsed = JSON.parse(jsonMatch[0])
-      return {
-        task_id: result.task_id,
-        mode,
-        rubric_version: rubricVersion,
-        pass: !!parsed.pass,
-        reason: parsed.reason ?? "",
-        confidence: parsed.confidence ?? "medium",
-        status: "judged",
-        model: config.model,
-        ...metrics(),
-        prompt_sha256: hash(prompt),
-      }
-    }
-    return { task_id: result.task_id, mode, rubric_version: rubricVersion, pass: false, reason: "Judge response not parseable", confidence: "low", status: "judged", model: config.model, ...metrics(), prompt_sha256: hash(prompt) }
+    if (response.choices[0].finish_reason !== "stop") throw new Error("Judge response was truncated or requested tools")
+    const judgments = JSON.parse(response.choices[0].message.content.trim())
+    if (!Array.isArray(judgments) || judgments.length !== 1) throw new Error("Judge must return a one-entry JSON array")
+    const judgment = judgments[0]
+    if (judgment.task_id !== result.task_id || typeof judgment.pass !== "boolean" || typeof judgment.reason !== "string" || !judgment.reason.trim()) throw new Error("Invalid judge-prompt.md result schema or task_id")
+    return { task_id: result.task_id, mode, rubric_version: rubricVersion, pass: judgment.pass, reason: judgment.reason, status: "judged", model: config.model, ...metrics(), prompt_sha256: hash(prompt) }
   } catch (error) {
     Object.assign(call, { status: "error", finished_at: new Date().toISOString(), duration_ms: Date.now() - callStarted })
     appendJson(join(directory, `judge-${mode}.ndjson`), { rubric_version: rubricVersion, attempt: 1, error: error.message, ...call }, [config.apiKey])
-    return { task_id: result.task_id, mode, rubric_version: rubricVersion, pass: false, reason: `Judge error: ${error.message}`, confidence: "low", status: "judged", model: config.model, ...metrics(), prompt_sha256: hash(prompt) }
+    return { task_id: result.task_id, mode, rubric_version: rubricVersion, pass: null, reason: `Judge error: ${error.message}`, status: "judge_error", infrastructure_error: infrastructureFailure(error), model: config.model, ...metrics(), prompt_sha256: hash(prompt) }
   }
 }
 
