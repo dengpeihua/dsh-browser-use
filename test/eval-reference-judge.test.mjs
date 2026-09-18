@@ -55,7 +55,7 @@ test("reference judge follows judge-prompt.md conflict rule and evaluates error 
     const calls = []
     const judged = await judgeResult(task, config, "reference", directory, async (_config, messages, options) => {
       calls.push({ messages, options })
-      return response('[{"task_id":"Allrecipes--0","pass":true,"reason":"The answer supplies a vegetarian lasagna recipe and its 4.6-star rating."}]')
+      return response('```json\n[{"task_id":"Allrecipes--0","pass":true,"reason":"The answer supplies a vegetarian lasagna recipe and its 4.6-star rating."}]\n```')
     })
     assert.equal(calls.length, 1)
     assert.equal(createHash("sha256").update(calls[0].messages[0].content).digest("hex"), promptSha256)
