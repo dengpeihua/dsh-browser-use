@@ -52,7 +52,8 @@ async function judgeReferenceResult(result, config, mode, directory, request, ca
     appendJson(join(directory, `judge-${mode}.ndjson`), { rubric_version: rubricVersion, attempt: 1, prompt: messages, prompt_sha256: hash(messages), response, ...call }, [config.apiKey])
 
     if (response.choices[0].finish_reason !== "stop") throw new Error("Judge response was truncated or requested tools")
-    const judgments = JSON.parse(response.choices[0].message.content.trim())
+    const raw = response.choices[0].message.content.trim().replace(/^```(?:json)?\s*/i, "").replace(/\s*```$/, "")
+    const judgments = JSON.parse(raw)
     if (!Array.isArray(judgments) || judgments.length !== 1) throw new Error("Judge must return a one-entry JSON array")
     const judgment = judgments[0]
     if (judgment.task_id !== result.task_id || typeof judgment.pass !== "boolean" || typeof judgment.reason !== "string" || !judgment.reason.trim()) throw new Error("Invalid judge-prompt.md result schema or task_id")
