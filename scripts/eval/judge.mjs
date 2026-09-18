@@ -50,7 +50,7 @@ export function judgePrompt(task, mode, evidence = "") {
 }
 
 async function judgeReferenceResult(result, config, mode, directory, request, calls, metrics) {
-  const rubricVersion = "opencode-browser-8568679-judge.ts"
+  const rubricVersion = "opencode-browser-856867996e73f7dcc5e39827bf2af7555bd63d40-judge.ts"
   if (result.status !== "completed" || !result.final_answer) return {
     task_id: result.task_id,
     mode,
