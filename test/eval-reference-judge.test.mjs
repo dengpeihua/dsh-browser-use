@@ -5,7 +5,7 @@ import test from "node:test"
 import { tmpdir } from "node:os"
 import { join } from "node:path"
 import { judgeResult } from "../scripts/eval/judge.mjs"
-import { hash, readJson, writeJson } from "../scripts/eval/core.mjs"
+import { hash, judgeOnlyPlan, readJson, resultHaltReason, writeJson } from "../scripts/eval/core.mjs"
 import { readRunResults, writeResultIndex } from "../scripts/eval/state.mjs"
 import { resetJudgeArtifacts } from "../scripts/eval/reset-judge.mjs"
 
@@ -26,6 +26,22 @@ const task = {
 const response = content => ({
   choices: [{ finish_reason: "stop", message: { content } }],
   usage: { prompt_tokens: 10, completion_tokens: 5 },
+})
+
+test("judge-only resumes only unresolved grading and ignores historical agent failures", () => {
+  const results = [
+    { task_id: "done", status: "completed", judge_mode: "reference", judge_result: { pass: false } },
+    { task_id: "missing", status: "timeout" },
+    { task_id: "broken", status: "error", infrastructure_error: "provider_connection", judge_mode: "reference", judge_result: { pass: true } },
+    { task_id: "old-rubric", status: "completed", judge_mode: "evidence", judge_result: { pass: true } },
+  ]
+  assert.deepEqual(judgeOnlyPlan(results, "reference"), [
+    { task_id: "missing", action: "judge" },
+    { task_id: "old-rubric", action: "judge" },
+  ])
+  assert.equal(resultHaltReason(results[2], "judge"), null)
+  assert.equal(resultHaltReason({ ...results[1], judge_result: { pass: null, infrastructure_error: "quota_exhausted" } }, "judge"), "quota_exhausted")
+  assert.equal(resultHaltReason(results[2], "run"), "provider_connection")
 })
 
 test("vendored judge-prompt.md is byte-identical to the pinned opencode-browser source", () => {
