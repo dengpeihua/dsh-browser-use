@@ -123,7 +123,7 @@ test("evaluation CLI reports the benchmark defaults and an explicit reasoning ef
   const plan = JSON.parse(stdout)
   assert.equal(plan.reasoning_effort, "high")
   assert.deepEqual(plan.settings, { timeout: 600000, preflightTimeout: 60000, maxRounds: 50, headed: true })
-  assert.equal(plan.judge, "evidence")
+  assert.equal(plan.judge, "reference")
 })
 
 test("Responses preserves encrypted reasoning, tool IDs and image input across a tool round", async () => {
@@ -269,7 +269,7 @@ test("MiniMax-M3 high uses the DSH Anthropic thinking budget and preserves repla
     assert.equal(replay[0].anthropic_content[0].signature, "signed-thinking")
   } finally { server.closeAllConnections(); await new Promise(done => server.close(done)) }
 })
-test("runtime failures skip judge calls; malformed judge stays unresolved", async () => {
+test("reference runtime failures skip judge calls and preserve upstream truthy pass coercion", async () => {
   let calls = 0
   const request = async () => { calls++; return { choices: [{ finish_reason: "stop", message: { content: '{"pass":"false"}' } }] } }
   const directory = mkdtempSync(join(tmpdir(), "dsh-eval-judge-"))
@@ -278,8 +278,8 @@ test("runtime failures skip judge calls; malformed judge stays unresolved", asyn
     assert.equal(calls, 0)
     assert.equal(failed.pass, false)
     const malformed = await judgeResult({ task_id: "a", status: "completed", final_answer: "answer", tool_trace: [] }, {}, "reference", directory, request)
-    assert.equal(malformed.pass, null)
-    assert.equal(malformed.status, "judge_error")
+    assert.equal(malformed.pass, true)
+    assert.equal(malformed.status, "judged")
   } finally { rmSync(directory, { recursive: true, force: true }) }
 })
 test("images are delivered only after all sibling tool responses, preserving function-call protocol", () => {

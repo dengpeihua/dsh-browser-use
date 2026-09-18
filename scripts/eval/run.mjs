@@ -14,7 +14,7 @@ import { recoverAttemptResults } from "./state.mjs"
 
 const root = fileURLToPath(new URL("../../", import.meta.url))
 const DEFAULT_TASK_TIMEOUT_MS = 600000
-const DEFAULT_JUDGE_MODE = "evidence"
+const DEFAULT_JUDGE_MODE = "reference"
 const DEFAULT_HEADED = true
 const { values: flags } = parseArgs({ options: {
   data: { type: "string", default: "assets/benchmark/webvoyager-109.json" },
