@@ -5,7 +5,7 @@ import { throwIfBrowserAborted, type BrowserOperation } from "../runtime.js"
 
 export const browserExecuteScript: BrowserOperation = {
   id: "browser_execute_script",
-  description: `Read page data with JavaScript. Helpers: __data(type), __records(anchor), __skeleton(element), __q(N), __find(pattern), __get(ref), __clickable(element). Load guide: true before structured/list extraction. Use browser action tools for interactions and browser_record_facts for findings; returned elements serialize compactly.`,
+  description: `Read page data with JavaScript. Helpers: __data(type), __records(anchor), __skeleton(element), __q(N), __find(pattern), __get(ref), __clickable(element). Load guide: true before structured/list extraction. Retain important findings in text output before changing pages. Use browser action tools for interactions; returned elements serialize compactly.`,
   async execute(args, context) {
     const guide = args.guide === true ? EXTRACTION_GUIDE : ""
     if (!args.script) {

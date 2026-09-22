@@ -1,21 +1,21 @@
-# WebVoyager 109 题评测
+# WebVoyager 126 题评测
 
-我们的评测链路使用真实 Cordis + DSH AgentLoop + 本仓库编译的 dsh-browser 插件。每题创建独立 Session 和 Chromium；Agent 决定工具调用，独立 LLM 请求根据浏览器证据评分，输出 Trace、截图、成功率、步数、耗时及成本估算。
+我们的评测链路使用真实 Cordis + DSH AgentLoop + 本仓库编译的 dsh-browser 插件。每题创建独立 Session 和 Chromium；Agent 决定工具调用，独立 LLM 请求严格按固定上游 `judge-prompt.md` 比较任务与最终答案，输出 Trace、截图、成功率、步数、耗时及成本估算。
 
 ## 完整评测结果
 
-WebVoyager 109 tasks / 3 站点：成功率 88.1%（AllRecipes 88.6%、Apple 85.7%、Amazon 89.7%），平均 26.7 步、167.3s、$0.0968/任务。
+WebVoyager 126 tasks / 3 站点：成功率 88.9%（AllRecipes 86.7%、Apple 90.5%、Amazon 89.7%），平均 27.1 步、176.3s。
 
 | 站点 | 题数 | 通过 | 成功率 |
 | --- | ---: | ---: | ---: |
-| AllRecipes | 35 | 31 | 88.6% |
-| Apple | 35 | 30 | 85.7% |
+| AllRecipes | 45 | 39 | 86.7% |
+| Apple | 42 | 38 | 90.5% |
 | Amazon | 39 | 35 | 89.7% |
-| **合计** | **109** | **96** | **88.1%** |
+| **合计** | **126** | **112** | **88.9%** |
 
-我们用 `MiniMax-M3` High、`--concurrency 1`、`--headed --timeout 600000 --judge evidence` 完成该运行。最终 109 题全部有布尔评分：101 个正常完成的任务由 LLM-as-a-Judge 评判，8 个达到 `step_limit` 的任务按运行规则直接判定失败；`unjudged=0`。每个任务都保留 `session.json` 会话轨迹，101 个 LLM 评分任务还保留 `judge-evidence.ndjson`。
+我们用 `MiniMax-M3` High、`--concurrency 1`、`--headed --timeout 600000 --judge reference` 运行并重新评分。原 109 题轨迹被保护不重跑，随后按 126 题数据集原序补齐 17 题，因此这是混合时间批次，而不是一次全新受控的 126 题运行。重评分前已删除旧 evidence Judge 的结果、日志、费用、耗时和汇总；最终 126 题全部由 LLM-as-a-Judge 依照 `judge-prompt.md` 判定，包括 11 个 `step_limit` 结果。`missing=0`、`unjudged=0`，每题均保留 `session.json` 和非空 `trace.ndjson`。
 
-Agent 标价等价成本平均为 $0.096844/任务，总计 $10.556004；Judge 总计 $0.855908，Agent + Judge 平均为 $0.104696/任务。这些是根据配置单价计算的 USD 等价估算，不是 Token Plan 实际账单。可读报告位于 `output/evals/webvoyager-109-20260916-concurrency1/report.md`，结构化指标位于同目录的 `summary.json` 和 `task-metrics.json`。
+当前 126 条结果的 Agent 成本估算为 $12.126323，Judge 为 $0.243535，合计 $12.369858；126 题用量均有记录。另有 4 个被替换的历史 Agent attempt，其已观测成本 $0.360453 单独保留，不计入当前结果总额。这些仍是配置单价下的 USD 等价估算，不是 Token Plan 实际账单。可读报告位于 `output/evals/webvoyager-109-20260916-concurrency1/report.md`；目录名保留历史名称，实际任务数以 manifest 的 126 题为准。
 
 ## 参考结果核查
 
@@ -28,7 +28,7 @@ Agent 标价等价成本平均为 $0.096844/任务，总计 $10.556004；Judge �
 | Amazon | 39 | 26 | 66.7% |
 | 总计 | 109 | 80 | 73.4% |
 
-重算原始记录：平均 9.1927 次工具调用、149.971 秒、$0.024457/题；执行完成 91 题，Judge 通过 80 题。数据文件有 549 条任务，但本次仅复用实际评测的 109 条。选题列表、上游 SHA、源文件 SHA-256、统计摘要见 `assets/benchmark/reference.json`；任务文本保存在 `webvoyager-109.json`。来源许可保留于同目录 `LICENSE.txt`。
+重算原始记录：平均 9.1927 次工具调用、149.971 秒、$0.024457/题；执行完成 91 题，Judge 通过 80 题。上游数据文件有 549 条任务，历史对照仅使用实际评测的 109 条。选题 ID、上游 SHA、源文件 SHA-256、统计摘要见 `assets/benchmark/reference.json`；当前三个站点的完整 126 题保存在 `webvoyager-126.json`。来源许可保留于同目录 `LICENSE.txt`。
 
 这些数字是原项目的结果，不能当作 dsh-browser 的结果。原轨迹含 webfetch、bash、read、grep；本链路只挂载 browser 工具，也保留本仓库任务证据和完成校验，因此工具数、提示词、上下文管理和执行日期不同。原始记录中的 Agent 为 minimax-cn/MiniMax-M3（部分错误记录模型字段为空），公开 judgments 未注明 Judge 模型。
 
@@ -41,14 +41,14 @@ npm install
 npm run build
 npm run eval:test
 npm run eval:smoke
-npm run eval -- --dry-run --reasoning-effort high --headed --timeout 600000 --judge evidence
-npm run eval -- --out output/evals/pilot --ids Allrecipes--0,Apple--0,Amazon--0 --reasoning-effort high --concurrency 1 --headed --timeout 600000 --judge evidence
-npm run eval -- --out output/evals/webvoyager-109 --reasoning-effort high --concurrency 1 --headed --timeout 600000 --judge evidence
+npm run eval -- --dry-run --reasoning-effort high --headed --timeout 600000 --judge reference
+npm run eval -- --out output/evals/pilot --ids Allrecipes--0,Apple--0,Amazon--0 --reasoning-effort high --concurrency 1 --headed --timeout 600000 --judge reference
+npm run eval -- --out output/evals/webvoyager-126 --reasoning-effort high --concurrency 1 --headed --timeout 600000 --judge reference
 ```
 
 `eval:smoke` 使用真实浏览器和 DSH AgentLoop，但模型与 Judge 是确定性测试替身，不调用收费 API，不计入 benchmark。普通 `eval` 使用 DSH 当前配置中的真实模型。
 
-正式评测条件固定为 `--headed --timeout 600000 --judge evidence`，这三项同时也是 CLI 默认值：使用可见浏览器窗口、每题最多运行 600 秒，并让独立 Judge 根据浏览器文本证据评分。正式命令仍显式写出这些参数，方便复核和复现。
+正式评测条件固定为 `--headed --timeout 600000 --judge reference`，这三项同时也是 CLI 默认值：使用可见浏览器窗口、每题最多运行 600 秒，并按固定上游版本 `856867996e73f7dcc5e39827bf2af7555bd63d40` 的 `judge-prompt.md` 规则评分。正式命令仍显式写出这些参数，方便复核和复现。
 
 启动时先做一次小请求检查服务可用性，默认等待 60000 ms，可用 `--preflight-timeout` 调整；结果单独记录到 `preflight.ndjson`，不计入逐题成绩。Agent 运行中的临时 HTTP 429、5xx、超时和传输错误会在同一模型步骤内最多重试 5 次，采用 500 ms–10 s 指数退避和抖动，并优先遵守有效的 `Retry-After`；重试事件写入 Session Trace。额度耗尽和认证失败不在本次运行中重试。服务故障停止派发新题，已在运行的题目按原时限结束，未派发题保持 missing/unjudged。服务恢复后 `--resume` 重试服务中断题，不再将已有错误记录视为完成；正常任务失败不自动重试。这里管理的是评测模型 provider 额度，与桌面应用或代码工具的账户限额无关；程序不购买额度，也不承诺在未知刷新时间自动唤醒。
 
@@ -59,8 +59,8 @@ MiniMax 五小时额度耗尽时，失败任务进入 `recovery.json` 待重测�
 额度恢复后，用原来的选题、模型和运行参数加 `--resume`；可先加 `--dry-run` 查看重测顺序（不调用模型）：
 
 ```powershell
-npm run eval -- --out output/evals/webvoyager-109 --reasoning-effort high --concurrency 1 --headed --timeout 600000 --judge evidence --resume --dry-run
-npm run eval -- --out output/evals/webvoyager-109 --reasoning-effort high --concurrency 1 --headed --timeout 600000 --judge evidence --resume
+npm run eval -- --out output/evals/webvoyager-126 --reasoning-effort high --concurrency 1 --headed --timeout 600000 --judge reference --resume --dry-run
+npm run eval -- --out output/evals/webvoyager-126 --reasoning-effort high --concurrency 1 --headed --timeout 600000 --judge reference --resume
 ```
 
 程序保存恢复状态后退出，不自行固定睡眠五小时；具体刷新时刻以提供方为准。代码更新后的旧运行请使用下文的 `--retry-from` 新目录恢复，仍会重测额度失败项并保留其他结果。
@@ -82,27 +82,25 @@ npm run eval -- --out output/evals/webvoyager-109 --reasoning-effort high --conc
 
 ```mermaid
 flowchart LR
-  A[固定的 109 题及 SHA] --> B[每题独立 DSH Session]
+  A[固定的 126 题及 SHA] --> B[每题独立 DSH Session]
   B --> C[MiniMax 决策与 browser 工具]
   C --> D[会话事件和 DOM Trace / 截图 / 用量]
   D --> E[独立 MiniMax Judge]
   E --> F[逐题结果 / 分站点统计 / 报告]
 ```
 
-- `--judge evidence`（默认）：提交任务、最终答案和带序号/URL/采集时间的浏览器观测。观测总窗口最多 120000 字符，跨观测分配空间、保留前后段并标注截断，不再只取整个 Session 的开头。
-- `--judge reference`：评分版本 `rubric_version: 2` 中也必须参考实际观测，不再使用纯答案合理性评分；保留标签供结果溯源。不能将 v1/v2 的结果当作同一评分口径。
-- 通过结论必须引用真实观测序号，且至少包含一条非错误浏览器观测。字段覆盖成功本身不是语义或动作完成证明；不得仅凭模型既有知识否定网页上新出现的产品。缺少/截断证据时要求保守判定并标记低置信度。
-- JSON 格式或引用不合法最多修复一次，并累计请求用量。额度、认证、连接失败不按格式错误重试，保持未评分以供恢复。语义评分仍可能出错，不能宣称完全消除误判。
+- `--judge reference`（默认）：逐字加载固定上游版本的 `judge-prompt.md`，其 SHA-256 为 `bcdf403484823037eaeb6cec7918b966fe90ee31a30bc8d69094d2ff42747ccf`。每次调用提供一条对应的 `WebVoyager_data.json` 任务和一条兼容上游 `run.ts` 字段的 `results.ndjson` 结果，严格要求返回单项 JSON 数组。error/timeout 也必须交给 LLM；只要最终答案有效就允许 PASS。该模式不提交 `session.json`、浏览器文本证据或截图。
+- `--judge evidence`：保留本项目原有的严格证据评分，供历史运行兼容。它提交带序号/URL/采集时间的浏览器观测；通过结论必须引用至少一条非错误浏览器观测。JSON 或引用不合法最多修复一次，API/解析错误保持未评分。该模式不与上游 `judge.ts` 等价。
 - `--judge none`：仅运行，稍后评分。
-- Judge API/解析错误记录 `pass: null` 和 `judge_error`，保留已发生用量与费用，不伪装成任务失败；重新评分或人工审核后才算完整。
+- 两种模式遇到 Judge API、截断或输出格式错误时都记录 `pass: null` 和 `judge_error`，避免把“没有得到合法评分”伪装成任务失败；可用 `--judge-only` 补评。
 
-参考项目的 `judge-prompt.md` 允许报错但有有效答案的任务通过，与 `judge.ts` 有差异。本链路固定采用 `judge.ts` 的执行失败策略。实际公开 80 个通过项均属于 completed，未发现该差异改变这份已公布的 80/109 结果。
+参考项目的 `judge-prompt.md` 允许报错但有有效答案的任务通过，与 `judge.ts` 有差异。当前 `reference` 模式明确以用户指定的 `judge-prompt.md` 为唯一评分真值，不再沿用 `judge.ts` 的非 completed 直接失败规则。
 
-[官方 WebVoyager evaluator](https://github.com/MinorJerry/WebVoyager/blob/main/evaluation/auto_eval.py) 使用截图和回答进行多模态评判；本项目使用带浏览器文本证据的 Judge，不是官方评分程序。最终截图作为人工核验附件保存，默认不发送给 Judge。同模型 Judge 可能产生共同偏差，建议抽查所有低置信度结果以及部分 PASS，并在需要更强独立性时指定另一 Judge。
+[官方 WebVoyager evaluator](https://github.com/MinorJerry/WebVoyager/blob/main/evaluation/auto_eval.py) 使用截图和回答进行多模态评判；`reference` 模式复现的是 opencode-browser `judge-prompt.md` 的答案合理性规则，不是官方评分程序。最终截图作为人工核验附件保存，不发送给 reference Judge。同模型 Judge 可能产生共同偏差，建议人工抽查部分 PASS/FAIL，并在需要更强独立性时指定另一 Judge。
 
 成功率分母始终为 manifest 中选定的全部任务，包括运行错误、超时和缺失结果。未评分时显示保守的 provisional rate，同时输出 missing/unjudged 和 `scoring_complete: false`。`completed` 仅代表 Agent 执行结束，`judge_result.pass` 才是任务通过。
 
-`steps` 是所有工具调用数（含失败及证据管理工具）；`model_rounds` 是模型请求轮次，两者不能互换。平均步数和平均时间覆盖各题当前尝试（含失败/超时），时间从 worker 初始化到 Agent 停止，不含 Judge 和浏览器清理。默认使用可见浏览器窗口，每题 600000 ms，最多 50 轮模型请求，并采用 `evidence` 评分；一次启动每题最多派发一次，服务中断可在恢复时补跑。`--reasoning-effort high` 会进入请求头和运行指纹。并发默认 1，可设 1–8；对照报告应保持一致。
+`steps` 是所有工具调用数（含失败及证据管理工具）；`model_rounds` 是模型请求轮次，两者不能互换。平均步数和平均时间覆盖各题当前尝试（含失败/超时），时间从 worker 初始化到 Agent 停止，不含 Judge 和浏览器清理。默认使用可见浏览器窗口，每题 600000 ms，最多 50 轮模型请求，并采用 `reference` 评分；一次启动每题最多派发一次，服务中断可在恢复时补跑。`--reasoning-effort high` 会进入请求头和运行指纹。并发默认 1，可设 1–8；对照报告应保持一致。
 
 usage.input 是扣除 cache_read/cache_write 的未缓存输入；output 已包含 reasoning，禁止重复计费。Agent 和 Judge 费用分别汇总；缺 usage 或不认识的模型价格显示 null，不能当作 0。MiniMax-M3 使用 [2026-09-13 官方 standard USD 公开单价](https://platform.minimax.io/docs/guides/pricing-paygo)：<=512k 输入 $0.30/M、输出 $1.20/M、缓存读 $0.06/M，超过阈值乘 2。这是标价等价估算，**不是 Token Plan 的实际账单**，也不代表原项目当时的价格。
 
@@ -133,7 +131,7 @@ usage.input 是扣除 cache_read/cache_write 的未缓存输入；output 已包�
 $env:EVAL_PRICING_JSON = '{"input":2,"output":8,"cache_read":0.5,"cache_write":3}'
 # Judge 使用不同模型/地址时需独立配置；相同模型和地址默认继承 Agent 单价
 $env:EVAL_JUDGE_PRICING_JSON = '{"input":2,"output":8,"cache_read":0.5,"cache_write":3}'
-npm run eval -- --out output/evals/measured-run --count 3 --headed --timeout 600000 --judge evidence
+npm run eval -- --out output/evals/measured-run --count 3 --headed --timeout 600000 --judge reference
 ```
 
 `input` / `output` 必填，缓存单价可省略，但存在相应非零用量时费用将未知。可同时设置 `context_threshold` 和 `long_context_multiplier` 表示长上下文整次请求的倍率，并用 `source` / `date` 标注价格依据。价格随配置进入 manifest 指纹，汇总中保留定价快照；不会自动推断套餐实际账单。
@@ -141,6 +139,7 @@ npm run eval -- --out output/evals/measured-run --count 3 --headed --timeout 600
 ```text
 output/evals/RUN/
   manifest.json           # 精确选题、模型、运行参数、代码指纹
+  manifest-before-backfill.json # 补跑前的原 manifest（仅扩展旧运行时存在）
   preflight.ndjson        # 服务准入检查，独立于任务成绩
   results.ndjson          # 每题完成即追加，不覆盖已有尝试
   summary.json            # 总体及逐站点指标
@@ -158,24 +157,39 @@ output/evals/RUN/
     judge-reference.ndjson # Judge 输入、原始响应、用量、提示哈希
 ```
 
-大段工具输出由插件写到该题目录；图像以内容哈希命名。截图失败记入 trace，不生成虚假的截图记录。输出含真实页面内容，全部置于 Git 已忽略的 `output/` 中，不提交会话、网页内容或凭据。
+大段工具输出由插件写到该题目录；图像以内容哈希命名。截图失败记入 trace，不生成虚假的截图记录。输出含真实页面内容，`output/` 默认由 Git 忽略；只有仓库所有者明确授权、完成密钥/私有路径/文件大小检查后才可选择性发布，凭据始终禁止提交。
+
+### 从旧数据集只补缺失任务
 
 ```powershell
-# 参数、代码、模型与原运行完全一致，跳过已完成题
-npm run eval -- --out output/evals/webvoyager-109 --reasoning-effort high --concurrency 1 --headed --timeout 600000 --judge evidence --resume
-# 使用已保存的 Agent 结果重新评分，无浏览器重跑
-npm run eval -- --out output/evals/webvoyager-109 --reasoning-effort high --judge-only --judge evidence
+# 只读审计；输出 protected、missing_task_ids 和按数据集顺序排列的 pending
+npm run eval:backfill -- --out output/evals/OLD_RUN --data assets/benchmark/webvoyager-126.json
+# 审核后执行；已有任务不会进入运行或重评分队列
+npm run eval:backfill -- --out output/evals/OLD_RUN --data assets/benchmark/webvoyager-126.json --execute
 ```
 
-重新评分写 `judged-evidence.json`，并逐题提交到 `result-revisions/00000001.json` 等文件；原 `results.ndjson`、原始结果和以前的 Judge trace 均保留。修订带前一结果哈希，重启按序校验恢复当前视图。服务失败补跑写入 `TASK_ID/attempts/2/` 等新目录；子进程结果已落盘而父进程未登记时直接恢复该结果。只有 trace 没有结果的中断尝试保留原目录，再建立下一次尝试。Ctrl+C 会停止队列并清理子进程。不要同时向同一目录启动多个调度器。
+补跑器要求旧 manifest 是目标数据集的同内容有序子序列，且每个受保护任务都存在匹配的 `task.json`、非空可解析的 `session.json` / `trace.ndjson`、`result.json` 和已决评分。任一条件不满足即在加载凭据和启动浏览器前失败。扩展时保留 `manifest-before-backfill.json`，把原任务 ID 固定为 `protected_task_ids`，只允许新增差集进入队列；`results.ndjson`、`task-metrics.json`、Markdown 和 CSV 均按目标数据集顺序重建。补齐结果标记 `mixed_provenance`，不能冒充同一时刻的一次全新运行。
+
+```powershell
+# 普通中断续跑：参数、代码、模型与原运行完全一致，跳过已完成题
+npm run eval -- --out output/evals/webvoyager-126 --reasoning-effort high --concurrency 1 --headed --timeout 600000 --judge reference --resume
+# 完全更换评分规则：先清除旧 Judge 内容，再对包括 error/timeout 在内的全部已保存 Agent 结果重新评分
+npm run eval:reset-judge -- --out output/evals/webvoyager-126
+npm run eval:reset-judge -- --out output/evals/webvoyager-126 --execute
+npm run eval -- --out output/evals/webvoyager-126 --reasoning-effort high --judge-only --judge reference
+```
+
+`eval:reset-judge` 只删除 Judge 字段、`judge-*.ndjson`、旧评分 revisions 和评分派生汇总；先把 revision 链中最新的 Agent 尝试重建为不含 Judge 内容的新链，保留 `session.json`、`trace.ndjson`、截图、任务结果和尝试目录。重新评分写 `judged-reference.json`，并逐题提交到新的 `result-revisions/00000001.json` 等文件。修订带前一结果哈希，重启按序校验恢复当前视图。服务失败补跑写入 `TASK_ID/attempts/2/` 等新目录；子进程结果已落盘而父进程未登记时直接恢复该结果。Ctrl+C 会停止队列并清理子进程。不要同时向同一目录启动多个调度器。
+
+仓库所有者明确要求替换某个非受保护任务时，先用 `--rerun-ids TASK_ID --dry-run` 审核唯一目标，再移除 `--dry-run` 执行。该路径不会删除第一次尝试；新结果写入 `TASK_ID/attempts/2/`，通过带哈希的 revision 更新当前结果视图，并按数据集原顺序重建 CSV、JSON、Markdown 与汇总。重复相同命令只恢复或重建最近的同目标 replacement request；若所有者以后明确要求再做一次独立尝试，必须另外加 `--new-rerun`。不要仅因为任务失败、超时或 CSV 用量列为未知就选择性重跑；定点替换必须有明确的任务 ID 和所有者授权。
 
 代码改变后仍禁止直接 `--resume`。可明确创建恢复分支：
 
 ```powershell
 # 只查看计划，不加载凭据、不调用模型或浏览器
-npm run eval -- --retry-from output/evals/OLD_RUN --out output/evals/RECOVERED --headed --timeout 600000 --judge evidence --dry-run
+npm run eval -- --retry-from output/evals/OLD_RUN --out output/evals/RECOVERED --headed --timeout 600000 --judge reference --dry-run
 # 服务恢复后补跑中断题；已完成但未评分的题只补评分
-npm run eval -- --retry-from output/evals/OLD_RUN --out output/evals/RECOVERED --reasoning-effort high --concurrency 3 --headed --timeout 600000 --judge evidence
+npm run eval -- --retry-from output/evals/OLD_RUN --out output/evals/RECOVERED --reasoning-effort high --concurrency 3 --headed --timeout 600000 --judge reference
 ```
 
 恢复分支要求相同选题，原目录只读；历史 Session 仍从原目录读取，不要移走它。新报告标注 `mixed_provenance`，不能作为同一版本全新运行的对照成绩。分母仍包含全部选题，不剔除访问失败；被替代尝试的费用另列 `superseded_*` 小计，不把重试视作免费。未知费用和孤立 trace 仍不能当作零费用。
@@ -190,6 +204,6 @@ npm run eval -- --retry-from output/evals/OLD_RUN --out output/evals/RECOVERED -
 
 ## 结果解读与验证边界
 
-我们将 96/109 解读为这一次固定代码、模型、运行参数和实时网站状态下的成绩。它不是对所有时间、地区、账户或网站版本的承诺，也不是与其他工具链的受控等条件复现。数据集分母始终是 manifest 中的 109 题，网站访问失败、超时和步数上限不会被删出。
+我们将 112/126 解读为原 109 题受保护轨迹加 17 题后续补跑形成的混合时间批次，并统一使用固定上游 `judge-prompt.md` 重评分后的结果。它不是一次同一时刻的全新受控运行，也不是对所有时间、地区、账户或网站版本的承诺。数据集分母始终是 manifest 中的 126 题，网站访问失败、超时和步数上限不会被删出。
 
-LLM Judge 仍可能出现语义误判或共同模型偏差。我们保留序号化证据引用、原始 Judge 响应、最终截图和低置信度复核提示，使结果可追溯并可人工抽查。任何修改代码、数据集、provider、推理档位、并发、超时或评分规则的对照运行，都应使用新输出目录并保留独立 manifest。
+LLM Judge 仍可能出现语义误判或共同模型偏差。我们保留原始 Judge 提示与响应、Agent Trace 和最终截图，使结果可追溯并可人工抽查；reference Judge 本身只读取任务定义与 Agent 结果，不读取浏览器证据或截图。任何修改代码、数据集、provider、推理档位、并发、超时或评分规则的对照运行，都应使用新输出目录并保留独立 manifest。

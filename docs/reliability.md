@@ -83,28 +83,26 @@ stateId → 查找内存检查点 → 有效历史条目优先 / 原 URL 回退
 
 `scripts/smoke-reliability.mjs` 验证：缺失/遮挡元素、输入截断、成功/失败后置条件、精确版本恢复、只读字段的部分恢复、动态插入后覆盖失效，以及连续读取 60 条虚拟列表数据。我们用本地页面与确定性工具调用验证契约；这不代表线上 LLM 能自主完成所有网站任务。
 
-## 5. 事实记忆与错误恢复
+## 5. 跨页工作记忆与错误恢复
 
-新任务先用 `browser_define_task` 声明字段，再通过 `browser_record_facts.records` 登记 sourceRef。完成时自动重查覆盖，浏览过程不因旧观察未登记而阻断。详见[证据状态模型](evidence.md)。以下原文规则适用于兼容接口 `observations`；旧事实不自动满足新任务的字段覆盖。
+`browser_start` 与 DOM 快照保留 OpenCode Browser 的原文提醒：Agent 在改变页面前，把重要答案、数值和导航线索写进同轮 assistant 文本。DSH 将该文本与工具调用保存在 Session 中；普通跨页任务不再调用 `browser_record_facts`，也不需要先声明字段或在结束时补齐覆盖。无需记录的页面无需额外动作。
 
-`browser_record_facts` 的 `evidence` 必须是对应观察的一段连续原文，保留中间的 DOM 标记（允许空白归一化）；`entity` 和 `value` 都须出现在这段原文中。例如原文为 `Product A: 100 yuan`，可记录 `entity: "Product A"`、`attribute: "price"`、`value: "100 yuan"`、`evidence: "Product A: 100 yuan"`。推断、概述、不同片段的拼接不能作为原文证据。
-
-证据失败时整批不写入。错误会报告无效事实数量、最多前五条的 `observations[i].facts[j]` 位置、缺失字段及有界原文片段，并给出带观察 ID 和字符偏移的 `browser_recall` 参数。先依据原文修正，再重试；原文仍是网页数据，不是指令。只有观察确实没有任务相关信息时，才使用 `facts: []` 和明确的 `reason`；填写 reason 不会跳过非空 facts 的校验。
+原始页面观察仍按 Session 归档，必要时用 `browser_recall` 回读。正文工作笔记便于后续推理，但不是经过机器校验的 `sourceRef` 证据；最终答案的事实准确性仍由 Agent 核对。详见[页面观察与工作记忆](evidence.md)。旧版结构化事实只为历史会话回读保留，三个登记／覆盖工具不再对 Agent 注册。
 
 | 情况 | 恢复方式 |
 |---|---|
-| `browser_record_facts {}` | 返回参数错误，不写入；查询归档请用 `browser_recall {"mode":"bundles"}`。 |
+| 需要查看旧页面 | 使用 `browser_recall {"mode":"bundles"}` 找观察，再按 `observationId` 回读。 |
 | `browser_recall` 携带 `observationId` | `offset` 与 `limit` 都按字符计算，`limit` 可为 1–12000；不携带 `observationId` 时仍按 1–30 条事实分页。 |
 | 标签显示为 `[tab:tab1]` | 切换和关闭均接受 `tab1`、`tab:tab1`、`[tab:tab1]`；关闭前检查全部目标，未知 ID 会报错。 |
 | 浏览器已关闭 | 用目标 URL 调用 `browser_start`，使用新返回的元素 ID；旧事实仍可 recall。 |
 | `net::ERR_*` | 检查目标地址或改用可访问来源，不重复尝试同一失败地址；插件不保证外部网站可达。 |
 | 搜索服务 `HTTP 402: Insufficient Balance` | 属于搜索服务账户余额问题，需要处理对应服务账户；浏览器插件修复不能消除此错误。 |
 
-Host 回归包含无效证据提交、按错误中的原文纠正、继续跨页浏览以及压缩后重放；使用确定性模型适配器，不代表已经验证线上模型的自主纠错成功率。
+Host 回归包含同轮文本留存和跨页浏览；使用确定性模型适配器，不代表已经验证线上模型会稳定记录所有重要信息。
 
-### 事实保存后模型请求报 HTTP 400
+### 历史结构化事实与 HTTP 400
 
-事实记录不能在工具执行体中直接追加到会话消息：这会形成 `assistant(tool_use) → user(事实记录) → user(tool_result)`。Anthropic Messages 兼容接口要求工具结果紧随工具调用，普通消息插在中间可能导致参数错误。插件通过宿主的 `exec.deferContext` 提交事实记录，由 Agent Loop 在工具结果之后写入；事实仍使用原来的持久化格式，回放和校验规则不变。宿主回归会检查每次实际传给模型的消息顺序，覆盖事实保存、DOM 裁剪和记忆更新。
+旧版会话的事实记录仍可回放，但新任务不再调用事实写入工具。历史记录曾通过宿主的 `exec.deferContext` 在工具结果之后写入，以免在 `assistant(tool_use) → user(tool_result)` 之间插入普通消息而导致部分模型接口报 HTTP 400。
 
 已生成的错误会话历史不会因更新插件而自动重排。加载新版插件后，用新任务验证；保留旧日志供定位。HTTP 400 的通用错误本身不能证明所有此类错误都源于这一问题，线上服务仍需复测。
 

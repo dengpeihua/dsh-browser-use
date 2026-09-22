@@ -10,9 +10,7 @@ import SystemPrompt from "@deepseek-ai/dsh-system-prompt"
 import ToolRuntime from "@deepseek-ai/dsh-tools"
 import TokenMeter from "@deepseek-ai/dsh-token-meter"
 import * as browserPlugin from "../lib/index.js"
-import { runMemorySmoke } from "./smoke-memory.mjs"
 import { assertToolProtocol } from "./assert-tool-protocol.mjs"
-import { runEvidenceSmoke } from "./smoke-evidence.mjs"
 
 const html = `<title>Host browser test</title><style>p{margin:0;line-height:16px}</style><main>${Array.from({ length: 40 }, (_, i) => `<p>Stable row ${i}</p>`).join("")}<svg width="64" height="32" aria-label="chart"><rect width="64" height="32" fill="navy"/></svg></main>`
 const url = `data:text/html,${encodeURIComponent(html)}`
@@ -32,21 +30,13 @@ const actions = [
 class ScriptedAdapter extends LlmAdapter {
   requests = []
   totalRequests = 0
-  reviewed = new Set()
   constructor(script = actions) { super(); this.script = script }
   async resolveModel(provider, id) { return { provider, id, name: id } }
   async *stream(options) {
     assertToolProtocol(options.messages)
     this.totalRequests++
-    const latest = JSON.stringify(options.messages).match(/Latest observation: (obs-[a-f0-9]+)\./)?.[1]
-    let action
-    if (latest && !this.reviewed.has(latest)) {
-      action = ["browser_record_facts", { observations: [{ observationId: latest, facts: [], reason: "The fixture DOM is for browser mechanics; the separate script output preserves the requested extracted fact." }] }]
-      this.reviewed.add(latest)
-    } else {
-      this.requests.push(structuredClone(options.messages))
-      action = this.script[this.requests.length - 1]
-    }
+    this.requests.push(structuredClone(options.messages))
+    const action = this.script[this.requests.length - 1]
     if (!action) {
       yield { type: "block-start", index: 0, blockType: "text" }
       yield { type: "text-delta", index: 0, text: "done" }
@@ -63,9 +53,16 @@ class ScriptedAdapter extends LlmAdapter {
     }
     const id = `host-call-${this.totalRequests}`
     const argumentsJson = JSON.stringify(args)
-    yield { type: "block-start", index: 0, blockType: "tool-call" }
-    yield { type: "tool-call-delta", index: 0, id, name, argumentsDelta: argumentsJson }
-    yield { type: "block-end", index: 0, block: { type: "tool-call", id, name, arguments: argumentsJson } }
+    if (this.totalRequests === 3) {
+      const note = "Browser working note: selected item 42"
+      yield { type: "block-start", index: 0, blockType: "text" }
+      yield { type: "text-delta", index: 0, text: note }
+      yield { type: "block-end", index: 0, block: { type: "text", text: note } }
+    }
+    const callIndex = this.totalRequests === 3 ? 1 : 0
+    yield { type: "block-start", index: callIndex, blockType: "tool-call" }
+    yield { type: "tool-call-delta", index: callIndex, id, name, argumentsDelta: argumentsJson }
+    yield { type: "block-end", index: callIndex, block: { type: "tool-call", id, name, arguments: argumentsJson } }
     yield { type: "finish", reason: { kind: "tool-calls" } }
   }
 }
@@ -87,11 +84,11 @@ try {
   await browserFiber
   disposeBrowser = () => browserFiber.dispose()
   const agent = ctx.agentLoop.create(SessionId("host-browser-smoke"), { provider: "fixture", model: "fixture" })
-  browserPlugin.defineEvidenceTask(agent.session, { mode: "interaction", objective: "Exercise browser mechanics and legacy memory compatibility" })
   agent.followup(createUserMessage({ source: { kind: "user" }, content: [{ type: "text", text: "Inspect the local fixture and preserve extracted facts." }] }))
   await agent.whenIdle()
   assert.equal(adapter.requests.length, actions.length + 1, JSON.stringify(agent.session.events.slice(-4)))
   const allResults = agent.session.events.filter(e => e.type === "tool/result" && e.surfaceOp === "append")
+  assert.ok(!agent.session.events.some(e => e.type === "tool/call" && ["browser_define_task", "browser_record_facts", "browser_check_coverage"].includes(e.data.name)))
   assert.ok(allResults.every(e => !e.data.message.content[0].isError), JSON.stringify(allResults))
   const results = allResults.filter(e => e.data.meta?.browserContext)
   assert.equal(results.length, actions.length)
@@ -104,6 +101,7 @@ try {
   assert.match(JSON.stringify(adapter.requests[2]), /Stable row 0/)
   assert.doesNotMatch(JSON.stringify(adapter.requests[3]), /Stable row 0/)
   assert.match(JSON.stringify(adapter.requests[3]), /Changed row 0/)
+  assert.match(JSON.stringify(adapter.requests[3]), /Browser working note: selected item 42/)
   assert.match(JSON.stringify(adapter.requests.at(-1)), /fact: selected item 42/)
   assert.match(JSON.stringify(adapter.requests.at(-1)), /runtime is no longer live/)
   assert.equal(imageCount, 2)
@@ -120,7 +118,6 @@ try {
   const otherAdapter = new ScriptedAdapter([["browser_start", { url: "data:text/html,<title>Independent session</title><h1>Other agent</h1>" }]])
   ctx.llm.registerAdapter(["other"], otherAdapter)
   const other = ctx.agentLoop.create(SessionId("host-browser-other"), { provider: "other", model: "fixture" })
-  browserPlugin.defineEvidenceTask(other.session, { mode: "interaction", objective: "Open another isolated browser" })
   other.followup(createUserMessage({ source: { kind: "user" }, content: [{ type: "text", text: "Open the other browser" }] }))
   await other.whenIdle()
   assert.equal(otherAdapter.requests.length, 2)
@@ -128,8 +125,6 @@ try {
   await ctx.browserRuntime.cleanupSession(String(agent.id))
   assert.equal(await ctx.browserRuntime.getManager(String(other.id)).getActiveTab().page.title(), "Independent session")
   console.log(JSON.stringify({ status: "success", hostRequests: adapter.totalRequests + otherAdapter.totalRequests, browserOperations: results.length + 1, images: imageCount, replayExact: true, isolatedSessions: true }))
-  await runMemorySmoke(ctx)
-  await runEvidenceSmoke(ctx)
 } finally {
   if (disposeBrowser) await disposeBrowser()
   await ctx.fiber.dispose()

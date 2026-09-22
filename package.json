@@ -44,8 +44,10 @@
   },
   "scripts": {
     "eval": "node scripts/eval/run.mjs",
+    "eval:reset-judge": "node scripts/eval/reset-judge.mjs",
+    "eval:backfill": "node scripts/eval/backfill-missing.mjs",
     "eval:prepare": "node scripts/eval/prepare.mjs",
-    "eval:test": "node --test test/eval.test.mjs test/eval-reliability.test.mjs test/eval-metrics.test.mjs test/eval-reference-judge.test.mjs",
+    "eval:test": "node --test test/eval.test.mjs test/eval-reliability.test.mjs test/eval-metrics.test.mjs test/eval-backfill.test.mjs test/eval-reference-judge.test.mjs",
     "eval:smoke": "npm run build && node scripts/eval/smoke.mjs",
     "build": "tsdown",
     "clean": "tsdown --clean",

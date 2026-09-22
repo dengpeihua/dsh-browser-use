@@ -19,19 +19,12 @@ export const BROWSER_TOOL_IDS = [
   "browser_wait",
 ] as const
 
-export const MEMORY_TOOL_IDS = ["browser_record_facts", "browser_recall", "browser_define_task", "browser_check_coverage"] as const
+export const MEMORY_TOOL_IDS = ["browser_recall"] as const
 export const TOOL_IDS = [...BROWSER_TOOL_IDS, ...MEMORY_TOOL_IDS] as const
 
 export type BrowserToolId = (typeof TOOL_IDS)[number]
 
 export const PARAMETER_SCHEMAS: Record<BrowserToolId, ParameterSchemaSpec> = {
-  browser_define_task: {
-    mode: { type: "string", required: true, enum: ["records", "interaction"], description: "records for extraction/comparison/research; interaction only for navigation or UI tasks with no record deliverable. Fixed for this user turn." },
-    objective: { type: "string", required: true, description: "Faithful description of this user turn's requested deliverable." },
-    requiredFields: { type: "array", items: { type: "string" }, description: "Required output field names for EVERY record, e.g. title,company,publishedAt,location. Required and non-empty for records mode. Cannot be weakened in this turn." },
-    minRecords: { type: "integer", description: "Minimum records required by the task, at least 1 for records mode. Field coverage does not prove exhaustive search." },
-  },
-  browser_check_coverage: {},
   browser_start: {
     url: { type: "string", required: true, description: "URL to open in Chromium." },
   },
@@ -90,41 +83,13 @@ export const PARAMETER_SCHEMAS: Record<BrowserToolId, ParameterSchemaSpec> = {
   browser_wait: {
     seconds: { type: "number", required: true, description: "Seconds to wait before continuing." },
   },
-  browser_record_facts: {
-    records: { type: "array", description: "Save or merge task records using host-resolved field references. Use the same recordId when supplementing fields; all registered records are checked at completion.", items: { type: "object", additionalProperties: false, properties: {
-      recordId: { type: "string", required: true, description: "Stable business record identity, e.g. job URL or vendor/product ID. Do not combine unrelated entities." },
-      fields: { type: "array", required: true, items: { type: "object", additionalProperties: false, properties: {
-        name: { type: "string", required: true, description: "Task output field name matching requiredFields." },
-        sourceRef: { type: "object", required: true, additionalProperties: false, properties: {
-          observationId: { type: "string", required: true },
-          query: { type: "string", description: "Alternative to offsets or recordId+field: unique exact text (1-1200 characters) already seen in this observation. Host resolves and stores a canonical span. Include entity context if repeated; do not paraphrase. This avoids a separate recall for every field." },
-          recordId: { type: "string", description: "Source recordId returned by browser_recall. Pair with field." },
-          field: { type: "string", description: "Exact JSON pointer from browser_recall sourceRecords, including empty string for a scalar." },
-          start: { type: "integer", description: "Alternative: absolute UTF-16 start offset, NOT a DOM [N] marker. Copy sourceSpans[].sourceRef from browser_recall with observationId and exact-text query; do not guess offsets." },
-          end: { type: "integer", description: "Alternative: exclusive end character offset. Use a span OR recordId+field." },
-        } },
-      } } },
-    } } },
-    observations: { type: "array", description: "Legacy exact-quote memory only; does not satisfy task-record coverage. Supply observations OR records; use browser_recall for queries.", items: {
-      type: "object", additionalProperties: false, properties: {
-        observationId: { type: "string", required: true, description: "obs-... ID from browser task memory or browser_recall. Source URL/time is resolved by the host." },
-        facts: { type: "array", required: true, items: { type: "object", additionalProperties: false, properties: {
-          entity: { type: "string", required: true, description: "Exact entity wording present in the evidence quote." },
-          attribute: { type: "string", required: true, description: "Stable field name, e.g. price. Reuse for updates." },
-          value: { type: "string", required: true, description: "Exact value including currency/unit as shown in the evidence; do not invent conversions." },
-          evidence: { type: "string", required: true, description: "One contiguous exact quote from browser_recall observation.content containing both entity and value (at most 1200 characters). Preserve intervening DOM markup; whitespace may be normalized. Do not paraphrase or concatenate separate snippets. Example source Product A: 100 yuan -> entity Product A, value 100 yuan, evidence Product A: 100 yuan." },
-        } } },
-        reason: { type: "string", description: "Required if facts is empty: why this observation contains no information needed for the user's task (e.g. an unrelated login page). Use facts: [] in that case. A reason never bypasses validation of non-empty facts." },
-      },
-    } },
-  },
   browser_recall: {
-    mode: { type: "string", enum: ["facts", "bundles", "records"], description: "Default facts for legacy memory; bundles lists visit groups; records lists this turn's source-backed task records. observationId takes precedence and returns sourceRecords." },
-    bundleId: { type: "string", description: "Read one bundle's paginated observation sources." },
-    recordOffset: { type: "integer", description: "With observationId, zero-based source-record index; separate from text character offset." },
-    query: { type: "string", description: "With observationId: exact case-sensitive source text (1-1200 UTF-16 characters); returns up to 10 sourceSpans with host-issued sourceRefs. Pass nextMatchOffset as offset to continue; inspect context for repeated text. Otherwise case-insensitive search over legacy facts." },
+    mode: { type: "string", enum: ["facts", "bundles", "records"], description: "Default facts for older Session memory; bundles lists archived page visits; records reads older source-backed task records." },
+    bundleId: { type: "string", description: "Read one archived page visit's observation sources." },
+    recordOffset: { type: "integer", description: "With observationId, zero-based structured source-record index." },
+    query: { type: "string", description: "With observationId: exact source text to locate in the archived page; otherwise search older saved facts." },
     includeHistory: { type: "boolean", description: "Include earlier observed values as well as current per-source values." },
-    observationId: { type: "string", description: "Read an archived observation instead of facts; usable after navigation, compaction or browser restart." },
+    observationId: { type: "string", description: "Read an archived page observation after navigation, compaction or browser restart." },
     offset: { type: "integer", description: "Zero-based record offset for facts/unreviewed sources, or character offset when reading an observation." },
     limit: { type: "integer", description: "For facts/unreviewed sources: records per page, 1-30 (default 20). With observationId: characters to return, 1-12000 (default 12000)." },
   },

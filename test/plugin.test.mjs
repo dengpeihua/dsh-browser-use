@@ -1,8 +1,12 @@
 import assert from "node:assert/strict"
 import test from "node:test"
-import { apply, TOOL_IDS } from "../lib/index.js"
+import { apply, TOOL_IDS, BROWSER_GUIDE } from "../lib/index.js"
 import { Session, SessionId } from "@deepseek-ai/dsh-session"
 import { createUserMessage } from "@deepseek-ai/dsh-llm"
+
+test("browser start guide retains the exact text-output instruction", () => {
+  assert.ok(BROWSER_GUIDE.includes("3. **Record important information in your text output before taking actions that change the page** — the current DOM snapshot will be replaced after your next action. Any unrecorded data is lost. Write down answers, clues, navigation waypoints, or any useful observations before proceeding."))
+})
 
 test("pending archived observations do not block later browser actions", async () => {
   const { context, registered } = harnessContext()
@@ -202,13 +206,15 @@ test("bundle registers the complete native DSH browser tool set and disposes it"
   const { context, registered, promptSections, listeners } = harnessContext()
   const dispose = apply(context, { approvalMode: "off", headless: true })
   assert.deepEqual(registered.map(tool => tool.name), [...TOOL_IDS])
-  assert.equal(new Set(registered.map(tool => tool.name)).size, 20)
+  assert.equal(new Set(registered.map(tool => tool.name)).size, 17)
+  assert.ok(!registered.some(tool => ["browser_define_task", "browser_record_facts", "browser_check_coverage"].includes(tool.name)))
   assert.equal(promptSections.length, 1)
   assert.match(promptSections[0].text, /explicitly asks to use a browser/)
   assert.match(promptSections[0].text, /only permitted web-access tools for that entire turn/)
   assert.match(promptSections[0].text, /never call web_search or web_fetch before, alongside, or after them/)
   assert.equal(listeners.has("session/disposed"), true)
   assert.equal(listeners.has("agent/pre-step"), true)
+  assert.equal(listeners.has("agent/turn-stopping"), false)
   assert.ok(context.browserRuntime)
   for (const tool of registered) {
     assert.equal(typeof tool.execute, "function")
@@ -311,33 +317,14 @@ test("concurrent browser calls cannot navigate past an unobserved intermediate p
   } finally { await first; await dispose() }
 })
 
-test("cancelled memory writes do not append events", async () => {
+test("cancelled archive reads do not append events", async () => {
   const { context, registered } = harnessContext()
   const dispose = apply(context, { approvalMode: "off" })
   const controller = new AbortController()
   controller.abort(new Error("cancelled"))
-  const exec = execution("browser_record_facts", controller.signal)
+  const exec = execution("browser_recall", controller.signal)
   const before = exec.agent.session.events.length
-  await assert.rejects(registered.find(t => t.name === "browser_record_facts").execute({ observations: [] }, exec), /cancelled/)
+  await assert.rejects(registered.find(t => t.name === "browser_recall").execute({}, exec), /cancelled/)
   assert.equal(exec.agent.session.events.length, before)
   await dispose()
-})
-
-test("completion recovery respects cancellation and removes its hook on unload", async () => {
-  const { context, listeners } = harnessContext()
-  const dispose = apply(context, { approvalMode: "off" })
-  try {
-    const controller = new AbortController()
-    const session = Session.create(SessionId("cancel-evidence"))
-    session.append("tool/call", { turn: 1, step: 1, callId: "browser", name: "browser_start", arguments: "{}" })
-    let injected = 0
-    const payload = { agent: { session, inject() { injected++ } }, turn: 1, signal: controller.signal }
-    const hook = listeners.get("agent/turn-stopping")
-    hook(payload)
-    assert.equal(injected, 1, "missing task requests recovery")
-    controller.abort(new Error("cancelled"))
-    assert.throws(() => hook(payload), /cancelled/)
-    assert.equal(injected, 1, "cancelled turn must not be extended")
-  } finally { await dispose() }
-  assert.equal(listeners.has("agent/turn-stopping"), false)
 })

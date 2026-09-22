@@ -4,7 +4,7 @@
 
 <p align="center">Native Chromium browser Agent tools for DeepSeek Harness</p>
 
-WebVoyager 109 tasks / 3 站点：成功率 88.1%（AllRecipes 88.6%、Apple 85.7%、Amazon 89.7%），平均 26.7 步、167.3s、$0.0968/任务。完整的 LLM-as-a-Judge、Trace、成本口径和恢复流程见[评测指南](docs/evaluation.md)。
+WebVoyager 126 tasks / 3 站点：按固定上游 `judge-prompt.md` 重新评分后成功率 88.9%（AllRecipes 86.7%、Apple 90.5%、Amazon 89.7%），平均 27.1 步、176.3s。126 题均有 Trace 和评分；当前结果的 Agent 成本估算为 $12.1263，Judge 为 $0.2435。完整的 LLM-as-a-Judge、补跑来源和成本口径见[评测指南](docs/evaluation.md)。
 
 浏览器命令失败的处理、点击检查和脚本异常说明见[可靠性文档](docs/reliability.md)；原文引用的获取方式见[证据文档](docs/evidence.md)。
 
@@ -12,7 +12,7 @@ WebVoyager 109 tasks / 3 站点：成功率 88.1%（AllRecipes 88.6%、Apple 85.
   <a href="LICENSE"><img src="https://img.shields.io/badge/license-MIT-green" alt="MIT license"></a>
   <img src="https://img.shields.io/badge/node-%3E%3D22.19-blue" alt="Node.js >= 22.19">
   <img src="https://img.shields.io/badge/browser-Chrome%20%7C%20Chromium-blue" alt="Chrome or Chromium">
-  <img src="https://img.shields.io/badge/tools-20-success" alt="20 browser and evidence tools">
+  <img src="https://img.shields.io/badge/tools-17-success" alt="17 browser and recall tools">
 </p>
 
 <p align="center"><strong><a href="#中文">中文</a> | <a href="#english">English</a></strong></p>
@@ -52,7 +52,8 @@ WebVoyager 109 tasks / 3 站点：成功率 88.1%（AllRecipes 88.6%、Apple 85.
 - **显式浏览器路由** — 用户明确要求使用浏览器或 Chromium 时，模型从 `browser_start` 开始并持续使用 `browser_*`，不会用 `web_search` 或 `web_fetch` 替代。
 - **安全默认值** — Chromium sandbox 默认开启；改变页面状态的操作默认需要 DSH approval。
 - **有界输出** — 页面脚本结果过大时只向模型返回预览，并把完整结果写入指定目录或临时目录。
-- **证据化任务记录** — 我们按页面访问归档 observation，用 `sourceRef` 登记结构化字段，并在完成时重查声明的字段覆盖。
+- **同轮文本留存** — 每个 DOM 快照提醒 Agent 在改变页面前把重要答案、数值和导航线索写进同一次 assistant 输出，无需额外调用旧事实总结接口。
+- **按需回读归档** — 页面观察按访问自动归档；需要核对旧页面时再调用 `browser_recall`，不强制逐页登记或补齐字段。
 - **操作后置条件** — 点击和输入可检查文本或 URL；实际执行、验证通过和整体任务完成始终是三个独立结论。
 - **精确检查点恢复** — 我们用完整 `stateId` 恢复支持的表单、展开状态与滚动位置，并将不完整恢复明确标为 `partial`。
 - **结构化与跨域诊断** — `browser_execute_script` 支持 JSON-LD、重复列表和有界结果；OOPIF 路由、CDP 录制/回放与统计接口用于可复现的 DOM 诊断。
@@ -201,10 +202,7 @@ CDP Snapshot
 | `browser_execute_script` | 在页面上下文执行 JavaScript |
 | `browser_view_elements` | 截取 `[view:ID]` 视觉元素 |
 | `browser_wait` | 可取消地等待指定秒数 |
-| `browser_define_task` | 声明本轮任务字段与最低记录数 |
-| `browser_record_facts` | 登记 sourceRef 任务记录；兼容旧事实格式 |
-| `browser_check_coverage` | 检查字段覆盖；完成阶段自动重查 |
-| `browser_recall` | 搜索当前/历史事实，或回读已归档的页面观察 |
+| `browser_recall` | 按需回读历史事实或已归档的页面观察 |
 
 ## 架构
 
@@ -227,7 +225,7 @@ DSH Agent Session
 dsh-browser/
 ├─ src/
 │  ├─ index.ts              # Cordis 插件入口与生命周期
-│  ├─ plugin-tools.ts       # 浏览器注册器，配合记忆工具共 20 个
+│  ├─ plugin-tools.ts       # 注册 16 个浏览器工具，另有 1 个归档回读工具
 │  ├─ tool-schemas.ts       # 参数与输出 schema
 │  ├─ config.ts             # 配置 schema 与校验
 │  └─ browser/
@@ -247,7 +245,7 @@ dsh-browser/
 
 ## 浏览器能力与诊断
 
-我们对 20 个工具统一复用 approval、取消和输出限额，并保持以下能力边界：
+我们对 17 个工具统一复用 approval、取消和输出限额，并保持以下能力边界：
 
 | 能力 | 使用方式与边界 |
 |---|---|
@@ -278,25 +276,25 @@ npm run build
 
 ```powershell
 # 只检查并列出选题，不启动浏览器、不调用模型 API
-npm run eval -- --dry-run --reasoning-effort high --headed --timeout 600000 --judge evidence
+npm run eval -- --dry-run --reasoning-effort high --headed --timeout 600000 --judge reference
 
 # Allrecipes、Apple、Amazon 各一题，显示浏览器窗口方便观察
-npm run eval -- --out output/evals/pilot-run1 --ids "Allrecipes--0,Apple--0,Amazon--0" --reasoning-effort high --concurrency 3 --headed --timeout 600000 --judge evidence
+npm run eval -- --out output/evals/pilot-run1 --ids "Allrecipes--0,Apple--0,Amazon--0" --reasoning-effort high --concurrency 3 --headed --timeout 600000 --judge reference
 ```
 
-正式评测条件固定为 `--headed --timeout 600000 --judge evidence`：显示浏览器窗口、每题最多运行 600 秒，并使用浏览器文本证据评分。它们也是评测器的默认值，但命令中仍显式写出，便于复核 manifest 和复现实验。`--reasoning-effort high` 显式固定 Agent 和默认 Judge 的推理档位，并写入 manifest 和运行指纹。真实试跑和全量评测都会消耗 Agent、Judge 的 API 额度；`npm run eval:smoke` 则使用真实浏览器和确定性模型替身，不调用收费 API，也不产生正式评测成绩。
+正式评测条件固定为 `--headed --timeout 600000 --judge reference`：显示浏览器窗口、每题最多运行 600 秒，并逐字加载固定上游版本 opencode-browser 的 `judge-prompt.md`。每次评分提供对应任务和 Agent 结果，要求返回单项 JSON 数组；error/timeout 只要最终答案有效也允许 PASS。它们也是评测器的默认值，但命令中仍显式写出，便于复核 manifest 和复现实验。`reference` 不提交浏览器文本证据或截图；旧的严格证据评分仍可显式选择 `--judge evidence`，但不属于上游同口径。`--reasoning-effort high` 显式固定 Agent 和默认 Judge 的推理档位，并写入 manifest 和运行指纹。真实试跑和全量评测都会消耗 Agent、Judge 的 API 额度；`npm run eval:smoke` 则使用真实浏览器和确定性模型替身，不调用收费 API，也不产生正式评测成绩。
 
-### 3. 顺序运行全部 109 题
+### 3. 顺序运行全部 126 题
 
 ```powershell
-npm run eval -- --out output/evals/webvoyager-109-20260916-concurrency1 --reasoning-effort high --concurrency 1 --headed --timeout 600000 --judge evidence
+npm run eval -- --out output/evals/webvoyager-126-concurrency1 --reasoning-effort high --concurrency 1 --headed --timeout 600000 --judge reference
 ```
 
-数据集包含 Allrecipes 35 题、Apple 35 题、Amazon 39 题。我们的完整运行使用可见浏览器、`evidence` 评分、每题 600 秒上限、50 轮模型请求和 `--concurrency 1`。并发会影响限流频率和延迟，对照运行必须保持一致；每次全新评测使用独立输出目录。
+数据集包含 Allrecipes 45 题、Apple 42 题、Amazon 39 题。完整运行使用可见浏览器、`reference` 评分、每题 600 秒上限、50 轮模型请求和 `--concurrency 1`。并发会影响限流频率和延迟，对照运行必须保持一致；每次全新评测使用独立输出目录。
 
-WebVoyager 109 tasks / 3 站点：成功率 88.1%（AllRecipes 88.6%、Apple 85.7%、Amazon 89.7%），平均 26.7 步、167.3s、$0.0968/任务。这里的成本是 Agent 标价等价估算；加上 Judge 后平均为 $0.1047/任务。
+当前归档由受保护的原 109 题轨迹与随后按数据集顺序补齐的 17 题组成：按固定上游 `judge-prompt.md` 清除旧 evidence 判定并重新评分后，112/126 通过，成功率 88.9%，平均 27.1 步、176.3 秒。它仍是混合时间批次，不应描述为一次全新受控的 126 题运行。当前结果的 Agent 成本估算为 $12.126323，Judge 为 $0.243535，合计 $12.369858；另有 4 个被替换的历史 Agent attempt，其已观测成本 $0.360453 单独保留，不计入当前结果总额。
 
-启动时会用小请求检查模型服务，默认准入超时为 60000 ms，可通过 `--preflight-timeout` 调整。Agent 运行中的临时限流、服务端错误、超时和传输错误会按有界指数退避自动重试；preflight 和独立 Judge 请求则是单次调用，失败后停止派发或留下未完成评分。额度耗尽与认证失败不会重试。若出现 `quota_exhausted`，需先恢复对应模型账户的额度。缺失或未评分任务不能作为完整评测成绩发布。
+启动时会用小请求检查模型服务，默认准入超时为 60000 ms，可通过 `--preflight-timeout` 调整。Agent 运行中的临时限流、服务端错误、超时和传输错误会按有界指数退避自动重试；preflight 和独立 Judge 请求均为单次调用。Judge API、截断或格式异常记录为未评分，不能算作任务 FAIL；可在服务恢复后用 `--judge-only` 补评。额度耗尽与认证失败不会重试。若出现 `quota_exhausted`，需先恢复对应模型账户的额度。
 
 | `halted` / 现象 | 含义 | 处理方式 |
 |---|---|---|
@@ -311,15 +309,30 @@ WebVoyager 109 tasks / 3 站点：成功率 88.1%（AllRecipes 88.6%、Apple 85.
 ### 4. 中断后继续
 
 ```powershell
-npm run eval -- --out output/evals/webvoyager-109-20260916-concurrency1 --reasoning-effort high --concurrency 1 --headed --timeout 600000 --judge evidence --resume
+# 普通中断续跑
+npm run eval -- --out output/evals/webvoyager-126-concurrency1 --reasoning-effort high --concurrency 1 --headed --timeout 600000 --judge reference --resume
 
-# Agent 结果已保存、仅 Judge 失败时重新评分，不重新运行浏览器
-npm run eval -- --out output/evals/webvoyager-109-20260916-concurrency1 --reasoning-effort high --judge-only --judge evidence
+# 完全更换评分规则：先清除旧 Judge 内容，再重新评分全部已保存 Agent 结果；不重跑浏览器
+npm run eval:reset-judge -- --out output/evals/webvoyager-126-concurrency1
+npm run eval:reset-judge -- --out output/evals/webvoyager-126-concurrency1 --execute
+npm run eval -- --out output/evals/webvoyager-126-concurrency1 --reasoning-effort high --judge-only --judge reference
 ```
 
-续跑需保持原输出目录、选题、配置及代码指纹完全一致。修改 `--concurrency`、`--preflight-timeout`、模型、Judge、评测脚本或构建产物后不能续跑原目录，必须指定新的 `--out`。已有结果（包括失败和超时）会跳过，不会自动重跑或重新评分；仅 Judge 失败时使用 `--judge-only` 生成单独的 `judged-evidence.json`。发现已有 `trace.ndjson` 但没有 `result.json` 的中断题时，评测器会直接拒绝继续，避免静默重试。需要重新执行这些题时，使用新的输出目录。不要删除仍需续跑的记录。
+续跑需保持原输出目录、选题、配置及代码指纹完全一致。修改 `--concurrency`、`--preflight-timeout`、模型、Judge、评测脚本或构建产物后不能续跑原目录，必须指定新的 `--out`。已有结果（包括失败和超时）会跳过，不会自动重跑或重新评分；要重新评分时使用 `--judge-only` 生成单独的 `judged-reference.json`。发现已有 `trace.ndjson` 但没有 `result.json` 的中断题时，评测器会直接拒绝继续，避免静默重试。需要重新执行这些题时，使用新的输出目录。不要删除仍需续跑的记录。
 
-### 5. 查看结果与保留代码
+### 5. 只补旧运行缺失的任务
+
+```powershell
+# 只读核对：验证旧任务轨迹并列出精确差集，不加载凭据或启动浏览器
+npm run eval:backfill -- --out output/evals/OLD_RUN --data assets/benchmark/webvoyager-126.json
+
+# 审核清单后执行；旧任务进入保护集合，只有差集可被派发
+npm run eval:backfill -- --out output/evals/OLD_RUN --data assets/benchmark/webvoyager-126.json --execute
+```
+
+补跑器要求旧 manifest 是新数据集的同内容有序子序列，并逐题验证已有 `task.json`、`session.json`、非空 `trace.ndjson`、`result.json` 和最终索引。旧任务即使存在于恢复计划中也不会被重新运行或重新评分；新增结果按 126 题数据集原位置重建 `results.ndjson`、JSON、Markdown 和 CSV。原 manifest 保存为 `manifest-before-backfill.json`，扩展后的结果标记 `mixed_provenance`。
+
+### 6. 查看结果与保留代码
 
 全量命令的结果位于命令指定的 `output/evals/RUN_NAME/`：
 
@@ -379,7 +392,7 @@ Remove-Item Env:DSH_TEST_SESSION_MODULE
 
 We build `dsh-browser-plugin` as a standalone [DeepSeek Harness (DSH)](https://github.com/deepseek-ai/deepseek-harness) plugin for the Web profile. It launches a local Chrome or Chromium instance and exposes 16 browser operations plus four task/evidence tools through Puppeteer, the Chrome DevTools Protocol (CDP), and incremental DOM snapshots.
 
-Our completed WebVoyager run covers 109 tasks across three sites: 88.1% overall success (AllRecipes 88.6%, Apple 85.7%, Amazon 89.7%), with 26.7 average tool calls, 167.3 seconds, and an estimated $0.0968 Agent cost per task.
+Our archived WebVoyager result covers 126 tasks across three sites: after regrading with the pinned upstream `judge-prompt.md`, it achieves 88.9% overall success (AllRecipes 86.7%, Apple 90.5%, Amazon 89.7%), with 27.1 average tool calls and 176.3 seconds. It combines 109 protected prior trajectories with a 17-task ordered backfill, so it is mixed-provenance rather than a fresh controlled 126-task run. Estimated current-result cost is $12.1263 for the Agent plus $0.2435 for the Judge.
 
 This repository contains only the browser plugin's own source. It neither contains DeepSeek Harness source nor requires users to clone the Harness repository.
 
@@ -404,7 +417,8 @@ This repository contains only the browser plugin's own source. It neither contai
 - **Explicit browser routing** — When the user explicitly requests a browser or Chromium, the model starts with `browser_start` and stays on `browser_*` instead of substituting `web_search` or `web_fetch`.
 - **Secure defaults** — Chromium sandboxing is enabled, and state-changing operations request DSH approval by default.
 - **Bounded output** — Oversized script results return a preview while the full value is written to a configured or temporary directory.
-- **Evidence-backed records** — We archive observations by visit, register structured fields through `sourceRef`, and recheck declared coverage at completion.
+- **Same-step text retention** — Every DOM snapshot tells the Agent to write important answers, values, and navigation cues into the same assistant output before changing pages, without an extra legacy fact-summary call.
+- **On-demand archive recall** — Observations are archived by visit; `browser_recall` retrieves older pages when needed, without per-page registration or a completion coverage gate.
 - **Postcondition-aware actions** — Click and input can verify text or URL outcomes; execution, checked postconditions, and whole-task completion remain separate claims.
 - **Exact checkpoint restoration** — We restore supported form, details, and scroll state by full `stateId`, reporting incomplete restoration as `partial`.
 - **Structured and cross-frame diagnostics** — Script helpers cover JSON-LD and repeated records, while OOPIF routing plus CDP tape/statistics support reproducible DOM diagnostics.
@@ -553,10 +567,7 @@ CDP Snapshot
 | `browser_execute_script` | Run JavaScript in the page context |
 | `browser_view_elements` | Capture `[view:ID]` visual elements |
 | `browser_wait` | Wait for a bounded number of seconds with cancellation support |
-| `browser_define_task` | Declare required fields and minimum records for this turn |
-| `browser_record_facts` | Register sourceRef task records; support legacy facts |
-| `browser_check_coverage` | Check field coverage and report missing evidence |
-| `browser_recall` | Search current/historical facts or read archived browser observations |
+| `browser_recall` | Read historical facts or archived browser observations on demand |
 
 ## Architecture
 
@@ -579,7 +590,7 @@ Repository layout:
 dsh-browser/
 ├─ src/
 │  ├─ index.ts              # Cordis entry and lifecycle
-│  ├─ plugin-tools.ts       # Browser registrations; 20 tools with memory tools
+│  ├─ plugin-tools.ts       # Registers 16 browser tools; one archive recall tool is separate
 │  ├─ tool-schemas.ts       # parameter and output schemas
 │  ├─ config.ts             # config schema and validation
 │  └─ browser/
@@ -628,9 +639,9 @@ See [CONTRIBUTING.md](CONTRIBUTING.md) for the contribution workflow and [SECURI
 
 ## Browser, evidence, and diagnostic contract
 
-We treat dynamic-list coverage, action postconditions, exact checkpoint restoration, evidence records, and Host context management as normal product capabilities rather than dated additions. The package exposes 20 tools: 16 browser operations and four task/evidence tools.
+We retain dynamic-list coverage, action postconditions, exact checkpoint restoration, archived observations, and Host context management. The package exposes 17 tools: 16 browser operations and `browser_recall`.
 
-The evidence flow is **archive → visit-level Evidence Bundles → sourceRef records → continue browsing → check declared field coverage at completion → recall or browse to fill gaps**. Coverage is revision-specific and does not prove exhaustive search or arbitrary answer prose. Exact checkpoint IDs restore supported native fields and scrolling; unavailable state returns `error`, while incomplete restoration returns `partial`.
+The working-memory flow is **observe → write important findings in the same assistant message → continue browsing → recall archived observations only when needed**. Text notes are not verified `sourceRef` evidence. Exact checkpoint IDs restore supported native fields and scrolling; unavailable state returns `error`, while incomplete restoration returns `partial`.
 
 `browser_observe` creates a current full baseline without reloading, with optional Markdown action references. Script helpers include `__data`, `__records`, `__skeleton`, and browser-free `guide: true`. Child-frame CDP routing, frame-scoped references, URL-change notices, and bounded script evidence extend the same execution contract.
 

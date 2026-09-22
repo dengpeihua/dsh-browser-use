@@ -86,6 +86,12 @@ try {
   )
   assert.equal(started.status, "success")
   assert.match(started.output, /DSH Browser Smoke|ready|Navigated to data:/)
+  assert.match(started.output, /Match element labels or nearby text, and use DOM indentation/)
+  assert.match(started.output, /inspect the updated DOM instead of guessing or reusing stale indices/)
+  assert.match(started.output, /Use `browser_reveal_offscreen` with their `\[container:N\]` and optional `target`/)
+  assert.match(started.output, /Record important information in your text output before taking actions that change the page/)
+  assert.match(started.browserContext.observation.output, /Record any important data \(answers, values, navigation cues\) in your text output now/)
+  assert.match(started.browserContext.observation.fullOutput, /Record any important data \(answers, values, navigation cues\) in your text output now/)
 
   const scripted = await tool("browser_execute_script").execute(
     { script: "return document.title" },
@@ -93,6 +99,7 @@ try {
   )
   assert.equal(scripted.status, "success")
   assert.match(scripted.output, /DSH Browser Smoke/)
+  assert.match(scripted.browserContext.observation.output, /Record any important data \(answers, values, navigation cues\) in your text output now/)
 
   const viewId = [...started.output.matchAll(/\[view:([^\]]+)\]/g)]
     .map(match => match[1])

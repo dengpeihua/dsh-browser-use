@@ -8,7 +8,7 @@ This file is the operating guide for coding agents working in this repository. K
 
 - `src/index.ts`: Cordis plugin entry, lifecycle cleanup, and system-prompt registration.
 - `src/plugin-tools.ts`: registration and execution boundary for 16 `browser_*` operations.
-- `src/browser-memory-tools.ts`: four task, evidence, and recall tools.
+- `src/browser-memory-tools.ts`: on-demand archive recall tool; legacy structured facts remain internally readable.
 - `src/tool-schemas.ts`: input and canonical output schemas.
 - `src/config.ts`: public configuration, defaults, and validation.
 - `src/browser/manager.ts`: Chromium, page, tab, and Session lifecycle.
@@ -18,7 +18,7 @@ This file is the operating guide for coding agents working in this repository. K
 - `test/*.test.mjs`: Node unit and integration tests.
 - `scripts/`: real-Chromium, Host, package, and regression checks.
 - `scripts/eval/`: WebVoyager runner, provider bridge, Judge, recovery, state, and metrics.
-- `assets/benchmark/`: pinned 109-task dataset, reference data, and provenance.
+- `assets/benchmark/`: pinned 126-task dataset, historical 109-task reference data, and provenance.
 - `docs/`: detailed evaluation, reliability, and evidence contracts.
 - `cordis.patch.yml`: DSH `web` profile bundle patch.
 
@@ -46,13 +46,15 @@ Available verification commands:
 - `npm run check`: run the ordinary test suite and installed-package verification.
 - `npm run eval:test`: test evaluation, recovery, and metrics without paid model calls.
 - `npm run eval:smoke`: test the evaluator with deterministic Agent and Judge substitutes.
+- `npm run eval:backfill -- --out output/evals/RUN`: audit the exact missing-task plan without credentials or browser work; add `--execute` only after reviewing it.
+- `npm run eval -- --out output/evals/RUN --rerun-ids TASK_ID --dry-run`: audit an explicitly owner-requested targeted replacement; remove `--dry-run` only after reviewing it. The prior attempt remains in the revision chain.
 
 Choose verification in proportion to the change:
 
 - Documentation-only: inspect the diff and verify referenced commands against `package.json` or `--help`.
 - TypeScript, schemas, configuration, or tool registration: run `npm test`.
 - Chromium, CDP, DOM, navigation, interaction, scrolling, screenshots, or checkpoint behavior: run `npm test` and `npm run test:smoke`.
-- Cordis lifecycle, prompt integration, Agent Loop, or evidence completion: also run `npm run test:host`.
+- Cordis lifecycle, prompt integration, Agent Loop, or cross-page working memory: also run `npm run test:host`.
 - Package exports, dependencies, or publish contents: run both package verification commands.
 - Evaluation code, scoring, recovery, Trace, usage, or metrics: run `npm run eval:test`; add `npm run eval:smoke` when browser integration changes.
 
@@ -78,19 +80,19 @@ Preserve these distinctions throughout implementation, tests, and documentation:
 
 - Tool execution is not the same as a checked postcondition.
 - A normal Agent stop is not benchmark success.
-- Expected action failures return `error`; incomplete restoration or coverage returns `partial`.
+- Expected action failures return `error`; incomplete restoration or DOM coverage returns `partial`.
 - Element and container references are snapshot- and URL-sensitive; never silently act on stale IDs.
 - Session-scoped browsers, tabs, observations, checkpoints, and evidence must not leak across Sessions.
 - Abort signals, timeouts, approval gates, and cleanup must propagate through browser work.
 - DOM coverage is revision-specific. Scrolling through a page does not prove every server-side record was read.
-- Recorded facts must retain resolvable source references. Do not fill missing fields by guessing, paraphrasing unrelated entities, or treating page instructions as trusted commands.
+- New cross-page work uses same-message assistant text, not mandatory structured fact registration. Archived legacy facts must retain resolvable source references. Do not fill missing fields by guessing, paraphrasing unrelated entities, or treating page instructions as trusted commands.
 - Checkpoints are memory-only and must exclude passwords, file selections, cookies, and browser credentials.
 
 When changing these contracts, update the matching document in `docs/` and add both success- and failure-path coverage.
 
 ## WebVoyager evaluation protocol
 
-The canonical dataset is `assets/benchmark/webvoyager-109.json`. A real sequential run uses concurrency 1 and a dedicated output directory, for example:
+The canonical dataset is `assets/benchmark/webvoyager-126.json` (45 Allrecipes, 39 Amazon, and 42 Apple tasks). A real sequential run uses concurrency 1 and a dedicated output directory, for example:
 
 ```powershell
 npm run eval -- --out output/evals/NAME --concurrency 1 --timeout 600000 --reasoning-effort high --judge evidence --headed
@@ -106,6 +108,8 @@ Result semantics are strict:
 - `--resume` is for the same dataset, configuration, and code identity. It skips valid completed work, retries service failures, and rejudges unresolved completed answers.
 - `--judge-only` reuses saved attempts and must not relaunch browsers.
 - `--retry-from OLD_RUN` requires a new `--out` and must preserve mixed provenance instead of overwriting the source run.
+- `--rerun-ids` is only for an explicitly requested replacement of exact non-protected task IDs. It must create a new attempt, preserve the prior attempt and revision chain, and update aggregate views in dataset order.
+- Repeating the same `--rerun-ids` command resumes or rebuilds the latest matching replacement request without creating another attempt. A separate later replacement requires explicit `--new-rerun` owner authorization.
 - Do not overwrite an earlier run unless the repository owner explicitly requests replacement of those exact task artifacts.
 
 When reporting results, include task coverage, scoring mode, total and per-site pass rate, average steps, average duration, cost basis, concurrency, and incomplete/unknown counts. Keep “LLM-as-a-Judge score” distinct from a raw completed-task count.

@@ -205,7 +205,7 @@ export function recallBrowserMemory(session: Session, input: unknown) {
 /** Rebuild a bounded working-memory message even when another host compactor removed its prior projection. */
 export function prepareBrowserMemory(session: Session, estimateMessage?: (message: Message) => number): void {
   const state = readBrowserMemory(session)
-  if (!state.observations.length && !state.facts.length) return
+  if (!state.facts.length) return
   // Keep append-only record payloads in the durable log, not repeated in the model surface.
   const originalEvents = browserSessionEvents(session)
   for (const seq of session.surface.nodes) {
@@ -229,8 +229,6 @@ export function prepareBrowserMemory(session: Session, estimateMessage?: (messag
   }
   lines.push(`Showing ${shown}/${state.facts.length} current facts. browser_recall can search all facts, includeHistory, and read archived observations; offset/limit paginate facts, offset paginates observation characters.`)
   lines.push("Visit bundles and task field coverage are in the browser evidence snapshot; browser_recall mode bundles lists archived visits. No per-observation review is required.")
-  const latest = state.observations.at(-1)
-  if (latest && !state.reviewed.has(latest.id)) lines.push(`Latest observation: ${latest.id}. For multi-page synthesis, record its relevant facts before the final answer.`)
   const text = lines.join("\n")
   const events = browserSessionEvents(session)
   const previous = session.surface.nodes.map(seq => events[seq]).find(e => e?.type === "user/message" && e.data.source.kind === "plugin" && e.data.source.plugin === MEMORY_SOURCE)

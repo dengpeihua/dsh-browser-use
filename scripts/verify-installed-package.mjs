@@ -60,12 +60,12 @@ try {
   assert.equal(manifest.dsh.bundle.patch, "./cordis.patch.yml")
   assert.match(bundlePatch, /name:\s*dsh-browser-plugin/)
   assert.equal(plugin.name, "dsh-browser")
-  assert.equal(plugin.TOOL_IDS.length, 20)
+  assert.equal(plugin.TOOL_IDS.length, 17)
   const diagnostics = await import(pathToFileURL(join(installedRoot, manifest.exports["./diagnostics"].default)))
   assert.equal(typeof diagnostics.captureDomTape, "function")
   assert.equal(typeof diagnostics.replayDomTape, "function")
   assert.equal(typeof plugin.recordBrowserFacts, "function")
-  console.log("verify-installed-package: tarball installed and imported successfully (20 tools and diagnostics).")
+  console.log("verify-installed-package: tarball installed and imported successfully (17 tools and diagnostics).")
 } finally {
   await rm(temporaryRoot, { recursive: true, force: true })
 }

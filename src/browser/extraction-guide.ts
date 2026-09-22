@@ -1,8 +1,8 @@
 export const EXTRACTION_GUIDE = `# Extraction guide
 
-Declare required output fields with browser_define_task. Return plain objects or arrays using page data; then recall the observationId to obtain Host-issued sourceRefs. Register each task field through browser_record_facts records, without retyping its value. Keep browsing freely; browser_check_coverage and the turn-stopping hook check missing fields at completion. Source references prove provenance to saved output, not semantic correctness or exhaustive search. Narrow truncated extractions before referencing them.
+Return plain objects or arrays using page data. Record important results in your text output before changing pages. The Host archives page observations automatically; use browser_recall only when an older source has left working context. Narrow truncated extractions before relying on them.
 
-For plain text, call browser_recall with observationId and query set to an exact source quote. Copy sourceSpans[].sourceRef; inspect the surrounding text when a quote occurs more than once. DOM [N] markers are element IDs, never character offsets or source record IDs. Do not mix recordId/field with start/end, invent IDs, or submit empty spans. Missing facts require another source, not a fabricated reference.
+For plain text, keep the exact relevant wording and its page URL or observation ID in your answer notes. If the text is no longer visible, call browser_recall with observationId to read the archived page. DOM [N] markers are element IDs, not source citations. Missing facts require another source, not a fabricated answer.
 
 ## Strategy — try in this order
 

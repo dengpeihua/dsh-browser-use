@@ -21,7 +21,7 @@ const request = async (_config, messages, options) => {
   round++
   assert.ok(options.tools.some(t => t.name === "browser_start"))
   const views = [...JSON.stringify(messages).matchAll(/\[view:([^\]]+)\]/g)].map(m => m[1]).filter(id => id !== "ID")
-  const action = round === 1 ? ["browser_define_task", { mode: "interaction", objective: task.confirmed_task }] : round === 2 ? ["browser_start", { url }] : round === 3 ? ["browser_view_elements", { viewIds: [views.at(-1)] }] : null
+  const action = round === 1 ? ["browser_start", { url }] : round === 2 ? ["browser_view_elements", { viewIds: [views.at(-1)] }] : null
   if (!action) assert.match(JSON.stringify(messages), /Evaluation fixture ready/)
   if (!action) assert.ok(messages.some(m => Array.isArray(m.content) && m.content.some(b => b.type === "image_url")))
   return { usage: { prompt_tokens: 20, completion_tokens: 5 }, choices: [{ finish_reason: action ? "tool_calls" : "stop", message: action ? { role: "assistant", content: null, tool_calls: [{ id: `fixture-${round}`, type: "function", function: { name: action[0], arguments: JSON.stringify(action[1]) } }] } : { role: "assistant", content: "Evaluation fixture ready" } }] }
@@ -30,15 +30,15 @@ try {
   const result = await runHost(task, directory, { maxRounds: 8, timeout: 30000 }, config, request)
   assert.equal(result.status, "completed", JSON.stringify(result))
   assert.equal(result.infrastructure_error, null)
-  assert.equal(result.steps, 3)
-  assert.equal(result.model_rounds, 5)
-  assert.equal(result.request_count, 5)
+  assert.equal(result.steps, 2)
+  assert.equal(result.model_rounds, 4)
+  assert.equal(result.request_count, 4)
   assert.equal(result.retry_count, 1)
-  assert.equal(result.model_steps, 4)
+  assert.equal(result.model_steps, 3)
   assert.equal(result.usage_missing_calls, 1)
   assert.equal(result.tokens, null)
-  assert.equal(result.tokens_observed.input, 80)
-  assert.equal(result.tokens_observed.output, 20)
+  assert.equal(result.tokens_observed.input, 60)
+  assert.equal(result.tokens_observed.output, 15)
   assert.ok(Date.parse(result.finished_at) >= Date.parse(result.started_at))
   assert.equal(result.duration_ms, Date.parse(result.finished_at) - Date.parse(result.started_at))
   assert.ok(result.tool_trace.every(t => t.status === "success"))

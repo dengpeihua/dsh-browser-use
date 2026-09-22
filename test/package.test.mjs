@@ -7,7 +7,7 @@ import { satisfies } from "semver"
 const packageJson = JSON.parse(await readFile(new URL("../package.json", import.meta.url), "utf8"))
 const readme = await readFile(new URL("../README.md", import.meta.url), "utf8")
 const patch = await readFile(new URL("../cordis.patch.yml", import.meta.url), "utf8")
-const expectedPackageDocumentation = ["AGENTS.md", "CONTRIBUTING.md", "LICENSE", "README.md", "SECURITY.md", "docs/evaluation.md", "docs/evidence.md", "docs/reliability.md"]
+const expectedPackageDocumentation = ["AGENTS.md", "CONTRIBUTING.md", "LICENSE", "README.md", "SECURITY.md", "assets/benchmark/judge-prompt.md", "docs/evaluation.md", "docs/evidence.md", "docs/reliability.md"]
 const expectedRepositoryDocumentation = expectedPackageDocumentation
 
 async function findDocumentation(directory, prefix = "") {

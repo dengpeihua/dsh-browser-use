@@ -19,12 +19,13 @@ const tasks = ["a", "b", "c"].map(task_id => ({ task_id, confirmed_task: "Find a
 test("preflight allows a slow reasoning endpoint more than the old 15 second deadline", () => {
   assert.ok(DEFAULT_PREFLIGHT_TIMEOUT_MS >= 60000)
 })
-test("pinned benchmark contains exactly the original 109 IDs and website counts", () => {
-  const selected = validateTasks(readJson(new URL("../assets/benchmark/webvoyager-109.json", import.meta.url)))
+test("pinned benchmark contains all 126 tasks and preserves the published 109-task reference subset", () => {
+  const selected = validateTasks(readJson(new URL("../assets/benchmark/webvoyager-126.json", import.meta.url)))
   const ref = readJson(new URL("../assets/benchmark/reference.json", import.meta.url))
-  assert.equal(hash(selected), ref.subset_sha256)
-  assert.deepEqual(selected.map(t => t.task_id), ref.task_ids)
-  assert.equal(selected.length, 109)
+  const referenceTasks = ref.task_ids.map(id => selected.find(task => task.task_id === id))
+  assert.equal(hash(referenceTasks), ref.subset_sha256)
+  assert.equal(selected.length, 126)
+  assert.deepEqual(Object.fromEntries([...new Set(selected.map(task => new URL(task.website).hostname))].map(site => [site, selected.filter(task => new URL(task.website).hostname === site).length])), { "www.allrecipes.com": 45, "www.amazon.com": 39, "www.apple.com": 42 })
   assert.deepEqual(Object.fromEntries(Object.entries(ref.per_site).map(([k, v]) => [k, v.total])), { "www.allrecipes.com": 35, "www.amazon.com": 39, "www.apple.com": 35 })
   assert.equal((ref.success_rate * 100).toFixed(1), "73.4")
 })
@@ -269,17 +270,18 @@ test("MiniMax-M3 high uses the DSH Anthropic thinking budget and preserves repla
     assert.equal(replay[0].anthropic_content[0].signature, "signed-thinking")
   } finally { server.closeAllConnections(); await new Promise(done => server.close(done)) }
 })
-test("reference runtime failures skip judge calls and preserve upstream truthy pass coercion", async () => {
+test("reference judge grades runtime failures and enforces judge-prompt array output", async () => {
   let calls = 0
-  const request = async () => { calls++; return { choices: [{ finish_reason: "stop", message: { content: '{"pass":"false"}' } }] } }
+  const request = async () => { calls++; return { choices: [{ finish_reason: "stop", message: { content: calls === 1 ? '[{"task_id":"a","pass":false,"reason":"No answer was produced."}]' : '{"task_id":"a","pass":false,"reason":"Wrong output shape."}' } }] } }
   const directory = mkdtempSync(join(tmpdir(), "dsh-eval-judge-"))
   try {
     const failed = await judgeResult({ task_id: "a", status: "timeout" }, {}, "reference", directory, request)
-    assert.equal(calls, 0)
+    assert.equal(calls, 1)
     assert.equal(failed.pass, false)
     const malformed = await judgeResult({ task_id: "a", status: "completed", final_answer: "answer", tool_trace: [] }, {}, "reference", directory, request)
-    assert.equal(malformed.pass, true)
-    assert.equal(malformed.status, "judged")
+    assert.equal(calls, 2)
+    assert.equal(malformed.pass, null)
+    assert.equal(malformed.status, "judge_error")
   } finally { rmSync(directory, { recursive: true, force: true }) }
 })
 test("images are delivered only after all sibling tool responses, preserving function-call protocol", () => {
@@ -356,7 +358,7 @@ test("quota circuit breaker prevents dataset-wide false failures, both before an
     assert.equal(summary.attempted, 1)
     assert.equal(summary.missing, 2)
     assert.equal(summary.halted, "quota_exhausted")
-    assert.equal(requests, 2)
+    assert.equal(requests, 3)
     const manifest = readJson(join(midrun, "manifest.json"))
     assert.equal(manifest.agent.reasoningEffort, "high")
     assert.equal(manifest.agent.protocol, "openai-completions")

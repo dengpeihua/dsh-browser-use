@@ -33,7 +33,7 @@ src/                       源码事实来源
 lib/                       构建产物，不要手工修改
 test/                      node:test 测试
 scripts/                   真实浏览器与安装验证
-assets/benchmark/          固定的 WebVoyager 109 题与来源信息
+assets/benchmark/          固定的 WebVoyager 126 题与历史 109 题参考信息
 docs/                      评测、可靠性和证据契约
 cordis.patch.yml           DSH profile bundle patch
 ```
@@ -99,7 +99,7 @@ src/                       source of truth
 lib/                       generated output; do not edit manually
 test/                      node:test suite
 scripts/                   real-browser and installation verification
-assets/benchmark/          pinned WebVoyager 109-task dataset and provenance
+assets/benchmark/          pinned WebVoyager 126-task dataset and historical 109-task provenance
 docs/                      evaluation, reliability, and evidence contracts
 cordis.patch.yml           DSH profile bundle patch
 ```
