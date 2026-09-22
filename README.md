@@ -4,7 +4,7 @@
 
 <p align="center">Native Chromium browser Agent tools for DeepSeek Harness</p>
 
-WebVoyager 126 tasks / 3 站点：按固定上游 `judge-prompt.md` 重新评分后成功率 88.9%（AllRecipes 86.7%、Apple 90.5%、Amazon 89.7%），平均 27.1 步、176.3s。126 题均有 Trace 和评分；当前结果的 Agent 成本估算为 $12.1263，Judge 为 $0.2435。完整的 LLM-as-a-Judge、补跑来源和成本口径见[评测指南](docs/evaluation.md)。
+在 WebVoyager 126 tasks / 3 站点上取得 92.9 % 的成功率，平均 15.3 steps / 任务，耗时149 s / 任务，成本约 $ 0.031 / 任务。成本为 Agent 标价等价估算，Judge 费用另计；评测方法和历史归档见[评测指南](docs/evaluation.md)。
 
 浏览器命令失败的处理、点击检查和脚本异常说明见[可靠性文档](docs/reliability.md)；原文引用的获取方式见[证据文档](docs/evidence.md)。
 
@@ -25,7 +25,7 @@ WebVoyager 126 tasks / 3 站点：按固定上游 `judge-prompt.md` 重新评分
 
 > 给 DeepSeek Harness 装上真实浏览器：让 Agent 能够打开网页、理解页面、填写表单、管理标签页并完成多步骤任务。
 
-我们将 `dsh-browser-plugin` 作为可独立安装的 [DeepSeek Harness（DSH）](https://github.com/deepseek-ai/deepseek-harness) Web profile 插件。它直接启动本机 Chrome 或 Chromium，通过 Puppeteer、Chrome DevTools Protocol（CDP）和增量 DOM 快照向 Agent 提供 16 个浏览器操作与 4 个任务证据工具。
+我们将 `dsh-browser-plugin` 作为可独立安装的 [DeepSeek Harness（DSH）](https://github.com/deepseek-ai/deepseek-harness) Web profile 插件。它直接启动本机 Chrome 或 Chromium，通过 Puppeteer、Chrome DevTools Protocol（CDP）和增量 DOM 快照向 Agent 提供 16 个浏览器操作与 1 个归档回读工具。
 
 本仓库只包含浏览器插件自身的源码，不包含 DeepSeek Harness 源码，也不要求用户克隆 Harness 仓库。
 
@@ -79,7 +79,7 @@ npm install --global pnpm
 
 ### 安装当前本地版本
 
-该包目前尚未发布到 npm，以下步骤假定你已经通过当前私下交付渠道取得源码。先生成标准 npm tarball，再安装到 DSH 的 `web` profile：
+该包目前尚未发布到 npm。取得本仓库源码后，先生成标准 npm tarball，再安装到 DSH 的 `web` profile：
 
 ```powershell
 Set-Location path\to\dsh-browser
@@ -292,7 +292,7 @@ npm run eval -- --out output/evals/webvoyager-126-concurrency1 --reasoning-effor
 
 数据集包含 Allrecipes 45 题、Apple 42 题、Amazon 39 题。完整运行使用可见浏览器、`reference` 评分、每题 600 秒上限、50 轮模型请求和 `--concurrency 1`。并发会影响限流频率和延迟，对照运行必须保持一致；每次全新评测使用独立输出目录。
 
-当前归档由受保护的原 109 题轨迹与随后按数据集顺序补齐的 17 题组成：按固定上游 `judge-prompt.md` 清除旧 evidence 判定并重新评分后，112/126 通过，成功率 88.9%，平均 27.1 步、176.3 秒。它仍是混合时间批次，不应描述为一次全新受控的 126 题运行。当前结果的 Agent 成本估算为 $12.126323，Judge 为 $0.243535，合计 $12.369858；另有 4 个被替换的历史 Agent attempt，其已观测成本 $0.360453 单独保留，不计入当前结果总额。
+当前本地评测汇总覆盖 126/126 题，全部已评分，117/126 通过，成功率 92.9%。平均每题调用浏览器工具 15.3 次，Agent 耗时 149 秒，Agent 成本按标价估算约 $0.031；Judge 成本另计。评分模式为 `reference`，成功率分母包含失败和超时任务。此处的成本是估算值，不是实际账单。
 
 启动时会用小请求检查模型服务，默认准入超时为 60000 ms，可通过 `--preflight-timeout` 调整。Agent 运行中的临时限流、服务端错误、超时和传输错误会按有界指数退避自动重试；preflight 和独立 Judge 请求均为单次调用。Judge API、截断或格式异常记录为未评分，不能算作任务 FAIL；可在服务恢复后用 `--judge-only` 补评。额度耗尽与认证失败不会重试。若出现 `quota_exhausted`，需先恢复对应模型账户的额度。
 
@@ -390,9 +390,9 @@ Remove-Item Env:DSH_TEST_SESSION_MODULE
 
 > Give DeepSeek Harness a real browser so an Agent can open pages, understand interfaces, fill forms, manage tabs, and complete multi-step tasks.
 
-We build `dsh-browser-plugin` as a standalone [DeepSeek Harness (DSH)](https://github.com/deepseek-ai/deepseek-harness) plugin for the Web profile. It launches a local Chrome or Chromium instance and exposes 16 browser operations plus four task/evidence tools through Puppeteer, the Chrome DevTools Protocol (CDP), and incremental DOM snapshots.
+We build `dsh-browser-plugin` as a standalone [DeepSeek Harness (DSH)](https://github.com/deepseek-ai/deepseek-harness) plugin for the Web profile. It launches a local Chrome or Chromium instance and exposes 16 browser operations plus one archive recall tool through Puppeteer, the Chrome DevTools Protocol (CDP), and incremental DOM snapshots.
 
-Our archived WebVoyager result covers 126 tasks across three sites: after regrading with the pinned upstream `judge-prompt.md`, it achieves 88.9% overall success (AllRecipes 86.7%, Apple 90.5%, Amazon 89.7%), with 27.1 average tool calls and 176.3 seconds. It combines 109 protected prior trajectories with a 17-task ordered backfill, so it is mixed-provenance rather than a fresh controlled 126-task run. Estimated current-result cost is $12.1263 for the Agent plus $0.2435 for the Judge.
+Our current local WebVoyager result covers all 126 tasks across three sites. All tasks were judged with the `reference` judge, and 117 passed: 92.9% success, 15.3 browser tool calls and 149 seconds per task. Estimated Agent cost is about $0.031 per task at list prices; Judge cost is separate.
 
 This repository contains only the browser plugin's own source. It neither contains DeepSeek Harness source nor requires users to clone the Harness repository.
 
@@ -444,7 +444,7 @@ npm install --global pnpm
 
 ### Install the current local build
 
-The package has not been published to npm yet, so these steps assume you already obtained the source through the current private distribution channel. Build a standard npm tarball and add it to the DSH `web` profile:
+The package has not been published to npm yet. Obtain this repository's source, build a standard npm tarball, and add it to the DSH `web` profile:
 
 ```powershell
 Set-Location path\to\dsh-browser
