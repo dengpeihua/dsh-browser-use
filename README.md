@@ -4,7 +4,7 @@
 
 <p align="center">Native Chromium browser Agent tools for DeepSeek Harness</p>
 
-在 WebVoyager 549 tasks / 13 站点上，按[完整评分规则](assets/benchmark/judge-prompt.md)复核后取得 **88.0%（483/549）** 的成功率，平均 16.3 steps、140 s、Agent 标价估算 $0.028 / 任务。归档中的 `reference` Judge 为 495/549（90.2%）；两种口径及逐题结果见[评测报告](output/evals/webvoyager-126-concurrency1/reference-review-20260928/report.md)。
+在 WebVoyager 549 tasks / 13 站点上，按下文[完整评分规则](#4-完整评测规则)复核后取得 **88.0%（483/549）** 的成功率，平均 16.3 steps、140 s、Agent 标价估算 $0.028 / 任务。归档中的 `reference` Judge 为 495/549（90.2%）；两种口径及逐题结果见[评测报告](output/evals/webvoyager-126-concurrency1/reference-review-20260928/report.md)。
 
 浏览器命令失败的处理、点击检查和脚本异常说明见[可靠性文档](docs/reliability.md)；原文引用的获取方式见[证据文档](docs/evidence.md)。
 
@@ -282,7 +282,7 @@ npm run eval -- --data assets/benchmark/WebVoyager_data.json --dry-run --reasoni
 npm run eval -- --data assets/benchmark/WebVoyager_data.json --out output/evals/pilot-run1 --ids "Allrecipes--0,Apple--0,Amazon--0" --reasoning-effort high --concurrency 3 --headed --timeout 600000 --judge reference
 ```
 
-正式评测条件固定为 `--headed --timeout 600000 --judge reference`：显示浏览器窗口、每题最多运行 600 秒，并逐字加载固定上游版本 opencode-browser 的 `judge-prompt.md`。每次评分提供对应任务和 Agent 结果，要求返回单项 JSON 数组；error/timeout 只要最终答案有效也允许 PASS。它们也是评测器的默认值，但命令中仍显式写出，便于复核 manifest 和复现实验。`reference` 不提交浏览器文本证据或截图；旧的严格证据评分仍可显式选择 `--judge evidence`，但不属于上游同口径。`--reasoning-effort high` 显式固定 Agent 和默认 Judge 的推理档位，并写入 manifest 和运行指纹。真实试跑和全量评测都会消耗 Agent、Judge 的 API 额度；`npm run eval:smoke` 则使用真实浏览器和确定性模型替身，不调用收费 API，也不产生正式评测成绩。
+正式评测条件固定为 `--headed --timeout 600000 --judge reference`：显示浏览器窗口、每题最多运行 600 秒，并加载下文集中列出的完整评分规则。命令显式写出这些参数，便于复核 manifest 和复现实验。`--reasoning-effort high` 固定 Agent 和默认 Judge 的推理档位，并写入运行指纹。真实评测会消耗 Agent、Judge 的 API 额度；`npm run eval:smoke` 使用确定性模型替身，不产生正式评测成绩。
 
 ### 3. 当前 549 题评测
 
@@ -293,7 +293,7 @@ npm run eval -- --data assets/benchmark/WebVoyager_data.json --out output/evals/
 
 当前[评测归档](output/evals/webvoyager-126-concurrency1/)覆盖 549 题、13 个站点。每题均有最新轨迹、评分及成本记录；定点重测保留全部尝试与修订链。评测并发为 1、每题最多 600 秒、最多 50 轮模型请求。
 
-[`summary.json`](output/evals/webvoyager-126-concurrency1/summary.json) 的 `reference` Judge 为 **495/549（90.2%）**。按照下文[完整评分规则](assets/benchmark/judge-prompt.md)复核最终答案，对 12 项明确缺少关键条件的通过判定作修正后，[逐题复核报告](output/evals/webvoyager-126-concurrency1/reference-review-20260928/report.md)为 **483/549（88.0%）**。复核没有重新调用模型或浏览器；运行结果和修订链保持原样。[逐题 JSON 数组](output/evals/webvoyager-126-concurrency1/reference-review-20260928/judgments.json)、[最新尝试 `results.ndjson`](output/evals/webvoyager-126-concurrency1/reference-review-20260928/results.ndjson)和[12 项改判明细](output/evals/webvoyager-126-concurrency1/reference-review-20260928/corrections.json)可供独立检查。
+[`summary.json`](output/evals/webvoyager-126-concurrency1/summary.json) 的 `reference` Judge 为 **495/549（90.2%）**。按照下文[完整评分规则](#4-完整评测规则)复核最终答案，对 12 项明确缺少关键条件的通过判定作修正后，[逐题复核报告](output/evals/webvoyager-126-concurrency1/reference-review-20260928/report.md)为 **483/549（88.0%）**。复核没有重新调用模型或浏览器；运行结果和修订链保持原样。[逐题 JSON 数组](output/evals/webvoyager-126-concurrency1/reference-review-20260928/judgments.json)、[最新尝试 `results.ndjson`](output/evals/webvoyager-126-concurrency1/reference-review-20260928/results.ndjson)和[12 项改判明细](output/evals/webvoyager-126-concurrency1/reference-review-20260928/corrections.json)可供独立检查。
 
 | 站点 | 复核通过/总数 | 成功率 |
 |---|---:|---:|
@@ -313,12 +313,7 @@ npm run eval -- --data assets/benchmark/WebVoyager_data.json --out output/evals/
 
 复核口径平均 16.3 个浏览器步骤、Agent 耗时 140 秒、Agent 成本约 $0.028 / 任务；加上 Judge 约 $0.029 / 任务。成本按配置或历史美元标价估算，只计算每题最新尝试，不是 MiniMax Token Plan 账单。公开归档中 71 个文件的本机用户目录路径及 6 个文件中的 Google Maps API key 已脱敏；本地原始轨迹未改动，处理范围见归档中的 [`PUBLICATION.md`](output/evals/webvoyager-126-concurrency1/PUBLICATION.md)。
 
-### 4. 完整英文评测规则
-
-下面完整收录本项目的 [WebVoyager Judge 提示词](assets/benchmark/judge-prompt.md)。逐题结果见[判定 JSON](output/evals/webvoyager-126-concurrency1/reference-review-20260928/judgments.json)。
-
-<details open>
-<summary>WebVoyager Benchmark Evaluation：完整规则</summary>
+### 4. 完整评测规则
 
 # WebVoyager Benchmark Evaluation
 
@@ -381,7 +376,7 @@ Requirements for each entry:
 
 Evaluate all results now.
 
-</details>
+以上为完整规则，独立文件见 [judge-prompt.md](assets/benchmark/judge-prompt.md)；549 题的逐题判定见 [judgments.json](output/evals/webvoyager-126-concurrency1/reference-review-20260928/judgments.json)。
 
 启动时会用小请求检查模型服务，默认准入超时为 60000 ms，可通过 `--preflight-timeout` 调整。Agent 运行中的临时限流、服务端错误、超时和传输错误会按有界指数退避自动重试；preflight 和独立 Judge 请求均为单次调用。Judge API、截断或格式异常记录为未评分，不能算作任务 FAIL；可在服务恢复后用 `--judge-only` 补评。额度耗尽与认证失败不会重试。若出现 `quota_exhausted`，需先恢复对应模型账户的额度。
 
@@ -481,7 +476,7 @@ Remove-Item Env:DSH_TEST_SESSION_MODULE
 
 We build `dsh-browser-plugin` as a standalone [DeepSeek Harness (DSH)](https://github.com/deepseek-ai/deepseek-harness) plugin for the Web profile. It launches a local Chrome or Chromium instance and exposes 16 browser operations plus one archive recall tool through Puppeteer, the Chrome DevTools Protocol (CDP), and incremental DOM snapshots.
 
-The current WebVoyager archive covers 549 tasks across 13 sites. Its saved `reference` Judge scored 495/549 (90.2%); a review using the full [rubric below](#4-完整英文评测规则) corrected 12 clear missing-requirement passes and scored 483/549 (88.0%). The review averages 16.3 browser steps and 140 seconds per task, with estimated Agent list-price cost of $0.028 per task ($0.029 including Judge). See the [per-task results and site breakdown](output/evals/webvoyager-126-concurrency1/reference-review-20260928/report.md). The public archive redacts local user-directory paths in 71 files and Google Maps API keys in 6 files while leaving the original local trajectories intact.
+The current WebVoyager archive covers 549 tasks across 13 sites. Its saved `reference` Judge scored 495/549 (90.2%); a review using the full [rubric in this README](#4-完整评测规则) corrected 12 clear missing-requirement passes and scored 483/549 (88.0%). The review averages 16.3 browser steps and 140 seconds per task, with estimated Agent list-price cost of $0.028 per task ($0.029 including Judge). See the [per-task results and site breakdown](output/evals/webvoyager-126-concurrency1/reference-review-20260928/report.md). The public archive redacts local user-directory paths in 71 files and Google Maps API keys in 6 files while leaving the original local trajectories intact.
 
 This repository contains only the browser plugin's own source. It neither contains DeepSeek Harness source nor requires users to clone the Harness repository.
 
