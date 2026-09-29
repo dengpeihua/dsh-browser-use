@@ -4,7 +4,7 @@
 
 <p align="center">Native Chromium browser Agent tools for DeepSeek Harness</p>
 
-在 WebVoyager 549 tasks / 13 站点上，按[逐题复核规则](assets/benchmark/judge-prompt.md)及明确缺项修正后取得 **88.0%（483/549）** 的成功率，平均 16.3 steps、140 s、Agent 标价估算 $0.028 / 任务。原 `reference` Judge 为 495/549（90.2%）；两种口径及逐题结果见[评测归档](output/evals/webvoyager-126-concurrency1/reference-review-20260928/report.md)。
+在 WebVoyager 549 tasks / 13 站点上，按[完整评分规则](assets/benchmark/judge-prompt.md)复核后取得 **88.0%（483/549）** 的成功率，平均 16.3 steps、140 s、Agent 标价估算 $0.028 / 任务。归档中的 `reference` Judge 为 495/549（90.2%）；两种口径及逐题结果见[评测报告](output/evals/webvoyager-126-concurrency1/reference-review-20260928/report.md)。
 
 浏览器命令失败的处理、点击检查和脚本异常说明见[可靠性文档](docs/reliability.md)；原文引用的获取方式见[证据文档](docs/evidence.md)。
 
@@ -275,25 +275,25 @@ npm run build
 ### 2. 检查选题并可选试跑
 
 ```powershell
-# 只检查并列出选题，不启动浏览器、不调用模型 API
-npm run eval -- --dry-run --reasoning-effort high --headed --timeout 600000 --judge reference
+# 只检查并列出 549 题，不启动浏览器、不调用模型 API
+npm run eval -- --data assets/benchmark/WebVoyager_data.json --dry-run --reasoning-effort high --headed --timeout 600000 --judge reference
 
 # Allrecipes、Apple、Amazon 各一题，显示浏览器窗口方便观察
-npm run eval -- --out output/evals/pilot-run1 --ids "Allrecipes--0,Apple--0,Amazon--0" --reasoning-effort high --concurrency 3 --headed --timeout 600000 --judge reference
+npm run eval -- --data assets/benchmark/WebVoyager_data.json --out output/evals/pilot-run1 --ids "Allrecipes--0,Apple--0,Amazon--0" --reasoning-effort high --concurrency 3 --headed --timeout 600000 --judge reference
 ```
 
 正式评测条件固定为 `--headed --timeout 600000 --judge reference`：显示浏览器窗口、每题最多运行 600 秒，并逐字加载固定上游版本 opencode-browser 的 `judge-prompt.md`。每次评分提供对应任务和 Agent 结果，要求返回单项 JSON 数组；error/timeout 只要最终答案有效也允许 PASS。它们也是评测器的默认值，但命令中仍显式写出，便于复核 manifest 和复现实验。`reference` 不提交浏览器文本证据或截图；旧的严格证据评分仍可显式选择 `--judge evidence`，但不属于上游同口径。`--reasoning-effort high` 显式固定 Agent 和默认 Judge 的推理档位，并写入 manifest 和运行指纹。真实试跑和全量评测都会消耗 Agent、Judge 的 API 额度；`npm run eval:smoke` 则使用真实浏览器和确定性模型替身，不调用收费 API，也不产生正式评测成绩。
 
-### 3. 当前 549 题评测与历史 126 题
+### 3. 当前 549 题评测
 
 ```powershell
-# 全新 549 题运行必须使用独立目录；下方现存目录由旧 126 题逐步补齐，具有混合来源
+# 全新评测使用独立输出目录
 npm run eval -- --data assets/benchmark/WebVoyager_data.json --out output/evals/webvoyager-549-fresh --reasoning-effort high --concurrency 1 --headed --timeout 600000 --judge reference
 ```
 
-现存的 [`webvoyager-126-concurrency1`](output/evals/webvoyager-126-concurrency1/) 先完成 Allrecipes 45 题、Amazon 39 题和 Apple 42 题，再按数据集顺序补齐至 549 题、13 个站点，并对部分失败或用量缺失的任务保留旧尝试后定点重测。目录名称保留历史 126 题来源；它不是同一时间完成的全新 549 题运行。当前 549 题均有最新轨迹、评分及成本记录，并发为 1、每题最多 600 秒、最多 50 轮模型请求。
+当前[评测归档](output/evals/webvoyager-126-concurrency1/)覆盖 549 题、13 个站点。每题均有最新轨迹、评分及成本记录；定点重测保留全部尝试与修订链。评测并发为 1、每题最多 600 秒、最多 50 轮模型请求。
 
-原 [`summary.json`](output/evals/webvoyager-126-concurrency1/summary.json) 的 `reference` Judge 为 **495/549（90.2%）**。按照[固定评测规则](assets/benchmark/judge-prompt.md)复用该 549 项评分，并依据最终答案对 12 项明确缺少关键条件的通过判定作修正后，[逐题复核报告](output/evals/webvoyager-126-concurrency1/reference-review-20260928/report.md)为 **483/549（88.0%）**。复核没有重新调用模型或浏览器；原运行结果和修订链保持原样。[逐题 JSON 数组](output/evals/webvoyager-126-concurrency1/reference-review-20260928/judgments.json)、[最新尝试 `results.ndjson`](output/evals/webvoyager-126-concurrency1/reference-review-20260928/results.ndjson)和[12 项改判明细](output/evals/webvoyager-126-concurrency1/reference-review-20260928/corrections.json)可供独立检查。
+[`summary.json`](output/evals/webvoyager-126-concurrency1/summary.json) 的 `reference` Judge 为 **495/549（90.2%）**。按照下文[完整评分规则](assets/benchmark/judge-prompt.md)复核最终答案，对 12 项明确缺少关键条件的通过判定作修正后，[逐题复核报告](output/evals/webvoyager-126-concurrency1/reference-review-20260928/report.md)为 **483/549（88.0%）**。复核没有重新调用模型或浏览器；运行结果和修订链保持原样。[逐题 JSON 数组](output/evals/webvoyager-126-concurrency1/reference-review-20260928/judgments.json)、[最新尝试 `results.ndjson`](output/evals/webvoyager-126-concurrency1/reference-review-20260928/results.ndjson)和[12 项改判明细](output/evals/webvoyager-126-concurrency1/reference-review-20260928/corrections.json)可供独立检查。
 
 | 站点 | 复核通过/总数 | 成功率 |
 |---|---:|---:|
@@ -311,7 +311,77 @@ npm run eval -- --data assets/benchmark/WebVoyager_data.json --out output/evals/
 | Hugging Face | 37/41 | 90.2% |
 | Wolfram Alpha | 38/41 | 92.7% |
 
-复核口径平均 16.3 个浏览器步骤、Agent 耗时 140 秒、Agent 成本约 $0.028 / 任务；加上 Judge 约 $0.029 / 任务。成本按配置或历史美元标价估算，只计算每题最新尝试，不是 MiniMax Token Plan 账单。历史最初 126 题原始结果为 117/126（92.9%），不应与重测后的 549 题复核口径混用。公开归档中 71 个文件的本机用户目录路径及 6 个文件中的 Google Maps API key 已脱敏；本地原始轨迹未改动，处理范围见归档中的 `PUBLICATION.md`。
+复核口径平均 16.3 个浏览器步骤、Agent 耗时 140 秒、Agent 成本约 $0.028 / 任务；加上 Judge 约 $0.029 / 任务。成本按配置或历史美元标价估算，只计算每题最新尝试，不是 MiniMax Token Plan 账单。公开归档中 71 个文件的本机用户目录路径及 6 个文件中的 Google Maps API key 已脱敏；本地原始轨迹未改动，处理范围见归档中的 [`PUBLICATION.md`](output/evals/webvoyager-126-concurrency1/PUBLICATION.md)。
+
+### 4. 完整英文评测规则
+
+下面完整收录本项目的 [WebVoyager Judge 提示词](assets/benchmark/judge-prompt.md)。逐题结果见[判定 JSON](output/evals/webvoyager-126-concurrency1/reference-review-20260928/judgments.json)。
+
+<details open>
+<summary>WebVoyager Benchmark Evaluation：完整规则</summary>
+
+# WebVoyager Benchmark Evaluation
+
+You are an evaluator for a web browsing agent benchmark. You will receive:
+
+1. **WebVoyager_data.json** — the task definitions (task_id, confirmed_task, website)
+2. **results.ndjson** — the agent's execution results (one JSON per line)
+
+## Your Job
+
+For each result in results.ndjson, judge whether the agent successfully completed the task.
+
+## Evaluation Rules
+
+**PASS** if:
+- The agent's `final_answer` contains the specific information requested by the task
+- The information is factually plausible (e.g., a recipe with "4.5 stars" when task asks for "at least 4.5 stars")
+- Minor formatting differences, extra information, or verbose answers are acceptable
+- Partial completion counts as PASS only if the core requirement is met
+
+**FAIL** if:
+- `status` is "error" or "timeout" AND `final_answer` is empty or does not answer the task
+- The answer is wrong, irrelevant, or hallucinatory
+- The answer is generic (e.g., "I found a recipe" without providing the actual recipe details)
+- The agent failed to find the requested information and said so
+- Key requirements are missing (e.g., task asks for "rating above 4.5" but agent's answer shows a 3-star recipe)
+
+**NOTE**: If `status` is "error" but `final_answer` still contains a valid answer to the task, judge it as PASS.
+
+## Output Format
+
+Return a JSON array, one object per task:
+
+```json
+[
+  {
+    "task_id": "Allrecipes--0",
+    "pass": true,
+    "reason": "Agent found a vegetarian lasagna recipe with 4.6 stars and 150+ reviews, matching all criteria."
+  },
+  {
+    "task_id": "Allrecipes--1",
+    "pass": false,
+    "reason": "Agent returned a lasagna recipe but it does not use zucchini as required."
+  }
+]
+```
+
+Requirements for each entry:
+- `task_id`: must match exactly
+- `pass`: boolean
+- `reason`: one sentence explaining why pass or fail, referencing the specific task requirement
+
+## Important
+
+- Compare `final_answer` against `confirmed_task` from WebVoyager_data.json for each matching `task_id`
+- Do NOT skip any result — every entry in results.ndjson must have a judgment
+- Be strict on whether the core task requirement is met, but lenient on presentation
+- If the task asks for multiple things (e.g., "find a recipe AND list ingredients"), all parts must be present to PASS
+
+Evaluate all results now.
+
+</details>
 
 启动时会用小请求检查模型服务，默认准入超时为 60000 ms，可通过 `--preflight-timeout` 调整。Agent 运行中的临时限流、服务端错误、超时和传输错误会按有界指数退避自动重试；preflight 和独立 Judge 请求均为单次调用。Judge API、截断或格式异常记录为未评分，不能算作任务 FAIL；可在服务恢复后用 `--judge-only` 补评。额度耗尽与认证失败不会重试。若出现 `quota_exhausted`，需先恢复对应模型账户的额度。
 
@@ -325,33 +395,33 @@ npm run eval -- --data assets/benchmark/WebVoyager_data.json --out output/evals/
 
 `Allrecipes` 返回 People Inc access issue 页面时属于目标网站访问限制，不是模型 provider 故障；降低模型并发或延长 preflight 超时不会绕过该限制。
 
-### 4. 中断后继续
+### 5. 中断后继续
 
 ```powershell
 # 普通中断续跑
-npm run eval -- --out output/evals/webvoyager-126-concurrency1 --reasoning-effort high --concurrency 1 --headed --timeout 600000 --judge reference --resume
+npm run eval -- --data assets/benchmark/WebVoyager_data.json --out output/evals/webvoyager-126-concurrency1 --reasoning-effort high --concurrency 1 --headed --timeout 600000 --judge reference --resume
 
 # 完全更换评分规则：先清除旧 Judge 内容，再重新评分全部已保存 Agent 结果；不重跑浏览器
 npm run eval:reset-judge -- --out output/evals/webvoyager-126-concurrency1
 npm run eval:reset-judge -- --out output/evals/webvoyager-126-concurrency1 --execute
-npm run eval -- --out output/evals/webvoyager-126-concurrency1 --reasoning-effort high --judge-only --judge reference
+npm run eval -- --data assets/benchmark/WebVoyager_data.json --out output/evals/webvoyager-126-concurrency1 --reasoning-effort high --judge-only --judge reference
 ```
 
 续跑需保持原输出目录、选题、配置及代码指纹完全一致。修改 `--concurrency`、`--preflight-timeout`、模型、Judge、评测脚本或构建产物后不能续跑原目录，必须指定新的 `--out`。已有结果（包括失败和超时）会跳过，不会自动重跑或重新评分；要重新评分时使用 `--judge-only` 生成单独的 `judged-reference.json`。发现已有 `trace.ndjson` 但没有 `result.json` 的中断题时，评测器会直接拒绝继续，避免静默重试。需要重新执行这些题时，使用新的输出目录。不要删除仍需续跑的记录。
 
-### 5. 只补旧运行缺失的任务
+### 6. 只补运行中缺失的任务
 
 ```powershell
 # 只读核对：验证旧任务轨迹并列出精确差集，不加载凭据或启动浏览器
-npm run eval:backfill -- --out output/evals/OLD_RUN --data assets/benchmark/webvoyager-126.json
+npm run eval:backfill -- --out output/evals/OLD_RUN --data assets/benchmark/WebVoyager_data.json
 
 # 审核清单后执行；旧任务进入保护集合，只有差集可被派发
-npm run eval:backfill -- --out output/evals/OLD_RUN --data assets/benchmark/webvoyager-126.json --execute
+npm run eval:backfill -- --out output/evals/OLD_RUN --data assets/benchmark/WebVoyager_data.json --execute
 ```
 
-补跑器要求旧 manifest 是新数据集的同内容有序子序列，并逐题验证已有 `task.json`、`session.json`、非空 `trace.ndjson`、`result.json` 和最终索引。旧任务即使存在于恢复计划中也不会被重新运行或重新评分；新增结果按 126 题数据集原位置重建 `results.ndjson`、JSON、Markdown 和 CSV。原 manifest 保存为 `manifest-before-backfill.json`，扩展后的结果标记 `mixed_provenance`。
+补跑器要求已有 manifest 是目标数据集的同内容有序子序列，并逐题验证已有 `task.json`、`session.json`、非空 `trace.ndjson`、`result.json` 和最终索引。已有任务即使存在于恢复计划中也不会被重新运行或重新评分；新增结果按目标数据集原位置重建 `results.ndjson`、JSON、Markdown 和 CSV。原 manifest 保存为 `manifest-before-backfill.json`，扩展后的结果标记 `mixed_provenance`。
 
-### 6. 查看结果与保留代码
+### 7. 查看结果与保留代码
 
 全量命令的结果位于命令指定的 `output/evals/RUN_NAME/`：
 
@@ -411,7 +481,7 @@ Remove-Item Env:DSH_TEST_SESSION_MODULE
 
 We build `dsh-browser-plugin` as a standalone [DeepSeek Harness (DSH)](https://github.com/deepseek-ai/deepseek-harness) plugin for the Web profile. It launches a local Chrome or Chromium instance and exposes 16 browser operations plus one archive recall tool through Puppeteer, the Chrome DevTools Protocol (CDP), and incremental DOM snapshots.
 
-The current WebVoyager archive covers 549 tasks across 13 sites. Its saved `reference` Judge scored 495/549 (90.2%); a review using the same [rubric](assets/benchmark/judge-prompt.md) corrected 12 clear missing-requirement passes and scored 483/549 (88.0%). The review averages 16.3 browser steps and 140 seconds per task, with estimated Agent list-price cost of $0.028 per task ($0.029 including Judge). See the [per-task results and site breakdown](output/evals/webvoyager-126-concurrency1/reference-review-20260928/report.md); the original 126-task result is historical and the extended run has mixed provenance. The public archive redacts local user-directory paths in 71 files and Google Maps API keys in 6 files while leaving the original local trajectories intact.
+The current WebVoyager archive covers 549 tasks across 13 sites. Its saved `reference` Judge scored 495/549 (90.2%); a review using the full [rubric below](#4-完整英文评测规则) corrected 12 clear missing-requirement passes and scored 483/549 (88.0%). The review averages 16.3 browser steps and 140 seconds per task, with estimated Agent list-price cost of $0.028 per task ($0.029 including Judge). See the [per-task results and site breakdown](output/evals/webvoyager-126-concurrency1/reference-review-20260928/report.md). The public archive redacts local user-directory paths in 71 files and Google Maps API keys in 6 files while leaving the original local trajectories intact.
 
 This repository contains only the browser plugin's own source. It neither contains DeepSeek Harness source nor requires users to clone the Harness repository.
 
