@@ -1,0 +1,643 @@
+{
+  "previous": "ec83bff354a9f532573deba005b7c4ee0b6fccc7b324dfdd98bdd221c62b4f16",
+  "result": {
+    "task_id": "BBC News--22",
+    "website": "https://www.bbc.com/news/",
+    "task": "Determine the current top business story on BBC News and give a brief overview of its economic implications.",
+    "status": "completed",
+    "duration_ms": 80441,
+    "steps": 11,
+    "browser_steps": 11,
+    "model_rounds": 12,
+    "cost": 0.01383384,
+    "tokens": {
+      "input": 22284,
+      "output": 3388,
+      "cache_read": 51384,
+      "cache_write": 0,
+      "reasoning": 2280
+    },
+    "final_answer": "I have gathered sufficient information from the BBC News website. Here is my answer:\n\n## Top Business Story on BBC News\n\n**Headline:** \"The two big decisions the chancellor must make\"\n- **Author:** Faisal Islam, BBC Economics Editor\n- **Published:** ~10 hours ago\n- **Section:** Business\n\n### Story Overview\n\nThe article focuses on UK Chancellor **John Healey**, who faces two pivotal decisions ahead of his inaugural Budget scheduled for **28 October**:\n\n1. **How to address the longevity of economic pressures** caused by the ongoing Iran war (geopolitical conflict)\n2. **How to sustain a modest but notable uptick in economic optimism** through the global turbulence\n\nKey quotes from Healey himself: *\"It is tough... Conflicts, uncertainty, driving up inflation, driving up interest rates. But we've got great strengths. We've got good reasons to be confident about the future of Britain.\"*\n\nThe Chancellor also announced a **new scheme aimed at helping young people get on the property ladder** (first-time buyers).\n\n### Economic Implications\n\nThe article highlights several significant economic signals:\n\n| Indicator | Value | Implication |\n|-----------|-------|-------------|\n| Crude Oil Price | ~$75/barrel (recent low) | Energy cost relief for UK consumers and businesses |\n| 10-Year UK Gilt Yield | 4.9% | Elevated borrowing costs for the government |\n| Inflation | Rising | Geopolitical conflicts pushing prices higher |\n| Interest Rates | Rising | Tighter monetary conditions ahead |\n\n**Broader Economic Implications:**\n\n1. **Fiscal Policy Crossroads** — The Budget will set the UK's economic direction at a moment of fragile global stability. Tax/spending choices will shape the recovery trajectory.\n2. **Geopolitical Spillovers** — UK economic fortunes remain tied to Middle East tensions through oil prices, supply chains, and inflation transmission.\n3. **Housing Market Intervention** — The new property-ladder scheme signals a targeted policy response to the chronic UK housing affordability crisis, which has been a drag on labor mobility and consumer spending.\n4. **Debt Servicing Pressure** — A 4.9% gilt yield significantly raises the cost of government borrowing, constraining Healey's fiscal headroom for the Budget.\n5. **Consumer Confidence vs. Hard Data** — The Chancellor must balance sustaining public optimism with confronting worsening inflation and interest rate realities—a classic policy communication challenge.\n\nIn short, this is a story about a new Chancellor navigating an unusually complex mix of domestic housing pressures, global geopolitical risk, and elevated borrowing costs—a combination that will likely define UK economic policy for the coming year.",
+    "tool_trace": [
+      {
+        "tool": "browser_start",
+        "input": {
+          "url": "https://www.bbc.com/news/"
+        },
+        "call_id": "call_01a0e224f363737c8ed6cb08",
+        "time_ms": 15529,
+        "output_preview": "# Browser Mode\n\nThe DSH browser plugin controls a real Chromium instance isolated to the current Agent Session.\n\n- DOM markers `[N]` are clickable and `<N>` are inputs.\n- Match element labels or nearby text, and use DOM indentation to distinguish parents, children, and siblings; do not choose by mar",
+        "status": "success"
+      },
+      {
+        "tool": "browser_observe",
+        "input": {
+          "format": "markdown"
+        },
+        "call_id": "call_01a0e22533d874789664f0a6",
+        "time_ms": 1392,
+        "output_preview": "\n\n<!-- DOM_START dom0.1 tab:tab0 mode:full -->\n(stateId: tab0-dom0.1)\n## Current Page DOM Structure\n\n\n#DOCUMENT\n\tDIV\n\t\tDIV\n\t\t\tLINK: Skip to content\n\t\tHEADER\n\t\t\tDIV\n\t\t\t\tBUTTON: Open menu\n\t\t\t\tDIV\n\t\t\t\t\tLINK: Watch Live\n\t\t\tDIV\n\t\t\t\tLINK: British Broadcasting Corporation\n\t\t\tDIV\n\t\t\t\tBUTTON: Subscribe\n\t\t\t\tD",
+        "status": "success"
+      },
+      {
+        "tool": "browser_click",
+        "input": {
+          "elementIndex": 0,
+          "expectText": "News"
+        },
+        "call_id": "call_01a0e22541bf7285a300df9d",
+        "time_ms": 2,
+        "output_preview": "Element [0] not found or not clickable in the current DOM. No click was performed. Call browser_observe and choose a current [N] marker in the active tab; archived observations and removed delta lines are not live targets.\n\nNext actions:\n- Inspect the failure or partial result and re-observe before ",
+        "status": "error"
+      },
+      {
+        "tool": "browser_observe",
+        "input": {
+          "format": "html"
+        },
+        "call_id": "call_01a0e225453e77f9b61a4d91",
+        "time_ms": 1311,
+        "output_preview": "\n\n<!-- DOM_START dom0.2 tab:tab0 mode:full -->\n(stateId: tab0-dom0.2)\n## Current Page DOM Structure\n\n\n[view:fb]<img alt='BBC logo'></img>\n<div></div>\n\tTerms of Use & Privacy\n\t<p></p>\n\t\tBy clicking “Accept and Continue,” you confirm you agree to the\n\t\t[1000000000]<a aria-label='Terms of Use'></a>\n\t\ta",
+        "status": "success"
+      },
+      {
+        "tool": "browser_click",
+        "input": {
+          "elementIndex": 1000000004,
+          "expectText": "News"
+        },
+        "call_id": "call_01a0e2254dd47706a091d033",
+        "time_ms": 10900,
+        "output_preview": "Clicked <button aria-label='Accept and Continue' title='Accept and Continue'></button> Postcondition verified.\n\n\n<!-- DOM_START dom0.3 tab:tab0 mode:full -->\n(stateId: tab0-dom0.3)\n## Current Page DOM Structure\n\n\n<header></header>\n\t<div></div>\n\t\t[115]<button aria-label='Open menu' aria-expanded='fal",
+        "status": "success"
+      },
+      {
+        "tool": "browser_click",
+        "input": {
+          "elementIndex": 156,
+          "expectText": "Business"
+        },
+        "call_id": "call_01a0e2257f5a708085ef1416",
+        "time_ms": 11457,
+        "output_preview": "Clicked <a data-testid='mainNavigationLink'> Business </a> Postcondition verified.\n\n\n<!-- DOM_START dom1 tab:tab0 mode:full -->\n(stateId: tab0-dom1)\n## Current Page DOM Structure\n\n\n<header></header>\n\t<div></div>\n\t\t[2419]<button aria-label='Open menu' aria-expanded='false'></button>\n\t\t\t[view:ceca]<sv",
+        "status": "success"
+      },
+      {
+        "tool": "browser_reveal_offscreen",
+        "input": {
+          "container": 0,
+          "direction": "down"
+        },
+        "call_id": "call_01a0e225b2ce739785dcc3f3",
+        "time_ms": 2521,
+        "output_preview": "Scrolled down on container [0]: P0 -> P0.9\n\n\n<!-- DOM_START dom1.1 tab:tab0 mode:full -->\n(stateId: tab0-dom1.1)\n## Current Page DOM Structure\n\n\n<header></header>\n\t<div></div>\n\t\t[2419]<button aria-label='Open menu' aria-expanded='false'></button>\n\t\t\t[view:ceca]<svg></svg>\n\t\t<div></div>\n\t\t\t[2427]<a d",
+        "status": "success"
+      },
+      {
+        "tool": "browser_click",
+        "input": {
+          "elementIndex": 5330,
+          "expectText": "Budget"
+        },
+        "call_id": "call_01a0e225c60e71c695073002",
+        "time_ms": 9928,
+        "output_preview": "Clicked <a data-testid='internal-link'> Chancellor John Healey speaking in Coventry in front of purple and grey coloured equipment. He is wearing a dark suit, white short and red tie The two big calls the UK chancellor has to make ahead of the Budget He must consider the longevity of Iran war econom",
+        "status": "success"
+      },
+      {
+        "tool": "browser_reveal_offscreen",
+        "input": {
+          "container": 0,
+          "direction": "down"
+        },
+        "call_id": "call_01a0e225f39b77e583329880",
+        "time_ms": 1780,
+        "output_preview": "Scrolled down on container [0]: P0 -> P0.9\n\n\n<!-- DOM_START dom2.1 tab:tab0 mode:full -->\n(stateId: tab0-dom2.1)\n## Current Page DOM Structure\n\n\n<header></header>\n\t<div></div>\n\t\t[10292]<button aria-label='Open menu' aria-expanded='false'></button>\n\t\t\t[view:bacjd]<svg></svg>\n\t\t<div></div>\n\t\t\t[10300]<",
+        "status": "success"
+      },
+      {
+        "tool": "browser_scroll_next_screen",
+        "input": {
+          "container": 0,
+          "direction": "down"
+        },
+        "call_id": "call_01a0e22601e17115b31b025f",
+        "time_ms": 1673,
+        "output_preview": "Scrolled down to next screen on container [0]: P0.9 -> P1.7\n\n\n<!-- DOM_START dom2.2 tab:tab0 mode:full -->\n(stateId: tab0-dom2.2)\n## Current Page DOM Structure\n\n\n<div></div>\n\t[10292]<button aria-label='Open menu' aria-expanded='false'></button>\n\t\t[view:bacjd]<svg></svg>\n\t<div></div>\n\t\t[10300]<a data",
+        "status": "success"
+      },
+      {
+        "tool": "browser_scroll_to_page",
+        "input": {
+          "container": 0,
+          "page": 1
+        },
+        "call_id": "call_01a0e22612c175c5b0280ad9",
+        "time_ms": 1825,
+        "output_preview": "Scrolled to target page on container [0]: P1.7 -> P1\n\n\n<!-- DOM_START dom2.3 tab:tab0 mode:nochange -->\n(stateId: tab0-dom2.3)\n## Current Page DOM Structure\n\n\nNo DOM changes detected after the previous action.\nscrollMap:\n[container:0] 11 pages (coverage resets on content/layout changes) | viewing P1",
+        "status": "success"
+      }
+    ],
+    "error": null,
+    "model": "MiniMax-M3",
+    "provider": "minimax-cn",
+    "protocol": "anthropic-messages",
+    "reasoning_effort": "high",
+    "session_id": "eval-BBC News--22-b026d867f6c3",
+    "started_at": "2026-09-27T09:14:27.340Z",
+    "finished_at": "2026-09-27T09:15:47.781Z",
+    "duration_basis": "worker initialization to agent stop; excludes judge, screenshots and cleanup",
+    "infrastructure_error": null,
+    "request_count": 12,
+    "usage_missing_calls": 0,
+    "unpriced_calls": 0,
+    "tokens_observed": {
+      "input": 22284,
+      "output": 3388,
+      "cache_read": 51384,
+      "cache_write": 0,
+      "reasoning": 2280
+    },
+    "usage_metrics": {
+      "input_tokens": 73668,
+      "output_tokens": 3388,
+      "uncached_input_tokens": 22284,
+      "cache_hit_tokens": 51384,
+      "cache_miss_tokens": 22284,
+      "cache_write_tokens": 0,
+      "output_cache_tokens": null,
+      "reasoning_tokens": 2280,
+      "total_tokens": 77056,
+      "cache_hit_rate": 0.6975077374165174
+    },
+    "usage_observed": {
+      "input_tokens": 73668,
+      "output_tokens": 3388,
+      "uncached_input_tokens": 22284,
+      "cache_hit_tokens": 51384,
+      "cache_miss_tokens": 22284,
+      "cache_write_tokens": 0,
+      "output_cache_tokens": null,
+      "reasoning_tokens": 2280,
+      "total_tokens": 77056,
+      "cache_hit_rate": 0.6975077374165174
+    },
+    "cost_observed": 0.01383384,
+    "model_duration_ms": 21576,
+    "model_calls": [
+      {
+        "call_index": 1,
+        "started_at": "2026-09-27T09:14:27.370Z",
+        "finished_at": "2026-09-27T09:14:28.488Z",
+        "usage": {
+          "input": 2675,
+          "cache_read": 128,
+          "cache_write": 0,
+          "output": 74,
+          "reasoning": 38
+        },
+        "cost": 0.0008989800000000001,
+        "duration_ms": 1118,
+        "status": "success",
+        "raw_usage": {
+          "prompt_tokens": 2803,
+          "completion_tokens": 74,
+          "prompt_tokens_details": {
+            "cached_tokens": 128
+          },
+          "cache_creation_input_tokens": 0,
+          "completion_tokens_details": {
+            "thinking_tokens": 38,
+            "reasoning_tokens": 38
+          }
+        },
+        "output_cache_tokens": null
+      },
+      {
+        "call_index": 2,
+        "started_at": "2026-09-27T09:14:44.042Z",
+        "finished_at": "2026-09-27T09:14:44.975Z",
+        "usage": {
+          "input": 691,
+          "cache_read": 2803,
+          "cache_write": 0,
+          "output": 54,
+          "reasoning": 24
+        },
+        "cost": 0.0004402799999999999,
+        "duration_ms": 933,
+        "status": "success",
+        "raw_usage": {
+          "prompt_tokens": 3494,
+          "completion_tokens": 54,
+          "prompt_tokens_details": {
+            "cached_tokens": 2803
+          },
+          "cache_creation_input_tokens": 0,
+          "completion_tokens_details": {
+            "thinking_tokens": 24,
+            "reasoning_tokens": 24
+          }
+        },
+        "output_cache_tokens": null
+      },
+      {
+        "call_index": 3,
+        "started_at": "2026-09-27T09:14:46.404Z",
+        "finished_at": "2026-09-27T09:14:48.577Z",
+        "usage": {
+          "input": 3914,
+          "cache_read": 3333,
+          "cache_write": 0,
+          "output": 191,
+          "reasoning": 125
+        },
+        "cost": 0.00160338,
+        "duration_ms": 2173,
+        "status": "success",
+        "raw_usage": {
+          "prompt_tokens": 7247,
+          "completion_tokens": 191,
+          "prompt_tokens_details": {
+            "cached_tokens": 3333
+          },
+          "cache_creation_input_tokens": 0,
+          "completion_tokens_details": {
+            "thinking_tokens": 125,
+            "reasoning_tokens": 125
+          }
+        },
+        "output_cache_tokens": null
+      },
+      {
+        "call_index": 4,
+        "started_at": "2026-09-27T09:14:48.616Z",
+        "finished_at": "2026-09-27T09:14:49.440Z",
+        "usage": {
+          "input": 279,
+          "cache_read": 7247,
+          "cache_write": 0,
+          "output": 43,
+          "reasoning": 13
+        },
+        "cost": 0.00057012,
+        "duration_ms": 824,
+        "status": "success",
+        "raw_usage": {
+          "prompt_tokens": 7526,
+          "completion_tokens": 43,
+          "prompt_tokens_details": {
+            "cached_tokens": 7247
+          },
+          "cache_creation_input_tokens": 0,
+          "completion_tokens_details": {
+            "thinking_tokens": 13,
+            "reasoning_tokens": 13
+          }
+        },
+        "output_cache_tokens": null
+      },
+      {
+        "call_index": 5,
+        "started_at": "2026-09-27T09:14:50.779Z",
+        "finished_at": "2026-09-27T09:14:51.642Z",
+        "usage": {
+          "input": 791,
+          "cache_read": 3438,
+          "cache_write": 0,
+          "output": 77,
+          "reasoning": 32
+        },
+        "cost": 0.00053598,
+        "duration_ms": 863,
+        "status": "success",
+        "raw_usage": {
+          "prompt_tokens": 4229,
+          "completion_tokens": 77,
+          "prompt_tokens_details": {
+            "cached_tokens": 3438
+          },
+          "cache_creation_input_tokens": 0,
+          "completion_tokens_details": {
+            "thinking_tokens": 32,
+            "reasoning_tokens": 32
+          }
+        },
+        "output_cache_tokens": null
+      },
+      {
+        "call_index": 6,
+        "started_at": "2026-09-27T09:15:02.578Z",
+        "finished_at": "2026-09-27T09:15:04.330Z",
+        "usage": {
+          "input": 2119,
+          "cache_read": 3812,
+          "cache_write": 0,
+          "output": 232,
+          "reasoning": 174
+        },
+        "cost": 0.00114282,
+        "duration_ms": 1752,
+        "status": "success",
+        "raw_usage": {
+          "prompt_tokens": 5931,
+          "completion_tokens": 232,
+          "prompt_tokens_details": {
+            "cached_tokens": 3812
+          },
+          "cache_creation_input_tokens": 0,
+          "completion_tokens_details": {
+            "thinking_tokens": 174,
+            "reasoning_tokens": 174
+          }
+        },
+        "output_cache_tokens": null
+      },
+      {
+        "call_index": 7,
+        "started_at": "2026-09-27T09:15:15.827Z",
+        "finished_at": "2026-09-27T09:15:17.469Z",
+        "usage": {
+          "input": 2545,
+          "cache_read": 3963,
+          "cache_write": 0,
+          "output": 284,
+          "reasoning": 217
+        },
+        "cost": 0.0013420799999999998,
+        "duration_ms": 1642,
+        "status": "success",
+        "raw_usage": {
+          "prompt_tokens": 6508,
+          "completion_tokens": 284,
+          "prompt_tokens_details": {
+            "cached_tokens": 3963
+          },
+          "cache_creation_input_tokens": 0,
+          "completion_tokens_details": {
+            "thinking_tokens": 217,
+            "reasoning_tokens": 217
+          }
+        },
+        "output_cache_tokens": null
+      },
+      {
+        "call_index": 8,
+        "started_at": "2026-09-27T09:15:20.043Z",
+        "finished_at": "2026-09-27T09:15:22.435Z",
+        "usage": {
+          "input": 4230,
+          "cache_read": 4267,
+          "cache_write": 0,
+          "output": 516,
+          "reasoning": 443
+        },
+        "cost": 0.00214422,
+        "duration_ms": 2392,
+        "status": "success",
+        "raw_usage": {
+          "prompt_tokens": 8497,
+          "completion_tokens": 516,
+          "prompt_tokens_details": {
+            "cached_tokens": 4267
+          },
+          "cache_creation_input_tokens": 0,
+          "completion_tokens_details": {
+            "thinking_tokens": 443,
+            "reasoning_tokens": 443
+          }
+        },
+        "output_cache_tokens": null
+      },
+      {
+        "call_index": 9,
+        "started_at": "2026-09-27T09:15:32.425Z",
+        "finished_at": "2026-09-27T09:15:34.098Z",
+        "usage": {
+          "input": 1815,
+          "cache_read": 4618,
+          "cache_write": 0,
+          "output": 261,
+          "reasoning": 200
+        },
+        "cost": 0.0011347799999999997,
+        "duration_ms": 1673,
+        "status": "success",
+        "raw_usage": {
+          "prompt_tokens": 6433,
+          "completion_tokens": 261,
+          "prompt_tokens_details": {
+            "cached_tokens": 4618
+          },
+          "cache_creation_input_tokens": 0,
+          "completion_tokens_details": {
+            "thinking_tokens": 200,
+            "reasoning_tokens": 200
+          }
+        },
+        "output_cache_tokens": null
+      },
+      {
+        "call_index": 10,
+        "started_at": "2026-09-27T09:15:35.906Z",
+        "finished_at": "2026-09-27T09:15:37.740Z",
+        "usage": {
+          "input": 1238,
+          "cache_read": 5275,
+          "cache_write": 0,
+          "output": 385,
+          "reasoning": 331
+        },
+        "cost": 0.0011499,
+        "duration_ms": 1834,
+        "status": "success",
+        "raw_usage": {
+          "prompt_tokens": 6513,
+          "completion_tokens": 385,
+          "prompt_tokens_details": {
+            "cached_tokens": 5275
+          },
+          "cache_creation_input_tokens": 0,
+          "completion_tokens_details": {
+            "thinking_tokens": 331,
+            "reasoning_tokens": 331
+          }
+        },
+        "output_cache_tokens": null
+      },
+      {
+        "call_index": 11,
+        "started_at": "2026-09-27T09:15:39.466Z",
+        "finished_at": "2026-09-27T09:15:42.061Z",
+        "usage": {
+          "input": 1294,
+          "cache_read": 5603,
+          "cache_write": 0,
+          "output": 435,
+          "reasoning": 378
+        },
+        "cost": 0.00124638,
+        "duration_ms": 2595,
+        "status": "success",
+        "raw_usage": {
+          "prompt_tokens": 6897,
+          "completion_tokens": 435,
+          "prompt_tokens_details": {
+            "cached_tokens": 5603
+          },
+          "cache_creation_input_tokens": 0,
+          "completion_tokens_details": {
+            "thinking_tokens": 378,
+            "reasoning_tokens": 378
+          }
+        },
+        "output_cache_tokens": null
+      },
+      {
+        "call_index": 12,
+        "started_at": "2026-09-27T09:15:43.982Z",
+        "finished_at": "2026-09-27T09:15:47.759Z",
+        "usage": {
+          "input": 693,
+          "cache_read": 6897,
+          "cache_write": 0,
+          "output": 836,
+          "reasoning": 305
+        },
+        "cost": 0.00162492,
+        "duration_ms": 3777,
+        "status": "success",
+        "raw_usage": {
+          "prompt_tokens": 7590,
+          "completion_tokens": 836,
+          "prompt_tokens_details": {
+            "cached_tokens": 6897
+          },
+          "cache_creation_input_tokens": 0,
+          "completion_tokens_details": {
+            "thinking_tokens": 305,
+            "reasoning_tokens": 305
+          }
+        },
+        "output_cache_tokens": null
+      }
+    ],
+    "model_steps": 12,
+    "retry_count": 0,
+    "failed_steps": 1,
+    "incomplete_steps": 0,
+    "final_screenshot": "final.png",
+    "attempt_number": 2,
+    "attempt_directory": "BBC News--22\\attempts\\2",
+    "judge_mode": "reference",
+    "metrics": {
+      "metrics_version": 1,
+      "input_tokens": 73668,
+      "output_tokens": 3388,
+      "uncached_input_tokens": 22284,
+      "cache_hit_tokens": 51384,
+      "cache_miss_tokens": 22284,
+      "cache_write_tokens": 0,
+      "output_cache_tokens": null,
+      "reasoning_tokens": 2280,
+      "total_tokens": 77056,
+      "cache_hit_rate": 0.6975077374165174,
+      "agent_cost_usd": 0.01383384,
+      "judge_cost_usd": 0.0012349799999999999,
+      "total_cost_usd": 0.01506882,
+      "observed_cost_usd": 0.01506882,
+      "agent_duration_ms": 80441,
+      "judge_duration_ms": 2088,
+      "active_duration_ms": 82529
+    },
+    "judge_result": {
+      "task_id": "BBC News--22",
+      "mode": "reference",
+      "rubric_version": "opencode-browser-856867996e73f7dcc5e39827bf2af7555bd63d40-judge-prompt.md",
+      "pass": true,
+      "reason": "Agent identified a top BBC Business story about UK Chancellor John Healey's upcoming Budget decisions and provided a detailed overview of its economic implications including fiscal policy, geopolitical spillovers, and housing market intervention.",
+      "status": "judged",
+      "model": "MiniMax-M3",
+      "request_count": 1,
+      "usage_missing_calls": 0,
+      "unpriced_calls": 0,
+      "tokens": {
+        "input": 2967,
+        "output": 281,
+        "cache_read": 128,
+        "cache_write": 0,
+        "reasoning": 207
+      },
+      "tokens_observed": {
+        "input": 2967,
+        "output": 281,
+        "cache_read": 128,
+        "cache_write": 0,
+        "reasoning": 207
+      },
+      "usage_metrics": {
+        "input_tokens": 3095,
+        "output_tokens": 281,
+        "uncached_input_tokens": 2967,
+        "cache_hit_tokens": 128,
+        "cache_miss_tokens": 2967,
+        "cache_write_tokens": 0,
+        "output_cache_tokens": null,
+        "reasoning_tokens": 207,
+        "total_tokens": 3376,
+        "cache_hit_rate": 0.04135702746365105
+      },
+      "usage_observed": {
+        "input_tokens": 3095,
+        "output_tokens": 281,
+        "uncached_input_tokens": 2967,
+        "cache_hit_tokens": 128,
+        "cache_miss_tokens": 2967,
+        "cache_write_tokens": 0,
+        "output_cache_tokens": null,
+        "reasoning_tokens": 207,
+        "total_tokens": 3376,
+        "cache_hit_rate": 0.04135702746365105
+      },
+      "cost": 0.0012349799999999999,
+      "cost_observed": 0.0012349799999999999,
+      "model_duration_ms": 2083,
+      "requests": 1,
+      "model_calls": [
+        {
+          "call_index": 1,
+          "started_at": "2026-09-27T09:15:50.792Z",
+          "usage": {
+            "input": 2967,
+            "cache_read": 128,
+            "cache_write": 0,
+            "output": 281,
+            "reasoning": 207
+          },
+          "cost": 0.0012349799999999999,
+          "status": "success",
+          "output_cache_tokens": null,
+          "raw_usage": {
+            "prompt_tokens": 3095,
+            "completion_tokens": 281,
+            "prompt_tokens_details": {
+              "cached_tokens": 128
+            },
+            "cache_creation_input_tokens": 0,
+            "completion_tokens_details": {
+              "thinking_tokens": 207,
+              "reasoning_tokens": 207
+            }
+          },
+          "finished_at": "2026-09-27T09:15:52.875Z",
+          "duration_ms": 2083
+        }
+      ],
+      "started_at": "2026-09-27T09:15:50.792Z",
+      "finished_at": "2026-09-27T09:15:52.880Z",
+      "duration_ms": 2088,
+      "prompt_sha256": "bcdf403484823037eaeb6cec7918b966fe90ee31a30bc8d69094d2ff42747ccf"
+    },
+    "evaluation_finished_at": "2026-09-27T09:15:52.880Z"
+  }
+}

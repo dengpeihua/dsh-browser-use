@@ -1,0 +1,720 @@
+{
+  "previous": "dc815caedbcfe8a9f42c05b7a9d1e0b1fad9e27343b80329c97de989a6919fce",
+  "result": {
+    "task_id": "Apple--36",
+    "website": "https://www.apple.com/",
+    "task": "Browse Apple Music on the entertainment section of the Apple's website, and see which singers' names are included in the pictures on this page.",
+    "status": "completed",
+    "duration_ms": 79731,
+    "steps": 13,
+    "browser_steps": 13,
+    "model_rounds": 14,
+    "cost": 0.02286246,
+    "tokens": {
+      "input": 42235,
+      "output": 4583,
+      "cache_read": 78206,
+      "cache_write": 0,
+      "reasoning": 3284
+    },
+    "final_answer": "Based on my thorough exploration of the Apple Music section on the Entertainment page (which redirects to https://www.apple.com/services/), I have found the answer.\n\n## Answer\n\nIn the **Apple Music** section of the Entertainment page, the singer whose name is included in the pictures is:\n\n**Olivia Rodrigo**\n\nThe picture shows her in an image titled **\"Olivia Rodrigo: The Zane Lowe Interview\"** with the description *\"The 'drop dead' superstar discusses her third album.\"* This is the only individual singer's name that appears in a picture on the Apple Music section. The other items in the Apple Music gallery are playlist/show names, not singer names:\n\n- New Music Daily (Apple Music)\n- Today's Hits (Apple Music Hits)\n- Today's Country (Apple Music Country)\n- A-List Pop (Apple Music Pop)\n- Alpha (Alpha Women)\n- Rap Life (Apple Music Hip-Hop)\n- ¡Dale Play! (Apple Music Latin)",
+    "tool_trace": [
+      {
+        "tool": "browser_start",
+        "input": {
+          "url": "https://www.apple.com/"
+        },
+        "call_id": "call_01a0c3e58f75763582a5ccc4",
+        "time_ms": 3223,
+        "output_preview": "# Browser Mode\n\nThe DSH browser plugin controls a real Chromium instance isolated to the current Agent Session.\n\n- DOM markers `[N]` are clickable and `<N>` are inputs.\n- Match element labels or nearby text, and use DOM indentation to distinguish parents, children, and siblings; do not choose by mar",
+        "status": "success"
+      },
+      {
+        "tool": "browser_click",
+        "input": {
+          "elementIndex": 301,
+          "expectText": "Entertainment"
+        },
+        "call_id": "call_01a0c3e5a04272a7a35acce8",
+        "time_ms": 10586,
+        "output_preview": "Clicked <a aria-label='Entertainment'></a> Postcondition verified.\n\n\n<!-- DOM_START dom1 tab:tab0 mode:full -->\n(stateId: tab0-dom1)\n## Current Page DOM Structure\n\n\n<div></div>\n\t<li></li>\n\t\t[6359]<a aria-label='Apple'></a>\n\t\t\t<span></span>\n\t\t\t\t[view:gdgb]<svg></svg>\n\t\t\t<span> Apple </span>\n\t<div></d",
+        "status": "success"
+      },
+      {
+        "tool": "browser_click",
+        "input": {
+          "elementIndex": 6595,
+          "expectText": "Apple Music"
+        },
+        "call_id": "call_01a0c3e5d47f7780b98d0fd7",
+        "time_ms": 4314,
+        "output_preview": "Clicked <a> Apple Music </a> Postcondition verified.\n\n\n<!-- DOM_START dom2 tab:tab0 mode:full -->\n(stateId: tab0-dom2)\n## Current Page DOM Structure\n\n\n<div></div>\n\t<li></li>\n\t\t[29065]<a aria-label='Apple'></a>\n\t\t\t<span></span>\n\t\t\t\t[view:dafai]<svg></svg>\n\t\t\t<span> Apple </span>\n\t<div></div>\n\t\t[29067",
+        "status": "success"
+      },
+      {
+        "tool": "browser_execute_script",
+        "input": {
+          "script": "return window.location.href;"
+        },
+        "call_id": "call_01a0c3e5efa7761fa529943b",
+        "time_ms": 529,
+        "output_preview": "\n\n<!-- DOM_START dom2.1 tab:tab0 mode:nochange -->\n(stateId: tab0-dom2.1)\n## Current Page DOM Structure\n\n\nNo DOM changes detected after the previous action.\nscrollMap:\n[container:0] 15 pages (coverage resets on content/layout changes) | viewing P0 | unexplored P1-14\n[container:1] 47 pages (coverage ",
+        "status": "success"
+      },
+      {
+        "tool": "browser_scroll_next_screen",
+        "input": {
+          "container": 32,
+          "direction": "down"
+        },
+        "call_id": "call_01a0c3e5fb8070bcb9d8d1be",
+        "time_ms": 2862,
+        "output_preview": "Scrolled down to next screen on container [32]: P0 -> P0 (Reached the BOTTOM of the page)\n\n\n<!-- DOM_START dom2.2 tab:tab0 mode:incremental -->\n(stateId: tab0-dom2.2)\n## Incremental DOM updates\n\n\n=== OFF-SCREEN above [container:32] (scroll to reveal these elements) ===\n+|Individual\n+|$11.99/month,\n+",
+        "status": "success"
+      },
+      {
+        "tool": "browser_goto",
+        "input": {
+          "url": "https://www.apple.com/entertainment/"
+        },
+        "call_id": "call_01a0c3e60ba5731aaba06faa",
+        "time_ms": 4120,
+        "output_preview": "Navigated to https://www.apple.com/services/\n\n\n<!-- DOM_START dom3 tab:tab0 mode:full -->\n(stateId: tab0-dom3)\n## Current Page DOM Structure\n\n\n<div></div>\n\t<li></li>\n\t\t[36286]<a aria-label='Apple'></a>\n\t\t\t<span></span>\n\t\t\t\t[view:dhhff]<svg></svg>\n\t\t\t<span> Apple </span>\n\t<div></div>\n\t\t[36288]<a aria",
+        "status": "success"
+      },
+      {
+        "tool": "browser_execute_script",
+        "input": {
+          "script": "return Array.from(document.querySelectorAll('img')).filter(img => img.alt && (img.alt.toLowerCase().includes('apple music') || img.alt.toLowerCase().includes('olivia') || img.alt.toLowerCase().includes('rodrigo') || img.alt.toLowerCase().includes('rap life') || img.alt.toLowerCase().includes('dale play'))).map(img => img.alt);"
+        },
+        "call_id": "call_01a0c3e62695719a80f87133",
+        "time_ms": 1728,
+        "output_preview": "\n\n<!-- DOM_START dom3.1 tab:tab0 mode:full -->\n(stateId: tab0-dom3.1)\n## Current Page DOM Structure\n\n\n<div></div>\n\t<li></li>\n\t\t[36286]<a aria-label='Apple'></a>\n\t\t\t<span></span>\n\t\t\t\t[view:dhhff]<svg></svg>\n\t\t\t<span> Apple </span>\n\t<div></div>\n\t\t[36288]<a aria-label='Store'></a>\n\t\t\t<span></span>\n\t\t\t\t",
+        "status": "success"
+      },
+      {
+        "tool": "browser_reveal_offscreen",
+        "input": {
+          "container": 23,
+          "direction": "up",
+          "target": "Olivia Rodrigo"
+        },
+        "call_id": "call_01a0c3e638617685bfe8081c",
+        "time_ms": 8684,
+        "output_preview": "Scrolled to element in container [23]: Olivia Rodrigo\n\n\n<!-- DOM_START dom3.2 tab:tab0 mode:full -->\n(stateId: tab0-dom3.2)\n## Current Page DOM Structure\n\n\n=== OFF-SCREEN above [container:13] (scroll to reveal these elements) ===\n<li></li>\n\t<picture></picture>\n\t\t<img alt='Trying - Comedy'></img>\n\t<s",
+        "status": "success"
+      },
+      {
+        "tool": "browser_view_elements",
+        "input": {
+          "viewIds": [
+            "dihbj"
+          ]
+        },
+        "call_id": "call_01a0c3e661b97029a8992209",
+        "time_ms": 266,
+        "output_preview": "view:dihbj <img>: [see attachment]\n\nNext actions:\n- Use the images together with the current DOM snapshot before interacting.",
+        "status": "success"
+      },
+      {
+        "tool": "browser_execute_script",
+        "input": {
+          "script": "const imgs = Array.from(document.querySelectorAll('img'));\nconst olivia = imgs.find(img => img.alt && img.alt.toLowerCase().includes('olivia'));\nreturn olivia ? {alt: olivia.alt, src: olivia.src, parentClass: olivia.parentElement ? olivia.parentElement.className : null} : null;"
+        },
+        "call_id": "call_01a0c3e66c9574649bed42f6",
+        "time_ms": 3582,
+        "output_preview": "\n\n<!-- DOM_START dom3.3 tab:tab0 mode:full -->\n(stateId: tab0-dom3.3)\n## Current Page DOM Structure\n\n\n=== OFF-SCREEN above [container:14] (scroll to reveal these elements) ===\n<li></li>\n\t<picture></picture>\n\t\t<img alt='Slow Horses - Thriller'></img>\n\t<span> Stream now </span>\n\t\t ...\n<li></li>\n\t<div>",
+        "status": "success"
+      },
+      {
+        "tool": "browser_view_elements",
+        "input": {
+          "viewIds": [
+            "dihbj"
+          ]
+        },
+        "call_id": "call_01a0c3e67fa174bbb64d6a94",
+        "time_ms": 126,
+        "output_preview": "view:dihbj <img>: [see attachment]\n\nNext actions:\n- Use the images together with the current DOM snapshot before interacting.",
+        "status": "success"
+      },
+      {
+        "tool": "browser_execute_script",
+        "input": {
+          "script": "const pictures = Array.from(document.querySelectorAll('picture'));\nconst olivia = pictures.find(p => {\n\tconst img = p.querySelector('img');\n\treturn img && img.alt && img.alt.toLowerCase().includes('olivia');\n});\nif (olivia) {\n\tconst imgs = olivia.querySelectorAll('img');\n\treturn Array.from(imgs).map(img => ({alt: img.alt, src: img.src, srcset: img.srcset ? img.srcset.substring(0, 200) : null}));\n}\nreturn null;"
+        },
+        "call_id": "call_01a0c3e68f6c731787146a62",
+        "time_ms": 2796,
+        "output_preview": "\n\n<!-- DOM_START dom3.4 tab:tab0 mode:full -->\n(stateId: tab0-dom3.4)\n## Current Page DOM Structure\n\n\n=== OFF-SCREEN above [container:14] (scroll to reveal these elements) ===\n<li></li>\n\t<picture></picture>\n\t\t<img alt='Last Seen - Thriller'></img>\n\t<span> Stream now </span>\n\t\t ...\n<li></li>\n\t<div></",
+        "status": "success"
+      },
+      {
+        "tool": "browser_scroll_to_page",
+        "input": {
+          "container": 5,
+          "page": 1
+        },
+        "call_id": "call_01a0c3e6a0b6721d900c0b66",
+        "time_ms": 5851,
+        "output_preview": "Scrolled to target page on container [5]: P0 -> P0.1 (At the BOTTOM of the page)\n\n\n<!-- DOM_START dom3.5 tab:tab0 mode:full -->\n(stateId: tab0-dom3.5)\n## Current Page DOM Structure\n\n\n=== OFF-SCREEN above [container:14] (scroll to reveal these elements) ===\n<li></li>\n\t<picture></picture>\n\t\t<img alt='",
+        "status": "success"
+      }
+    ],
+    "error": null,
+    "model": "MiniMax-M3",
+    "provider": "minimax-cn",
+    "protocol": "anthropic-messages",
+    "reasoning_effort": "high",
+    "session_id": "eval-Apple--36-0e5cbc21bb5b",
+    "started_at": "2026-09-21T12:16:36.801Z",
+    "finished_at": "2026-09-21T12:17:56.532Z",
+    "duration_basis": "worker initialization to agent stop; excludes judge, screenshots and cleanup",
+    "infrastructure_error": null,
+    "request_count": 14,
+    "usage_missing_calls": 0,
+    "unpriced_calls": 0,
+    "tokens_observed": {
+      "input": 42235,
+      "output": 4583,
+      "cache_read": 78206,
+      "cache_write": 0,
+      "reasoning": 3284
+    },
+    "usage_metrics": {
+      "input_tokens": 120441,
+      "output_tokens": 4583,
+      "uncached_input_tokens": 42235,
+      "cache_hit_tokens": 78206,
+      "cache_miss_tokens": 42235,
+      "cache_write_tokens": 0,
+      "output_cache_tokens": null,
+      "reasoning_tokens": 3284,
+      "total_tokens": 125024,
+      "cache_hit_rate": 0.6493303775292467
+    },
+    "usage_observed": {
+      "input_tokens": 120441,
+      "output_tokens": 4583,
+      "uncached_input_tokens": 42235,
+      "cache_hit_tokens": 78206,
+      "cache_miss_tokens": 42235,
+      "cache_write_tokens": 0,
+      "output_cache_tokens": null,
+      "reasoning_tokens": 3284,
+      "total_tokens": 125024,
+      "cache_hit_rate": 0.6493303775292467
+    },
+    "cost_observed": 0.02286246,
+    "model_duration_ms": 30366,
+    "model_calls": [
+      {
+        "call_index": 1,
+        "started_at": "2026-09-21T12:16:36.841Z",
+        "finished_at": "2026-09-21T12:16:38.180Z",
+        "usage": {
+          "input": 2681,
+          "cache_read": 128,
+          "cache_write": 0,
+          "output": 55,
+          "reasoning": 21
+        },
+        "cost": 0.00087798,
+        "duration_ms": 1339,
+        "status": "success",
+        "raw_usage": {
+          "prompt_tokens": 2809,
+          "completion_tokens": 55,
+          "prompt_tokens_details": {
+            "cached_tokens": 128
+          },
+          "cache_creation_input_tokens": 0,
+          "completion_tokens_details": {
+            "thinking_tokens": 21,
+            "reasoning_tokens": 21
+          }
+        },
+        "output_cache_tokens": null
+      },
+      {
+        "call_index": 2,
+        "started_at": "2026-09-21T12:16:41.424Z",
+        "finished_at": "2026-09-21T12:16:42.477Z",
+        "usage": {
+          "input": 1451,
+          "cache_read": 2809,
+          "cache_write": 0,
+          "output": 100,
+          "reasoning": 34
+        },
+        "cost": 0.00072384,
+        "duration_ms": 1053,
+        "status": "success",
+        "raw_usage": {
+          "prompt_tokens": 4260,
+          "completion_tokens": 100,
+          "prompt_tokens_details": {
+            "cached_tokens": 2809
+          },
+          "cache_creation_input_tokens": 0,
+          "completion_tokens_details": {
+            "thinking_tokens": 34,
+            "reasoning_tokens": 34
+          }
+        },
+        "output_cache_tokens": null
+      },
+      {
+        "call_index": 3,
+        "started_at": "2026-09-21T12:16:53.121Z",
+        "finished_at": "2026-09-21T12:16:55.883Z",
+        "usage": {
+          "input": 3624,
+          "cache_read": 3318,
+          "cache_write": 0,
+          "output": 351,
+          "reasoning": 276
+        },
+        "cost": 0.00170748,
+        "duration_ms": 2762,
+        "status": "success",
+        "raw_usage": {
+          "prompt_tokens": 6942,
+          "completion_tokens": 351,
+          "prompt_tokens_details": {
+            "cached_tokens": 3318
+          },
+          "cache_creation_input_tokens": 0,
+          "completion_tokens_details": {
+            "thinking_tokens": 276,
+            "reasoning_tokens": 276
+          }
+        },
+        "output_cache_tokens": null
+      },
+      {
+        "call_index": 4,
+        "started_at": "2026-09-21T12:17:00.247Z",
+        "finished_at": "2026-09-21T12:17:02.805Z",
+        "usage": {
+          "input": 1705,
+          "cache_read": 3484,
+          "cache_write": 0,
+          "output": 393,
+          "reasoning": 306
+        },
+        "cost": 0.00119214,
+        "duration_ms": 2558,
+        "status": "success",
+        "raw_usage": {
+          "prompt_tokens": 5189,
+          "completion_tokens": 393,
+          "prompt_tokens_details": {
+            "cached_tokens": 3484
+          },
+          "cache_creation_input_tokens": 0,
+          "completion_tokens_details": {
+            "thinking_tokens": 306,
+            "reasoning_tokens": 306
+          }
+        },
+        "output_cache_tokens": null
+      },
+      {
+        "call_index": 5,
+        "started_at": "2026-09-21T12:17:03.378Z",
+        "finished_at": "2026-09-21T12:17:05.850Z",
+        "usage": {
+          "input": 1486,
+          "cache_read": 5189,
+          "cache_write": 0,
+          "output": 372,
+          "reasoning": 298
+        },
+        "cost": 0.00120354,
+        "duration_ms": 2472,
+        "status": "success",
+        "raw_usage": {
+          "prompt_tokens": 6675,
+          "completion_tokens": 372,
+          "prompt_tokens_details": {
+            "cached_tokens": 5189
+          },
+          "cache_creation_input_tokens": 0,
+          "completion_tokens_details": {
+            "thinking_tokens": 298,
+            "reasoning_tokens": 298
+          }
+        },
+        "output_cache_tokens": null
+      },
+      {
+        "call_index": 6,
+        "started_at": "2026-09-21T12:17:08.750Z",
+        "finished_at": "2026-09-21T12:17:09.972Z",
+        "usage": {
+          "input": 1625,
+          "cache_read": 6675,
+          "cache_write": 0,
+          "output": 147,
+          "reasoning": 82
+        },
+        "cost": 0.0010644,
+        "duration_ms": 1222,
+        "status": "success",
+        "raw_usage": {
+          "prompt_tokens": 8300,
+          "completion_tokens": 147,
+          "prompt_tokens_details": {
+            "cached_tokens": 6675
+          },
+          "cache_creation_input_tokens": 0,
+          "completion_tokens_details": {
+            "thinking_tokens": 82,
+            "reasoning_tokens": 82
+          }
+        },
+        "output_cache_tokens": null
+      },
+      {
+        "call_index": 7,
+        "started_at": "2026-09-21T12:17:14.156Z",
+        "finished_at": "2026-09-21T12:17:16.867Z",
+        "usage": {
+          "input": 4305,
+          "cache_read": 3899,
+          "cache_write": 0,
+          "output": 420,
+          "reasoning": 251
+        },
+        "cost": 0.00202944,
+        "duration_ms": 2711,
+        "status": "success",
+        "raw_usage": {
+          "prompt_tokens": 8204,
+          "completion_tokens": 420,
+          "prompt_tokens_details": {
+            "cached_tokens": 3899
+          },
+          "cache_creation_input_tokens": 0,
+          "completion_tokens_details": {
+            "thinking_tokens": 251,
+            "reasoning_tokens": 251
+          }
+        },
+        "output_cache_tokens": null
+      },
+      {
+        "call_index": 8,
+        "started_at": "2026-09-21T12:17:18.645Z",
+        "finished_at": "2026-09-21T12:17:21.415Z",
+        "usage": {
+          "input": 5059,
+          "cache_read": 5003,
+          "cache_write": 0,
+          "output": 490,
+          "reasoning": 424
+        },
+        "cost": 0.0024058800000000004,
+        "duration_ms": 2770,
+        "status": "success",
+        "raw_usage": {
+          "prompt_tokens": 10062,
+          "completion_tokens": 490,
+          "prompt_tokens_details": {
+            "cached_tokens": 5003
+          },
+          "cache_creation_input_tokens": 0,
+          "completion_tokens_details": {
+            "thinking_tokens": 424,
+            "reasoning_tokens": 424
+          }
+        },
+        "output_cache_tokens": null
+      },
+      {
+        "call_index": 9,
+        "started_at": "2026-09-21T12:17:30.149Z",
+        "finished_at": "2026-09-21T12:17:31.992Z",
+        "usage": {
+          "input": 5091,
+          "cache_read": 5474,
+          "cache_write": 0,
+          "output": 265,
+          "reasoning": 205
+        },
+        "cost": 0.00217374,
+        "duration_ms": 1843,
+        "status": "success",
+        "raw_usage": {
+          "prompt_tokens": 10565,
+          "completion_tokens": 265,
+          "prompt_tokens_details": {
+            "cached_tokens": 5474
+          },
+          "cache_creation_input_tokens": 0,
+          "completion_tokens_details": {
+            "thinking_tokens": 205,
+            "reasoning_tokens": 205
+          }
+        },
+        "output_cache_tokens": null
+      },
+      {
+        "call_index": 10,
+        "started_at": "2026-09-21T12:17:32.301Z",
+        "finished_at": "2026-09-21T12:17:34.776Z",
+        "usage": {
+          "input": 329,
+          "cache_read": 10565,
+          "cache_write": 0,
+          "output": 263,
+          "reasoning": 137
+        },
+        "cost": 0.0010482,
+        "duration_ms": 2475,
+        "status": "success",
+        "raw_usage": {
+          "prompt_tokens": 10894,
+          "completion_tokens": 263,
+          "prompt_tokens_details": {
+            "cached_tokens": 10565
+          },
+          "cache_creation_input_tokens": 0,
+          "completion_tokens_details": {
+            "thinking_tokens": 137,
+            "reasoning_tokens": 137
+          }
+        },
+        "output_cache_tokens": null
+      },
+      {
+        "call_index": 11,
+        "started_at": "2026-09-21T12:17:38.433Z",
+        "finished_at": "2026-09-21T12:17:39.654Z",
+        "usage": {
+          "input": 5129,
+          "cache_read": 6028,
+          "cache_write": 0,
+          "output": 116,
+          "reasoning": 56
+        },
+        "cost": 0.00203958,
+        "duration_ms": 1222,
+        "status": "success",
+        "raw_usage": {
+          "prompt_tokens": 11157,
+          "completion_tokens": 116,
+          "prompt_tokens_details": {
+            "cached_tokens": 6028
+          },
+          "cache_creation_input_tokens": 0,
+          "completion_tokens_details": {
+            "thinking_tokens": 56,
+            "reasoning_tokens": 56
+          }
+        },
+        "output_cache_tokens": null
+      },
+      {
+        "call_index": 12,
+        "started_at": "2026-09-21T12:17:39.832Z",
+        "finished_at": "2026-09-21T12:17:43.745Z",
+        "usage": {
+          "input": 180,
+          "cache_read": 11157,
+          "cache_write": 0,
+          "output": 923,
+          "reasoning": 762
+        },
+        "cost": 0.0018310199999999998,
+        "duration_ms": 3913,
+        "status": "success",
+        "raw_usage": {
+          "prompt_tokens": 11337,
+          "completion_tokens": 923,
+          "prompt_tokens_details": {
+            "cached_tokens": 11157
+          },
+          "cache_creation_input_tokens": 0,
+          "completion_tokens_details": {
+            "thinking_tokens": 762,
+            "reasoning_tokens": 762
+          }
+        },
+        "output_cache_tokens": null
+      },
+      {
+        "call_index": 13,
+        "started_at": "2026-09-21T12:17:46.584Z",
+        "finished_at": "2026-09-21T12:17:48.148Z",
+        "usage": {
+          "input": 5167,
+          "cache_read": 6665,
+          "cache_write": 0,
+          "output": 214,
+          "reasoning": 153
+        },
+        "cost": 0.0022068,
+        "duration_ms": 1564,
+        "status": "success",
+        "raw_usage": {
+          "prompt_tokens": 11832,
+          "completion_tokens": 214,
+          "prompt_tokens_details": {
+            "cached_tokens": 6665
+          },
+          "cache_creation_input_tokens": 0,
+          "completion_tokens_details": {
+            "thinking_tokens": 153,
+            "reasoning_tokens": 153
+          }
+        },
+        "output_cache_tokens": null
+      },
+      {
+        "call_index": 14,
+        "started_at": "2026-09-21T12:17:54.047Z",
+        "finished_at": "2026-09-21T12:17:56.509Z",
+        "usage": {
+          "input": 4403,
+          "cache_read": 7812,
+          "cache_write": 0,
+          "output": 474,
+          "reasoning": 279
+        },
+        "cost": 0.00235842,
+        "duration_ms": 2462,
+        "status": "success",
+        "raw_usage": {
+          "prompt_tokens": 12215,
+          "completion_tokens": 474,
+          "prompt_tokens_details": {
+            "cached_tokens": 7812
+          },
+          "cache_creation_input_tokens": 0,
+          "completion_tokens_details": {
+            "thinking_tokens": 279,
+            "reasoning_tokens": 279
+          }
+        },
+        "output_cache_tokens": null
+      }
+    ],
+    "model_steps": 14,
+    "retry_count": 0,
+    "failed_steps": 0,
+    "incomplete_steps": 0,
+    "final_screenshot": "final.png",
+    "attempt_number": 1,
+    "attempt_directory": "Apple--36",
+    "judge_mode": "reference",
+    "metrics": {
+      "metrics_version": 1,
+      "input_tokens": 120441,
+      "output_tokens": 4583,
+      "uncached_input_tokens": 42235,
+      "cache_hit_tokens": 78206,
+      "cache_miss_tokens": 42235,
+      "cache_write_tokens": 0,
+      "output_cache_tokens": null,
+      "reasoning_tokens": 3284,
+      "total_tokens": 125024,
+      "cache_hit_rate": 0.6493303775292467,
+      "agent_cost_usd": 0.02286246,
+      "judge_cost_usd": 0.0011743799999999998,
+      "total_cost_usd": 0.02403684,
+      "observed_cost_usd": 0.02403684,
+      "agent_duration_ms": 79731,
+      "judge_duration_ms": 2941,
+      "active_duration_ms": 82672
+    },
+    "judge_result": {
+      "task_id": "Apple--36",
+      "mode": "reference",
+      "rubric_version": "opencode-browser-856867996e73f7dcc5e39827bf2af7555bd63d40-judge-prompt.md",
+      "pass": true,
+      "reason": "Agent browsed the Apple Music section on Apple's entertainment page and identified Olivia Rodrigo as the singer whose name appears in the pictures, which is a plausible and specific answer to the task.",
+      "status": "judged",
+      "model": "MiniMax-M3",
+      "request_count": 1,
+      "usage_missing_calls": 0,
+      "unpriced_calls": 0,
+      "tokens": {
+        "input": 3197,
+        "output": 173,
+        "cache_read": 128,
+        "cache_write": 0,
+        "reasoning": 0
+      },
+      "tokens_observed": {
+        "input": 3197,
+        "output": 173,
+        "cache_read": 128,
+        "cache_write": 0,
+        "reasoning": 0
+      },
+      "usage_metrics": {
+        "input_tokens": 3325,
+        "output_tokens": 173,
+        "uncached_input_tokens": 3197,
+        "cache_hit_tokens": 128,
+        "cache_miss_tokens": 3197,
+        "cache_write_tokens": 0,
+        "output_cache_tokens": null,
+        "reasoning_tokens": 0,
+        "total_tokens": 3498,
+        "cache_hit_rate": 0.03849624060150376
+      },
+      "usage_observed": {
+        "input_tokens": 3325,
+        "output_tokens": 173,
+        "uncached_input_tokens": 3197,
+        "cache_hit_tokens": 128,
+        "cache_miss_tokens": 3197,
+        "cache_write_tokens": 0,
+        "output_cache_tokens": null,
+        "reasoning_tokens": 0,
+        "total_tokens": 3498,
+        "cache_hit_rate": 0.03849624060150376
+      },
+      "cost": 0.0011743799999999998,
+      "cost_observed": 0.0011743799999999998,
+      "model_duration_ms": 2938,
+      "requests": 1,
+      "model_calls": [
+        {
+          "call_index": 1,
+          "started_at": "2026-09-21T12:17:58.908Z",
+          "usage": {
+            "input": 3197,
+            "cache_read": 128,
+            "cache_write": 0,
+            "output": 173,
+            "reasoning": 0
+          },
+          "cost": 0.0011743799999999998,
+          "status": "success",
+          "output_cache_tokens": null,
+          "raw_usage": {
+            "prompt_tokens": 3325,
+            "completion_tokens": 173,
+            "prompt_tokens_details": {
+              "cached_tokens": 128
+            },
+            "cache_creation_input_tokens": 0,
+            "completion_tokens_details": {
+              "reasoning_tokens": 0
+            }
+          },
+          "finished_at": "2026-09-21T12:18:01.846Z",
+          "duration_ms": 2938
+        }
+      ],
+      "started_at": "2026-09-21T12:17:58.908Z",
+      "finished_at": "2026-09-21T12:18:01.849Z",
+      "duration_ms": 2941,
+      "prompt_sha256": "bcdf403484823037eaeb6cec7918b966fe90ee31a30bc8d69094d2ff42747ccf"
+    },
+    "evaluation_finished_at": "2026-09-21T12:18:01.849Z"
+  }
+}

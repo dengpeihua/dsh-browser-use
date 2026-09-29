@@ -1,0 +1,911 @@
+{
+  "previous": "a8078d35962a58390d9d1c4a4c389d805226b9a3dcca4dc2340842ba1dd84835",
+  "result": {
+    "task_id": "Huggingface--4",
+    "website": "https://huggingface.co/",
+    "task": "Locate an open-source conversational AI model on Hugging Face, trained in English and list its main features and applications.",
+    "status": "completed",
+    "duration_ms": 148802,
+    "steps": 18,
+    "browser_steps": 18,
+    "model_rounds": 19,
+    "cost": 0.04045457999999999,
+    "tokens": {
+      "input": 89928,
+      "output": 4849,
+      "cache_read": 127623,
+      "cache_write": 0,
+      "reasoning": 2963
+    },
+    "final_answer": "I have found the necessary information. Let me provide the comprehensive answer about the open-source conversational AI model trained in English on Hugging Face.\n\n---\n\n## Open-Source Conversational AI Model: **Microsoft/DialoGPT-medium**\n\n**Model Page:** https://huggingface.co/microsoft/DialoGPT-medium\n\n### Overview\n**DialoGPT** is a State-of-the-Art (SOTA) large-scale pretrained dialogue response generation model for multi-turn conversations, released by Microsoft Research. It is hosted on Hugging Face under the MIT License (open-source).\n\n### Key Specifications\n| Attribute | Value |\n|---|---|\n| **Base Architecture** | GPT-2 |\n| **Pipeline Tag** | Text Generation (also tagged `conversational`) |\n| **Libraries Supported** | PyTorch, TensorFlow, JAX, Rust, Transformers |\n| **Training Language** | English (trained on 147M multi-turn dialogues from Reddit discussion threads) |\n| **Downloads (last month)** | 215,929 |\n| **Community Likes** | 441 |\n| **Associated Paper** | arXiv:1911.00536 (Nov 2019) – *\"DialoGPT: Large-Scale Generative Pre-training for Conversational Response Generation\"* |\n\n### Main Features\n1. **Multi-Turn Conversation Generation** – Generates contextually relevant responses across multiple conversational turns (not just single-turn replies).\n2. **Large-Scale Pretraining** – Trained on 147 million multi-turn dialogue exchanges from Reddit, giving it broad conversational coverage.\n3. **Human-Like Response Quality** – Human evaluation shows the responses are comparable in quality to those of humans under a single-turn Turing test.\n4. **GPT-2 Based Architecture** – Inherits the strong autoregressive language modeling capabilities of GPT-2.\n5. **Multiple Sizes Available** – DialoGPT is available in small, medium, and large variants.\n6. **Highly Extensible** – 35 adapters, 93 fine-tunes, and 3 quantizations have been built on top of this model by the community.\n7. **Easy Integration** – Can be loaded with `AutoModelForCausalLM` and `AutoTokenizer` from the `transformers` library in just a few lines of code.\n\n### Applications\n- **Chatbots and Virtual Assistants** – Building conversational agents for customer service or general chitchat (e.g., it is used in Microsoft's HuggingGPT Space on HF).\n- **Open-Domain Dialogue Systems** – Generating coherent responses to arbitrary conversational topics.\n- **Empathetic Response Generation** – Used in spaces like `arya7113/empathetic-response-ai` for emotionally aware replies.\n- **Research and Benchmarking** – Cited as a benchmark model for evaluating dialogue systems (referenced in leaderboards like the Intel low-bit Open LLM Leaderboard and BAAI Open Chinese LLM Leaderboard).\n- **Educational Toolkits** – Used for teaching conversational AI concepts, with 100+ Hugging Face Spaces built on top of it.\n- **Fine-Tuning Base for Custom Bots** – Provides a strong pretrained starting point for building domain-specific conversational agents.\n- **Conversational Research Prototyping** – Supports both Python (Transformers) and Rust inference, enabling rapid experimentation.\n\n### How to Use (Quick Example from Model Card)\n```python\nfrom transformers import AutoModelForCausalLM, AutoTokenizer\nimport torch\n\ntokenizer = AutoTokenizer.from_pretrained(\"microsoft/DialoGPT-medium\")\nmodel = AutoModelForCausalLM.from_pretrained(\"microsoft/DialoGPT-medium\")\n\n# Multi-turn chat loop\nfor step in range(5):\n    new_user_input_ids = tokenizer.encode(input(\">> User:\") + tokenizer.eos_token, return_tensors='pt')\n    bot_input_ids = torch.cat([chat_history_ids, new_user_input_ids], dim=-1) if step > 0 else new_user_input_ids\n    chat_history_ids = model.generate(bot_input_ids, max_length=1000, pad_token_id=tokenizer.eos_token_id)\n    print(\"DialoGPT: {}\".format(tokenizer.decode(chat_history_ids[:, bot_input_ids.shape[-1]:][0], skip_special_tokens=True)))\n```\n\n### Conclusion\n**Microsoft/DialoGPT-medium** is a strong representative example of an open-source, English-trained conversational AI model on Hugging Face. With its MIT license, extensive community adoption (215K+ monthly downloads), 100+ derivative Spaces, and a robust GPT-2 based architecture pretrained on 147M Reddit conversations, it remains a foundational model for both production chatbots and academic dialogue research.",
+    "tool_trace": [
+      {
+        "tool": "browser_start",
+        "input": {
+          "url": "https://huggingface.co/"
+        },
+        "call_id": "call_01a0dee93225774da9cf5c6c",
+        "time_ms": 15014,
+        "output_preview": "# Browser Mode\n\nThe DSH browser plugin controls a real Chromium instance isolated to the current Agent Session.\n\n- DOM markers `[N]` are clickable and `<N>` are inputs.\n- Match element labels or nearby text, and use DOM indentation to distinguish parents, children, and siblings; do not choose by mar",
+        "status": "success"
+      },
+      {
+        "tool": "browser_click",
+        "input": {
+          "elementIndex": 156,
+          "expectText": "Models"
+        },
+        "call_id": "call_01a0dee970ee74a8b15a0d94",
+        "time_ms": 4046,
+        "output_preview": "Clicked <a> Models </a> Postcondition verified.\n\n\n<!-- DOM_START dom1 tab:tab0 mode:full -->\n(stateId: tab0-dom1)\n## Current Page DOM Structure\n\n\n<div></div>\n\t[3247]<a> Hugging Face's logo Hugging Face </a>\n\t\t[3248][view:dcei]<img alt='Hugging Face's logo'></img>\n\t\t[3250]<span> Hugging Face </span>\n",
+        "status": "success"
+      },
+      {
+        "tool": "browser_goto",
+        "input": {
+          "url": "https://huggingface.co/models?pipeline_tag=conversational&language=en&sort=trending"
+        },
+        "call_id": "call_01a0dee985b2747f884ddde6",
+        "time_ms": 10483,
+        "output_preview": "Navigated to https://huggingface.co/models?language=en&sort=trending&other=conversational\n\n\n<!-- DOM_START dom2 tab:tab0 mode:full -->\n(stateId: tab0-dom2)\n## Current Page DOM Structure\n\n\n<div></div>\n\t[9227]<a> Hugging Face's logo Hugging Face </a>\n\t\t[9228][view:jcci]<img alt='Hugging Face's logo'><",
+        "status": "success"
+      },
+      {
+        "tool": "browser_goto",
+        "input": {
+          "url": "https://huggingface.co/models?pipeline_tag=conversational&language=en"
+        },
+        "call_id": "call_01a0dee9b46c76a4b0143c13",
+        "time_ms": 9887,
+        "output_preview": "Navigated to https://huggingface.co/models?language=en&other=conversational\n\n\n<!-- DOM_START dom3 tab:tab0 mode:full -->\n(stateId: tab0-dom3)\n## Current Page DOM Structure\n\n\n<div></div>\n\t[15940]<a> Hugging Face's logo Hugging Face </a>\n\t\t[15941][view:bfjeb]<img alt='Hugging Face's logo'></img>\n\t\t[15",
+        "status": "success"
+      },
+      {
+        "tool": "browser_click",
+        "input": {
+          "elementIndex": 16499,
+          "expectText": "Tasks"
+        },
+        "call_id": "call_01a0dee9e50974a88bb82c02",
+        "time_ms": 3610,
+        "output_preview": "Clicked <button> Languages </button> Postcondition verified.\n\n\n<!-- DOM_START dom3.1 tab:tab0 mode:incremental -->\n(stateId: tab0-dom3.1)\n## Incremental DOM updates\n\n\n+|[view:biica]<article></article>\n\t+|[18821]<a> Text Generation • 27B • Updated 4 days ago • 5.59k • 701 </a>\n\t\t+|[18823]<header titl",
+        "status": "success"
+      },
+      {
+        "tool": "browser_click",
+        "input": {
+          "elementIndex": 16491,
+          "expectText": "Conversational"
+        },
+        "call_id": "call_01a0dee9f6c3760d872b0494",
+        "time_ms": 8426,
+        "output_preview": "Clicked <button> Tasks </button> Postcondition failed.\n\n\n<!-- DOM_START dom3.2 tab:tab0 mode:full -->\n(stateId: tab0-dom3.2)\n## Current Page DOM Structure\n\n\n<div></div>\n\t[15940]<a> Hugging Face's logo Hugging Face </a>\n\t\t[15941][view:bfjeb]<img alt='Hugging Face's logo'></img>\n\t\t[15943]<span> Huggin",
+        "status": "error"
+      },
+      {
+        "tool": "browser_reveal_offscreen",
+        "input": {
+          "container": 1,
+          "direction": "down",
+          "target": "Conversational"
+        },
+        "call_id": "call_01a0deea1c2e746db16a767e",
+        "time_ms": 2912,
+        "output_preview": "Scrolled down on container [1]: P0 -> P1 Target \"Conversational\" was not found. Use browser_execute_script with __find() and scrollIntoView() for a targeted fallback.\n\n\n<!-- DOM_START dom3.3 tab:tab0 mode:nochange -->\n(stateId: tab0-dom3.3)\n## Current Page DOM Structure\n\n\nNo DOM changes detected aft",
+        "status": "success"
+      },
+      {
+        "tool": "browser_scroll_next_screen",
+        "input": {
+          "container": 2,
+          "direction": "down"
+        },
+        "call_id": "call_01a0deea2adc733c9793556a",
+        "time_ms": 2550,
+        "output_preview": "Scrolled down to next screen on container [2]: P0 -> P0 (Reached the BOTTOM of the page)\n\n\n<!-- DOM_START dom3.4 tab:tab0 mode:nochange -->\n(stateId: tab0-dom3.4)\n## Current Page DOM Structure\n\n\nNo DOM changes detected after the previous action.\nscrollMap:\n[container:0] 4 pages (coverage resets on c",
+        "status": "success"
+      },
+      {
+        "tool": "browser_observe",
+        "input": {},
+        "call_id": "call_01a0deea380b73bd9b2b338a",
+        "time_ms": 2613,
+        "output_preview": "\n\n<!-- DOM_START dom3.5 tab:tab0 mode:full -->\n(stateId: tab0-dom3.5)\n## Current Page DOM Structure\n\n\n<div></div>\n\t[15940]<a> Hugging Face's logo Hugging Face </a>\n\t\t[15941][view:bfjeb]<img alt='Hugging Face's logo'></img>\n\t\t[15943]<span> Hugging Face </span>\n\t<div></div>\n\t\t<15760><input placeholder",
+        "status": "success"
+      },
+      {
+        "tool": "browser_reveal_offscreen",
+        "input": {
+          "container": 0,
+          "direction": "down",
+          "target": "Conversational"
+        },
+        "call_id": "call_01a0deea48e3723a955c9176",
+        "time_ms": 2654,
+        "output_preview": "Scrolled down on container [0]: P0 -> P0.9 Target \"Conversational\" was not found. Use browser_execute_script with __find() and scrollIntoView() for a targeted fallback.\n\n\n<!-- DOM_START dom3.6 tab:tab0 mode:full -->\n(stateId: tab0-dom3.6)\n## Current Page DOM Structure\n\n\n[view:bgehc]<section> Multimo",
+        "status": "success"
+      },
+      {
+        "tool": "browser_goto",
+        "input": {
+          "url": "https://huggingface.co/models?pipeline_tag=conversational&language=en&sort=downloads"
+        },
+        "call_id": "call_01a0deea5a9370fa91b9083c",
+        "time_ms": 12002,
+        "output_preview": "Navigated to https://huggingface.co/models?language=en&sort=downloads&other=conversational\n\n\n<!-- DOM_START dom4 tab:tab0 mode:full -->\n(stateId: tab0-dom4)\n## Current Page DOM Structure\n\n\n<div></div>\n\t[28491]<a> Hugging Face's logo Hugging Face </a>\n\t\t[28492][view:ciejc]<img alt='Hugging Face's log",
+        "status": "success"
+      },
+      {
+        "tool": "browser_click",
+        "input": {
+          "elementIndex": 29061,
+          "expectText": "Other"
+        },
+        "call_id": "call_01a0deea933270b88f549435",
+        "time_ms": 3114,
+        "output_preview": "Clicked <button> Other </button> Postcondition verified.\n\n\n<!-- DOM_START dom4.1 tab:tab0 mode:full -->\n(stateId: tab0-dom4.1)\n## Current Page DOM Structure\n\n\n<div></div>\n\t[28491]<a> Hugging Face's logo Hugging Face </a>\n\t\t[28492][view:ciejc]<img alt='Hugging Face's logo'></img>\n\t\t[28494]<span> Hugg",
+        "status": "success"
+      },
+      {
+        "tool": "browser_click",
+        "input": {
+          "elementIndex": 29061,
+          "expectText": "Reset Misc"
+        },
+        "call_id": "call_01a0deeaa7a9767b97795506",
+        "time_ms": 2975,
+        "output_preview": "Clicked <button> Other </button> Postcondition verified.\n\n\n<!-- DOM_START dom4.2 tab:tab0 mode:nochange -->\n(stateId: tab0-dom4.2)\n## Current Page DOM Structure\n\n\nNo DOM changes detected after the previous action.\nscrollMap:\n[container:0] 4 pages (coverage resets on content/layout changes) | viewing",
+        "status": "success"
+      },
+      {
+        "tool": "browser_observe",
+        "input": {},
+        "call_id": "call_01a0deeab69770e9a994a1f4",
+        "time_ms": 2464,
+        "output_preview": "\n\n<!-- DOM_START dom4.3 tab:tab0 mode:full -->\n(stateId: tab0-dom4.3)\n## Current Page DOM Structure\n\n\n<div></div>\n\t[28491]<a> Hugging Face's logo Hugging Face </a>\n\t\t[28492][view:ciejc]<img alt='Hugging Face's logo'></img>\n\t\t[28494]<span> Hugging Face </span>\n\t<div></div>\n\t\t<28311><input placeholder",
+        "status": "success"
+      },
+      {
+        "tool": "browser_click",
+        "input": {
+          "elementIndex": 28311,
+          "expectText": "Search"
+        },
+        "call_id": "call_01a0deeac75974d282c7a51a",
+        "time_ms": 8134,
+        "output_preview": "Clicked <input placeholder='Search models, datasets, users...'></input> Postcondition failed.\n\n\n<!-- DOM_START dom4.4 tab:tab0 mode:incremental -->\n(stateId: tab0-dom4.4)\n## Incremental DOM updates\n\n\n<div></div>\n\t<div></div>\n\t\t+|<div></div>\n\t\t\t+|<ul></ul>\n\t\t\t\t+|[view:djecg]<li></li>\n\t\t\t\t+|<li></li>\n",
+        "status": "error"
+      },
+      {
+        "tool": "browser_input",
+        "input": {
+          "elementIndex": 28311,
+          "pressEnter": true,
+          "text": "microsoft/DialoGPT-medium"
+        },
+        "call_id": "call_01a0deeaf0c9719ca553b66b",
+        "time_ms": 12123,
+        "output_preview": "Input \"microsoft/DialoGPT-medium\" into <input placeholder='Search models, datasets, users...'></input> and pressed Enter Action dispatched; outcome not verified. Check the returned page before claiming success.\n\n\n<!-- DOM_START dom5 tab:tab0 mode:full -->\n(stateId: tab0-dom5)\n## Current Page DOM Str",
+        "status": "success"
+      },
+      {
+        "tool": "browser_goto",
+        "input": {
+          "url": "https://huggingface.co/microsoft/DialoGPT-medium"
+        },
+        "call_id": "call_01a0deeb247a769fbbeaf97f",
+        "time_ms": 9181,
+        "output_preview": "Navigated to https://huggingface.co/microsoft/DialoGPT-medium\n\n\n<!-- DOM_START dom6 tab:tab0 mode:full -->\n(stateId: tab0-dom6)\n## Current Page DOM Structure\n\n\n<div></div>\n\t[46246]<a> Hugging Face's logo Hugging Face </a>\n\t\t[46247][view:egceh]<img alt='Hugging Face's logo'></img>\n\t\t[46249]<span> Hug",
+        "status": "success"
+      },
+      {
+        "tool": "browser_scroll_next_screen",
+        "input": {
+          "container": 0,
+          "direction": "down"
+        },
+        "call_id": "call_01a0deeb4e0c723da82fabd9",
+        "time_ms": 3421,
+        "output_preview": "Scrolled down to next screen on container [0]: P0 -> P0.8\n\n\n<!-- DOM_START dom6.1 tab:tab0 mode:full -->\n(stateId: tab0-dom6.1)\n## Current Page DOM Structure\n\n\n=== OFF-SCREEN above [container:0] (scroll to reveal these elements) ===\n<div></div>\n\t<a> Hugging Face's logo Hugging Face </a>\n\t\t ...\n\t<div",
+        "status": "success"
+      }
+    ],
+    "error": null,
+    "model": "MiniMax-M3",
+    "provider": "minimax-cn",
+    "protocol": "anthropic-messages",
+    "reasoning_effort": "high",
+    "session_id": "eval-Huggingface--4-77f6ec3d2d4a",
+    "started_at": "2026-09-26T18:10:19.079Z",
+    "finished_at": "2026-09-26T18:12:47.881Z",
+    "duration_basis": "worker initialization to agent stop; excludes judge, screenshots and cleanup",
+    "infrastructure_error": null,
+    "request_count": 19,
+    "usage_missing_calls": 0,
+    "unpriced_calls": 0,
+    "tokens_observed": {
+      "input": 89928,
+      "output": 4849,
+      "cache_read": 127623,
+      "cache_write": 0,
+      "reasoning": 2963
+    },
+    "usage_metrics": {
+      "input_tokens": 217551,
+      "output_tokens": 4849,
+      "uncached_input_tokens": 89928,
+      "cache_hit_tokens": 127623,
+      "cache_miss_tokens": 89928,
+      "cache_write_tokens": 0,
+      "output_cache_tokens": null,
+      "reasoning_tokens": 2963,
+      "total_tokens": 222400,
+      "cache_hit_rate": 0.5866348580332887
+    },
+    "usage_observed": {
+      "input_tokens": 217551,
+      "output_tokens": 4849,
+      "uncached_input_tokens": 89928,
+      "cache_hit_tokens": 127623,
+      "cache_miss_tokens": 89928,
+      "cache_write_tokens": 0,
+      "output_cache_tokens": null,
+      "reasoning_tokens": 2963,
+      "total_tokens": 222400,
+      "cache_hit_rate": 0.5866348580332887
+    },
+    "cost_observed": 0.04045457999999999,
+    "model_duration_ms": 32375,
+    "model_calls": [
+      {
+        "call_index": 1,
+        "started_at": "2026-09-26T18:10:19.120Z",
+        "finished_at": "2026-09-26T18:10:20.255Z",
+        "usage": {
+          "input": 2678,
+          "cache_read": 128,
+          "cache_write": 0,
+          "output": 77,
+          "reasoning": 42
+        },
+        "cost": 0.00090348,
+        "duration_ms": 1135,
+        "status": "success",
+        "raw_usage": {
+          "prompt_tokens": 2806,
+          "completion_tokens": 77,
+          "prompt_tokens_details": {
+            "cached_tokens": 128
+          },
+          "cache_creation_input_tokens": 0,
+          "completion_tokens_details": {
+            "thinking_tokens": 42,
+            "reasoning_tokens": 42
+          }
+        },
+        "output_cache_tokens": null
+      },
+      {
+        "call_index": 2,
+        "started_at": "2026-09-26T18:10:35.294Z",
+        "finished_at": "2026-09-26T18:10:36.306Z",
+        "usage": {
+          "input": 1970,
+          "cache_read": 2806,
+          "cache_write": 0,
+          "output": 93,
+          "reasoning": 51
+        },
+        "cost": 0.00087096,
+        "duration_ms": 1012,
+        "status": "success",
+        "raw_usage": {
+          "prompt_tokens": 4776,
+          "completion_tokens": 93,
+          "prompt_tokens_details": {
+            "cached_tokens": 2806
+          },
+          "cache_creation_input_tokens": 0,
+          "completion_tokens_details": {
+            "thinking_tokens": 51,
+            "reasoning_tokens": 51
+          }
+        },
+        "output_cache_tokens": null
+      },
+      {
+        "call_index": 3,
+        "started_at": "2026-09-26T18:10:40.393Z",
+        "finished_at": "2026-09-26T18:10:41.625Z",
+        "usage": {
+          "input": 5682,
+          "cache_read": 3338,
+          "cache_write": 0,
+          "output": 135,
+          "reasoning": 71
+        },
+        "cost": 0.00206688,
+        "duration_ms": 1232,
+        "status": "success",
+        "raw_usage": {
+          "prompt_tokens": 9020,
+          "completion_tokens": 135,
+          "prompt_tokens_details": {
+            "cached_tokens": 3338
+          },
+          "cache_creation_input_tokens": 0,
+          "completion_tokens_details": {
+            "thinking_tokens": 71,
+            "reasoning_tokens": 71
+          }
+        },
+        "output_cache_tokens": null
+      },
+      {
+        "call_index": 4,
+        "started_at": "2026-09-26T18:10:52.145Z",
+        "finished_at": "2026-09-26T18:10:53.582Z",
+        "usage": {
+          "input": 8313,
+          "cache_read": 3494,
+          "cache_write": 0,
+          "output": 194,
+          "reasoning": 130
+        },
+        "cost": 0.0029363400000000004,
+        "duration_ms": 1437,
+        "status": "success",
+        "raw_usage": {
+          "prompt_tokens": 11807,
+          "completion_tokens": 194,
+          "prompt_tokens_details": {
+            "cached_tokens": 3494
+          },
+          "cache_creation_input_tokens": 0,
+          "completion_tokens_details": {
+            "thinking_tokens": 130,
+            "reasoning_tokens": 130
+          }
+        },
+        "output_cache_tokens": null
+      },
+      {
+        "call_index": 5,
+        "started_at": "2026-09-26T18:11:03.508Z",
+        "finished_at": "2026-09-26T18:11:06.027Z",
+        "usage": {
+          "input": 8352,
+          "cache_read": 3705,
+          "cache_write": 0,
+          "output": 187,
+          "reasoning": 125
+        },
+        "cost": 0.0029522999999999997,
+        "duration_ms": 2519,
+        "status": "success",
+        "raw_usage": {
+          "prompt_tokens": 12057,
+          "completion_tokens": 187,
+          "prompt_tokens_details": {
+            "cached_tokens": 3705
+          },
+          "cache_creation_input_tokens": 0,
+          "completion_tokens_details": {
+            "thinking_tokens": 125,
+            "reasoning_tokens": 125
+          }
+        },
+        "output_cache_tokens": null
+      },
+      {
+        "call_index": 6,
+        "started_at": "2026-09-26T18:11:09.666Z",
+        "finished_at": "2026-09-26T18:11:10.554Z",
+        "usage": {
+          "input": 1068,
+          "cache_read": 12057,
+          "cache_write": 0,
+          "output": 86,
+          "reasoning": 42
+        },
+        "cost": 0.00114702,
+        "duration_ms": 888,
+        "status": "success",
+        "raw_usage": {
+          "prompt_tokens": 13125,
+          "completion_tokens": 86,
+          "prompt_tokens_details": {
+            "cached_tokens": 12057
+          },
+          "cache_creation_input_tokens": 0,
+          "completion_tokens_details": {
+            "thinking_tokens": 42,
+            "reasoning_tokens": 42
+          }
+        },
+        "output_cache_tokens": null
+      },
+      {
+        "call_index": 7,
+        "started_at": "2026-09-26T18:11:19.017Z",
+        "finished_at": "2026-09-26T18:11:20.152Z",
+        "usage": {
+          "input": 7131,
+          "cache_read": 3970,
+          "cache_write": 0,
+          "output": 133,
+          "reasoning": 60
+        },
+        "cost": 0.0025371,
+        "duration_ms": 1135,
+        "status": "success",
+        "raw_usage": {
+          "prompt_tokens": 11101,
+          "completion_tokens": 133,
+          "prompt_tokens_details": {
+            "cached_tokens": 3970
+          },
+          "cache_creation_input_tokens": 0,
+          "completion_tokens_details": {
+            "thinking_tokens": 60,
+            "reasoning_tokens": 60
+          }
+        },
+        "output_cache_tokens": null
+      },
+      {
+        "call_index": 8,
+        "started_at": "2026-09-26T18:11:23.093Z",
+        "finished_at": "2026-09-26T18:11:23.911Z",
+        "usage": {
+          "input": 417,
+          "cache_read": 11101,
+          "cache_write": 0,
+          "output": 69,
+          "reasoning": 29
+        },
+        "cost": 0.0008739599999999999,
+        "duration_ms": 818,
+        "status": "success",
+        "raw_usage": {
+          "prompt_tokens": 11518,
+          "completion_tokens": 69,
+          "prompt_tokens_details": {
+            "cached_tokens": 11101
+          },
+          "cache_creation_input_tokens": 0,
+          "completion_tokens_details": {
+            "thinking_tokens": 29,
+            "reasoning_tokens": 29
+          }
+        },
+        "output_cache_tokens": null
+      },
+      {
+        "call_index": 9,
+        "started_at": "2026-09-26T18:11:26.482Z",
+        "finished_at": "2026-09-26T18:11:27.295Z",
+        "usage": {
+          "input": 341,
+          "cache_read": 11518,
+          "cache_write": 0,
+          "output": 40,
+          "reasoning": 19
+        },
+        "cost": 0.00084138,
+        "duration_ms": 813,
+        "status": "success",
+        "raw_usage": {
+          "prompt_tokens": 11859,
+          "completion_tokens": 40,
+          "prompt_tokens_details": {
+            "cached_tokens": 11518
+          },
+          "cache_creation_input_tokens": 0,
+          "completion_tokens_details": {
+            "thinking_tokens": 19,
+            "reasoning_tokens": 19
+          }
+        },
+        "output_cache_tokens": null
+      },
+      {
+        "call_index": 10,
+        "started_at": "2026-09-26T18:11:29.958Z",
+        "finished_at": "2026-09-26T18:11:31.585Z",
+        "usage": {
+          "input": 7197,
+          "cache_read": 4371,
+          "cache_write": 0,
+          "output": 290,
+          "reasoning": 238
+        },
+        "cost": 0.00276936,
+        "duration_ms": 1627,
+        "status": "success",
+        "raw_usage": {
+          "prompt_tokens": 11568,
+          "completion_tokens": 290,
+          "prompt_tokens_details": {
+            "cached_tokens": 4371
+          },
+          "cache_creation_input_tokens": 0,
+          "completion_tokens_details": {
+            "thinking_tokens": 238,
+            "reasoning_tokens": 238
+          }
+        },
+        "output_cache_tokens": null
+      },
+      {
+        "call_index": 11,
+        "started_at": "2026-09-26T18:11:34.310Z",
+        "finished_at": "2026-09-26T18:11:36.150Z",
+        "usage": {
+          "input": 7618,
+          "cache_read": 4847,
+          "cache_write": 0,
+          "output": 398,
+          "reasoning": 332
+        },
+        "cost": 0.0030538199999999996,
+        "duration_ms": 1840,
+        "status": "success",
+        "raw_usage": {
+          "prompt_tokens": 12465,
+          "completion_tokens": 398,
+          "prompt_tokens_details": {
+            "cached_tokens": 4847
+          },
+          "cache_creation_input_tokens": 0,
+          "completion_tokens_details": {
+            "thinking_tokens": 332,
+            "reasoning_tokens": 332
+          }
+        },
+        "output_cache_tokens": null
+      },
+      {
+        "call_index": 12,
+        "started_at": "2026-09-26T18:11:48.234Z",
+        "finished_at": "2026-09-26T18:11:50.622Z",
+        "usage": {
+          "input": 8600,
+          "cache_read": 5232,
+          "cache_write": 0,
+          "output": 527,
+          "reasoning": 466
+        },
+        "cost": 0.00352632,
+        "duration_ms": 2388,
+        "status": "success",
+        "raw_usage": {
+          "prompt_tokens": 13832,
+          "completion_tokens": 527,
+          "prompt_tokens_details": {
+            "cached_tokens": 5232
+          },
+          "cache_creation_input_tokens": 0,
+          "completion_tokens_details": {
+            "thinking_tokens": 466,
+            "reasoning_tokens": 466
+          }
+        },
+        "output_cache_tokens": null
+      },
+      {
+        "call_index": 13,
+        "started_at": "2026-09-26T18:11:53.779Z",
+        "finished_at": "2026-09-26T18:11:55.857Z",
+        "usage": {
+          "input": 7761,
+          "cache_read": 5708,
+          "cache_write": 0,
+          "output": 274,
+          "reasoning": 216
+        },
+        "cost": 0.00299958,
+        "duration_ms": 2078,
+        "status": "success",
+        "raw_usage": {
+          "prompt_tokens": 13469,
+          "completion_tokens": 274,
+          "prompt_tokens_details": {
+            "cached_tokens": 5708
+          },
+          "cache_creation_input_tokens": 0,
+          "completion_tokens_details": {
+            "thinking_tokens": 216,
+            "reasoning_tokens": 216
+          }
+        },
+        "output_cache_tokens": null
+      },
+      {
+        "call_index": 14,
+        "started_at": "2026-09-26T18:11:58.850Z",
+        "finished_at": "2026-09-26T18:11:59.670Z",
+        "usage": {
+          "input": 502,
+          "cache_read": 13469,
+          "cache_write": 0,
+          "output": 39,
+          "reasoning": 18
+        },
+        "cost": 0.0010055399999999999,
+        "duration_ms": 820,
+        "status": "success",
+        "raw_usage": {
+          "prompt_tokens": 13971,
+          "completion_tokens": 39,
+          "prompt_tokens_details": {
+            "cached_tokens": 13469
+          },
+          "cache_creation_input_tokens": 0,
+          "completion_tokens_details": {
+            "thinking_tokens": 18,
+            "reasoning_tokens": 18
+          }
+        },
+        "output_cache_tokens": null
+      },
+      {
+        "call_index": 15,
+        "started_at": "2026-09-26T18:12:02.153Z",
+        "finished_at": "2026-09-26T18:12:03.969Z",
+        "usage": {
+          "input": 7602,
+          "cache_read": 6298,
+          "cache_write": 0,
+          "output": 392,
+          "reasoning": 335
+        },
+        "cost": 0.00312888,
+        "duration_ms": 1816,
+        "status": "success",
+        "raw_usage": {
+          "prompt_tokens": 13900,
+          "completion_tokens": 392,
+          "prompt_tokens_details": {
+            "cached_tokens": 6298
+          },
+          "cache_creation_input_tokens": 0,
+          "completion_tokens_details": {
+            "thinking_tokens": 335,
+            "reasoning_tokens": 335
+          }
+        },
+        "output_cache_tokens": null
+      },
+      {
+        "call_index": 16,
+        "started_at": "2026-09-26T18:12:12.145Z",
+        "finished_at": "2026-09-26T18:12:14.581Z",
+        "usage": {
+          "input": 4150,
+          "cache_read": 13900,
+          "cache_write": 0,
+          "output": 89,
+          "reasoning": 33
+        },
+        "cost": 0.0021858,
+        "duration_ms": 2436,
+        "status": "success",
+        "raw_usage": {
+          "prompt_tokens": 18050,
+          "completion_tokens": 89,
+          "prompt_tokens_details": {
+            "cached_tokens": 13900
+          },
+          "cache_creation_input_tokens": 0,
+          "completion_tokens_details": {
+            "thinking_tokens": 33,
+            "reasoning_tokens": 33
+          }
+        },
+        "output_cache_tokens": null
+      },
+      {
+        "call_index": 17,
+        "started_at": "2026-09-26T18:12:26.741Z",
+        "finished_at": "2026-09-26T18:12:27.793Z",
+        "usage": {
+          "input": 3798,
+          "cache_read": 6729,
+          "cache_write": 0,
+          "output": 116,
+          "reasoning": 55
+        },
+        "cost": 0.0016823399999999998,
+        "duration_ms": 1052,
+        "status": "success",
+        "raw_usage": {
+          "prompt_tokens": 10527,
+          "completion_tokens": 116,
+          "prompt_tokens_details": {
+            "cached_tokens": 6729
+          },
+          "cache_creation_input_tokens": 0,
+          "completion_tokens_details": {
+            "thinking_tokens": 55,
+            "reasoning_tokens": 55
+          }
+        },
+        "output_cache_tokens": null
+      },
+      {
+        "call_index": 18,
+        "started_at": "2026-09-26T18:12:37.055Z",
+        "finished_at": "2026-09-26T18:12:38.481Z",
+        "usage": {
+          "input": 3527,
+          "cache_read": 7384,
+          "cache_write": 0,
+          "output": 255,
+          "reasoning": 200
+        },
+        "cost": 0.00180714,
+        "duration_ms": 1426,
+        "status": "success",
+        "raw_usage": {
+          "prompt_tokens": 10911,
+          "completion_tokens": 255,
+          "prompt_tokens_details": {
+            "cached_tokens": 7384
+          },
+          "cache_creation_input_tokens": 0,
+          "completion_tokens_details": {
+            "thinking_tokens": 200,
+            "reasoning_tokens": 200
+          }
+        },
+        "output_cache_tokens": null
+      },
+      {
+        "call_index": 19,
+        "started_at": "2026-09-26T18:12:41.968Z",
+        "finished_at": "2026-09-26T18:12:47.871Z",
+        "usage": {
+          "input": 3221,
+          "cache_read": 7568,
+          "cache_write": 0,
+          "output": 1455,
+          "reasoning": 501
+        },
+        "cost": 0.00316638,
+        "duration_ms": 5903,
+        "status": "success",
+        "raw_usage": {
+          "prompt_tokens": 10789,
+          "completion_tokens": 1455,
+          "prompt_tokens_details": {
+            "cached_tokens": 7568
+          },
+          "cache_creation_input_tokens": 0,
+          "completion_tokens_details": {
+            "thinking_tokens": 501,
+            "reasoning_tokens": 501
+          }
+        },
+        "output_cache_tokens": null
+      }
+    ],
+    "model_steps": 19,
+    "retry_count": 0,
+    "failed_steps": 2,
+    "incomplete_steps": 0,
+    "final_screenshot": "final.png",
+    "attempt_number": 1,
+    "attempt_directory": "Huggingface--4",
+    "judge_mode": "reference",
+    "metrics": {
+      "metrics_version": 1,
+      "input_tokens": 217551,
+      "output_tokens": 4849,
+      "uncached_input_tokens": 89928,
+      "cache_hit_tokens": 127623,
+      "cache_miss_tokens": 89928,
+      "cache_write_tokens": 0,
+      "output_cache_tokens": null,
+      "reasoning_tokens": 2963,
+      "total_tokens": 222400,
+      "cache_hit_rate": 0.5866348580332887,
+      "agent_cost_usd": 0.04045457999999999,
+      "judge_cost_usd": 0.0016861799999999998,
+      "total_cost_usd": 0.04214075999999999,
+      "observed_cost_usd": 0.04214075999999999,
+      "agent_duration_ms": 148802,
+      "judge_duration_ms": 1500,
+      "active_duration_ms": 150302
+    },
+    "judge_result": {
+      "task_id": "Huggingface--4",
+      "mode": "reference",
+      "rubric_version": "opencode-browser-856867996e73f7dcc5e39827bf2af7555bd63d40-judge-prompt.md",
+      "pass": true,
+      "reason": "The agent located Microsoft/DialoGPT-medium, an open-source conversational AI model trained in English, and provided comprehensive details on its main features (multi-turn conversation generation, GPT-2 architecture, large-scale pretraining) and applications (chatbots, dialogue systems, empathetic response generation, research).",
+      "status": "judged",
+      "model": "MiniMax-M3",
+      "request_count": 1,
+      "usage_missing_calls": 0,
+      "unpriced_calls": 0,
+      "tokens": {
+        "input": 4607,
+        "output": 247,
+        "cache_read": 128,
+        "cache_write": 0,
+        "reasoning": 152
+      },
+      "tokens_observed": {
+        "input": 4607,
+        "output": 247,
+        "cache_read": 128,
+        "cache_write": 0,
+        "reasoning": 152
+      },
+      "usage_metrics": {
+        "input_tokens": 4735,
+        "output_tokens": 247,
+        "uncached_input_tokens": 4607,
+        "cache_hit_tokens": 128,
+        "cache_miss_tokens": 4607,
+        "cache_write_tokens": 0,
+        "output_cache_tokens": null,
+        "reasoning_tokens": 152,
+        "total_tokens": 4982,
+        "cache_hit_rate": 0.02703273495248152
+      },
+      "usage_observed": {
+        "input_tokens": 4735,
+        "output_tokens": 247,
+        "uncached_input_tokens": 4607,
+        "cache_hit_tokens": 128,
+        "cache_miss_tokens": 4607,
+        "cache_write_tokens": 0,
+        "output_cache_tokens": null,
+        "reasoning_tokens": 152,
+        "total_tokens": 4982,
+        "cache_hit_rate": 0.02703273495248152
+      },
+      "cost": 0.0016861799999999998,
+      "cost_observed": 0.0016861799999999998,
+      "model_duration_ms": 1498,
+      "requests": 1,
+      "model_calls": [
+        {
+          "call_index": 1,
+          "started_at": "2026-09-26T18:12:49.173Z",
+          "usage": {
+            "input": 4607,
+            "cache_read": 128,
+            "cache_write": 0,
+            "output": 247,
+            "reasoning": 152
+          },
+          "cost": 0.0016861799999999998,
+          "status": "success",
+          "output_cache_tokens": null,
+          "raw_usage": {
+            "prompt_tokens": 4735,
+            "completion_tokens": 247,
+            "prompt_tokens_details": {
+              "cached_tokens": 128
+            },
+            "cache_creation_input_tokens": 0,
+            "completion_tokens_details": {
+              "thinking_tokens": 152,
+              "reasoning_tokens": 152
+            }
+          },
+          "finished_at": "2026-09-26T18:12:50.671Z",
+          "duration_ms": 1498
+        }
+      ],
+      "started_at": "2026-09-26T18:12:49.173Z",
+      "finished_at": "2026-09-26T18:12:50.673Z",
+      "duration_ms": 1500,
+      "prompt_sha256": "bcdf403484823037eaeb6cec7918b966fe90ee31a30bc8d69094d2ff42747ccf"
+    },
+    "evaluation_finished_at": "2026-09-26T18:12:50.673Z"
+  }
+}

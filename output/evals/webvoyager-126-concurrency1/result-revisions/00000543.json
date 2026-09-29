@@ -1,0 +1,488 @@
+{
+  "previous": "cce45062a1af7c28ddf64bc355c8b5a10896168a6161ce22d128505dcbab9f41",
+  "result": {
+    "task_id": "Wolfram Alpha--20",
+    "website": "https://www.wolframalpha.com/",
+    "task": "Compute the integral of 3e^(2x) from x=0 to x=5.",
+    "status": "completed",
+    "duration_ms": 51525,
+    "steps": 7,
+    "browser_steps": 7,
+    "model_rounds": 8,
+    "cost": 0.00736032,
+    "tokens": {
+      "input": 12224,
+      "output": 1460,
+      "cache_read": 32352,
+      "cache_write": 0,
+      "reasoning": 790
+    },
+    "final_answer": "I have successfully computed the integral using WolframAlpha. Here are the results:\n\n## Integral Result\n\n**∫₀⁵ 3e^(2x) dx**\n\n### WolframAlpha Output:\n- **Exact form:** 3/2 (e¹⁰ − 1)\n- **Approximate value:** ≈ **33,038.1986922101**\n\n### Verification:\nThe indefinite integral is (3e^(2x))/2 + C\n\nEvaluating from 0 to 5:\n- At x = 5: (3/2)e¹⁰\n- At x = 0: (3/2)e⁰ = 3/2\n- Difference: (3/2)(e¹⁰ − 1) ≈ 33,038.20\n\nThe final answer is **(3/2)(e¹⁰ − 1) ≈ 33,038.1986922101**.",
+    "tool_trace": [
+      {
+        "tool": "browser_goto",
+        "input": {
+          "url": "https://www.wolframalpha.com/"
+        },
+        "call_id": "call_01a0e1abc33474a29d45b9cd",
+        "time_ms": 3,
+        "output_preview": "Error: browser_goto failed: Browser not started. Call browser_start first to enter browser mode.\nSafe retry: verify browser_start succeeded, refresh the DOM snapshot, and retry once with current element/tab IDs.\nStop condition: stop retrying if Chromium is unavailable, approval is denied, or the sam",
+        "status": "error"
+      },
+      {
+        "tool": "browser_start",
+        "input": {
+          "url": "https://www.wolframalpha.com/"
+        },
+        "call_id": "call_01a0e1abc6ee70e2bf21dff6",
+        "time_ms": 8840,
+        "output_preview": "# Browser Mode\n\nThe DSH browser plugin controls a real Chromium instance isolated to the current Agent Session.\n\n- DOM markers `[N]` are clickable and `<N>` are inputs.\n- Match element labels or nearby text, and use DOM indentation to distinguish parents, children, and siblings; do not choose by mar",
+        "status": "success"
+      },
+      {
+        "tool": "browser_click",
+        "input": {
+          "elementIndex": 2
+        },
+        "call_id": "call_01a0e1abeee072acbfc54267",
+        "time_ms": 6637,
+        "output_preview": "Clicked <textarea aria-label='Wolfram|Alpha 输入栏'></textarea> Action dispatched; outcome not verified. Check the returned page before claiming success.\n\n\n<!-- DOM_START dom0.1 tab:tab0 mode:nochange -->\n(stateId: tab0-dom0.1)\n## Current Page DOM Structure\n\n\nNo DOM changes detected after the previous ",
+        "status": "success"
+      },
+      {
+        "tool": "browser_input",
+        "input": {
+          "clear": true,
+          "elementIndex": 2,
+          "pressEnter": true,
+          "text": "integrate 3*e^(2x) from 0 to 5"
+        },
+        "call_id": "call_01a0e1ac0d397258982aa445",
+        "time_ms": 8225,
+        "output_preview": "Input \"integrate 3*e^(2x) from 0 to 5\" into <textarea aria-label='Wolfram|Alpha 输入栏'></textarea> and pressed Enter Action dispatched; outcome not verified. Check the returned page before claiming success.\n\n\n<!-- DOM_START dom0.2 tab:tab0 mode:full -->\n(stateId: tab0-dom0.2)\n## Current Page DOM Struc",
+        "status": "success"
+      },
+      {
+        "tool": "browser_view_elements",
+        "input": {
+          "viewIds": [
+            "bhcg"
+          ]
+        },
+        "call_id": "call_01a0e1ac344f7336a97bc651",
+        "time_ms": 10025,
+        "output_preview": "Error: browser_view_elements failed: [CDP] Command timed out after 10000ms: Page.captureScreenshot\nSafe retry: verify browser_start succeeded, refresh the DOM snapshot, and retry once with current element/tab IDs.\nStop condition: stop retrying if Chromium is unavailable, approval is denied, or the s",
+        "status": "error"
+      },
+      {
+        "tool": "browser_execute_script",
+        "input": {
+          "script": "return JSON.stringify({\n  results: document.querySelector('img[alt*=\"integral_0_5\"]')?.alt || 'not found',\n  allImages: Array.from(document.querySelectorAll('img')).slice(0, 10).map(img => img.alt).filter(a => a.includes('integral') || a.includes('33038'))\n});"
+        },
+        "call_id": "call_01a0e1ac60ab7480ac063615",
+        "time_ms": 304,
+        "output_preview": "\n\n<!-- DOM_START dom1 tab:tab0 mode:full -->\n(stateId: tab0-dom1)\n## Current Page DOM Structure\n\n\n<header></header>\n\t<li></li>\n\t\t[70]<button type='button'> 升级到 PRO </button>\n\t\t\t<span> 升级到 PRO </span>\n\t\t\t[73][view:hd]<svg></svg>\n\t<li></li>\n\t\t[76]<button type='button'> 应用程序 </button>\n\t\t\t<span> 应用程序 </",
+        "status": "success"
+      },
+      {
+        "tool": "browser_click",
+        "input": {
+          "elementIndex": 1717
+        },
+        "call_id": "call_01a0e1ac662b7542825eb7f4",
+        "time_ms": 6600,
+        "output_preview": "Clicked <button type='button'> 更多位数 </button> Action dispatched; outcome not verified. Check the returned page before claiming success.\n\n\n<!-- DOM_START dom1.1 tab:tab0 mode:incremental -->\n(stateId: tab0-dom1.1)\n## Incremental DOM updates\n\n\n<main></main>\n\t<div></div>\n\t\t<div></div>\n\t\t\t+|<section></s",
+        "status": "success"
+      }
+    ],
+    "error": null,
+    "model": "MiniMax-M3",
+    "provider": "minimax-cn",
+    "protocol": "anthropic-messages",
+    "reasoning_effort": "high",
+    "session_id": "eval-Wolfram Alpha--20-f56385851b9c",
+    "started_at": "2026-09-27T07:02:04.628Z",
+    "finished_at": "2026-09-27T07:02:56.153Z",
+    "duration_basis": "worker initialization to agent stop; excludes judge, screenshots and cleanup",
+    "infrastructure_error": null,
+    "request_count": 8,
+    "usage_missing_calls": 0,
+    "unpriced_calls": 0,
+    "tokens_observed": {
+      "input": 12224,
+      "output": 1460,
+      "cache_read": 32352,
+      "cache_write": 0,
+      "reasoning": 790
+    },
+    "usage_metrics": {
+      "input_tokens": 44576,
+      "output_tokens": 1460,
+      "uncached_input_tokens": 12224,
+      "cache_hit_tokens": 32352,
+      "cache_miss_tokens": 12224,
+      "cache_write_tokens": 0,
+      "output_cache_tokens": null,
+      "reasoning_tokens": 790,
+      "total_tokens": 46036,
+      "cache_hit_rate": 0.7257717157214645
+    },
+    "usage_observed": {
+      "input_tokens": 44576,
+      "output_tokens": 1460,
+      "uncached_input_tokens": 12224,
+      "cache_hit_tokens": 32352,
+      "cache_miss_tokens": 12224,
+      "cache_write_tokens": 0,
+      "output_cache_tokens": null,
+      "reasoning_tokens": 790,
+      "total_tokens": 46036,
+      "cache_hit_rate": 0.7257717157214645
+    },
+    "cost_observed": 0.00736032,
+    "model_duration_ms": 10405,
+    "model_calls": [
+      {
+        "call_index": 1,
+        "started_at": "2026-09-27T07:02:04.688Z",
+        "finished_at": "2026-09-27T07:02:06.263Z",
+        "usage": {
+          "input": 2677,
+          "cache_read": 128,
+          "cache_write": 0,
+          "output": 250,
+          "reasoning": 193
+        },
+        "cost": 0.00111078,
+        "duration_ms": 1575,
+        "status": "success",
+        "raw_usage": {
+          "prompt_tokens": 2805,
+          "completion_tokens": 250,
+          "prompt_tokens_details": {
+            "cached_tokens": 128
+          },
+          "cache_creation_input_tokens": 0,
+          "completion_tokens_details": {
+            "thinking_tokens": 193,
+            "reasoning_tokens": 193
+          }
+        },
+        "output_cache_tokens": null
+      },
+      {
+        "call_index": 2,
+        "started_at": "2026-09-27T07:02:06.281Z",
+        "finished_at": "2026-09-27T07:02:07.186Z",
+        "usage": {
+          "input": 330,
+          "cache_read": 2805,
+          "cache_write": 0,
+          "output": 45,
+          "reasoning": 8
+        },
+        "cost": 0.00032129999999999995,
+        "duration_ms": 905,
+        "status": "success",
+        "raw_usage": {
+          "prompt_tokens": 3135,
+          "completion_tokens": 45,
+          "prompt_tokens_details": {
+            "cached_tokens": 2805
+          },
+          "cache_creation_input_tokens": 0,
+          "completion_tokens_details": {
+            "thinking_tokens": 8,
+            "reasoning_tokens": 8
+          }
+        },
+        "output_cache_tokens": null
+      },
+      {
+        "call_index": 3,
+        "started_at": "2026-09-27T07:02:16.101Z",
+        "finished_at": "2026-09-27T07:02:17.424Z",
+        "usage": {
+          "input": 3268,
+          "cache_read": 3135,
+          "cache_write": 0,
+          "output": 167,
+          "reasoning": 115
+        },
+        "cost": 0.0013689000000000002,
+        "duration_ms": 1323,
+        "status": "success",
+        "raw_usage": {
+          "prompt_tokens": 6403,
+          "completion_tokens": 167,
+          "prompt_tokens_details": {
+            "cached_tokens": 3135
+          },
+          "cache_creation_input_tokens": 0,
+          "completion_tokens_details": {
+            "thinking_tokens": 115,
+            "reasoning_tokens": 115
+          }
+        },
+        "output_cache_tokens": null
+      },
+      {
+        "call_index": 4,
+        "started_at": "2026-09-27T07:02:24.125Z",
+        "finished_at": "2026-09-27T07:02:25.248Z",
+        "usage": {
+          "input": 387,
+          "cache_read": 6403,
+          "cache_write": 0,
+          "output": 95,
+          "reasoning": 15
+        },
+        "cost": 0.00061428,
+        "duration_ms": 1123,
+        "status": "success",
+        "raw_usage": {
+          "prompt_tokens": 6790,
+          "completion_tokens": 95,
+          "prompt_tokens_details": {
+            "cached_tokens": 6403
+          },
+          "cache_creation_input_tokens": 0,
+          "completion_tokens_details": {
+            "thinking_tokens": 15,
+            "reasoning_tokens": 15
+          }
+        },
+        "output_cache_tokens": null
+      },
+      {
+        "call_index": 5,
+        "started_at": "2026-09-27T07:02:33.528Z",
+        "finished_at": "2026-09-27T07:02:35.194Z",
+        "usage": {
+          "input": 1975,
+          "cache_read": 3637,
+          "cache_write": 0,
+          "output": 340,
+          "reasoning": 256
+        },
+        "cost": 0.0012187200000000002,
+        "duration_ms": 1666,
+        "status": "success",
+        "raw_usage": {
+          "prompt_tokens": 5612,
+          "completion_tokens": 340,
+          "prompt_tokens_details": {
+            "cached_tokens": 3637
+          },
+          "cache_creation_input_tokens": 0,
+          "completion_tokens_details": {
+            "thinking_tokens": 256,
+            "reasoning_tokens": 256
+          }
+        },
+        "output_cache_tokens": null
+      },
+      {
+        "call_index": 6,
+        "started_at": "2026-09-27T07:02:45.273Z",
+        "finished_at": "2026-09-27T07:02:46.533Z",
+        "usage": {
+          "input": 424,
+          "cache_read": 5612,
+          "cache_write": 0,
+          "output": 146,
+          "reasoning": 28
+        },
+        "cost": 0.00063912,
+        "duration_ms": 1260,
+        "status": "success",
+        "raw_usage": {
+          "prompt_tokens": 6036,
+          "completion_tokens": 146,
+          "prompt_tokens_details": {
+            "cached_tokens": 5612
+          },
+          "cache_creation_input_tokens": 0,
+          "completion_tokens_details": {
+            "thinking_tokens": 28,
+            "reasoning_tokens": 28
+          }
+        },
+        "output_cache_tokens": null
+      },
+      {
+        "call_index": 7,
+        "started_at": "2026-09-27T07:02:46.909Z",
+        "finished_at": "2026-09-27T07:02:47.957Z",
+        "usage": {
+          "input": 2464,
+          "cache_read": 4084,
+          "cache_write": 0,
+          "output": 122,
+          "reasoning": 71
+        },
+        "cost": 0.00113064,
+        "duration_ms": 1048,
+        "status": "success",
+        "raw_usage": {
+          "prompt_tokens": 6548,
+          "completion_tokens": 122,
+          "prompt_tokens_details": {
+            "cached_tokens": 4084
+          },
+          "cache_creation_input_tokens": 0,
+          "completion_tokens_details": {
+            "thinking_tokens": 71,
+            "reasoning_tokens": 71
+          }
+        },
+        "output_cache_tokens": null
+      },
+      {
+        "call_index": 8,
+        "started_at": "2026-09-27T07:02:54.617Z",
+        "finished_at": "2026-09-27T07:02:56.122Z",
+        "usage": {
+          "input": 699,
+          "cache_read": 6548,
+          "cache_write": 0,
+          "output": 295,
+          "reasoning": 104
+        },
+        "cost": 0.0009565800000000001,
+        "duration_ms": 1505,
+        "status": "success",
+        "raw_usage": {
+          "prompt_tokens": 7247,
+          "completion_tokens": 295,
+          "prompt_tokens_details": {
+            "cached_tokens": 6548
+          },
+          "cache_creation_input_tokens": 0,
+          "completion_tokens_details": {
+            "thinking_tokens": 104,
+            "reasoning_tokens": 104
+          }
+        },
+        "output_cache_tokens": null
+      }
+    ],
+    "model_steps": 8,
+    "retry_count": 0,
+    "failed_steps": 2,
+    "incomplete_steps": 0,
+    "final_screenshot": "final.png",
+    "attempt_number": 1,
+    "attempt_directory": "Wolfram Alpha--20",
+    "judge_mode": "reference",
+    "metrics": {
+      "metrics_version": 1,
+      "input_tokens": 44576,
+      "output_tokens": 1460,
+      "uncached_input_tokens": 12224,
+      "cache_hit_tokens": 32352,
+      "cache_miss_tokens": 12224,
+      "cache_write_tokens": 0,
+      "output_cache_tokens": null,
+      "reasoning_tokens": 790,
+      "total_tokens": 46036,
+      "cache_hit_rate": 0.7257717157214645,
+      "agent_cost_usd": 0.00736032,
+      "judge_cost_usd": 0.0009709799999999999,
+      "total_cost_usd": 0.0083313,
+      "observed_cost_usd": 0.0083313,
+      "agent_duration_ms": 51525,
+      "judge_duration_ms": 1635,
+      "active_duration_ms": 53160
+    },
+    "judge_result": {
+      "task_id": "Wolfram Alpha--20",
+      "mode": "reference",
+      "rubric_version": "opencode-browser-856867996e73f7dcc5e39827bf2af7555bd63d40-judge-prompt.md",
+      "pass": true,
+      "reason": "The agent correctly computed the integral of 3e^(2x) from x=0 to x=5, providing both the exact form (3/2)(e¹⁰ − 1) and the approximate value ≈ 33,038.1986922101, which is mathematically correct.",
+      "status": "judged",
+      "model": "MiniMax-M3",
+      "request_count": 1,
+      "usage_missing_calls": 0,
+      "unpriced_calls": 0,
+      "tokens": {
+        "input": 2019,
+        "output": 298,
+        "cache_read": 128,
+        "cache_write": 0,
+        "reasoning": 201
+      },
+      "tokens_observed": {
+        "input": 2019,
+        "output": 298,
+        "cache_read": 128,
+        "cache_write": 0,
+        "reasoning": 201
+      },
+      "usage_metrics": {
+        "input_tokens": 2147,
+        "output_tokens": 298,
+        "uncached_input_tokens": 2019,
+        "cache_hit_tokens": 128,
+        "cache_miss_tokens": 2019,
+        "cache_write_tokens": 0,
+        "output_cache_tokens": null,
+        "reasoning_tokens": 201,
+        "total_tokens": 2445,
+        "cache_hit_rate": 0.05961807172799255
+      },
+      "usage_observed": {
+        "input_tokens": 2147,
+        "output_tokens": 298,
+        "uncached_input_tokens": 2019,
+        "cache_hit_tokens": 128,
+        "cache_miss_tokens": 2019,
+        "cache_write_tokens": 0,
+        "output_cache_tokens": null,
+        "reasoning_tokens": 201,
+        "total_tokens": 2445,
+        "cache_hit_rate": 0.05961807172799255
+      },
+      "cost": 0.0009709799999999999,
+      "cost_observed": 0.0009709799999999999,
+      "model_duration_ms": 1633,
+      "requests": 1,
+      "model_calls": [
+        {
+          "call_index": 1,
+          "started_at": "2026-09-27T07:02:58.644Z",
+          "usage": {
+            "input": 2019,
+            "cache_read": 128,
+            "cache_write": 0,
+            "output": 298,
+            "reasoning": 201
+          },
+          "cost": 0.0009709799999999999,
+          "status": "success",
+          "output_cache_tokens": null,
+          "raw_usage": {
+            "prompt_tokens": 2147,
+            "completion_tokens": 298,
+            "prompt_tokens_details": {
+              "cached_tokens": 128
+            },
+            "cache_creation_input_tokens": 0,
+            "completion_tokens_details": {
+              "thinking_tokens": 201,
+              "reasoning_tokens": 201
+            }
+          },
+          "finished_at": "2026-09-27T07:03:00.277Z",
+          "duration_ms": 1633
+        }
+      ],
+      "started_at": "2026-09-27T07:02:58.644Z",
+      "finished_at": "2026-09-27T07:03:00.279Z",
+      "duration_ms": 1635,
+      "prompt_sha256": "bcdf403484823037eaeb6cec7918b966fe90ee31a30bc8d69094d2ff42747ccf"
+    },
+    "evaluation_finished_at": "2026-09-27T07:03:00.279Z"
+  }
+}

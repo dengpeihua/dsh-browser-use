@@ -1,0 +1,330 @@
+{
+  "task_id": "Coursera--29",
+  "website": "https://www.coursera.org/",
+  "task": "Browse the Coursera website and find the price required for one year of Coursera Plus. How much is the discount? Then list 3 companies that work with Coursera.",
+  "status": "completed",
+  "duration_ms": 66909,
+  "steps": 6,
+  "browser_steps": 6,
+  "model_rounds": 7,
+  "cost": 0.0082437,
+  "tokens": {
+    "input": 15045,
+    "output": 1671,
+    "cache_read": 28750,
+    "cache_write": 0,
+    "reasoning": 1073
+  },
+  "final_answer": "I have all the information needed. Let me summarize my findings:\n\n## Coursera Plus Pricing Information\n\n**Annual price: US$399/year** (with 14-day refund guarantee)\n- Monthly option: US$59/month (cancel anytime)\n\n**Discount Analysis:**\n- Monthly subscription annual cost: $59 × 12 = **US$708/year**\n- Annual subscription cost: **US$399/year**\n- **Discount: US$309/year savings (approximately 44% off)** when paying annually versus paying monthly\n\n**3 Companies that work with Coursera** (from over 350+ leading universities and companies):\n1. **Google**\n2. **IBM**\n3. **Microsoft**\n\nAdditional companies listed on the page include: Meta, Adobe, Stanford, Duke University, Vanderbilt University, and University of Michigan.\n\nCoursera Plus also offers a **7-day free trial** for new subscribers.",
+  "tool_trace": [
+    {
+      "tool": "browser_start",
+      "input": {
+        "url": "https://www.coursera.org/"
+      },
+      "call_id": "call_01a0d9c7d5fd73d6bc41f09a",
+      "time_ms": 12474,
+      "output_preview": "# Browser Mode\n\nThe DSH browser plugin controls a real Chromium instance isolated to the current Agent Session.\n\n- DOM markers `[N]` are clickable and `<N>` are inputs.\n- Match element labels or nearby text, and use DOM indentation to distinguish parents, children, and siblings; do not choose by mar",
+      "status": "success"
+    },
+    {
+      "tool": "browser_scroll_next_screen",
+      "input": {
+        "container": 0,
+        "direction": "down"
+      },
+      "call_id": "call_01a0d9c8155d756a8a610726",
+      "time_ms": 6401,
+      "output_preview": "Scrolled down to next screen on container [0]: P0 -> P0.8\n\n\n<!-- DOM_START dom0.1 tab:tab0 mode:full -->\n(stateId: tab0-dom0.1)\n## Current Page DOM Structure\n\n\n=== OFF-SCREEN above [container:0] (scroll to reveal these elements) ===\n<span></span>\n=== END OFF-SCREEN ===\n\t<div></div>\n\t\t<div></div>\n\t\t\t",
+      "status": "success"
+    },
+    {
+      "tool": "browser_click",
+      "input": {
+        "elementIndex": 4442
+      },
+      "call_id": "call_01a0d9c833627458b43391c2",
+      "time_ms": 4328,
+      "output_preview": "Clicked <button id='onetrust-accept-btn-handler'> Accept </button> Action dispatched; outcome not verified. Check the returned page before claiming success.\n\n\n<!-- DOM_START dom0.2 tab:tab0 mode:incremental -->\n(stateId: tab0-dom0.2)\n## Incremental DOM updates\n\n\n+|<section></section>\n\t+|<li></li>\n\t\t",
+      "status": "success"
+    },
+    {
+      "tool": "browser_click",
+      "input": {
+        "elementIndex": 631,
+        "expectUrl": "coursera.org"
+      },
+      "call_id": "call_01a0d9c84a5973f3b2b76425",
+      "time_ms": 16202,
+      "output_preview": "Clicked <a> 订阅即可解锁 10,000 多门课程 </a> Postcondition failed.\n\n\n<!-- DOM_START dom1 tab:tab0 mode:full -->\n(stateId: tab0-dom1)\n## Current Page DOM Structure\n\n\n<div></div>\n\t<li></li>\n\t\t[7153]<a> 为个人 </a>\n\t\t\t[7151]<span> 为个人 </span>\n\t<li></li>\n\t\t[7156]<a> 为商务 </a>\n\t\t\t[7154]<span> 为商务 </span>\n\t<li></li>\n\t",
+      "status": "error"
+    },
+    {
+      "tool": "browser_goto",
+      "input": {
+        "url": "https://www.coursera.org/courseraplus"
+      },
+      "call_id": "call_01a0d9c88e6473dbaab5de80",
+      "time_ms": 12584,
+      "output_preview": "Navigated to https://www.coursera.org/courseraplus\n\n\n<!-- DOM_START dom2 tab:tab0 mode:full -->\n(stateId: tab0-dom2)\n## Current Page DOM Structure\n\n\n<div></div>\n\t<div></div>\n\t\t<li></li>\n\t\t\t[15018]<a> 为个人 </a>\n\t\t\t\t[15020]<span> 为个人 </span>\n\t\t<li></li>\n\t\t\t[15022]<a> 为商务 </a>\n\t\t\t\t[15024]<span> 为商务 </sp",
+      "status": "success"
+    },
+    {
+      "tool": "browser_observe",
+      "input": {},
+      "call_id": "call_01a0d9c8c81a7710a5102d1a",
+      "time_ms": 1454,
+      "output_preview": "\n\n<!-- DOM_START dom2.1 tab:tab0 mode:full -->\n(stateId: tab0-dom2.1)\n## Current Page DOM Structure\n\n\n<div></div>\n\t<div></div>\n\t\t<li></li>\n\t\t\t[15018]<a> 为个人 </a>\n\t\t\t\t[15020]<span> 为个人 </span>\n\t\t<li></li>\n\t\t\t[15022]<a> 为商务 </a>\n\t\t\t\t[15024]<span> 为商务 </span>\n\t\t<li></li>\n\t\t\t[15026]<a> 为大学 </a>\n\t\t\t\t[150",
+      "status": "success"
+    }
+  ],
+  "error": null,
+  "model": "MiniMax-M3",
+  "provider": "minimax-cn",
+  "protocol": "anthropic-messages",
+  "reasoning_effort": "high",
+  "session_id": "eval-Coursera--29-3e478c7d5119",
+  "started_at": "2026-09-25T18:15:47.834Z",
+  "finished_at": "2026-09-25T18:16:54.743Z",
+  "duration_basis": "worker initialization to agent stop; excludes judge, screenshots and cleanup",
+  "infrastructure_error": null,
+  "request_count": 7,
+  "usage_missing_calls": 0,
+  "unpriced_calls": 0,
+  "tokens_observed": {
+    "input": 15045,
+    "output": 1671,
+    "cache_read": 28750,
+    "cache_write": 0,
+    "reasoning": 1073
+  },
+  "usage_metrics": {
+    "input_tokens": 43795,
+    "output_tokens": 1671,
+    "uncached_input_tokens": 15045,
+    "cache_hit_tokens": 28750,
+    "cache_miss_tokens": 15045,
+    "cache_write_tokens": 0,
+    "output_cache_tokens": null,
+    "reasoning_tokens": 1073,
+    "total_tokens": 45466,
+    "cache_hit_rate": 0.6564676332914716
+  },
+  "usage_observed": {
+    "input_tokens": 43795,
+    "output_tokens": 1671,
+    "uncached_input_tokens": 15045,
+    "cache_hit_tokens": 28750,
+    "cache_miss_tokens": 15045,
+    "cache_write_tokens": 0,
+    "output_cache_tokens": null,
+    "reasoning_tokens": 1073,
+    "total_tokens": 45466,
+    "cache_hit_rate": 0.6564676332914716
+  },
+  "cost_observed": 0.0082437,
+  "model_duration_ms": 13147,
+  "model_calls": [
+    {
+      "call_index": 1,
+      "started_at": "2026-09-25T18:15:47.873Z",
+      "finished_at": "2026-09-25T18:15:48.991Z",
+      "usage": {
+        "input": 87,
+        "cache_read": 2732,
+        "cache_write": 0,
+        "output": 110,
+        "reasoning": 55
+      },
+      "cost": 0.00032202,
+      "duration_ms": 1118,
+      "status": "success",
+      "raw_usage": {
+        "prompt_tokens": 2819,
+        "completion_tokens": 110,
+        "prompt_tokens_details": {
+          "cached_tokens": 2732
+        },
+        "cache_creation_input_tokens": 0,
+        "completion_tokens_details": {
+          "thinking_tokens": 55,
+          "reasoning_tokens": 55
+        }
+      },
+      "output_cache_tokens": null
+    },
+    {
+      "call_index": 2,
+      "started_at": "2026-09-25T18:16:01.486Z",
+      "finished_at": "2026-09-25T18:16:05.257Z",
+      "usage": {
+        "input": 3171,
+        "cache_read": 2819,
+        "cache_write": 0,
+        "output": 191,
+        "reasoning": 97
+      },
+      "cost": 0.0013496399999999998,
+      "duration_ms": 3771,
+      "status": "success",
+      "raw_usage": {
+        "prompt_tokens": 5990,
+        "completion_tokens": 191,
+        "prompt_tokens_details": {
+          "cached_tokens": 2819
+        },
+        "cache_creation_input_tokens": 0,
+        "completion_tokens_details": {
+          "thinking_tokens": 97,
+          "reasoning_tokens": 97
+        }
+      },
+      "output_cache_tokens": null
+    },
+    {
+      "call_index": 3,
+      "started_at": "2026-09-25T18:16:11.696Z",
+      "finished_at": "2026-09-25T18:16:12.926Z",
+      "usage": {
+        "input": 4293,
+        "cache_read": 3385,
+        "cache_write": 0,
+        "output": 144,
+        "reasoning": 82
+      },
+      "cost": 0.0016637999999999996,
+      "duration_ms": 1230,
+      "status": "success",
+      "raw_usage": {
+        "prompt_tokens": 7678,
+        "completion_tokens": 144,
+        "prompt_tokens_details": {
+          "cached_tokens": 3385
+        },
+        "cache_creation_input_tokens": 0,
+        "completion_tokens_details": {
+          "thinking_tokens": 82,
+          "reasoning_tokens": 82
+        }
+      },
+      "output_cache_tokens": null
+    },
+    {
+      "call_index": 4,
+      "started_at": "2026-09-25T18:16:17.293Z",
+      "finished_at": "2026-09-25T18:16:18.779Z",
+      "usage": {
+        "input": 1194,
+        "cache_read": 7678,
+        "cache_write": 0,
+        "output": 189,
+        "reasoning": 123
+      },
+      "cost": 0.00104568,
+      "duration_ms": 1486,
+      "status": "success",
+      "raw_usage": {
+        "prompt_tokens": 8872,
+        "completion_tokens": 189,
+        "prompt_tokens_details": {
+          "cached_tokens": 7678
+        },
+        "cache_creation_input_tokens": 0,
+        "completion_tokens_details": {
+          "thinking_tokens": 123,
+          "reasoning_tokens": 123
+        }
+      },
+      "output_cache_tokens": null
+    },
+    {
+      "call_index": 5,
+      "started_at": "2026-09-25T18:16:35.078Z",
+      "finished_at": "2026-09-25T18:16:36.198Z",
+      "usage": {
+        "input": 1415,
+        "cache_read": 3646,
+        "cache_write": 0,
+        "output": 135,
+        "reasoning": 72
+      },
+      "cost": 0.00080526,
+      "duration_ms": 1120,
+      "status": "success",
+      "raw_usage": {
+        "prompt_tokens": 5061,
+        "completion_tokens": 135,
+        "prompt_tokens_details": {
+          "cached_tokens": 3646
+        },
+        "cache_creation_input_tokens": 0,
+        "completion_tokens_details": {
+          "thinking_tokens": 72,
+          "reasoning_tokens": 72
+        }
+      },
+      "output_cache_tokens": null
+    },
+    {
+      "call_index": 6,
+      "started_at": "2026-09-25T18:16:48.819Z",
+      "finished_at": "2026-09-25T18:16:50.958Z",
+      "usage": {
+        "input": 2068,
+        "cache_read": 4140,
+        "cache_write": 0,
+        "output": 428,
+        "reasoning": 354
+      },
+      "cost": 0.0013824,
+      "duration_ms": 2139,
+      "status": "success",
+      "raw_usage": {
+        "prompt_tokens": 6208,
+        "completion_tokens": 428,
+        "prompt_tokens_details": {
+          "cached_tokens": 4140
+        },
+        "cache_creation_input_tokens": 0,
+        "completion_tokens_details": {
+          "thinking_tokens": 354,
+          "reasoning_tokens": 354
+        }
+      },
+      "output_cache_tokens": null
+    },
+    {
+      "call_index": 7,
+      "started_at": "2026-09-25T18:16:52.439Z",
+      "finished_at": "2026-09-25T18:16:54.722Z",
+      "usage": {
+        "input": 2817,
+        "cache_read": 4350,
+        "cache_write": 0,
+        "output": 474,
+        "reasoning": 290
+      },
+      "cost": 0.0016749,
+      "duration_ms": 2283,
+      "status": "success",
+      "raw_usage": {
+        "prompt_tokens": 7167,
+        "completion_tokens": 474,
+        "prompt_tokens_details": {
+          "cached_tokens": 4350
+        },
+        "cache_creation_input_tokens": 0,
+        "completion_tokens_details": {
+          "thinking_tokens": 290,
+          "reasoning_tokens": 290
+        }
+      },
+      "output_cache_tokens": null
+    }
+  ],
+  "model_steps": 7,
+  "retry_count": 0,
+  "failed_steps": 1,
+  "incomplete_steps": 0,
+  "final_screenshot": "final.png"
+}

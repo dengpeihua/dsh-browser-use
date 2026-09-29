@@ -1,0 +1,2037 @@
+{
+  "previous": "f108028e47696405937c0862cd6f8091f9200a747e15fa0ec0d908a7a2ab88eb",
+  "result": {
+    "task_id": "Coursera--17",
+    "website": "https://www.coursera.org/",
+    "task": "How many results are there for a search on Coursera for Machine Learning, then filtered by Credit Eligible and 1-4 Years duration?",
+    "status": "step_limit",
+    "duration_ms": 401315,
+    "steps": 50,
+    "browser_steps": 50,
+    "model_rounds": 50,
+    "cost": 0.07551198,
+    "tokens": {
+      "input": 104545,
+      "output": 8720,
+      "cache_read": 561408,
+      "cache_write": 0,
+      "reasoning": 0
+    },
+    "final_answer": "",
+    "tool_trace": [
+      {
+        "tool": "browser_goto",
+        "input": {
+          "url": "https://www.coursera.org/"
+        },
+        "call_id": "chatcmpl-tool-9004beb80190910d",
+        "time_ms": 8,
+        "output_preview": "Error: browser_goto failed: Browser not started. Call browser_start first to enter browser mode.\nSafe retry: verify browser_start succeeded, refresh the DOM snapshot, and retry once with current element/tab IDs.\nStop condition: stop retrying if Chromium is unavailable, approval is denied, or the sam",
+        "status": "error"
+      },
+      {
+        "tool": "browser_start",
+        "input": {
+          "url": "https://www.coursera.org/"
+        },
+        "call_id": "chatcmpl-tool-aaed0001f9de60d9",
+        "time_ms": 15962,
+        "output_preview": "# Browser Mode\n\nThe DSH browser plugin controls a real Chromium instance isolated to the current Agent Session.\n\n- DOM markers `[N]` are clickable and `<N>` are inputs.\n- Match element labels or nearby text, and use DOM indentation to distinguish parents, children, and siblings; do not choose by mar",
+        "status": "success"
+      },
+      {
+        "tool": "browser_click",
+        "input": {
+          "elementIndex": 464
+        },
+        "call_id": "chatcmpl-tool-ad4395db5e34bb80",
+        "time_ms": 7739,
+        "output_preview": "Clicked <input role='combobox' aria-label='搜索目录' id='search-autocomplete-input' data-testid='search-autocomplete-input' aria-expanded='false' name='query' placeholder='您想学习什么？'></input> Action dispatched; outcome not verified. Check the returned page before claiming success.\n\n\n<!-- DOM_START dom0.1 ",
+        "status": "success"
+      },
+      {
+        "tool": "browser_input",
+        "input": {
+          "elementIndex": 464,
+          "pressEnter": true,
+          "text": "Machine Learning"
+        },
+        "call_id": "chatcmpl-tool-bb66ede7982a4f1c",
+        "time_ms": 12999,
+        "output_preview": "Input \"Machine Learning\" into <input role='combobox' aria-label='搜索目录' id='search-autocomplete-input' data-testid='search-autocomplete-input' aria-expanded='true' name='query' placeholder='您想学习什么？'></input> and pressed Enter Action dispatched; outcome not verified. Check the returned page before cla",
+        "status": "success"
+      },
+      {
+        "tool": "browser_observe",
+        "input": {
+          "format": "markdown"
+        },
+        "call_id": "chatcmpl-tool-ade0865fc164f65d",
+        "time_ms": 3725,
+        "output_preview": "\n\n<!-- DOM_START dom1.1 tab:tab0 mode:full -->\n(stateId: tab0-dom1.1)\n## Current Page DOM Structure\n\n\n#DOCUMENT\n\tDIV\n\t\tDIV\n\t\t\tLINK: 跳至主要内容\n\t\t\tNAV\n\t\t\t\tDIV\n\t\t\t\t\tLI\n\t\t\t\t\t\tLINK: 为个人\n\t\t\t\t\tLI\n\t\t\t\t\t\tLINK: 为商务\n\t\t\t\t\tLI\n\t\t\t\t\t\tLINK: 为大学\n\t\t\t\t\tLI\n\t\t\t\t\t\tLINK: 为政府\n\t\t\t\tDIV\n\t\t\t\t\tDIV\n\t\t\t\t\t\tDIV\n\t\t\t\t\t\t\tLINK: Coursera\n\t",
+        "status": "success"
+      },
+      {
+        "tool": "browser_click",
+        "input": {
+          "elementIndex": 11
+        },
+        "call_id": "chatcmpl-tool-87808cc78ea2c0cf",
+        "time_ms": 5,
+        "output_preview": "Element [11] not found or not clickable in the current DOM. No click was performed. Call browser_observe and choose a current [N] marker in the active tab; archived observations and removed delta lines are not live targets.\n\nNext actions:\n- Inspect the failure or partial result and re-observe before",
+        "status": "error"
+      },
+      {
+        "tool": "browser_execute_script",
+        "input": {
+          "script": "return __data('searchResultsCount')"
+        },
+        "call_id": "chatcmpl-tool-9fde8f62425bfc15",
+        "time_ms": 1600,
+        "output_preview": "\n\n<!-- DOM_START dom1.2 tab:tab0 mode:nochange -->\n(stateId: tab0-dom1.2)\n## Current Page DOM Structure\n\n\nNo DOM changes detected after the previous action.\nscrollMap:\n[container:0] 5 pages (coverage resets on content/layout changes) | viewing P0 | unexplored P1-4\n[container:1] 2 pages (coverage res",
+        "status": "success"
+      },
+      {
+        "tool": "browser_execute_script",
+        "input": {
+          "script": "return document.querySelector('h1, [data-testid=\"search-results-page-title\"], .cds-search-results-page-header, .result-count')?.innerText || document.querySelector('main h1, main h2')?.innerText"
+        },
+        "call_id": "chatcmpl-tool-83278fc62e1c5809",
+        "time_ms": 2327,
+        "output_preview": "\n\n<!-- DOM_START dom1.3 tab:tab0 mode:nochange -->\n(stateId: tab0-dom1.3)\n## Current Page DOM Structure\n\n\nNo DOM changes detected after the previous action.\nscrollMap:\n[container:0] 5 pages (coverage resets on content/layout changes) | viewing P0 | unexplored P1-4\n[container:1] 2 pages (coverage res",
+        "status": "success"
+      },
+      {
+        "tool": "browser_execute_script",
+        "input": {
+          "script": "const h2 = document.querySelector('main h2'); return {text: h2?.innerText, html: h2?.outerHTML, parent: h2?.parentElement?.innerText}"
+        },
+        "call_id": "chatcmpl-tool-ad62cc4c25de05c6",
+        "time_ms": 2206,
+        "output_preview": "\n\n<!-- DOM_START dom1.4 tab:tab0 mode:nochange -->\n(stateId: tab0-dom1.4)\n## Current Page DOM Structure\n\n\nNo DOM changes detected after the previous action.\nscrollMap:\n[container:0] 5 pages (coverage resets on content/layout changes) | viewing P0 | unexplored P1-4\n[container:1] 2 pages (coverage res",
+        "status": "success"
+      },
+      {
+        "tool": "browser_execute_script",
+        "input": {
+          "script": "const numSection = document.querySelector('[data-e2e=\"NumberOfResultsSection\"]'); return {html: numSection?.outerHTML, fullText: document.querySelector('main h2')?.parentElement?.outerHTML?.substring(0, 2000)}"
+        },
+        "call_id": "chatcmpl-tool-902959ffe2575a5e",
+        "time_ms": 1783,
+        "output_preview": "\n\n<!-- DOM_START dom1.5 tab:tab0 mode:nochange -->\n(stateId: tab0-dom1.5)\n## Current Page DOM Structure\n\n\nNo DOM changes detected after the previous action.\nscrollMap:\n[container:0] 5 pages (coverage resets on content/layout changes) | viewing P0 | unexplored P1-4\n[container:1] 2 pages (coverage res",
+        "status": "success"
+      },
+      {
+        "tool": "browser_execute_script",
+        "input": {
+          "script": "return document.querySelector('.rc-SearchResultsHeader')?.outerHTML"
+        },
+        "call_id": "chatcmpl-tool-b610e47479f86b08",
+        "time_ms": 2168,
+        "output_preview": "\n\n<!-- DOM_START dom1.6 tab:tab0 mode:nochange -->\n(stateId: tab0-dom1.6)\n## Current Page DOM Structure\n\n\nNo DOM changes detected after the previous action.\nscrollMap:\n[container:0] 5 pages (coverage resets on content/layout changes) | viewing P0 | unexplored P1-4\n[container:1] 2 pages (coverage res",
+        "status": "success"
+      },
+      {
+        "tool": "browser_execute_script",
+        "input": {
+          "script": "const buttons = Array.from(document.querySelectorAll('button')); const closeBtn = buttons.find(b => b.innerText.trim() === 'Close' || b.getAttribute('aria-label') === 'Close'); if (closeBtn) closeBtn.click(); return 'clicked'"
+        },
+        "call_id": "chatcmpl-tool-af7a63567d60de61",
+        "time_ms": 3007,
+        "output_preview": "\n\n<!-- DOM_START dom1.7 tab:tab0 mode:incremental -->\n(stateId: tab0-dom1.7)\n## Incremental DOM updates\n\n\n+|<ul></ul>\n-|<div></div>\n\t-|<div></div>\n\t\t-|[view:hcjg]<img title='Company Logo' alt='Company Logo'></img>\n\t\t-|<div></div>\n\t\t\t-|We process your personal information to measure and improve our s",
+        "status": "success"
+      },
+      {
+        "tool": "browser_execute_script",
+        "input": {
+          "script": "return document.querySelector('[data-e2e=\"NumberOfResultsSection\"]')?.innerText"
+        },
+        "call_id": "chatcmpl-tool-ad7f26b686cfeaa0",
+        "time_ms": 1789,
+        "output_preview": "\n\n<!-- DOM_START dom1.8 tab:tab0 mode:nochange -->\n(stateId: tab0-dom1.8)\n## Current Page DOM Structure\n\n\nNo DOM changes detected after the previous action.\nscrollMap:\n[container:0] 5 pages (coverage resets on content/layout changes) | viewing P0 | unexplored P1-4\n[container:1] 2 pages (coverage res",
+        "status": "success"
+      },
+      {
+        "tool": "browser_execute_script",
+        "input": {
+          "script": "return document.body.innerText.substring(0, 5000)"
+        },
+        "call_id": "chatcmpl-tool-aac156bb71af7e2b",
+        "time_ms": 1437,
+        "output_preview": "\n\n<!-- DOM_START dom1.9 tab:tab0 mode:nochange -->\n(stateId: tab0-dom1.9)\n## Current Page DOM Structure\n\n\nNo DOM changes detected after the previous action.\nscrollMap:\n[container:0] 5 pages (coverage resets on content/layout changes) | viewing P0 | unexplored P1-4\n[container:1] 2 pages (coverage res",
+        "status": "success"
+      },
+      {
+        "tool": "browser_goto",
+        "input": {
+          "url": "https://www.coursera.org/search?query=Machine%20Learning&language=English"
+        },
+        "call_id": "chatcmpl-tool-8863e3bb43b7984d",
+        "time_ms": 9359,
+        "output_preview": "Navigated to https://www.coursera.org/search?query=Machine%20Learning&language=English\n\n\n<!-- DOM_START dom2 tab:tab0 mode:full -->\n(stateId: tab0-dom2)\n## Current Page DOM Structure\n\n\n<div></div>\n=== OFF-SCREEN above [container:0] (scroll to reveal these elements) ===\n\t<a> 跳至主要内容 </a>\n=== END OFF-S",
+        "status": "success"
+      },
+      {
+        "tool": "browser_execute_script",
+        "input": {
+          "script": "const h2 = document.querySelector('main h2'); return h2?.innerHTML"
+        },
+        "call_id": "chatcmpl-tool-ad48efaee30066af",
+        "time_ms": 1764,
+        "output_preview": "\n\n<!-- DOM_START dom2.1 tab:tab0 mode:nochange -->\n(stateId: tab0-dom2.1)\n## Current Page DOM Structure\n\n\nNo DOM changes detected after the previous action.\nscrollMap:\n[container:0] 5 pages (coverage resets on content/layout changes) | viewing P0 | unexplored P1-4\n[container:1] 2 pages (coverage res",
+        "status": "success"
+      },
+      {
+        "tool": "browser_goto",
+        "input": {
+          "url": "https://www.coursera.org/search?query=Machine%20Learning&facets=productDifficultyLevel%3ABeginner&language=English&allLanguages=true"
+        },
+        "call_id": "chatcmpl-tool-a78c1f312807ade1",
+        "time_ms": 7931,
+        "output_preview": "Navigated to https://www.coursera.org/search?query=Machine%20Learning&facets=productDifficultyLevel%3ABeginner&language=English&allLanguages=true\n\n\n<!-- DOM_START dom3 tab:tab0 mode:full -->\n(stateId: tab0-dom3)\n## Current Page DOM Structure\n\n\n<div></div>\n=== OFF-SCREEN above [container:0] (scroll t",
+        "status": "success"
+      },
+      {
+        "tool": "browser_execute_script",
+        "input": {
+          "script": "document.cookie = 'coursera_locale=en-US; path=/; domain=.coursera.org'; return document.cookie"
+        },
+        "call_id": "chatcmpl-tool-83317c0a3b29115e",
+        "time_ms": 1940,
+        "output_preview": "\n\n<!-- DOM_START dom3.1 tab:tab0 mode:nochange -->\n(stateId: tab0-dom3.1)\n## Current Page DOM Structure\n\n\nNo DOM changes detected after the previous action.\nscrollMap:\n[container:0] 5 pages (coverage resets on content/layout changes) | viewing P0 | unexplored P1-4\n[container:1] 2 pages (coverage res",
+        "status": "success"
+      },
+      {
+        "tool": "browser_refresh",
+        "input": {},
+        "call_id": "chatcmpl-tool-a4f9eb63c9ace7b5",
+        "time_ms": 8726,
+        "output_preview": "Page refreshed\n\n\n<!-- DOM_START dom3.2 tab:tab0 mode:full -->\n(stateId: tab0-dom3.2)\n## Current Page DOM Structure\n\n\n<div></div>\n=== OFF-SCREEN above [container:0] (scroll to reveal these elements) ===\n\t<a> 跳至主要内容 </a>\n=== END OFF-SCREEN ===\n\t<nav></nav>\n\t\t<div></div>\n\t\t\t<li></li>\n\t\t\t\t[17525]<a> 为个人",
+        "status": "success"
+      },
+      {
+        "tool": "browser_execute_script",
+        "input": {
+          "script": "document.cookie.split(';').forEach(c => { document.cookie = c.split('=')[0] + '=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;'; }); return document.cookie"
+        },
+        "call_id": "chatcmpl-tool-b3cec92db9fc982d",
+        "time_ms": 1740,
+        "output_preview": "\n\n<!-- DOM_START dom3.3 tab:tab0 mode:nochange -->\n(stateId: tab0-dom3.3)\n## Current Page DOM Structure\n\n\nNo DOM changes detected after the previous action.\nscrollMap:\n[container:0] 5 pages (coverage resets on content/layout changes) | viewing P0 | unexplored P1-4\n[container:1] 2 pages (coverage res",
+        "status": "success"
+      },
+      {
+        "tool": "browser_refresh",
+        "input": {},
+        "call_id": "chatcmpl-tool-a5306a6ab412f829",
+        "time_ms": 8441,
+        "output_preview": "Page refreshed\n\n\n<!-- DOM_START dom3.4 tab:tab0 mode:full -->\n(stateId: tab0-dom3.4)\n## Current Page DOM Structure\n\n\n<div></div>\n=== OFF-SCREEN above [container:0] (scroll to reveal these elements) ===\n\t<a> 跳至主要内容 </a>\n=== END OFF-SCREEN ===\n\t<nav></nav>\n\t\t<div></div>\n\t\t\t<li></li>\n\t\t\t\t[20513]<a> 为个人",
+        "status": "success"
+      },
+      {
+        "tool": "browser_execute_script",
+        "input": {
+          "script": "document.cookie = 'COURSERA_LOCALE=en-US; path=/; domain=coursera.org'; return document.cookie"
+        },
+        "call_id": "chatcmpl-tool-bd32ef87ccb4a146",
+        "time_ms": 1724,
+        "output_preview": "\n\n<!-- DOM_START dom3.5 tab:tab0 mode:nochange -->\n(stateId: tab0-dom3.5)\n## Current Page DOM Structure\n\n\nNo DOM changes detected after the previous action.\nscrollMap:\n[container:0] 5 pages (coverage resets on content/layout changes) | viewing P0 | unexplored P1-4\n[container:1] 2 pages (coverage res",
+        "status": "success"
+      },
+      {
+        "tool": "browser_goto",
+        "input": {
+          "url": "https://www.coursera.org/search?query=Machine%20Learning"
+        },
+        "call_id": "chatcmpl-tool-a2aab3f6bf8244f3",
+        "time_ms": 10405,
+        "output_preview": "Navigated to https://www.coursera.org/search?query=Machine%20Learning\n\n\n<!-- DOM_START dom4 tab:tab0 mode:full -->\n(stateId: tab0-dom4)\n## Current Page DOM Structure\n\n\n<div></div>\n=== OFF-SCREEN above [container:0] (scroll to reveal these elements) ===\n\t<a> 跳至主要内容 </a>\n=== END OFF-SCREEN ===\n\t<nav><",
+        "status": "success"
+      },
+      {
+        "tool": "browser_execute_script",
+        "input": {
+          "script": "const numSection = document.querySelector('[data-e2e=\"NumberOfResultsSection\"]'); return {innerHTML: numSection?.innerHTML, parentHTML: numSection?.parentElement?.outerHTML?.substring(0, 3000), siblingText: numSection?.parentElement?.parentElement?.innerText?.substring(0, 500)}"
+        },
+        "call_id": "chatcmpl-tool-96ac3060e17187d2",
+        "time_ms": 1873,
+        "output_preview": "\n\n<!-- DOM_START dom4.1 tab:tab0 mode:nochange -->\n(stateId: tab0-dom4.1)\n## Current Page DOM Structure\n\n\nNo DOM changes detected after the previous action.\nscrollMap:\n[container:0] 5 pages (coverage resets on content/layout changes) | viewing P0 | unexplored P1-4\n[container:1] 2 pages (coverage res",
+        "status": "success"
+      },
+      {
+        "tool": "browser_execute_script",
+        "input": {
+          "script": "const langBtn = document.querySelector('[aria-label*=\"language\" i], [aria-label*=\"语言\"]'); return {found: !!langBtn, ariaLabel: langBtn?.getAttribute('aria-label')};"
+        },
+        "call_id": "chatcmpl-tool-bafb26011648c1c6",
+        "time_ms": 1698,
+        "output_preview": "\n\n<!-- DOM_START dom4.2 tab:tab0 mode:nochange -->\n(stateId: tab0-dom4.2)\n## Current Page DOM Structure\n\n\nNo DOM changes detected after the previous action.\nscrollMap:\n[container:0] 5 pages (coverage resets on content/layout changes) | viewing P0 | unexplored P1-4\n[container:1] 2 pages (coverage res",
+        "status": "success"
+      },
+      {
+        "tool": "browser_goto",
+        "input": {
+          "url": "https://www.coursera.org/search?query=Machine%20Learning&index=prod_all_products_termv4&allLanguages=true"
+        },
+        "call_id": "chatcmpl-tool-a7f043ff442efbfa",
+        "time_ms": 8041,
+        "output_preview": "Navigated to https://www.coursera.org/search?query=Machine%20Learning&index=prod_all_products_termv4&allLanguages=true\n\n\n<!-- DOM_START dom5 tab:tab0 mode:full -->\n(stateId: tab0-dom5)\n## Current Page DOM Structure\n\n\n<div></div>\n=== OFF-SCREEN above [container:0] (scroll to reveal these elements) ==",
+        "status": "success"
+      },
+      {
+        "tool": "browser_execute_script",
+        "input": {
+          "script": "const numSection = document.querySelector('[data-e2e=\"NumberOfResultsSection\"]'); return {outerHTML: numSection?.outerHTML, allTextNodes: Array.from(numSection?.querySelectorAll('*') || []).map(e => e.outerHTML).slice(0, 10)}"
+        },
+        "call_id": "chatcmpl-tool-b3b9286a055c29d6",
+        "time_ms": 1642,
+        "output_preview": "\n\n<!-- DOM_START dom5.1 tab:tab0 mode:nochange -->\n(stateId: tab0-dom5.1)\n## Current Page DOM Structure\n\n\nNo DOM changes detected after the previous action.\nscrollMap:\n[container:0] 5 pages (coverage resets on content/layout changes) | viewing P0 | unexplored P1-4\n[container:1] 2 pages (coverage res",
+        "status": "success"
+      },
+      {
+        "tool": "browser_execute_script",
+        "input": {
+          "script": "Object.defineProperty(navigator, 'language', {get: () => 'en-US', configurable: true}); Object.defineProperty(navigator, 'languages', {get: () => ['en-US', 'en'], configurable: true}); return {lang: navigator.language, langs: navigator.languages};"
+        },
+        "call_id": "chatcmpl-tool-b1b19eff2cabafab",
+        "time_ms": 1882,
+        "output_preview": "\n\n<!-- DOM_START dom5.2 tab:tab0 mode:nochange -->\n(stateId: tab0-dom5.2)\n## Current Page DOM Structure\n\n\nNo DOM changes detected after the previous action.\nscrollMap:\n[container:0] 5 pages (coverage resets on content/layout changes) | viewing P0 | unexplored P1-4\n[container:1] 2 pages (coverage res",
+        "status": "success"
+      },
+      {
+        "tool": "browser_goto",
+        "input": {
+          "url": "https://www.coursera.org/search?query=Machine%20Learning&forceLang=en"
+        },
+        "call_id": "chatcmpl-tool-8ea961b7792fb9e6",
+        "time_ms": 8582,
+        "output_preview": "Navigated to https://www.coursera.org/search?query=Machine%20Learning&forceLang=en\n\n\n<!-- DOM_START dom6 tab:tab0 mode:full -->\n(stateId: tab0-dom6)\n## Current Page DOM Structure\n\n\n<div></div>\n=== OFF-SCREEN above [container:0] (scroll to reveal these elements) ===\n\t<a> 跳至主要内容 </a>\n=== END OFF-SCREE",
+        "status": "success"
+      },
+      {
+        "tool": "browser_goto",
+        "input": {
+          "url": "https://www.coursera.org/api/search/v1?q=machine+learning&limit=1"
+        },
+        "call_id": "chatcmpl-tool-828fb085dba0f3c4",
+        "time_ms": 1055,
+        "output_preview": "Navigated to https://www.coursera.org/api/search/v1?q=machine+learning&limit=1\n\n\n<!-- DOM_START dom7 tab:tab0 mode:full -->\n(stateId: tab0-dom7)\n## Current Page DOM Structure\n\n\nAPI Route Does Not Exist\nEdge does not know about this API route.\nCheck whether this route is exposed in the routing table.",
+        "status": "success"
+      },
+      {
+        "tool": "browser_goto",
+        "input": {
+          "url": "https://www.coursera.org/api/search?q=machine%20learning&limit=1"
+        },
+        "call_id": "chatcmpl-tool-bb5dd69a6a26f0bd",
+        "time_ms": 1082,
+        "output_preview": "Navigated to https://www.coursera.org/api/search?q=machine%20learning&limit=1\n\n\n<!-- DOM_START dom8 tab:tab0 mode:full -->\n(stateId: tab0-dom8)\n## Current Page DOM Structure\n\n\n[view:dbcfj]<img></img>\nAPI Route Does Not Exist\nEdge does not know about this API route.\nCheck whether this route is expose",
+        "status": "success"
+      },
+      {
+        "tool": "browser_goto",
+        "input": {
+          "url": "https://www.coursera.org/search?query=Machine%20Learning"
+        },
+        "call_id": "chatcmpl-tool-aaaa28b1303aa145",
+        "time_ms": 8754,
+        "output_preview": "Navigated to https://www.coursera.org/search?query=Machine%20Learning\n\n\n<!-- DOM_START dom9 tab:tab0 mode:full -->\n(stateId: tab0-dom9)\n## Current Page DOM Structure\n\n\n<div></div>\n=== OFF-SCREEN above [container:0] (scroll to reveal these elements) ===\n\t<a> 跳至主要内容 </a>\n=== END OFF-SCREEN ===\n\t<nav><",
+        "status": "success"
+      },
+      {
+        "tool": "browser_execute_script",
+        "input": {
+          "script": "const allButtons = Array.from(document.querySelectorAll('button')); return allButtons.map(b => ({text: b.innerText?.substring(0, 50), aria: b.getAttribute('aria-label')})).filter(b => b.text || b.aria);"
+        },
+        "call_id": "chatcmpl-tool-834772647cb9bc4f",
+        "time_ms": 1858,
+        "output_preview": "\n\n<!-- DOM_START dom9.1 tab:tab0 mode:nochange -->\n(stateId: tab0-dom9.1)\n## Current Page DOM Structure\n\n\nNo DOM changes detected after the previous action.\nscrollMap:\n[container:0] 5 pages (coverage resets on content/layout changes) | viewing P0 | unexplored P1-4\n[container:1] 2 pages (coverage res",
+        "status": "success"
+      },
+      {
+        "tool": "browser_goto",
+        "input": {
+          "url": "https://www.coursera.org/?learnersLocale=en"
+        },
+        "call_id": "chatcmpl-tool-93562ce7c11af7f4",
+        "time_ms": 5909,
+        "output_preview": "Navigated to https://www.coursera.org/?learnersLocale=en\n\n\n<!-- DOM_START dom10 tab:tab0 mode:full -->\n(stateId: tab0-dom10)\n## Current Page DOM Structure\n\n\n<span></span>\n\t<div></div>\n\t\t<li></li>\n\t\t\t[34853]<a> 为个人 </a>\n\t\t\t\t[34855]<span> 为个人 </span>\n\t\t<li></li>\n\t\t\t[34857]<a> 为商务 </a>\n\t\t\t\t[34859]<span",
+        "status": "success"
+      },
+      {
+        "tool": "browser_click",
+        "input": {
+          "elementIndex": 34510
+        },
+        "call_id": "chatcmpl-tool-8ec79b16318bca4c",
+        "time_ms": 8707,
+        "output_preview": "Clicked <input role='combobox' aria-label='搜索目录' id='search-autocomplete-input' data-testid='search-autocomplete-input' aria-expanded='false' name='query' placeholder='您想学习什么？'></input> Action dispatched; outcome not verified. Check the returned page before claiming success.\n\n\n<!-- DOM_START dom10.1",
+        "status": "success"
+      },
+      {
+        "tool": "browser_click",
+        "input": {
+          "elementIndex": 38913
+        },
+        "call_id": "chatcmpl-tool-85863d2872012a38",
+        "time_ms": 10910,
+        "output_preview": "Clicked <div role='option' id='react-aria-:R2lalalakcqH1:-option-MachineLearning' aria-selected='false'></div> Action dispatched; outcome not verified. Check the returned page before claiming success.\n\n\n<!-- DOM_START dom11 tab:tab0 mode:full -->\n(stateId: tab0-dom11)\n## Current Page DOM Structure\n\n",
+        "status": "success"
+      },
+      {
+        "tool": "browser_scroll_to_page",
+        "input": {
+          "container": 0,
+          "page": 1
+        },
+        "call_id": "chatcmpl-tool-b714b1ab97407636",
+        "time_ms": 2993,
+        "output_preview": "Scrolled to target page on container [0]: P0 -> P1\n\n\n<!-- DOM_START dom11.1 tab:tab0 mode:full -->\n(stateId: tab0-dom11.1)\n## Current Page DOM Structure\n\n\n<div></div>\n=== OFF-SCREEN above [container:0] (scroll to reveal these elements) ===\n\t<a> 跳至主要内容 </a>\n=== END OFF-SCREEN ===\n\t<nav></nav>\n\t\t<div>",
+        "status": "success"
+      },
+      {
+        "tool": "browser_execute_script",
+        "input": {
+          "script": "const text = document.body.innerText; const matches = text.match(/\\d{1,3}(,\\d{3})*\\s*(?:个结果|results)/i); return {match: matches?.[0], count: (text.match(/results/g) || []).length};"
+        },
+        "call_id": "chatcmpl-tool-a8d4826641e765ca",
+        "time_ms": 1932,
+        "output_preview": "\n\n<!-- DOM_START dom11.2 tab:tab0 mode:nochange -->\n(stateId: tab0-dom11.2)\n## Current Page DOM Structure\n\n\nNo DOM changes detected after the previous action.\nscrollMap:\n[container:0] 5 pages (coverage resets on content/layout changes) | viewing P1 | unexplored P0,P2-4\n[container:1] 2 pages (coverag",
+        "status": "success"
+      },
+      {
+        "tool": "browser_click",
+        "input": {
+          "elementIndex": 40076
+        },
+        "call_id": "chatcmpl-tool-800f1be9b5ce793a",
+        "time_ms": 5,
+        "output_preview": "Element [40076] not found or not clickable in the current DOM. No click was performed. Call browser_observe and choose a current [N] marker in the active tab; archived observations and removed delta lines are not live targets.\n\nNext actions:\n- Inspect the failure or partial result and re-observe bef",
+        "status": "error"
+      },
+      {
+        "tool": "browser_execute_script",
+        "input": {
+          "script": "localStorage.clear(); sessionStorage.clear(); document.cookie.split(';').forEach(c => { document.cookie = c.split('=')[0] + '=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/; domain=.coursera.org;'; document.cookie = c.split('=')[0] + '=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;'; }); return 'cleared';"
+        },
+        "call_id": "chatcmpl-tool-9cda6ed54915f90f",
+        "time_ms": 1915,
+        "output_preview": "\n\n<!-- DOM_START dom11.3 tab:tab0 mode:nochange -->\n(stateId: tab0-dom11.3)\n## Current Page DOM Structure\n\n\nNo DOM changes detected after the previous action.\nscrollMap:\n[container:0] 5 pages (coverage resets on content/layout changes) | viewing P1 | unexplored P0,P2-4\n[container:1] 2 pages (coverag",
+        "status": "success"
+      },
+      {
+        "tool": "browser_execute_script",
+        "input": {
+          "script": "fetch('https://www.coursera.org/api/search/v1?q=machine+learning&limit=1').then(r => r.json()).then(d => JSON.stringify(d).substring(0, 2000)).catch(e => 'err:' + e.message);"
+        },
+        "call_id": "chatcmpl-tool-bc65c322c3054fbb",
+        "time_ms": 1845,
+        "output_preview": "\n\n<!-- DOM_START dom11.4 tab:tab0 mode:nochange -->\n(stateId: tab0-dom11.4)\n## Current Page DOM Structure\n\n\nNo DOM changes detected after the previous action.\nscrollMap:\n[container:0] 5 pages (coverage resets on content/layout changes) | viewing P1 | unexplored P0,P2-4\n[container:1] 2 pages (coverag",
+        "status": "success"
+      },
+      {
+        "tool": "browser_execute_script",
+        "input": {
+          "script": "return await fetch('https://www.coursera.org/api/search/v1?q=machine+learning&limit=1').then(r => r.json()).then(d => ({total: d.total, totalResults: d.totalResults, paged: d.paging, hasNext: d.paging?.next, elementCount: d.elements?.length})).catch(e => 'err:' + e.message);"
+        },
+        "call_id": "chatcmpl-tool-8517458bac633f1f",
+        "time_ms": 10,
+        "output_preview": "Error: browser_execute_script failed: Page script error: SyntaxError: await is only valid in async functions and the top level bodies of modules\nCorrect the script using this exception before retrying. Refreshing DOM or restarting Chromium does not fix JavaScript syntax errors. Pass a function body ",
+        "status": "error"
+      },
+      {
+        "tool": "browser_execute_script",
+        "input": {
+          "script": "(async () => { try { const r = await fetch('https://www.coursera.org/api/search/v1?q=machine+learning&limit=1'); const d = await r.json(); return {total: d.total, totalResults: d.totalResults, paging: d.paging, elementCount: d.elements?.length, fullKeys: Object.keys(d).slice(0, 20)}; } catch(e) { return 'err: ' + e.message; } })()"
+        },
+        "call_id": "chatcmpl-tool-9e388478ef50644e",
+        "time_ms": 1925,
+        "output_preview": "\n\n<!-- DOM_START dom11.5 tab:tab0 mode:nochange -->\n(stateId: tab0-dom11.5)\n## Current Page DOM Structure\n\n\nNo DOM changes detected after the previous action.\nscrollMap:\n[container:0] 5 pages (coverage resets on content/layout changes) | viewing P1 | unexplored P0,P2-4\n[container:1] 2 pages (coverag",
+        "status": "success"
+      },
+      {
+        "tool": "browser_execute_script",
+        "input": {
+          "script": "return performance.getEntriesByType('resource').filter(r => r.name.includes('search') || r.name.includes('query') || r.name.includes('api')).map(r => r.name).slice(0, 30);"
+        },
+        "call_id": "chatcmpl-tool-959c05ccdc244ea3",
+        "time_ms": 1735,
+        "output_preview": "\n\n<!-- DOM_START dom11.6 tab:tab0 mode:nochange -->\n(stateId: tab0-dom11.6)\n## Current Page DOM Structure\n\n\nNo DOM changes detected after the previous action.\nscrollMap:\n[container:0] 5 pages (coverage resets on content/layout changes) | viewing P1 | unexplored P0,P2-4\n[container:1] 2 pages (coverag",
+        "status": "success"
+      },
+      {
+        "tool": "browser_execute_script",
+        "input": {
+          "script": "const request = await fetch('/api/search/v1?q=machine+learning&limit=1', {credentials: 'include'}); const data = await request.text(); return data.substring(0, 1000);"
+        },
+        "call_id": "chatcmpl-tool-acc0deebb9a458bc",
+        "time_ms": 10,
+        "output_preview": "Error: browser_execute_script failed: Page script error: SyntaxError: await is only valid in async functions and the top level bodies of modules\nCorrect the script using this exception before retrying. Refreshing DOM or restarting Chromium does not fix JavaScript syntax errors. Pass a function body ",
+        "status": "error"
+      },
+      {
+        "tool": "browser_execute_script",
+        "input": {
+          "script": "(async () => { try { const r = await fetch('/api/search/v1?q=machine+learning&limit=1', {credentials: 'include'}); const t = await r.text(); return t.substring(0, 1500); } catch(e) { return 'err: ' + e.message; } })()"
+        },
+        "call_id": "chatcmpl-tool-ad9e8088fe03b141",
+        "time_ms": 1880,
+        "output_preview": "\n\n<!-- DOM_START dom11.7 tab:tab0 mode:nochange -->\n(stateId: tab0-dom11.7)\n## Current Page DOM Structure\n\n\nNo DOM changes detected after the previous action.\nscrollMap:\n[container:0] 5 pages (coverage resets on content/layout changes) | viewing P1 | unexplored P0,P2-4\n[container:1] 2 pages (coverag",
+        "status": "success"
+      },
+      {
+        "tool": "browser_goto",
+        "input": {
+          "url": "https://www.coursera.org/search?query=Machine%20Learning&facets=productTypeDescription%3ACOURSERA_CREDITS_CREDIT_ELIGIBLE"
+        },
+        "call_id": "chatcmpl-tool-b6165abe3191f121",
+        "time_ms": 9931,
+        "output_preview": "Navigated to https://www.coursera.org/search?query=Machine%20Learning&facets=productTypeDescription%3ACOURSERA_CREDITS_CREDIT_ELIGIBLE\n\n\n<!-- DOM_START dom12 tab:tab0 mode:full -->\n(stateId: tab0-dom12)\n## Current Page DOM Structure\n\n\n<div></div>\n=== OFF-SCREEN above [container:0] (scroll to reveal ",
+        "status": "success"
+      },
+      {
+        "tool": "browser_execute_script",
+        "input": {
+          "script": "const root = document.querySelector('#rendered-content, [data-testid=\"search-page\"], main'); const reactKey = Object.keys(root).find(k => k.startsWith('__reactContainer')); return {found: !!reactKey, key: reactKey};"
+        },
+        "call_id": "chatcmpl-tool-9d2e4d8cfaef280c",
+        "time_ms": 704,
+        "output_preview": "\n\n<!-- DOM_START dom12.1 tab:tab0 mode:nochange -->\n(stateId: tab0-dom12.1)\n## Current Page DOM Structure\n\n\nNo DOM changes detected after the previous action.\nscrollMap:\n[container:0] 5 pages (coverage resets on content/layout changes) | viewing P0 | unexplored P1-4\n[container:1] 2 pages (coverage r",
+        "status": "success"
+      },
+      {
+        "tool": "browser_execute_script",
+        "input": {
+          "script": "return performance.getEntriesByType('resource').filter(r => r.name.includes('search') || r.name.includes('coursera.org/api')).map(r => ({url: r.name.substring(0, 200), duration: r.duration, type: r.initiatorType})).slice(0, 50);"
+        },
+        "call_id": "chatcmpl-tool-a287f24e10455d20",
+        "time_ms": 613,
+        "output_preview": "\n\n<!-- DOM_START dom12.2 tab:tab0 mode:nochange -->\n(stateId: tab0-dom12.2)\n## Current Page DOM Structure\n\n\nNo DOM changes detected after the previous action.\nscrollMap:\n[container:0] 5 pages (coverage resets on content/layout changes) | viewing P0 | unexplored P1-4\n[container:1] 2 pages (coverage r",
+        "status": "success"
+      },
+      {
+        "tool": "browser_execute_script",
+        "input": {
+          "script": "return performance.getEntriesByType('resource').map(r => r.name).filter(n => n.includes('api') || n.includes('query') || n.includes('search') || n.includes('graphql')).slice(0, 30);"
+        },
+        "call_id": "chatcmpl-tool-ad0ef896ce0764ee",
+        "time_ms": 761,
+        "output_preview": "\n\n<!-- DOM_START dom12.3 tab:tab0 mode:nochange -->\n(stateId: tab0-dom12.3)\n## Current Page DOM Structure\n\n\nNo DOM changes detected after the previous action.\nscrollMap:\n[container:0] 5 pages (coverage resets on content/layout changes) | viewing P0 | unexplored P1-4\n[container:1] 2 pages (coverage r",
+        "status": "success"
+      }
+    ],
+    "error": "step_limit",
+    "model": "MiniMax-M3",
+    "provider": "minimax-cn",
+    "protocol": "anthropic-messages",
+    "reasoning_effort": "high",
+    "session_id": "eval-Coursera--17-afab41279450",
+    "started_at": "2026-09-27T12:11:50.647Z",
+    "finished_at": "2026-09-27T12:18:31.962Z",
+    "duration_basis": "worker initialization to agent stop; excludes judge, screenshots and cleanup",
+    "infrastructure_error": null,
+    "request_count": 50,
+    "usage_missing_calls": 0,
+    "unpriced_calls": 0,
+    "tokens_observed": {
+      "input": 104545,
+      "output": 8720,
+      "cache_read": 561408,
+      "cache_write": 0,
+      "reasoning": 0
+    },
+    "usage_metrics": {
+      "input_tokens": 665953,
+      "output_tokens": 8720,
+      "uncached_input_tokens": 104545,
+      "cache_hit_tokens": 561408,
+      "cache_miss_tokens": 104545,
+      "cache_write_tokens": 0,
+      "output_cache_tokens": null,
+      "reasoning_tokens": 0,
+      "total_tokens": 674673,
+      "cache_hit_rate": 0.8430144469654766
+    },
+    "usage_observed": {
+      "input_tokens": 665953,
+      "output_tokens": 8720,
+      "uncached_input_tokens": 104545,
+      "cache_hit_tokens": 561408,
+      "cache_miss_tokens": 104545,
+      "cache_write_tokens": 0,
+      "output_cache_tokens": null,
+      "reasoning_tokens": 0,
+      "total_tokens": 674673,
+      "cache_hit_rate": 0.8430144469654766
+    },
+    "cost_observed": 0.07551198,
+    "model_duration_ms": 202154,
+    "model_calls": [
+      {
+        "call_index": 1,
+        "started_at": "2026-09-27T12:11:50.679Z",
+        "finished_at": "2026-09-27T12:11:52.107Z",
+        "usage": {
+          "input": 124,
+          "cache_read": 2688,
+          "cache_write": 0,
+          "output": 52,
+          "reasoning": 0
+        },
+        "cost": 0.00026088,
+        "duration_ms": 1428,
+        "status": "success",
+        "raw_usage": {
+          "prompt_tokens": 2812,
+          "completion_tokens": 52,
+          "prompt_tokens_details": {
+            "cached_tokens": 2688
+          },
+          "cache_creation_input_tokens": 0,
+          "completion_tokens_details": {
+            "reasoning_tokens": 0
+          }
+        },
+        "output_cache_tokens": null
+      },
+      {
+        "call_index": 2,
+        "started_at": "2026-09-27T12:11:52.152Z",
+        "finished_at": "2026-09-27T12:11:53.349Z",
+        "usage": {
+          "input": 256,
+          "cache_read": 2688,
+          "cache_write": 0,
+          "output": 44,
+          "reasoning": 0
+        },
+        "cost": 0.00029088,
+        "duration_ms": 1197,
+        "status": "success",
+        "raw_usage": {
+          "prompt_tokens": 2944,
+          "completion_tokens": 44,
+          "prompt_tokens_details": {
+            "cached_tokens": 2688
+          },
+          "cache_creation_input_tokens": 0,
+          "completion_tokens_details": {
+            "reasoning_tokens": 0
+          }
+        },
+        "output_cache_tokens": null
+      },
+      {
+        "call_index": 3,
+        "started_at": "2026-09-27T12:12:09.374Z",
+        "finished_at": "2026-09-27T12:12:12.753Z",
+        "usage": {
+          "input": 3302,
+          "cache_read": 2688,
+          "cache_write": 0,
+          "output": 163,
+          "reasoning": 0
+        },
+        "cost": 0.0013474799999999999,
+        "duration_ms": 3379,
+        "status": "success",
+        "raw_usage": {
+          "prompt_tokens": 5990,
+          "completion_tokens": 163,
+          "prompt_tokens_details": {
+            "cached_tokens": 2688
+          },
+          "cache_creation_input_tokens": 0,
+          "completion_tokens_details": {
+            "reasoning_tokens": 0
+          }
+        },
+        "output_cache_tokens": null
+      },
+      {
+        "call_index": 4,
+        "started_at": "2026-09-27T12:12:20.519Z",
+        "finished_at": "2026-09-27T12:12:23.066Z",
+        "usage": {
+          "input": 3098,
+          "cache_read": 2688,
+          "cache_write": 0,
+          "output": 105,
+          "reasoning": 0
+        },
+        "cost": 0.00121668,
+        "duration_ms": 2547,
+        "status": "success",
+        "raw_usage": {
+          "prompt_tokens": 5786,
+          "completion_tokens": 105,
+          "prompt_tokens_details": {
+            "cached_tokens": 2688
+          },
+          "cache_creation_input_tokens": 0,
+          "completion_tokens_details": {
+            "reasoning_tokens": 0
+          }
+        },
+        "output_cache_tokens": null
+      },
+      {
+        "call_index": 5,
+        "started_at": "2026-09-27T12:12:36.157Z",
+        "finished_at": "2026-09-27T12:12:40.010Z",
+        "usage": {
+          "input": 3655,
+          "cache_read": 3200,
+          "cache_write": 0,
+          "output": 200,
+          "reasoning": 0
+        },
+        "cost": 0.0015285,
+        "duration_ms": 3853,
+        "status": "success",
+        "raw_usage": {
+          "prompt_tokens": 6855,
+          "completion_tokens": 200,
+          "prompt_tokens_details": {
+            "cached_tokens": 3200
+          },
+          "cache_creation_input_tokens": 0,
+          "completion_tokens_details": {
+            "reasoning_tokens": 0
+          }
+        },
+        "output_cache_tokens": null
+      },
+      {
+        "call_index": 6,
+        "started_at": "2026-09-27T12:12:43.786Z",
+        "finished_at": "2026-09-27T12:12:48.388Z",
+        "usage": {
+          "input": 6887,
+          "cache_read": 3712,
+          "cache_write": 0,
+          "output": 242,
+          "reasoning": 0
+        },
+        "cost": 0.00257922,
+        "duration_ms": 4602,
+        "status": "success",
+        "raw_usage": {
+          "prompt_tokens": 10599,
+          "completion_tokens": 242,
+          "prompt_tokens_details": {
+            "cached_tokens": 3712
+          },
+          "cache_creation_input_tokens": 0,
+          "completion_tokens_details": {
+            "reasoning_tokens": 0
+          }
+        },
+        "output_cache_tokens": null
+      },
+      {
+        "call_index": 7,
+        "started_at": "2026-09-27T12:12:48.448Z",
+        "finished_at": "2026-09-27T12:12:50.605Z",
+        "usage": {
+          "input": 561,
+          "cache_read": 10368,
+          "cache_write": 0,
+          "output": 48,
+          "reasoning": 0
+        },
+        "cost": 0.0008479799999999999,
+        "duration_ms": 2158,
+        "status": "success",
+        "raw_usage": {
+          "prompt_tokens": 10929,
+          "completion_tokens": 48,
+          "prompt_tokens_details": {
+            "cached_tokens": 10368
+          },
+          "cache_creation_input_tokens": 0,
+          "completion_tokens_details": {
+            "reasoning_tokens": 0
+          }
+        },
+        "output_cache_tokens": null
+      },
+      {
+        "call_index": 8,
+        "started_at": "2026-09-27T12:12:52.239Z",
+        "finished_at": "2026-09-27T12:12:55.234Z",
+        "usage": {
+          "input": 850,
+          "cache_read": 10752,
+          "cache_write": 0,
+          "output": 93,
+          "reasoning": 0
+        },
+        "cost": 0.00101172,
+        "duration_ms": 2995,
+        "status": "success",
+        "raw_usage": {
+          "prompt_tokens": 11602,
+          "completion_tokens": 93,
+          "prompt_tokens_details": {
+            "cached_tokens": 10752
+          },
+          "cache_creation_input_tokens": 0,
+          "completion_tokens_details": {
+            "reasoning_tokens": 0
+          }
+        },
+        "output_cache_tokens": null
+      },
+      {
+        "call_index": 9,
+        "started_at": "2026-09-27T12:12:57.616Z",
+        "finished_at": "2026-09-27T12:13:00.559Z",
+        "usage": {
+          "input": 941,
+          "cache_read": 11392,
+          "cache_write": 0,
+          "output": 107,
+          "reasoning": 0
+        },
+        "cost": 0.00109422,
+        "duration_ms": 2943,
+        "status": "success",
+        "raw_usage": {
+          "prompt_tokens": 12333,
+          "completion_tokens": 107,
+          "prompt_tokens_details": {
+            "cached_tokens": 11392
+          },
+          "cache_creation_input_tokens": 0,
+          "completion_tokens_details": {
+            "reasoning_tokens": 0
+          }
+        },
+        "output_cache_tokens": null
+      },
+      {
+        "call_index": 10,
+        "started_at": "2026-09-27T12:13:02.820Z",
+        "finished_at": "2026-09-27T12:13:07.246Z",
+        "usage": {
+          "input": 977,
+          "cache_read": 12160,
+          "cache_write": 0,
+          "output": 177,
+          "reasoning": 0
+        },
+        "cost": 0.0012351,
+        "duration_ms": 4426,
+        "status": "success",
+        "raw_usage": {
+          "prompt_tokens": 13137,
+          "completion_tokens": 177,
+          "prompt_tokens_details": {
+            "cached_tokens": 12160
+          },
+          "cache_creation_input_tokens": 0,
+          "completion_tokens_details": {
+            "reasoning_tokens": 0
+          }
+        },
+        "output_cache_tokens": null
+      },
+      {
+        "call_index": 11,
+        "started_at": "2026-09-27T12:13:09.054Z",
+        "finished_at": "2026-09-27T12:13:13.845Z",
+        "usage": {
+          "input": 1101,
+          "cache_read": 12928,
+          "cache_write": 0,
+          "output": 138,
+          "reasoning": 0
+        },
+        "cost": 0.00127158,
+        "duration_ms": 4791,
+        "status": "success",
+        "raw_usage": {
+          "prompt_tokens": 14029,
+          "completion_tokens": 138,
+          "prompt_tokens_details": {
+            "cached_tokens": 12928
+          },
+          "cache_creation_input_tokens": 0,
+          "completion_tokens_details": {
+            "reasoning_tokens": 0
+          }
+        },
+        "output_cache_tokens": null
+      },
+      {
+        "call_index": 12,
+        "started_at": "2026-09-27T12:13:16.042Z",
+        "finished_at": "2026-09-27T12:13:19.382Z",
+        "usage": {
+          "input": 1027,
+          "cache_read": 13824,
+          "cache_write": 0,
+          "output": 162,
+          "reasoning": 0
+        },
+        "cost": 0.0013319399999999998,
+        "duration_ms": 3340,
+        "status": "success",
+        "raw_usage": {
+          "prompt_tokens": 14851,
+          "completion_tokens": 162,
+          "prompt_tokens_details": {
+            "cached_tokens": 13824
+          },
+          "cache_creation_input_tokens": 0,
+          "completion_tokens_details": {
+            "reasoning_tokens": 0
+          }
+        },
+        "output_cache_tokens": null
+      },
+      {
+        "call_index": 13,
+        "started_at": "2026-09-27T12:13:22.414Z",
+        "finished_at": "2026-09-27T12:13:24.798Z",
+        "usage": {
+          "input": 1180,
+          "cache_read": 14720,
+          "cache_write": 0,
+          "output": 77,
+          "reasoning": 0
+        },
+        "cost": 0.0013295999999999998,
+        "duration_ms": 2384,
+        "status": "success",
+        "raw_usage": {
+          "prompt_tokens": 15900,
+          "completion_tokens": 77,
+          "prompt_tokens_details": {
+            "cached_tokens": 14720
+          },
+          "cache_creation_input_tokens": 0,
+          "completion_tokens_details": {
+            "reasoning_tokens": 0
+          }
+        },
+        "output_cache_tokens": null
+      },
+      {
+        "call_index": 14,
+        "started_at": "2026-09-27T12:13:26.614Z",
+        "finished_at": "2026-09-27T12:13:28.510Z",
+        "usage": {
+          "input": 871,
+          "cache_read": 15744,
+          "cache_write": 0,
+          "output": 66,
+          "reasoning": 0
+        },
+        "cost": 0.00128514,
+        "duration_ms": 1896,
+        "status": "success",
+        "raw_usage": {
+          "prompt_tokens": 16615,
+          "completion_tokens": 66,
+          "prompt_tokens_details": {
+            "cached_tokens": 15744
+          },
+          "cache_creation_input_tokens": 0,
+          "completion_tokens_details": {
+            "reasoning_tokens": 0
+          }
+        },
+        "output_cache_tokens": null
+      },
+      {
+        "call_index": 15,
+        "started_at": "2026-09-27T12:13:29.958Z",
+        "finished_at": "2026-09-27T12:13:34.555Z",
+        "usage": {
+          "input": 3128,
+          "cache_read": 16384,
+          "cache_write": 0,
+          "output": 164,
+          "reasoning": 0
+        },
+        "cost": 0.0021182399999999995,
+        "duration_ms": 4597,
+        "status": "success",
+        "raw_usage": {
+          "prompt_tokens": 19512,
+          "completion_tokens": 164,
+          "prompt_tokens_details": {
+            "cached_tokens": 16384
+          },
+          "cache_creation_input_tokens": 0,
+          "completion_tokens_details": {
+            "reasoning_tokens": 0
+          }
+        },
+        "output_cache_tokens": null
+      },
+      {
+        "call_index": 16,
+        "started_at": "2026-09-27T12:13:44.006Z",
+        "finished_at": "2026-09-27T12:13:46.936Z",
+        "usage": {
+          "input": 5182,
+          "cache_read": 4096,
+          "cache_write": 0,
+          "output": 105,
+          "reasoning": 0
+        },
+        "cost": 0.00192636,
+        "duration_ms": 2931,
+        "status": "success",
+        "raw_usage": {
+          "prompt_tokens": 9278,
+          "completion_tokens": 105,
+          "prompt_tokens_details": {
+            "cached_tokens": 4096
+          },
+          "cache_creation_input_tokens": 0,
+          "completion_tokens_details": {
+            "reasoning_tokens": 0
+          }
+        },
+        "output_cache_tokens": null
+      },
+      {
+        "call_index": 17,
+        "started_at": "2026-09-27T12:13:48.733Z",
+        "finished_at": "2026-09-27T12:13:52.882Z",
+        "usage": {
+          "input": 947,
+          "cache_read": 9088,
+          "cache_write": 0,
+          "output": 175,
+          "reasoning": 0
+        },
+        "cost": 0.00103938,
+        "duration_ms": 4149,
+        "status": "success",
+        "raw_usage": {
+          "prompt_tokens": 10035,
+          "completion_tokens": 175,
+          "prompt_tokens_details": {
+            "cached_tokens": 9088
+          },
+          "cache_creation_input_tokens": 0,
+          "completion_tokens_details": {
+            "reasoning_tokens": 0
+          }
+        },
+        "output_cache_tokens": null
+      },
+      {
+        "call_index": 18,
+        "started_at": "2026-09-27T12:14:00.861Z",
+        "finished_at": "2026-09-27T12:14:06.423Z",
+        "usage": {
+          "input": 3676,
+          "cache_read": 6016,
+          "cache_write": 0,
+          "output": 185,
+          "reasoning": 0
+        },
+        "cost": 0.00168576,
+        "duration_ms": 5562,
+        "status": "success",
+        "raw_usage": {
+          "prompt_tokens": 9692,
+          "completion_tokens": 185,
+          "prompt_tokens_details": {
+            "cached_tokens": 6016
+          },
+          "cache_creation_input_tokens": 0,
+          "completion_tokens_details": {
+            "reasoning_tokens": 0
+          }
+        },
+        "output_cache_tokens": null
+      },
+      {
+        "call_index": 19,
+        "started_at": "2026-09-27T12:14:08.428Z",
+        "finished_at": "2026-09-27T12:14:10.276Z",
+        "usage": {
+          "input": 2304,
+          "cache_read": 9472,
+          "cache_write": 0,
+          "output": 55,
+          "reasoning": 0
+        },
+        "cost": 0.0013255199999999997,
+        "duration_ms": 1848,
+        "status": "success",
+        "raw_usage": {
+          "prompt_tokens": 11776,
+          "completion_tokens": 55,
+          "prompt_tokens_details": {
+            "cached_tokens": 9472
+          },
+          "cache_creation_input_tokens": 0,
+          "completion_tokens_details": {
+            "reasoning_tokens": 0
+          }
+        },
+        "output_cache_tokens": null
+      },
+      {
+        "call_index": 20,
+        "started_at": "2026-09-27T12:14:19.047Z",
+        "finished_at": "2026-09-27T12:14:24.414Z",
+        "usage": {
+          "input": 3642,
+          "cache_read": 6400,
+          "cache_write": 0,
+          "output": 270,
+          "reasoning": 0
+        },
+        "cost": 0.0018006,
+        "duration_ms": 5368,
+        "status": "success",
+        "raw_usage": {
+          "prompt_tokens": 10042,
+          "completion_tokens": 270,
+          "prompt_tokens_details": {
+            "cached_tokens": 6400
+          },
+          "cache_creation_input_tokens": 0,
+          "completion_tokens_details": {
+            "reasoning_tokens": 0
+          }
+        },
+        "output_cache_tokens": null
+      },
+      {
+        "call_index": 21,
+        "started_at": "2026-09-27T12:14:26.190Z",
+        "finished_at": "2026-09-27T12:14:29.359Z",
+        "usage": {
+          "input": 2279,
+          "cache_read": 9856,
+          "cache_write": 0,
+          "output": 107,
+          "reasoning": 0
+        },
+        "cost": 0.00140346,
+        "duration_ms": 3169,
+        "status": "success",
+        "raw_usage": {
+          "prompt_tokens": 12135,
+          "completion_tokens": 107,
+          "prompt_tokens_details": {
+            "cached_tokens": 9856
+          },
+          "cache_creation_input_tokens": 0,
+          "completion_tokens_details": {
+            "reasoning_tokens": 0
+          }
+        },
+        "output_cache_tokens": null
+      },
+      {
+        "call_index": 22,
+        "started_at": "2026-09-27T12:14:37.850Z",
+        "finished_at": "2026-09-27T12:14:42.893Z",
+        "usage": {
+          "input": 3738,
+          "cache_read": 6784,
+          "cache_write": 0,
+          "output": 229,
+          "reasoning": 0
+        },
+        "cost": 0.0018032399999999998,
+        "duration_ms": 5043,
+        "status": "success",
+        "raw_usage": {
+          "prompt_tokens": 10522,
+          "completion_tokens": 229,
+          "prompt_tokens_details": {
+            "cached_tokens": 6784
+          },
+          "cache_creation_input_tokens": 0,
+          "completion_tokens_details": {
+            "reasoning_tokens": 0
+          }
+        },
+        "output_cache_tokens": null
+      },
+      {
+        "call_index": 23,
+        "started_at": "2026-09-27T12:14:44.654Z",
+        "finished_at": "2026-09-27T12:14:47.360Z",
+        "usage": {
+          "input": 2289,
+          "cache_read": 10368,
+          "cache_write": 0,
+          "output": 89,
+          "reasoning": 0
+        },
+        "cost": 0.0014155799999999998,
+        "duration_ms": 2706,
+        "status": "success",
+        "raw_usage": {
+          "prompt_tokens": 12657,
+          "completion_tokens": 89,
+          "prompt_tokens_details": {
+            "cached_tokens": 10368
+          },
+          "cache_creation_input_tokens": 0,
+          "completion_tokens_details": {
+            "reasoning_tokens": 0
+          }
+        },
+        "output_cache_tokens": null
+      },
+      {
+        "call_index": 24,
+        "started_at": "2026-09-27T12:14:57.823Z",
+        "finished_at": "2026-09-27T12:15:02.519Z",
+        "usage": {
+          "input": 3485,
+          "cache_read": 7296,
+          "cache_write": 0,
+          "output": 209,
+          "reasoning": 0
+        },
+        "cost": 0.00173406,
+        "duration_ms": 4696,
+        "status": "success",
+        "raw_usage": {
+          "prompt_tokens": 10781,
+          "completion_tokens": 209,
+          "prompt_tokens_details": {
+            "cached_tokens": 7296
+          },
+          "cache_creation_input_tokens": 0,
+          "completion_tokens_details": {
+            "reasoning_tokens": 0
+          }
+        },
+        "output_cache_tokens": null
+      },
+      {
+        "call_index": 25,
+        "started_at": "2026-09-27T12:15:04.417Z",
+        "finished_at": "2026-09-27T12:15:09.583Z",
+        "usage": {
+          "input": 995,
+          "cache_read": 10624,
+          "cache_write": 0,
+          "output": 254,
+          "reasoning": 0
+        },
+        "cost": 0.00124074,
+        "duration_ms": 5166,
+        "status": "success",
+        "raw_usage": {
+          "prompt_tokens": 11619,
+          "completion_tokens": 254,
+          "prompt_tokens_details": {
+            "cached_tokens": 10624
+          },
+          "cache_creation_input_tokens": 0,
+          "completion_tokens_details": {
+            "reasoning_tokens": 0
+          }
+        },
+        "output_cache_tokens": null
+      },
+      {
+        "call_index": 26,
+        "started_at": "2026-09-27T12:15:11.316Z",
+        "finished_at": "2026-09-27T12:15:14.302Z",
+        "usage": {
+          "input": 1031,
+          "cache_read": 11392,
+          "cache_write": 0,
+          "output": 123,
+          "reasoning": 0
+        },
+        "cost": 0.00114042,
+        "duration_ms": 2986,
+        "status": "success",
+        "raw_usage": {
+          "prompt_tokens": 12423,
+          "completion_tokens": 123,
+          "prompt_tokens_details": {
+            "cached_tokens": 11392
+          },
+          "cache_creation_input_tokens": 0,
+          "completion_tokens_details": {
+            "reasoning_tokens": 0
+          }
+        },
+        "output_cache_tokens": null
+      },
+      {
+        "call_index": 27,
+        "started_at": "2026-09-27T12:15:22.394Z",
+        "finished_at": "2026-09-27T12:15:28.001Z",
+        "usage": {
+          "input": 3868,
+          "cache_read": 7680,
+          "cache_write": 0,
+          "output": 292,
+          "reasoning": 0
+        },
+        "cost": 0.0019715999999999996,
+        "duration_ms": 5607,
+        "status": "success",
+        "raw_usage": {
+          "prompt_tokens": 11548,
+          "completion_tokens": 292,
+          "prompt_tokens_details": {
+            "cached_tokens": 7680
+          },
+          "cache_creation_input_tokens": 0,
+          "completion_tokens_details": {
+            "reasoning_tokens": 0
+          }
+        },
+        "output_cache_tokens": null
+      },
+      {
+        "call_index": 28,
+        "started_at": "2026-09-27T12:15:29.661Z",
+        "finished_at": "2026-09-27T12:15:35.537Z",
+        "usage": {
+          "input": 1050,
+          "cache_read": 11392,
+          "cache_write": 0,
+          "output": 278,
+          "reasoning": 0
+        },
+        "cost": 0.00133212,
+        "duration_ms": 5876,
+        "status": "success",
+        "raw_usage": {
+          "prompt_tokens": 12442,
+          "completion_tokens": 278,
+          "prompt_tokens_details": {
+            "cached_tokens": 11392
+          },
+          "cache_creation_input_tokens": 0,
+          "completion_tokens_details": {
+            "reasoning_tokens": 0
+          }
+        },
+        "output_cache_tokens": null
+      },
+      {
+        "call_index": 29,
+        "started_at": "2026-09-27T12:15:37.466Z",
+        "finished_at": "2026-09-27T12:15:41.683Z",
+        "usage": {
+          "input": 989,
+          "cache_read": 12288,
+          "cache_write": 0,
+          "output": 186,
+          "reasoning": 0
+        },
+        "cost": 0.00125718,
+        "duration_ms": 4217,
+        "status": "success",
+        "raw_usage": {
+          "prompt_tokens": 13277,
+          "completion_tokens": 186,
+          "prompt_tokens_details": {
+            "cached_tokens": 12288
+          },
+          "cache_creation_input_tokens": 0,
+          "completion_tokens_details": {
+            "reasoning_tokens": 0
+          }
+        },
+        "output_cache_tokens": null
+      },
+      {
+        "call_index": 30,
+        "started_at": "2026-09-27T12:15:50.322Z",
+        "finished_at": "2026-09-27T12:15:53.230Z",
+        "usage": {
+          "input": 4038,
+          "cache_read": 8448,
+          "cache_write": 0,
+          "output": 124,
+          "reasoning": 0
+        },
+        "cost": 0.0018670799999999997,
+        "duration_ms": 2908,
+        "status": "success",
+        "raw_usage": {
+          "prompt_tokens": 12486,
+          "completion_tokens": 124,
+          "prompt_tokens_details": {
+            "cached_tokens": 8448
+          },
+          "cache_creation_input_tokens": 0,
+          "completion_tokens_details": {
+            "reasoning_tokens": 0
+          }
+        },
+        "output_cache_tokens": null
+      },
+      {
+        "call_index": 31,
+        "started_at": "2026-09-27T12:15:54.328Z",
+        "finished_at": "2026-09-27T12:15:56.728Z",
+        "usage": {
+          "input": 608,
+          "cache_read": 9216,
+          "cache_write": 0,
+          "output": 97,
+          "reasoning": 0
+        },
+        "cost": 0.00085176,
+        "duration_ms": 2400,
+        "status": "success",
+        "raw_usage": {
+          "prompt_tokens": 9824,
+          "completion_tokens": 97,
+          "prompt_tokens_details": {
+            "cached_tokens": 9216
+          },
+          "cache_creation_input_tokens": 0,
+          "completion_tokens_details": {
+            "reasoning_tokens": 0
+          }
+        },
+        "output_cache_tokens": null
+      },
+      {
+        "call_index": 32,
+        "started_at": "2026-09-27T12:15:57.864Z",
+        "finished_at": "2026-09-27T12:16:01.160Z",
+        "usage": {
+          "input": 535,
+          "cache_read": 9472,
+          "cache_write": 0,
+          "output": 146,
+          "reasoning": 0
+        },
+        "cost": 0.00090402,
+        "duration_ms": 3296,
+        "status": "success",
+        "raw_usage": {
+          "prompt_tokens": 10007,
+          "completion_tokens": 146,
+          "prompt_tokens_details": {
+            "cached_tokens": 9472
+          },
+          "cache_creation_input_tokens": 0,
+          "completion_tokens_details": {
+            "reasoning_tokens": 0
+          }
+        },
+        "output_cache_tokens": null
+      },
+      {
+        "call_index": 33,
+        "started_at": "2026-09-27T12:16:09.946Z",
+        "finished_at": "2026-09-27T12:16:16.392Z",
+        "usage": {
+          "input": 3473,
+          "cache_read": 9600,
+          "cache_write": 0,
+          "output": 215,
+          "reasoning": 0
+        },
+        "cost": 0.0018758999999999998,
+        "duration_ms": 6446,
+        "status": "success",
+        "raw_usage": {
+          "prompt_tokens": 13073,
+          "completion_tokens": 215,
+          "prompt_tokens_details": {
+            "cached_tokens": 9600
+          },
+          "cache_creation_input_tokens": 0,
+          "completion_tokens_details": {
+            "reasoning_tokens": 0
+          }
+        },
+        "output_cache_tokens": null
+      },
+      {
+        "call_index": 34,
+        "started_at": "2026-09-27T12:16:18.283Z",
+        "finished_at": "2026-09-27T12:16:23.652Z",
+        "usage": {
+          "input": 1411,
+          "cache_read": 12928,
+          "cache_write": 0,
+          "output": 234,
+          "reasoning": 0
+        },
+        "cost": 0.00147978,
+        "duration_ms": 5369,
+        "status": "success",
+        "raw_usage": {
+          "prompt_tokens": 14339,
+          "completion_tokens": 234,
+          "prompt_tokens_details": {
+            "cached_tokens": 12928
+          },
+          "cache_creation_input_tokens": 0,
+          "completion_tokens_details": {
+            "reasoning_tokens": 0
+          }
+        },
+        "output_cache_tokens": null
+      },
+      {
+        "call_index": 35,
+        "started_at": "2026-09-27T12:16:29.608Z",
+        "finished_at": "2026-09-27T12:16:32.119Z",
+        "usage": {
+          "input": 2251,
+          "cache_read": 9984,
+          "cache_write": 0,
+          "output": 88,
+          "reasoning": 0
+        },
+        "cost": 0.00137994,
+        "duration_ms": 2511,
+        "status": "success",
+        "raw_usage": {
+          "prompt_tokens": 12235,
+          "completion_tokens": 88,
+          "prompt_tokens_details": {
+            "cached_tokens": 9984
+          },
+          "cache_creation_input_tokens": 0,
+          "completion_tokens_details": {
+            "reasoning_tokens": 0
+          }
+        },
+        "output_cache_tokens": null
+      },
+      {
+        "call_index": 36,
+        "started_at": "2026-09-27T12:16:40.871Z",
+        "finished_at": "2026-09-27T12:16:42.976Z",
+        "usage": {
+          "input": 2624,
+          "cache_read": 10368,
+          "cache_write": 0,
+          "output": 77,
+          "reasoning": 0
+        },
+        "cost": 0.0015016799999999998,
+        "duration_ms": 2105,
+        "status": "success",
+        "raw_usage": {
+          "prompt_tokens": 12992,
+          "completion_tokens": 77,
+          "prompt_tokens_details": {
+            "cached_tokens": 10368
+          },
+          "cache_creation_input_tokens": 0,
+          "completion_tokens_details": {
+            "reasoning_tokens": 0
+          }
+        },
+        "output_cache_tokens": null
+      },
+      {
+        "call_index": 37,
+        "started_at": "2026-09-27T12:16:53.919Z",
+        "finished_at": "2026-09-27T12:16:59.733Z",
+        "usage": {
+          "input": 3196,
+          "cache_read": 10624,
+          "cache_write": 0,
+          "output": 339,
+          "reasoning": 0
+        },
+        "cost": 0.00200304,
+        "duration_ms": 5814,
+        "status": "success",
+        "raw_usage": {
+          "prompt_tokens": 13820,
+          "completion_tokens": 339,
+          "prompt_tokens_details": {
+            "cached_tokens": 10624
+          },
+          "cache_creation_input_tokens": 0,
+          "completion_tokens_details": {
+            "reasoning_tokens": 0
+          }
+        },
+        "output_cache_tokens": null
+      },
+      {
+        "call_index": 38,
+        "started_at": "2026-09-27T12:17:02.771Z",
+        "finished_at": "2026-09-27T12:17:08.787Z",
+        "usage": {
+          "input": 4153,
+          "cache_read": 10752,
+          "cache_write": 0,
+          "output": 339,
+          "reasoning": 0
+        },
+        "cost": 0.00229782,
+        "duration_ms": 6016,
+        "status": "success",
+        "raw_usage": {
+          "prompt_tokens": 14905,
+          "completion_tokens": 339,
+          "prompt_tokens_details": {
+            "cached_tokens": 10752
+          },
+          "cache_creation_input_tokens": 0,
+          "completion_tokens_details": {
+            "reasoning_tokens": 0
+          }
+        },
+        "output_cache_tokens": null
+      },
+      {
+        "call_index": 39,
+        "started_at": "2026-09-27T12:17:10.762Z",
+        "finished_at": "2026-09-27T12:17:15.157Z",
+        "usage": {
+          "input": 1225,
+          "cache_read": 14720,
+          "cache_write": 0,
+          "output": 208,
+          "reasoning": 0
+        },
+        "cost": 0.0015003,
+        "duration_ms": 4395,
+        "status": "success",
+        "raw_usage": {
+          "prompt_tokens": 15945,
+          "completion_tokens": 208,
+          "prompt_tokens_details": {
+            "cached_tokens": 14720
+          },
+          "cache_creation_input_tokens": 0,
+          "completion_tokens_details": {
+            "reasoning_tokens": 0
+          }
+        },
+        "output_cache_tokens": null
+      },
+      {
+        "call_index": 40,
+        "started_at": "2026-09-27T12:17:15.197Z",
+        "finished_at": "2026-09-27T12:17:19.424Z",
+        "usage": {
+          "input": 498,
+          "cache_read": 15744,
+          "cache_write": 0,
+          "output": 244,
+          "reasoning": 0
+        },
+        "cost": 0.0013868399999999999,
+        "duration_ms": 4227,
+        "status": "success",
+        "raw_usage": {
+          "prompt_tokens": 16242,
+          "completion_tokens": 244,
+          "prompt_tokens_details": {
+            "cached_tokens": 15744
+          },
+          "cache_creation_input_tokens": 0,
+          "completion_tokens_details": {
+            "reasoning_tokens": 0
+          }
+        },
+        "output_cache_tokens": null
+      },
+      {
+        "call_index": 41,
+        "started_at": "2026-09-27T12:17:21.380Z",
+        "finished_at": "2026-09-27T12:17:26.887Z",
+        "usage": {
+          "input": 1190,
+          "cache_read": 16000,
+          "cache_write": 0,
+          "output": 254,
+          "reasoning": 0
+        },
+        "cost": 0.0016218,
+        "duration_ms": 5507,
+        "status": "success",
+        "raw_usage": {
+          "prompt_tokens": 17190,
+          "completion_tokens": 254,
+          "prompt_tokens_details": {
+            "cached_tokens": 16000
+          },
+          "cache_creation_input_tokens": 0,
+          "completion_tokens_details": {
+            "reasoning_tokens": 0
+          }
+        },
+        "output_cache_tokens": null
+      },
+      {
+        "call_index": 42,
+        "started_at": "2026-09-27T12:17:28.761Z",
+        "finished_at": "2026-09-27T12:17:35.331Z",
+        "usage": {
+          "input": 1120,
+          "cache_read": 17024,
+          "cache_write": 0,
+          "output": 365,
+          "reasoning": 0
+        },
+        "cost": 0.00179544,
+        "duration_ms": 6570,
+        "status": "success",
+        "raw_usage": {
+          "prompt_tokens": 18144,
+          "completion_tokens": 365,
+          "prompt_tokens_details": {
+            "cached_tokens": 17024
+          },
+          "cache_creation_input_tokens": 0,
+          "completion_tokens_details": {
+            "reasoning_tokens": 0
+          }
+        },
+        "output_cache_tokens": null
+      },
+      {
+        "call_index": 43,
+        "started_at": "2026-09-27T12:17:35.376Z",
+        "finished_at": "2026-09-27T12:17:38.071Z",
+        "usage": {
+          "input": 684,
+          "cache_read": 17920,
+          "cache_write": 0,
+          "output": 137,
+          "reasoning": 0
+        },
+        "cost": 0.0014448,
+        "duration_ms": 2695,
+        "status": "success",
+        "raw_usage": {
+          "prompt_tokens": 18604,
+          "completion_tokens": 137,
+          "prompt_tokens_details": {
+            "cached_tokens": 17920
+          },
+          "cache_creation_input_tokens": 0,
+          "completion_tokens_details": {
+            "reasoning_tokens": 0
+          }
+        },
+        "output_cache_tokens": null
+      },
+      {
+        "call_index": 44,
+        "started_at": "2026-09-27T12:17:40.039Z",
+        "finished_at": "2026-09-27T12:17:44.425Z",
+        "usage": {
+          "input": 1009,
+          "cache_read": 18432,
+          "cache_write": 0,
+          "output": 171,
+          "reasoning": 0
+        },
+        "cost": 0.00161382,
+        "duration_ms": 4386,
+        "status": "success",
+        "raw_usage": {
+          "prompt_tokens": 19441,
+          "completion_tokens": 171,
+          "prompt_tokens_details": {
+            "cached_tokens": 18432
+          },
+          "cache_creation_input_tokens": 0,
+          "completion_tokens_details": {
+            "reasoning_tokens": 0
+          }
+        },
+        "output_cache_tokens": null
+      },
+      {
+        "call_index": 45,
+        "started_at": "2026-09-27T12:17:46.175Z",
+        "finished_at": "2026-09-27T12:17:52.176Z",
+        "usage": {
+          "input": 3246,
+          "cache_read": 19200,
+          "cache_write": 0,
+          "output": 283,
+          "reasoning": 0
+        },
+        "cost": 0.0024654,
+        "duration_ms": 6001,
+        "status": "success",
+        "raw_usage": {
+          "prompt_tokens": 22446,
+          "completion_tokens": 283,
+          "prompt_tokens_details": {
+            "cached_tokens": 19200
+          },
+          "cache_creation_input_tokens": 0,
+          "completion_tokens_details": {
+            "reasoning_tokens": 0
+          }
+        },
+        "output_cache_tokens": null
+      },
+      {
+        "call_index": 46,
+        "started_at": "2026-09-27T12:17:52.219Z",
+        "finished_at": "2026-09-27T12:17:56.091Z",
+        "usage": {
+          "input": 552,
+          "cache_read": 22272,
+          "cache_write": 0,
+          "output": 104,
+          "reasoning": 0
+        },
+        "cost": 0.00162672,
+        "duration_ms": 3872,
+        "status": "success",
+        "raw_usage": {
+          "prompt_tokens": 22824,
+          "completion_tokens": 104,
+          "prompt_tokens_details": {
+            "cached_tokens": 22272
+          },
+          "cache_creation_input_tokens": 0,
+          "completion_tokens_details": {
+            "reasoning_tokens": 0
+          }
+        },
+        "output_cache_tokens": null
+      },
+      {
+        "call_index": 47,
+        "started_at": "2026-09-27T12:17:58.011Z",
+        "finished_at": "2026-09-27T12:18:02.863Z",
+        "usage": {
+          "input": 970,
+          "cache_read": 22656,
+          "cache_write": 0,
+          "output": 256,
+          "reasoning": 0
+        },
+        "cost": 0.00195756,
+        "duration_ms": 4852,
+        "status": "success",
+        "raw_usage": {
+          "prompt_tokens": 23626,
+          "completion_tokens": 256,
+          "prompt_tokens_details": {
+            "cached_tokens": 22656
+          },
+          "cache_creation_input_tokens": 0,
+          "completion_tokens_details": {
+            "reasoning_tokens": 0
+          }
+        },
+        "output_cache_tokens": null
+      },
+      {
+        "call_index": 48,
+        "started_at": "2026-09-27T12:18:12.871Z",
+        "finished_at": "2026-09-27T12:18:19.985Z",
+        "usage": {
+          "input": 6272,
+          "cache_read": 11392,
+          "cache_write": 0,
+          "output": 410,
+          "reasoning": 0
+        },
+        "cost": 0.00305712,
+        "duration_ms": 7114,
+        "status": "success",
+        "raw_usage": {
+          "prompt_tokens": 17664,
+          "completion_tokens": 410,
+          "prompt_tokens_details": {
+            "cached_tokens": 11392
+          },
+          "cache_creation_input_tokens": 0,
+          "completion_tokens_details": {
+            "reasoning_tokens": 0
+          }
+        },
+        "output_cache_tokens": null
+      },
+      {
+        "call_index": 49,
+        "started_at": "2026-09-27T12:18:20.714Z",
+        "finished_at": "2026-09-27T12:18:23.823Z",
+        "usage": {
+          "input": 1102,
+          "cache_read": 17536,
+          "cache_write": 0,
+          "output": 137,
+          "reasoning": 0
+        },
+        "cost": 0.00154716,
+        "duration_ms": 3109,
+        "status": "success",
+        "raw_usage": {
+          "prompt_tokens": 18638,
+          "completion_tokens": 137,
+          "prompt_tokens_details": {
+            "cached_tokens": 17536
+          },
+          "cache_creation_input_tokens": 0,
+          "completion_tokens_details": {
+            "reasoning_tokens": 0
+          }
+        },
+        "output_cache_tokens": null
+      },
+      {
+        "call_index": 50,
+        "started_at": "2026-09-27T12:18:24.470Z",
+        "finished_at": "2026-09-27T12:18:31.171Z",
+        "usage": {
+          "input": 955,
+          "cache_read": 18432,
+          "cache_write": 0,
+          "output": 97,
+          "reasoning": 0
+        },
+        "cost": 0.0015088200000000001,
+        "duration_ms": 6701,
+        "status": "success",
+        "raw_usage": {
+          "prompt_tokens": 19387,
+          "completion_tokens": 97,
+          "prompt_tokens_details": {
+            "cached_tokens": 18432
+          },
+          "cache_creation_input_tokens": 0,
+          "completion_tokens_details": {
+            "reasoning_tokens": 0
+          }
+        },
+        "output_cache_tokens": null
+      }
+    ],
+    "model_steps": 50,
+    "retry_count": 0,
+    "failed_steps": 5,
+    "incomplete_steps": 0,
+    "final_screenshot": "final.png",
+    "attempt_number": 2,
+    "attempt_directory": "Coursera--17\\attempts\\2",
+    "judge_mode": "reference",
+    "metrics": {
+      "metrics_version": 1,
+      "input_tokens": 665953,
+      "output_tokens": 8720,
+      "uncached_input_tokens": 104545,
+      "cache_hit_tokens": 561408,
+      "cache_miss_tokens": 104545,
+      "cache_write_tokens": 0,
+      "output_cache_tokens": null,
+      "reasoning_tokens": 0,
+      "total_tokens": 674673,
+      "cache_hit_rate": 0.8430144469654766,
+      "agent_cost_usd": 0.07551198,
+      "judge_cost_usd": 0.0029269799999999996,
+      "total_cost_usd": 0.07843896,
+      "observed_cost_usd": 0.07843896,
+      "agent_duration_ms": 401315,
+      "judge_duration_ms": 3466,
+      "active_duration_ms": 404781
+    },
+    "judge_result": {
+      "task_id": "Coursera--17",
+      "mode": "reference",
+      "rubric_version": "opencode-browser-856867996e73f7dcc5e39827bf2af7555bd63d40-judge-prompt.md",
+      "pass": false,
+      "reason": "The agent reached the step limit without providing a final answer; it failed to determine the number of results for Machine Learning filtered by Credit Eligible and 1-4 Years duration.",
+      "status": "judged",
+      "model": "MiniMax-M3",
+      "request_count": 1,
+      "usage_missing_calls": 0,
+      "unpriced_calls": 0,
+      "tokens": {
+        "input": 9251,
+        "output": 120,
+        "cache_read": 128,
+        "cache_write": 0,
+        "reasoning": 0
+      },
+      "tokens_observed": {
+        "input": 9251,
+        "output": 120,
+        "cache_read": 128,
+        "cache_write": 0,
+        "reasoning": 0
+      },
+      "usage_metrics": {
+        "input_tokens": 9379,
+        "output_tokens": 120,
+        "uncached_input_tokens": 9251,
+        "cache_hit_tokens": 128,
+        "cache_miss_tokens": 9251,
+        "cache_write_tokens": 0,
+        "output_cache_tokens": null,
+        "reasoning_tokens": 0,
+        "total_tokens": 9499,
+        "cache_hit_rate": 0.013647510395564558
+      },
+      "usage_observed": {
+        "input_tokens": 9379,
+        "output_tokens": 120,
+        "uncached_input_tokens": 9251,
+        "cache_hit_tokens": 128,
+        "cache_miss_tokens": 9251,
+        "cache_write_tokens": 0,
+        "output_cache_tokens": null,
+        "reasoning_tokens": 0,
+        "total_tokens": 9499,
+        "cache_hit_rate": 0.013647510395564558
+      },
+      "cost": 0.0029269799999999996,
+      "cost_observed": 0.0029269799999999996,
+      "model_duration_ms": 3463,
+      "requests": 1,
+      "model_calls": [
+        {
+          "call_index": 1,
+          "started_at": "2026-09-27T12:18:34.032Z",
+          "usage": {
+            "input": 9251,
+            "cache_read": 128,
+            "cache_write": 0,
+            "output": 120,
+            "reasoning": 0
+          },
+          "cost": 0.0029269799999999996,
+          "status": "success",
+          "output_cache_tokens": null,
+          "raw_usage": {
+            "prompt_tokens": 9379,
+            "completion_tokens": 120,
+            "prompt_tokens_details": {
+              "cached_tokens": 128
+            },
+            "cache_creation_input_tokens": 0,
+            "completion_tokens_details": {
+              "reasoning_tokens": 0
+            }
+          },
+          "finished_at": "2026-09-27T12:18:37.495Z",
+          "duration_ms": 3463
+        }
+      ],
+      "started_at": "2026-09-27T12:18:34.032Z",
+      "finished_at": "2026-09-27T12:18:37.498Z",
+      "duration_ms": 3466,
+      "prompt_sha256": "bcdf403484823037eaeb6cec7918b966fe90ee31a30bc8d69094d2ff42747ccf"
+    },
+    "evaluation_finished_at": "2026-09-27T12:18:37.498Z"
+  }
+}

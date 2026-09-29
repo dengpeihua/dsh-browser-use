@@ -1,0 +1,822 @@
+{
+  "previous": "0a9f3c3e3826cb2d93d6ea8a4558354633e9a9753a35b4aa1d2110e644e9b389",
+  "result": {
+    "task_id": "Allrecipes--4",
+    "website": "https://www.allrecipes.com/",
+    "task": "Find a recipe for Baked Salmon that takes less than 30 minutes to prepare and has at least a 4 star rating based on user reviews.",
+    "status": "completed",
+    "duration_ms": 157178,
+    "steps": 16,
+    "browser_steps": 16,
+    "model_rounds": 17,
+    "cost": 0.019249080000000002,
+    "tokens": {
+      "input": 26602,
+      "output": 3016,
+      "cache_read": 127488,
+      "cache_write": 0,
+      "reasoning": 1253
+    },
+    "final_answer": "I have successfully found a recipe that meets all the criteria. Here's my answer:\n\n## Recipe Found: Baked Salmon Fillets Dijon\n\nThis recipe meets all your requirements:\n- ✅ **Recipe**: Baked Salmon\n- ✅ **Total Time**: 25 minutes (less than 30 minutes)\n  - Prep Time: 10 minutes\n  - Cook Time: 15 minutes\n- ✅ **Rating**: 4.6 stars (above 4 stars)\n- ✅ **Reviews**: 1,588 ratings, 1,133 written reviews\n\n### Recipe Details:\n- **Name**: Baked Salmon Fillets Dijon\n- **Description**: \"Learn how long to bake salmon at 400 degrees F with this easy recipe for delicious salmon fillets coated with Dijon-style mustard and seasoned bread crumbs drizzled with butter.\"\n- **Servings**: 4\n- **Submitted by**: CHRISTYJ\n- **Updated**: November 13, 2024\n- **Tested by**: Allrecipes Test Kitchen\n- **URL**: https://www.allrecipes.com/recipe/12720/baked-salmon-fillets-dijon/\n\n### How I Found It:\n1. Navigated to allrecipes.com and searched for \"baked salmon\"\n2. Browsed the search results page\n3. Opened the recipe \"Baked Salmon Fillets Dijon\" which was at the top of the results\n4. Verified on the recipe page that it had:\n   - A 4.6 star rating (displayed in the star rating section with 1,588 ratings)\n   - A total time of 25 minutes (10 min prep + 15 min cook)\n\nThis is a perfect match for your requirements — a highly-rated, quick-to-prepare baked salmon recipe.",
+    "tool_trace": [
+      {
+        "tool": "browser_goto",
+        "input": {
+          "url": "https://www.allrecipes.com/search?q=baked+salmon"
+        },
+        "call_id": "call_e2e1d4d4b2c845329e0757c3",
+        "time_ms": 3,
+        "output_preview": "Error: browser_goto failed: Browser not started. Call browser_start first to enter browser mode.\nSafe retry: verify browser_start succeeded, refresh the DOM snapshot, and retry once with current element/tab IDs.\nStop condition: stop retrying if Chromium is unavailable, approval is denied, or the sam",
+        "status": "error"
+      },
+      {
+        "tool": "browser_start",
+        "input": {
+          "url": "https://www.allrecipes.com/search?q=baked+salmon"
+        },
+        "call_id": "call_20a086bf4e6e488cb40b20e1",
+        "time_ms": 6532,
+        "output_preview": "# Browser Mode\n\nThe DSH browser plugin controls a real Chromium instance isolated to the current Agent Session.\n\n- DOM markers `[N]` are clickable and `<N>` are inputs.\n- Match element labels or nearby text, and use DOM indentation to distinguish parents, children, and siblings; do not choose by mar",
+        "status": "success"
+      },
+      {
+        "tool": "browser_execute_script",
+        "input": {
+          "script": "\n() => {\n  const results = [];\n  const cards = document.querySelectorAll('[id^=\"mntl-card-list-card--extendable\"]');\n  cards.forEach((card, idx) => {\n    const titleEl = card.querySelector('span');\n    const title = titleEl ? titleEl.innerText.trim() : '';\n    const link = card.href;\n    const rating = card.querySelector('[id*=\"recipe-star-rating\"]')?.getAttribute('data-rating') || \n                   card.querySelector('[id*=\"recipe-star-rating\"]')?.getAttribute('aria-label') || '';\n    // Try to find rating text\n    const ratingNumEl = card.querySelector('[id*=\"mntl-recipe-card-meta\"]');\n    const ratingNum = ratingNumEl ? ratingNumEl.innerText : '';\n    results.push({index: idx, title, link, ratingInfo: rating, ratingNum});\n  });\n  return results;\n}"
+        },
+        "call_id": "call_f5e45a9206874a1d8dc4b1b1",
+        "time_ms": 2106,
+        "output_preview": "\n\n<!-- DOM_START dom0.1 tab:tab0 mode:nochange -->\n(stateId: tab0-dom0.1)\n## Current Page DOM Structure\n\n\nNo DOM changes detected after the previous action.\nscrollMap:\n[container:0] 4 pages (coverage resets on content/layout changes) | viewing P0 | unexplored P1-3\n[container:1] 11 pages (coverage re",
+        "status": "success"
+      },
+      {
+        "tool": "browser_execute_script",
+        "input": {
+          "script": "\n() => {\n  const results = [];\n  // Try a broader selector for recipe cards\n  const cards = document.querySelectorAll('a[id*=\"mntl-card-list-card\"]');\n  cards.forEach((card, idx) => {\n    const titleEl = card.querySelector('span');\n    const title = titleEl ? titleEl.innerText.trim() : '';\n    const link = card.href;\n    const allText = card.innerText.replace(/\\n/g, ' | ');\n    results.push({index: idx, title, link: link ? link.substring(0, 100) : '', text: allText.substring(0, 300)});\n  });\n  return results.slice(0, 15);\n}"
+        },
+        "call_id": "call_4c16e30ed9214bc18bc661c2",
+        "time_ms": 1746,
+        "output_preview": "\n\n<!-- DOM_START dom0.2 tab:tab0 mode:nochange -->\n(stateId: tab0-dom0.2)\n## Current Page DOM Structure\n\n\nNo DOM changes detected after the previous action.\nscrollMap:\n[container:0] 4 pages (coverage resets on content/layout changes) | viewing P0 | unexplored P1-3\n[container:1] 11 pages (coverage re",
+        "status": "success"
+      },
+      {
+        "tool": "browser_execute_script",
+        "input": {
+          "guide": true
+        },
+        "call_id": "call_bba0b629697e49438f8ed6e7",
+        "time_ms": 4,
+        "output_preview": "# Extraction guide\n\nReturn plain objects or arrays using page data. Record important results in your text output before changing pages. The Host archives page observations automatically; use browser_recall only when an older source has left working context. Narrow truncated extractions before relyin",
+        "status": "success"
+      },
+      {
+        "tool": "browser_execute_script",
+        "input": {
+          "script": "\n() => {\n  const recipes = __data(\"Recipe\");\n  return recipes.map(r => ({\n    name: r.name,\n    rating: r.aggregateRating ? r.aggregateRating.ratingValue : null,\n    ratingCount: r.aggregateRating ? r.aggregateRating.ratingCount : null,\n    prepTime: r.prepTime,\n    cookTime: r.cookTime,\n    totalTime: r.totalTime,\n    url: r.url ? r.url.substring(0, 100) : null\n  }));\n}"
+        },
+        "call_id": "call_b8bfa67d4afd4ad987075518",
+        "time_ms": 1973,
+        "output_preview": "\n\n<!-- DOM_START dom0.3 tab:tab0 mode:nochange -->\n(stateId: tab0-dom0.3)\n## Current Page DOM Structure\n\n\nNo DOM changes detected after the previous action.\nscrollMap:\n[container:0] 4 pages (coverage resets on content/layout changes) | viewing P0 | unexplored P1-3\n[container:1] 11 pages (coverage re",
+        "status": "success"
+      },
+      {
+        "tool": "browser_execute_script",
+        "input": {
+          "script": "\n() => {\n  // Check what data is available\n  const all = __data();\n  return { types: Object.keys(all), count: Array.isArray(all) ? all.length : 'not array' };\n}"
+        },
+        "call_id": "call_c4df413a3b0e41c9b2fc7182",
+        "time_ms": 2252,
+        "output_preview": "\n\n<!-- DOM_START dom0.4 tab:tab0 mode:nochange -->\n(stateId: tab0-dom0.4)\n## Current Page DOM Structure\n\n\nNo DOM changes detected after the previous action.\nscrollMap:\n[container:0] 4 pages (coverage resets on content/layout changes) | viewing P0 | unexplored P1-3\n[container:1] 11 pages (coverage re",
+        "status": "success"
+      },
+      {
+        "tool": "browser_execute_script",
+        "input": {
+          "script": "\n() => {\n  // Get all recipe cards with text content\n  const allCards = document.querySelectorAll('article, .mntl-card-list-card, [class*=\"recipe-card\"], [class*=\"card-list\"]');\n  const data = [];\n  allCards.forEach((c, i) => {\n    data.push({\n      tag: c.tagName,\n      cls: c.className.toString().substring(0, 100),\n      id: c.id || '',\n      text: c.innerText ? c.innerText.substring(0, 200).replace(/\\n/g, ' | ') : ''\n    });\n  });\n  return { count: allCards.length, sample: data.slice(0, 5) };\n}"
+        },
+        "call_id": "call_7936b4fa21e242dfbd7538f2",
+        "time_ms": 2088,
+        "output_preview": "\n\n<!-- DOM_START dom0.5 tab:tab0 mode:nochange -->\n(stateId: tab0-dom0.5)\n## Current Page DOM Structure\n\n\nNo DOM changes detected after the previous action.\nscrollMap:\n[container:0] 4 pages (coverage resets on content/layout changes) | viewing P0 | unexplored P1-3\n[container:1] 11 pages (coverage re",
+        "status": "success"
+      },
+      {
+        "tool": "browser_execute_script",
+        "input": {
+          "script": "\n() => {\n  // Check the rating stars in the DOM - they are SVG with paths\n  const ratings = document.querySelectorAll('[id*=\"mntl-recipe-star-rating\"]');\n  const result = [];\n  ratings.forEach(r => {\n    result.push({\n      id: r.id,\n      cls: r.className.toString().substring(0, 100),\n      rating: r.getAttribute('data-rating') || r.getAttribute('data-star-rating') || r.getAttribute('aria-label') || '',\n      title: r.title || '',\n      style: r.getAttribute('style') || ''\n    });\n  });\n  return result;\n}"
+        },
+        "call_id": "call_2d316bca17214efe95936861",
+        "time_ms": 1720,
+        "output_preview": "\n\n<!-- DOM_START dom0.6 tab:tab0 mode:nochange -->\n(stateId: tab0-dom0.6)\n## Current Page DOM Structure\n\n\nNo DOM changes detected after the previous action.\nscrollMap:\n[container:0] 4 pages (coverage resets on content/layout changes) | viewing P0 | unexplored P1-3\n[container:1] 11 pages (coverage re",
+        "status": "success"
+      },
+      {
+        "tool": "browser_execute_script",
+        "input": {
+          "script": "\n() => {\n  // Check what's in the body\n  return {\n    bodyChildren: document.body.children.length,\n    title: document.title,\n    url: location.href,\n    scripts: document.scripts.length,\n    bodyHtml: document.body.innerHTML.substring(0, 500)\n  };\n}"
+        },
+        "call_id": "call_a091df61f12e40b28dd32a19",
+        "time_ms": 1960,
+        "output_preview": "\n\n<!-- DOM_START dom0.7 tab:tab0 mode:nochange -->\n(stateId: tab0-dom0.7)\n## Current Page DOM Structure\n\n\nNo DOM changes detected after the previous action.\nscrollMap:\n[container:0] 4 pages (coverage resets on content/layout changes) | viewing P0 | unexplored P1-3\n[container:1] 11 pages (coverage re",
+        "status": "success"
+      },
+      {
+        "tool": "browser_click",
+        "input": {
+          "elementIndex": 2280
+        },
+        "call_id": "call_e86d25b7731a45f689c7b5e7",
+        "time_ms": 4387,
+        "output_preview": "Clicked <a id='mntl-card-list-card--extendable_1-0'> Breaded, baked salmon fillets topped with lemon slices, served alongside asparagus slices and rice pilaf on blue plates Save Recipe BAKED SALMON RECIPES Baked Salmon Fillets Dijon 1,588 Ratings </a> Action dispatched; outcome not verified. Check t",
+        "status": "success"
+      },
+      {
+        "tool": "browser_execute_script",
+        "input": {
+          "script": "\n() => location.href"
+        },
+        "call_id": "call_7336493f312d4e45b2b86db2",
+        "time_ms": 11526,
+        "output_preview": "\n\n<!-- DOM_START dom1.1 tab:tab0 mode:incremental -->\n(stateId: tab0-dom1.1)\n## Incremental DOM updates\n\n\n<div></div>\n\t+|[20829]<div role='button' aria-label='Loading'></div>\n\t\t+|[view:caide]<svg></svg>\n=== OFF-SCREEN below [container:0] (scroll to reveal these elements) ===\n+|<div></div>\n\t+|Would y",
+        "status": "success"
+      },
+      {
+        "tool": "browser_execute_script",
+        "input": {
+          "script": "\n() => {\n  return JSON.stringify({url: location.href, title: document.title});\n}"
+        },
+        "call_id": "call_a894cddd6e834bde82435fcf",
+        "time_ms": 11312,
+        "output_preview": "\n\n<!-- DOM_START dom1.2 tab:tab0 mode:incremental -->\n(stateId: tab0-dom1.2)\n## Incremental DOM updates\n\n\n<div></div>\n\t+|<div></div>\n\t\t+|[20742][view:cahec]<video></video>\n\t-|<div></div>\n\t\t-|[20829]<div role='button' aria-label='Loading'></div>\n\t\t\t-|[view:caide]<svg></svg>\nscrollMap:\n[container:0] 1",
+        "status": "success"
+      },
+      {
+        "tool": "browser_observe",
+        "input": {},
+        "call_id": "call_04d2de1786cd4d9e8c894206",
+        "time_ms": 11183,
+        "output_preview": "\n\n<!-- DOM_START dom1.3 tab:tab0 mode:full -->\n(stateId: tab0-dom1.3)\n## Current Page DOM Structure\n\n\n[view:cefib]<div id='layout'> Would You Like to Send This Recipe to Yourself? </div>\n\t<div></div>\n\t\t[24613][view:cegbd]<button aria-label='Close Modal' id='button1'></button>\n\t[view:cegcb]<img></img",
+        "status": "success"
+      },
+      {
+        "tool": "browser_click",
+        "input": {
+          "elementIndex": 24617
+        },
+        "call_id": "call_9fdb08899cf54c70bd42c848",
+        "time_ms": 12411,
+        "output_preview": "Clicked <button aria-label='Close Modal' id='button3'> No Thanks </button> Action dispatched; outcome not verified. Check the returned page before claiming success.\n\n\n<!-- DOM_START dom1.4 tab:tab0 mode:full -->\n(stateId: tab0-dom1.4)\n## Current Page DOM Structure\n\n\n<header></header>\n=== OFF-SCREEN ",
+        "status": "success"
+      },
+      {
+        "tool": "browser_execute_script",
+        "input": {
+          "script": "\n() => document.querySelector('link[rel=\"canonical\"]') ? document.querySelector('link[rel=\"canonical\"]').href : location.href"
+        },
+        "call_id": "call_333075c2682943f78f8deb6f",
+        "time_ms": 11548,
+        "output_preview": "\n\n<!-- DOM_START dom1.5 tab:tab0 mode:nochange -->\n(stateId: tab0-dom1.5)\n## Current Page DOM Structure\n\n\nNo DOM changes detected after the previous action.\nscrollMap:\n[container:0] 15 pages (coverage resets on content/layout changes) | viewing P0 | unexplored P1-14\n[container:1] 11 pages (coverage ",
+        "status": "success"
+      }
+    ],
+    "error": null,
+    "model": "MiniMax-M3",
+    "provider": "minimax-cn",
+    "protocol": "anthropic-messages",
+    "reasoning_effort": "high",
+    "session_id": "eval-Allrecipes--4-9d833dbac5ab",
+    "started_at": "2026-09-21T06:34:55.773Z",
+    "finished_at": "2026-09-21T06:37:32.951Z",
+    "duration_basis": "worker initialization to agent stop; excludes judge, screenshots and cleanup",
+    "infrastructure_error": null,
+    "request_count": 17,
+    "usage_missing_calls": 0,
+    "unpriced_calls": 0,
+    "tokens_observed": {
+      "input": 26602,
+      "output": 3016,
+      "cache_read": 127488,
+      "cache_write": 0,
+      "reasoning": 1253
+    },
+    "usage_metrics": {
+      "input_tokens": 154090,
+      "output_tokens": 3016,
+      "uncached_input_tokens": 26602,
+      "cache_hit_tokens": 127488,
+      "cache_miss_tokens": 26602,
+      "cache_write_tokens": 0,
+      "output_cache_tokens": null,
+      "reasoning_tokens": 1253,
+      "total_tokens": 157106,
+      "cache_hit_rate": 0.8273606333960672
+    },
+    "usage_observed": {
+      "input_tokens": 154090,
+      "output_tokens": 3016,
+      "uncached_input_tokens": 26602,
+      "cache_hit_tokens": 127488,
+      "cache_miss_tokens": 26602,
+      "cache_write_tokens": 0,
+      "output_cache_tokens": null,
+      "reasoning_tokens": 1253,
+      "total_tokens": 157106,
+      "cache_hit_rate": 0.8273606333960672
+    },
+    "cost_observed": 0.019249080000000002,
+    "model_duration_ms": 73834,
+    "model_calls": [
+      {
+        "call_index": 1,
+        "started_at": "2026-09-21T06:34:55.821Z",
+        "finished_at": "2026-09-21T06:35:00.207Z",
+        "usage": {
+          "input": 2685,
+          "cache_read": 128,
+          "cache_write": 0,
+          "output": 94,
+          "reasoning": 54
+        },
+        "cost": 0.0009259800000000001,
+        "duration_ms": 4386,
+        "status": "success",
+        "raw_usage": {
+          "prompt_tokens": 2813,
+          "completion_tokens": 94,
+          "prompt_tokens_details": {
+            "cached_tokens": 128
+          },
+          "cache_creation_input_tokens": 0,
+          "completion_tokens_details": {
+            "thinking_tokens": 54,
+            "reasoning_tokens": 54
+          }
+        },
+        "output_cache_tokens": null
+      },
+      {
+        "call_index": 2,
+        "started_at": "2026-09-21T06:35:00.227Z",
+        "finished_at": "2026-09-21T06:35:02.742Z",
+        "usage": {
+          "input": 173,
+          "cache_read": 2816,
+          "cache_write": 0,
+          "output": 47,
+          "reasoning": 8
+        },
+        "cost": 0.00027726,
+        "duration_ms": 2515,
+        "status": "success",
+        "raw_usage": {
+          "prompt_tokens": 2989,
+          "completion_tokens": 47,
+          "prompt_tokens_details": {
+            "cached_tokens": 2816
+          },
+          "cache_creation_input_tokens": 0,
+          "completion_tokens_details": {
+            "thinking_tokens": 8,
+            "reasoning_tokens": 8
+          }
+        },
+        "output_cache_tokens": null
+      },
+      {
+        "call_index": 3,
+        "started_at": "2026-09-21T06:35:09.300Z",
+        "finished_at": "2026-09-21T06:35:20.161Z",
+        "usage": {
+          "input": 6466,
+          "cache_read": 128,
+          "cache_write": 0,
+          "output": 506,
+          "reasoning": 261
+        },
+        "cost": 0.0025546799999999997,
+        "duration_ms": 10861,
+        "status": "success",
+        "raw_usage": {
+          "prompt_tokens": 6594,
+          "completion_tokens": 506,
+          "prompt_tokens_details": {
+            "cached_tokens": 128
+          },
+          "cache_creation_input_tokens": 0,
+          "completion_tokens_details": {
+            "thinking_tokens": 261,
+            "reasoning_tokens": 261
+          }
+        },
+        "output_cache_tokens": null
+      },
+      {
+        "call_index": 4,
+        "started_at": "2026-09-21T06:35:22.298Z",
+        "finished_at": "2026-09-21T06:35:25.436Z",
+        "usage": {
+          "input": 600,
+          "cache_read": 7040,
+          "cache_write": 0,
+          "output": 193,
+          "reasoning": 19
+        },
+        "cost": 0.000834,
+        "duration_ms": 3138,
+        "status": "success",
+        "raw_usage": {
+          "prompt_tokens": 7640,
+          "completion_tokens": 193,
+          "prompt_tokens_details": {
+            "cached_tokens": 7040
+          },
+          "cache_creation_input_tokens": 0,
+          "completion_tokens_details": {
+            "thinking_tokens": 19,
+            "reasoning_tokens": 19
+          }
+        },
+        "output_cache_tokens": null
+      },
+      {
+        "call_index": 5,
+        "started_at": "2026-09-21T06:35:27.193Z",
+        "finished_at": "2026-09-21T06:35:31.886Z",
+        "usage": {
+          "input": 569,
+          "cache_read": 7808,
+          "cache_write": 0,
+          "output": 57,
+          "reasoning": 29
+        },
+        "cost": 0.00070758,
+        "duration_ms": 4693,
+        "status": "success",
+        "raw_usage": {
+          "prompt_tokens": 8377,
+          "completion_tokens": 57,
+          "prompt_tokens_details": {
+            "cached_tokens": 7808
+          },
+          "cache_creation_input_tokens": 0,
+          "completion_tokens_details": {
+            "thinking_tokens": 29,
+            "reasoning_tokens": 29
+          }
+        },
+        "output_cache_tokens": null
+      },
+      {
+        "call_index": 6,
+        "started_at": "2026-09-21T06:35:31.923Z",
+        "finished_at": "2026-09-21T06:35:35.353Z",
+        "usage": {
+          "input": 1168,
+          "cache_read": 8320,
+          "cache_write": 0,
+          "output": 160,
+          "reasoning": 24
+        },
+        "cost": 0.0010416,
+        "duration_ms": 3430,
+        "status": "success",
+        "raw_usage": {
+          "prompt_tokens": 9488,
+          "completion_tokens": 160,
+          "prompt_tokens_details": {
+            "cached_tokens": 8320
+          },
+          "cache_creation_input_tokens": 0,
+          "completion_tokens_details": {
+            "thinking_tokens": 24,
+            "reasoning_tokens": 24
+          }
+        },
+        "output_cache_tokens": null
+      },
+      {
+        "call_index": 7,
+        "started_at": "2026-09-21T06:35:37.381Z",
+        "finished_at": "2026-09-21T06:35:40.850Z",
+        "usage": {
+          "input": 590,
+          "cache_read": 9600,
+          "cache_write": 0,
+          "output": 87,
+          "reasoning": 16
+        },
+        "cost": 0.0008574,
+        "duration_ms": 3469,
+        "status": "success",
+        "raw_usage": {
+          "prompt_tokens": 10190,
+          "completion_tokens": 87,
+          "prompt_tokens_details": {
+            "cached_tokens": 9600
+          },
+          "cache_creation_input_tokens": 0,
+          "completion_tokens_details": {
+            "thinking_tokens": 16,
+            "reasoning_tokens": 16
+          }
+        },
+        "output_cache_tokens": null
+      },
+      {
+        "call_index": 8,
+        "started_at": "2026-09-21T06:35:43.132Z",
+        "finished_at": "2026-09-21T06:35:46.253Z",
+        "usage": {
+          "input": 580,
+          "cache_read": 10240,
+          "cache_write": 0,
+          "output": 198,
+          "reasoning": 21
+        },
+        "cost": 0.001026,
+        "duration_ms": 3121,
+        "status": "success",
+        "raw_usage": {
+          "prompt_tokens": 10820,
+          "completion_tokens": 198,
+          "prompt_tokens_details": {
+            "cached_tokens": 10240
+          },
+          "cache_creation_input_tokens": 0,
+          "completion_tokens_details": {
+            "thinking_tokens": 21,
+            "reasoning_tokens": 21
+          }
+        },
+        "output_cache_tokens": null
+      },
+      {
+        "call_index": 9,
+        "started_at": "2026-09-21T06:35:48.384Z",
+        "finished_at": "2026-09-21T06:35:52.510Z",
+        "usage": {
+          "input": 552,
+          "cache_read": 11008,
+          "cache_write": 0,
+          "output": 191,
+          "reasoning": 28
+        },
+        "cost": 0.00105528,
+        "duration_ms": 4126,
+        "status": "success",
+        "raw_usage": {
+          "prompt_tokens": 11560,
+          "completion_tokens": 191,
+          "prompt_tokens_details": {
+            "cached_tokens": 11008
+          },
+          "cache_creation_input_tokens": 0,
+          "completion_tokens_details": {
+            "thinking_tokens": 28,
+            "reasoning_tokens": 28
+          }
+        },
+        "output_cache_tokens": null
+      },
+      {
+        "call_index": 10,
+        "started_at": "2026-09-21T06:35:54.272Z",
+        "finished_at": "2026-09-21T06:35:57.170Z",
+        "usage": {
+          "input": 647,
+          "cache_read": 11648,
+          "cache_write": 0,
+          "output": 117,
+          "reasoning": 29
+        },
+        "cost": 0.00103338,
+        "duration_ms": 2898,
+        "status": "success",
+        "raw_usage": {
+          "prompt_tokens": 12295,
+          "completion_tokens": 117,
+          "prompt_tokens_details": {
+            "cached_tokens": 11648
+          },
+          "cache_creation_input_tokens": 0,
+          "completion_tokens_details": {
+            "thinking_tokens": 29,
+            "reasoning_tokens": 29
+          }
+        },
+        "output_cache_tokens": null
+      },
+      {
+        "call_index": 11,
+        "started_at": "2026-09-21T06:35:59.164Z",
+        "finished_at": "2026-09-21T06:36:03.436Z",
+        "usage": {
+          "input": 666,
+          "cache_read": 12288,
+          "cache_write": 0,
+          "output": 84,
+          "reasoning": 54
+        },
+        "cost": 0.00103788,
+        "duration_ms": 4272,
+        "status": "success",
+        "raw_usage": {
+          "prompt_tokens": 12954,
+          "completion_tokens": 84,
+          "prompt_tokens_details": {
+            "cached_tokens": 12288
+          },
+          "cache_creation_input_tokens": 0,
+          "completion_tokens_details": {
+            "thinking_tokens": 54,
+            "reasoning_tokens": 54
+          }
+        },
+        "output_cache_tokens": null
+      },
+      {
+        "call_index": 12,
+        "started_at": "2026-09-21T06:36:07.880Z",
+        "finished_at": "2026-09-21T06:36:11.411Z",
+        "usage": {
+          "input": 5455,
+          "cache_read": 3456,
+          "cache_write": 0,
+          "output": 279,
+          "reasoning": 233
+        },
+        "cost": 0.0021786600000000002,
+        "duration_ms": 3532,
+        "status": "success",
+        "raw_usage": {
+          "prompt_tokens": 8911,
+          "completion_tokens": 279,
+          "prompt_tokens_details": {
+            "cached_tokens": 3456
+          },
+          "cache_creation_input_tokens": 0,
+          "completion_tokens_details": {
+            "thinking_tokens": 233,
+            "reasoning_tokens": 233
+          }
+        },
+        "output_cache_tokens": null
+      },
+      {
+        "call_index": 13,
+        "started_at": "2026-09-21T06:36:22.965Z",
+        "finished_at": "2026-09-21T06:36:25.965Z",
+        "usage": {
+          "input": 909,
+          "cache_read": 9088,
+          "cache_write": 0,
+          "output": 71,
+          "reasoning": 25
+        },
+        "cost": 0.00090318,
+        "duration_ms": 3000,
+        "status": "success",
+        "raw_usage": {
+          "prompt_tokens": 9997,
+          "completion_tokens": 71,
+          "prompt_tokens_details": {
+            "cached_tokens": 9088
+          },
+          "cache_creation_input_tokens": 0,
+          "completion_tokens_details": {
+            "thinking_tokens": 25,
+            "reasoning_tokens": 25
+          }
+        },
+        "output_cache_tokens": null
+      },
+      {
+        "call_index": 14,
+        "started_at": "2026-09-21T06:36:37.297Z",
+        "finished_at": "2026-09-21T06:36:41.166Z",
+        "usage": {
+          "input": 839,
+          "cache_read": 9984,
+          "cache_write": 0,
+          "output": 148,
+          "reasoning": 129
+        },
+        "cost": 0.00102834,
+        "duration_ms": 3869,
+        "status": "success",
+        "raw_usage": {
+          "prompt_tokens": 10823,
+          "completion_tokens": 148,
+          "prompt_tokens_details": {
+            "cached_tokens": 9984
+          },
+          "cache_creation_input_tokens": 0,
+          "completion_tokens_details": {
+            "thinking_tokens": 129,
+            "reasoning_tokens": 129
+          }
+        },
+        "output_cache_tokens": null
+      },
+      {
+        "call_index": 15,
+        "started_at": "2026-09-21T06:36:52.389Z",
+        "finished_at": "2026-09-21T06:36:55.132Z",
+        "usage": {
+          "input": 1361,
+          "cache_read": 6656,
+          "cache_write": 0,
+          "output": 46,
+          "reasoning": 16
+        },
+        "cost": 0.00086286,
+        "duration_ms": 2743,
+        "status": "success",
+        "raw_usage": {
+          "prompt_tokens": 8017,
+          "completion_tokens": 46,
+          "prompt_tokens_details": {
+            "cached_tokens": 6656
+          },
+          "cache_creation_input_tokens": 0,
+          "completion_tokens_details": {
+            "thinking_tokens": 16,
+            "reasoning_tokens": 16
+          }
+        },
+        "output_cache_tokens": null
+      },
+      {
+        "call_index": 16,
+        "started_at": "2026-09-21T06:37:07.571Z",
+        "finished_at": "2026-09-21T06:37:09.930Z",
+        "usage": {
+          "input": 2620,
+          "cache_read": 7296,
+          "cache_write": 0,
+          "output": 122,
+          "reasoning": 52
+        },
+        "cost": 0.00137016,
+        "duration_ms": 2359,
+        "status": "success",
+        "raw_usage": {
+          "prompt_tokens": 9916,
+          "completion_tokens": 122,
+          "prompt_tokens_details": {
+            "cached_tokens": 7296
+          },
+          "cache_creation_input_tokens": 0,
+          "completion_tokens_details": {
+            "thinking_tokens": 52,
+            "reasoning_tokens": 52
+          }
+        },
+        "output_cache_tokens": null
+      },
+      {
+        "call_index": 17,
+        "started_at": "2026-09-21T06:37:21.507Z",
+        "finished_at": "2026-09-21T06:37:32.929Z",
+        "usage": {
+          "input": 722,
+          "cache_read": 9984,
+          "cache_write": 0,
+          "output": 616,
+          "reasoning": 255
+        },
+        "cost": 0.00155484,
+        "duration_ms": 11422,
+        "status": "success",
+        "raw_usage": {
+          "prompt_tokens": 10706,
+          "completion_tokens": 616,
+          "prompt_tokens_details": {
+            "cached_tokens": 9984
+          },
+          "cache_creation_input_tokens": 0,
+          "completion_tokens_details": {
+            "thinking_tokens": 255,
+            "reasoning_tokens": 255
+          }
+        },
+        "output_cache_tokens": null
+      }
+    ],
+    "model_steps": 17,
+    "retry_count": 0,
+    "failed_steps": 1,
+    "incomplete_steps": 0,
+    "final_screenshot": "final.png",
+    "attempt_number": 1,
+    "attempt_directory": "Allrecipes--4",
+    "judge_mode": "reference",
+    "metrics": {
+      "metrics_version": 1,
+      "input_tokens": 154090,
+      "output_tokens": 3016,
+      "uncached_input_tokens": 26602,
+      "cache_hit_tokens": 127488,
+      "cache_miss_tokens": 26602,
+      "cache_write_tokens": 0,
+      "output_cache_tokens": null,
+      "reasoning_tokens": 1253,
+      "total_tokens": 157106,
+      "cache_hit_rate": 0.8273606333960672,
+      "agent_cost_usd": 0.019249080000000002,
+      "judge_cost_usd": 0.0014674799999999997,
+      "total_cost_usd": 0.020716560000000002,
+      "observed_cost_usd": 0.020716560000000002,
+      "agent_duration_ms": 157178,
+      "judge_duration_ms": 2093,
+      "active_duration_ms": 159271
+    },
+    "judge_result": {
+      "task_id": "Allrecipes--4",
+      "mode": "reference",
+      "rubric_version": "opencode-browser-856867996e73f7dcc5e39827bf2af7555bd63d40-judge-prompt.md",
+      "pass": true,
+      "reason": "Agent found 'Baked Salmon Fillets Dijon' recipe with a 4.6-star rating (above 4 stars) and 25 minutes total time (less than 30 minutes), meeting all task requirements.",
+      "status": "judged",
+      "model": "MiniMax-M3",
+      "request_count": 1,
+      "usage_missing_calls": 0,
+      "unpriced_calls": 0,
+      "tokens": {
+        "input": 4406,
+        "output": 115,
+        "cache_read": 128,
+        "cache_write": 0,
+        "reasoning": 0
+      },
+      "tokens_observed": {
+        "input": 4406,
+        "output": 115,
+        "cache_read": 128,
+        "cache_write": 0,
+        "reasoning": 0
+      },
+      "usage_metrics": {
+        "input_tokens": 4534,
+        "output_tokens": 115,
+        "uncached_input_tokens": 4406,
+        "cache_hit_tokens": 128,
+        "cache_miss_tokens": 4406,
+        "cache_write_tokens": 0,
+        "output_cache_tokens": null,
+        "reasoning_tokens": 0,
+        "total_tokens": 4649,
+        "cache_hit_rate": 0.0282311424790472
+      },
+      "usage_observed": {
+        "input_tokens": 4534,
+        "output_tokens": 115,
+        "uncached_input_tokens": 4406,
+        "cache_hit_tokens": 128,
+        "cache_miss_tokens": 4406,
+        "cache_write_tokens": 0,
+        "output_cache_tokens": null,
+        "reasoning_tokens": 0,
+        "total_tokens": 4649,
+        "cache_hit_rate": 0.0282311424790472
+      },
+      "cost": 0.0014674799999999997,
+      "cost_observed": 0.0014674799999999997,
+      "model_duration_ms": 2091,
+      "requests": 1,
+      "model_calls": [
+        {
+          "call_index": 1,
+          "started_at": "2026-09-21T06:37:34.868Z",
+          "usage": {
+            "input": 4406,
+            "cache_read": 128,
+            "cache_write": 0,
+            "output": 115,
+            "reasoning": 0
+          },
+          "cost": 0.0014674799999999997,
+          "status": "success",
+          "output_cache_tokens": null,
+          "raw_usage": {
+            "prompt_tokens": 4534,
+            "completion_tokens": 115,
+            "prompt_tokens_details": {
+              "cached_tokens": 128
+            },
+            "cache_creation_input_tokens": 0,
+            "completion_tokens_details": {
+              "reasoning_tokens": 0
+            }
+          },
+          "finished_at": "2026-09-21T06:37:36.959Z",
+          "duration_ms": 2091
+        }
+      ],
+      "started_at": "2026-09-21T06:37:34.868Z",
+      "finished_at": "2026-09-21T06:37:36.961Z",
+      "duration_ms": 2093,
+      "prompt_sha256": "bcdf403484823037eaeb6cec7918b966fe90ee31a30bc8d69094d2ff42747ccf"
+    },
+    "evaluation_finished_at": "2026-09-21T06:37:36.961Z"
+  }
+}

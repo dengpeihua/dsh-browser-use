@@ -1,0 +1,547 @@
+{
+  "task_id": "Google Map--28",
+  "website": "https://www.google.com/maps/",
+  "task": "Find the search settings for Google Map, what options are shown on that page?",
+  "status": "completed",
+  "duration_ms": 65435,
+  "steps": 12,
+  "browser_steps": 12,
+  "model_rounds": 13,
+  "cost": 0.009373439999999999,
+  "tokens": {
+    "input": 10260,
+    "output": 2475,
+    "cache_read": 55424,
+    "cache_write": 0,
+    "reasoning": 0
+  },
+  "final_answer": "I have successfully navigated to the Google Maps Search Settings page and captured all the options shown. Here's the complete list of options on the page:\n\n# Google Maps Search Settings\n\nWhen clicking \"Search Settings\" from Google Maps, it opens the **Google Search Settings (Google 搜索设置)** page, which has two main sections in the side menu:\n\n## 🔒 Privacy and Security (隐私和安全)\n\n**Activity (活动)** section:\n- **Customized Search Results (定制化搜索结果)** — Currently **Enabled** (已开启)\n  - \"When customized search results is enabled, Google provides search results and recommendations tailored to your search history in this browser\"\n\n**Content (内容)** section:\n- **SafeSearch (安全搜索)** — Currently set to **\"Blur\" Enabled** (\"模糊处理\"已开启)\n  - For controlling the types of search results displayed (personalized/explicit content)\n\n**More Options (更多选项)**:\n- **Parental Controls in Family Link (Family Link 中的家长控制功能)**\n\n## ⚙️ Other Settings (其他设置)\n\n**Language (语言)** section:\n- **Language and Region (语言和地区)** — \"Manage the display language of Google Search, and choose search result preferences\"\n\n**Desktop (桌面)** section — \"Customize the appearance and behavior of Google Search on your device\":\n- **Dark Theme (深色主题)** — Set to **Device Default** (设备默认设置)\n- **Open search results in new window (在新窗口中打开搜索结果)** — **ON**\n- **Voice Reply (语音答复)** — **ON**\n- **Autocomplete trending searches (自动补全热搜字词)** — **ON**\n\n## 📎 Footer Links\n- Feedback (反馈)\n- Help (帮助)\n- Privacy (隐私权)\n- Terms (条款)\n\nNote: Google Maps uses Google's general search functionality, so its \"Search Settings\" menu links to the broader Google Search Settings page rather than having Maps-specific options.",
+  "tool_trace": [
+    {
+      "tool": "browser_goto",
+      "input": {
+        "url": "https://www.google.com/maps/"
+      },
+      "call_id": "call_01a0de01f6b77380b3f0677e",
+      "time_ms": 4,
+      "output_preview": "Error: browser_goto failed: Browser not started. Call browser_start first to enter browser mode.\nSafe retry: verify browser_start succeeded, refresh the DOM snapshot, and retry once with current element/tab IDs.\nStop condition: stop retrying if Chromium is unavailable, approval is denied, or the sam",
+      "status": "error"
+    },
+    {
+      "tool": "browser_start",
+      "input": {
+        "url": "https://www.google.com/maps/"
+      },
+      "call_id": "call_01a0de01fcd87b01b4483cf5",
+      "time_ms": 13373,
+      "output_preview": "# Browser Mode\n\nThe DSH browser plugin controls a real Chromium instance isolated to the current Agent Session.\n\n- DOM markers `[N]` are clickable and `<N>` are inputs.\n- Match element labels or nearby text, and use DOM indentation to distinguish parents, children, and siblings; do not choose by mar",
+      "status": "success"
+    },
+    {
+      "tool": "browser_click",
+      "input": {
+        "elementIndex": 305
+      },
+      "call_id": "call_01a0de023e667793be6b372f",
+      "time_ms": 2563,
+      "output_preview": "Clicked <button aria-label='菜单'></button> Action dispatched; outcome not verified. Check the returned page before claiming success.\n\n\n<!-- DOM_START dom1 tab:tab0 mode:full -->\n(stateId: tab0-dom1)\n## Current Page DOM Structure\n\n\n<div></div>\n\t<div></div>\n\t\t[356]<a role='button' aria-label='Google 应用",
+      "status": "success"
+    },
+    {
+      "tool": "browser_click",
+      "input": {
+        "elementIndex": 782,
+        "expectText": "搜索设置"
+      },
+      "call_id": "call_01a0de0255da75d18e249339",
+      "time_ms": 5491,
+      "output_preview": "Clicked <button role='menuitem'> 搜索设置 </button> Postcondition verified.\n\n\n<!-- DOM_START dom2 tab:tab0 mode:full -->\n(stateId: tab0-dom2)\n## Current Page DOM Structure\n\n\n<div></div>\n\t<span></span>\n\t\t[33]<a> Google 搜索设置 </a>\n\t\t\t[34][view:de]<img alt='Google'></img>\n\t\t\t[35]<span> 搜索设置 </span>\n\t[43]<a ",
+      "status": "success"
+    },
+    {
+      "tool": "browser_observe",
+      "input": {
+        "format": "markdown"
+      },
+      "call_id": "call_01a0de028b927da2bc6b714f",
+      "time_ms": 200,
+      "output_preview": "\n\n<!-- DOM_START dom2.1 tab:tab0 mode:full -->\n(stateId: tab0-dom2.1)\n## Current Page DOM Structure\n\n\n#DOCUMENT\n\tDIV\n\t\tspan\n\t\t\tLINK: Google 搜索设置\n\t\tDIV\n\t\t\tLINK: 登录\n\tDIV\n\t\tDIV\n\t\t\tG-MENU-ITEM: 隐私和安全\n\t\t\tG-MENU-ITEM: 其他设置\n\t\tDIV\n\t\t\tDIV\n\t\t\t\tDIV\n\t\t\t\t\t活动\n\t\t\t\t\t当\"定制化搜索结果\"设置处于开启状态时，Google 会根据此浏览器中的搜索记录为您提供更贴合需求",
+      "status": "success"
+    },
+    {
+      "tool": "browser_execute_script",
+      "input": {
+        "script": "() => ({ url: window.location.href, title: document.title })"
+      },
+      "call_id": "call_01a0de0294dd74019b12e7ab",
+      "time_ms": 137,
+      "output_preview": "\n\n<!-- DOM_START dom2.2 tab:tab0 mode:nochange -->\n(stateId: tab0-dom2.2)\n## Current Page DOM Structure\n\n\nNo DOM changes detected after the previous action.\n**Observation**: obs-44a59a80c9c3ccddb035. This source remains available through browser_recall after the DOM leaves working context. Page cont",
+      "status": "success"
+    },
+    {
+      "tool": "browser_execute_script",
+      "input": {
+        "script": "() => JSON.stringify({ url: window.location.href, title: document.title })"
+      },
+      "call_id": "call_01a0de029a2c72a2ab63b0fa",
+      "time_ms": 217,
+      "output_preview": "\n\n<!-- DOM_START dom2.3 tab:tab0 mode:nochange -->\n(stateId: tab0-dom2.3)\n## Current Page DOM Structure\n\n\nNo DOM changes detected after the previous action.\n**Observation**: obs-8dbb28f8106f5174238f. This source remains available through browser_recall after the DOM leaves working context. Page cont",
+      "status": "success"
+    },
+    {
+      "tool": "browser_execute_script",
+      "input": {
+        "script": "document.title"
+      },
+      "call_id": "call_01a0de02a01b7e91a0ca45da",
+      "time_ms": 220,
+      "output_preview": "\n\n<!-- DOM_START dom2.4 tab:tab0 mode:nochange -->\n(stateId: tab0-dom2.4)\n## Current Page DOM Structure\n\n\nNo DOM changes detected after the previous action.\n**Observation**: obs-091fc2c91fd7733f8ad1. This source remains available through browser_recall after the DOM leaves working context. Page cont",
+      "status": "success"
+    },
+    {
+      "tool": "browser_click",
+      "input": {
+        "elementIndex": 474,
+        "expectText": "其他设置"
+      },
+      "call_id": "call_01a0de02a61374a184caad74",
+      "time_ms": 5,
+      "output_preview": "Element [474] not found or not clickable in the current DOM. No click was performed. Call browser_observe and choose a current [N] marker in the active tab; archived observations and removed delta lines are not live targets.\n\nNext actions:\n- Inspect the failure or partial result and re-observe befor",
+      "status": "error"
+    },
+    {
+      "tool": "browser_observe",
+      "input": {},
+      "call_id": "call_01a0de02ab827a809216ca53",
+      "time_ms": 168,
+      "output_preview": "\n\n<!-- DOM_START dom2.5 tab:tab0 mode:full -->\n(stateId: tab0-dom2.5)\n## Current Page DOM Structure\n\n\n<div></div>\n\t<span></span>\n\t\t[33]<a> Google 搜索设置 </a>\n\t\t\t[34][view:de]<img alt='Google'></img>\n\t\t\t[35]<span> 搜索设置 </span>\n\t[43]<a aria-label='登录'></a>\n\t\t<span> 登录 </span>\n<div></div>\n\t<div></div>\n\t\t",
+      "status": "success"
+    },
+    {
+      "tool": "browser_click",
+      "input": {
+        "elementIndex": 61,
+        "expectText": "其他设置"
+      },
+      "call_id": "call_01a0de02b1d373c0993af56f",
+      "time_ms": 1569,
+      "output_preview": "Clicked <g-menu-item role='menuitem'> 其他设置 </g-menu-item> Postcondition verified.\n\n\n<!-- DOM_START dom3 tab:tab0 mode:full -->\n(stateId: tab0-dom3)\n## Current Page DOM Structure\n\n\n<div></div>\n\t<span></span>\n\t\t[33]<a> Google 搜索设置 </a>\n\t\t\t[34][view:de]<img alt='Google'></img>\n\t\t\t[35]<span> 搜索设置 </span",
+      "status": "success"
+    },
+    {
+      "tool": "browser_click",
+      "input": {
+        "elementIndex": 54,
+        "expectText": "定制化搜索结果"
+      },
+      "call_id": "call_01a0de02d1f876e3961d591b",
+      "time_ms": 1473,
+      "output_preview": "Clicked <g-menu-item role='menuitem'> 隐私和安全 </g-menu-item> Postcondition verified.\n\n\n<!-- DOM_START dom4 tab:tab0 mode:full -->\n(stateId: tab0-dom4)\n## Current Page DOM Structure\n\n\n<div></div>\n\t<span></span>\n\t\t[33]<a> Google 搜索设置 </a>\n\t\t\t[34][view:de]<img alt='Google'></img>\n\t\t\t[35]<span> 搜索设置 </spa",
+      "status": "success"
+    }
+  ],
+  "error": null,
+  "model": "MiniMax-M3",
+  "provider": "minimax-cn",
+  "protocol": "anthropic-messages",
+  "reasoning_effort": "high",
+  "session_id": "eval-Google Map--28-4687599b782c",
+  "started_at": "2026-09-26T13:57:46.975Z",
+  "finished_at": "2026-09-26T13:58:52.410Z",
+  "duration_basis": "worker initialization to agent stop; excludes judge, screenshots and cleanup",
+  "infrastructure_error": null,
+  "request_count": 13,
+  "usage_missing_calls": 0,
+  "unpriced_calls": 0,
+  "tokens_observed": {
+    "input": 10260,
+    "output": 2475,
+    "cache_read": 55424,
+    "cache_write": 0,
+    "reasoning": 0
+  },
+  "usage_metrics": {
+    "input_tokens": 65684,
+    "output_tokens": 2475,
+    "uncached_input_tokens": 10260,
+    "cache_hit_tokens": 55424,
+    "cache_miss_tokens": 10260,
+    "cache_write_tokens": 0,
+    "output_cache_tokens": null,
+    "reasoning_tokens": 0,
+    "total_tokens": 68159,
+    "cache_hit_rate": 0.843797576274283
+  },
+  "usage_observed": {
+    "input_tokens": 65684,
+    "output_tokens": 2475,
+    "uncached_input_tokens": 10260,
+    "cache_hit_tokens": 55424,
+    "cache_miss_tokens": 10260,
+    "cache_write_tokens": 0,
+    "output_cache_tokens": null,
+    "reasoning_tokens": 0,
+    "total_tokens": 68159,
+    "cache_hit_rate": 0.843797576274283
+  },
+  "cost_observed": 0.009373439999999999,
+  "model_duration_ms": 39261,
+  "model_calls": [
+    {
+      "call_index": 1,
+      "started_at": "2026-09-26T13:57:47.007Z",
+      "finished_at": "2026-09-26T13:57:48.209Z",
+      "usage": {
+        "input": 192,
+        "cache_read": 2688,
+        "cache_write": 0,
+        "output": 67,
+        "reasoning": 0
+      },
+      "cost": 0.00029927999999999997,
+      "duration_ms": 1202,
+      "status": "success",
+      "raw_usage": {
+        "prompt_tokens": 2880,
+        "completion_tokens": 67,
+        "prompt_tokens_details": {
+          "cached_tokens": 2688
+        },
+        "cache_creation_input_tokens": 0,
+        "completion_tokens_details": {
+          "reasoning_tokens": 0
+        }
+      },
+      "output_cache_tokens": null
+    },
+    {
+      "call_index": 2,
+      "started_at": "2026-09-26T13:57:48.228Z",
+      "finished_at": "2026-09-26T13:57:49.793Z",
+      "usage": {
+        "input": 211,
+        "cache_read": 2816,
+        "cache_write": 0,
+        "output": 44,
+        "reasoning": 0
+      },
+      "cost": 0.00028505999999999996,
+      "duration_ms": 1565,
+      "status": "success",
+      "raw_usage": {
+        "prompt_tokens": 3027,
+        "completion_tokens": 44,
+        "prompt_tokens_details": {
+          "cached_tokens": 2816
+        },
+        "cache_creation_input_tokens": 0,
+        "completion_tokens_details": {
+          "reasoning_tokens": 0
+        }
+      },
+      "output_cache_tokens": null
+    },
+    {
+      "call_index": 3,
+      "started_at": "2026-09-26T13:58:03.206Z",
+      "finished_at": "2026-09-26T13:58:06.538Z",
+      "usage": {
+        "input": 1269,
+        "cache_read": 2944,
+        "cache_write": 0,
+        "output": 70,
+        "reasoning": 0
+      },
+      "cost": 0.00064134,
+      "duration_ms": 3332,
+      "status": "success",
+      "raw_usage": {
+        "prompt_tokens": 4213,
+        "completion_tokens": 70,
+        "prompt_tokens_details": {
+          "cached_tokens": 2944
+        },
+        "cache_creation_input_tokens": 0,
+        "completion_tokens_details": {
+          "reasoning_tokens": 0
+        }
+      },
+      "output_cache_tokens": null
+    },
+    {
+      "call_index": 4,
+      "started_at": "2026-09-26T13:58:09.186Z",
+      "finished_at": "2026-09-26T13:58:12.696Z",
+      "usage": {
+        "input": 1077,
+        "cache_read": 3456,
+        "cache_write": 0,
+        "output": 82,
+        "reasoning": 0
+      },
+      "cost": 0.00062886,
+      "duration_ms": 3510,
+      "status": "success",
+      "raw_usage": {
+        "prompt_tokens": 4533,
+        "completion_tokens": 82,
+        "prompt_tokens_details": {
+          "cached_tokens": 3456
+        },
+        "cache_creation_input_tokens": 0,
+        "completion_tokens_details": {
+          "reasoning_tokens": 0
+        }
+      },
+      "output_cache_tokens": null
+    },
+    {
+      "call_index": 5,
+      "started_at": "2026-09-26T13:58:18.248Z",
+      "finished_at": "2026-09-26T13:58:26.333Z",
+      "usage": {
+        "input": 909,
+        "cache_read": 3584,
+        "cache_write": 0,
+        "output": 491,
+        "reasoning": 0
+      },
+      "cost": 0.0010769399999999998,
+      "duration_ms": 8085,
+      "status": "success",
+      "raw_usage": {
+        "prompt_tokens": 4493,
+        "completion_tokens": 491,
+        "prompt_tokens_details": {
+          "cached_tokens": 3584
+        },
+        "cache_creation_input_tokens": 0,
+        "completion_tokens_details": {
+          "reasoning_tokens": 0
+        }
+      },
+      "output_cache_tokens": null
+    },
+    {
+      "call_index": 6,
+      "started_at": "2026-09-26T13:58:26.571Z",
+      "finished_at": "2026-09-26T13:58:28.850Z",
+      "usage": {
+        "input": 1410,
+        "cache_read": 3712,
+        "cache_write": 0,
+        "output": 110,
+        "reasoning": 0
+      },
+      "cost": 0.00077772,
+      "duration_ms": 2279,
+      "status": "success",
+      "raw_usage": {
+        "prompt_tokens": 5122,
+        "completion_tokens": 110,
+        "prompt_tokens_details": {
+          "cached_tokens": 3712
+        },
+        "cache_creation_input_tokens": 0,
+        "completion_tokens_details": {
+          "reasoning_tokens": 0
+        }
+      },
+      "output_cache_tokens": null
+    },
+    {
+      "call_index": 7,
+      "started_at": "2026-09-26T13:58:29.039Z",
+      "finished_at": "2026-09-26T13:58:30.255Z",
+      "usage": {
+        "input": 290,
+        "cache_read": 5120,
+        "cache_write": 0,
+        "output": 64,
+        "reasoning": 0
+      },
+      "cost": 0.00047099999999999996,
+      "duration_ms": 1216,
+      "status": "success",
+      "raw_usage": {
+        "prompt_tokens": 5410,
+        "completion_tokens": 64,
+        "prompt_tokens_details": {
+          "cached_tokens": 5120
+        },
+        "cache_creation_input_tokens": 0,
+        "completion_tokens_details": {
+          "reasoning_tokens": 0
+        }
+      },
+      "output_cache_tokens": null
+    },
+    {
+      "call_index": 8,
+      "started_at": "2026-09-26T13:58:30.516Z",
+      "finished_at": "2026-09-26T13:58:31.629Z",
+      "usage": {
+        "input": 275,
+        "cache_read": 5376,
+        "cache_write": 0,
+        "output": 55,
+        "reasoning": 0
+      },
+      "cost": 0.00047106000000000003,
+      "duration_ms": 1113,
+      "status": "success",
+      "raw_usage": {
+        "prompt_tokens": 5651,
+        "completion_tokens": 55,
+        "prompt_tokens_details": {
+          "cached_tokens": 5376
+        },
+        "cache_creation_input_tokens": 0,
+        "completion_tokens_details": {
+          "reasoning_tokens": 0
+        }
+      },
+      "output_cache_tokens": null
+    },
+    {
+      "call_index": 9,
+      "started_at": "2026-09-26T13:58:31.890Z",
+      "finished_at": "2026-09-26T13:58:33.233Z",
+      "usage": {
+        "input": 251,
+        "cache_read": 5632,
+        "cache_write": 0,
+        "output": 61,
+        "reasoning": 0
+      },
+      "cost": 0.00048642,
+      "duration_ms": 1343,
+      "status": "success",
+      "raw_usage": {
+        "prompt_tokens": 5883,
+        "completion_tokens": 61,
+        "prompt_tokens_details": {
+          "cached_tokens": 5632
+        },
+        "cache_creation_input_tokens": 0,
+        "completion_tokens_details": {
+          "reasoning_tokens": 0
+        }
+      },
+      "output_cache_tokens": null
+    },
+    {
+      "call_index": 10,
+      "started_at": "2026-09-26T13:58:33.292Z",
+      "finished_at": "2026-09-26T13:58:34.453Z",
+      "usage": {
+        "input": 272,
+        "cache_read": 5760,
+        "cache_write": 0,
+        "output": 35,
+        "reasoning": 0
+      },
+      "cost": 0.0004691999999999999,
+      "duration_ms": 1161,
+      "status": "success",
+      "raw_usage": {
+        "prompt_tokens": 6032,
+        "completion_tokens": 35,
+        "prompt_tokens_details": {
+          "cached_tokens": 5760
+        },
+        "cache_creation_input_tokens": 0,
+        "completion_tokens_details": {
+          "reasoning_tokens": 0
+        }
+      },
+      "output_cache_tokens": null
+    },
+    {
+      "call_index": 11,
+      "started_at": "2026-09-26T13:58:34.710Z",
+      "finished_at": "2026-09-26T13:58:36.239Z",
+      "usage": {
+        "input": 1305,
+        "cache_read": 4352,
+        "cache_write": 0,
+        "output": 81,
+        "reasoning": 0
+      },
+      "cost": 0.00074982,
+      "duration_ms": 1529,
+      "status": "success",
+      "raw_usage": {
+        "prompt_tokens": 5657,
+        "completion_tokens": 81,
+        "prompt_tokens_details": {
+          "cached_tokens": 4352
+        },
+        "cache_creation_input_tokens": 0,
+        "completion_tokens_details": {
+          "reasoning_tokens": 0
+        }
+      },
+      "output_cache_tokens": null
+    },
+    {
+      "call_index": 12,
+      "started_at": "2026-09-26T13:58:37.867Z",
+      "finished_at": "2026-09-26T13:58:44.456Z",
+      "usage": {
+        "input": 1351,
+        "cache_read": 4864,
+        "cache_write": 0,
+        "output": 648,
+        "reasoning": 0
+      },
+      "cost": 0.00147474,
+      "duration_ms": 6589,
+      "status": "success",
+      "raw_usage": {
+        "prompt_tokens": 6215,
+        "completion_tokens": 648,
+        "prompt_tokens_details": {
+          "cached_tokens": 4864
+        },
+        "cache_creation_input_tokens": 0,
+        "completion_tokens_details": {
+          "reasoning_tokens": 0
+        }
+      },
+      "output_cache_tokens": null
+    },
+    {
+      "call_index": 13,
+      "started_at": "2026-09-26T13:58:46.001Z",
+      "finished_at": "2026-09-26T13:58:52.338Z",
+      "usage": {
+        "input": 1448,
+        "cache_read": 5120,
+        "cache_write": 0,
+        "output": 667,
+        "reasoning": 0
+      },
+      "cost": 0.001542,
+      "duration_ms": 6337,
+      "status": "success",
+      "raw_usage": {
+        "prompt_tokens": 6568,
+        "completion_tokens": 667,
+        "prompt_tokens_details": {
+          "cached_tokens": 5120
+        },
+        "cache_creation_input_tokens": 0,
+        "completion_tokens_details": {
+          "reasoning_tokens": 0
+        }
+      },
+      "output_cache_tokens": null
+    }
+  ],
+  "model_steps": 13,
+  "retry_count": 0,
+  "failed_steps": 2,
+  "incomplete_steps": 0,
+  "final_screenshot": "final.png"
+}

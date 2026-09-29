@@ -1,0 +1,996 @@
+{
+  "previous": "99a2881840303f71a537b96fb7a25efde74f67e0a185b80492a40d25bb02bf3e",
+  "result": {
+    "task_id": "Allrecipes--14",
+    "website": "https://www.allrecipes.com/",
+    "task": "Search for a recipe that includes \"chicken breast\" and \"quinoa\" with preparation time under 30 minutes on Allrecipes.",
+    "status": "completed",
+    "duration_ms": 197354,
+    "steps": 21,
+    "browser_steps": 21,
+    "model_rounds": 22,
+    "cost": 0.02476878,
+    "tokens": {
+      "input": 42441,
+      "output": 2984,
+      "cache_read": 140928,
+      "cache_write": 0,
+      "reasoning": 0
+    },
+    "final_answer": "I have all the information I need. I found the perfect recipe:\n\n**Recipe: Air Fryer Pesto Chicken Quinoa Bowl**\n\n- **Prep Time:** 10 mins\n- **Cook Time:** 10 mins\n- **Total Time:** 20 mins (under 30 minutes ✓)\n- **Category:** Bowls\n\n**Ingredients confirmed:**\n- 1 pound **skinless, boneless chicken breasts** (chicken breast ✓)\n- 2 cups cooked **quinoa** (quinoa ✓)\n- Plus: prepared pesto, garlic powder, olive oil, crushed red pepper flakes, salt, pepper, zucchini, nonstick cooking spray, basil leaves, grape tomatoes, crumbled feta cheese\n\nThis recipe meets all the criteria:\n1. ✅ Contains chicken breast (1 pound of skinless, boneless chicken breasts)\n2. ✅ Contains quinoa (2 cups cooked quinoa)\n3. ✅ Preparation time under 30 minutes (Total Time: 20 mins - Prep 10 mins + Cook 10 mins)\n4. ✅ Found on Allrecipes.com\n\n## Final Answer\n\n**Recipe Found: Air Fryer Pesto Chicken Quinoa Bowl** (by Chef Mo, published March 9, 2025 on Allrecipes)\n\nThis recipe meets all your criteria:\n- **Chicken Breast:** Uses 1 pound of skinless, boneless chicken breasts\n- **Quinoa:** Uses 2 cups of cooked quinoa\n- **Preparation Time Under 30 Minutes:**\n  - Prep Time: 10 mins\n  - Cook Time: 10 mins\n  - **Total Time: 20 mins**\n\nThe recipe features air-fried pesto chicken and zucchini over fluffy quinoa, topped with grape tomatoes, fresh basil, and crumbled feta cheese. It makes 2 servings and has a 4.5-star rating.",
+    "tool_trace": [
+      {
+        "tool": "browser_start",
+        "input": {
+          "url": "https://www.allrecipes.com/"
+        },
+        "call_id": "call_01a0c2c3bb8873d2abe11428",
+        "time_ms": 14929,
+        "output_preview": "# Browser Mode\n\nThe DSH browser plugin controls a real Chromium instance isolated to the current Agent Session.\n\n- DOM markers `[N]` are clickable and `<N>` are inputs.\n- Match element labels or nearby text, and use DOM indentation to distinguish parents, children, and siblings; do not choose by mar",
+        "status": "success"
+      },
+      {
+        "tool": "browser_input",
+        "input": {
+          "elementIndex": 868,
+          "pressEnter": true,
+          "text": "chicken breast quinoa"
+        },
+        "call_id": "call_01a0c2c40ad67742a204eb05",
+        "time_ms": 5670,
+        "output_preview": "Input \"chicken breast quinoa\" into <input id='mntl-search-form--open__search-input' name='q' placeholder='Find a recipe or ingredient' required='required'></input> and pressed Enter Action dispatched; outcome not verified. Check the returned page before claiming success.\n\n\n<!-- DOM_START dom1 tab:ta",
+        "status": "success"
+      },
+      {
+        "tool": "browser_click",
+        "input": {
+          "elementIndex": 10991
+        },
+        "call_id": "call_01a0c2c42ef375b191568de2",
+        "time_ms": 5736,
+        "output_preview": "Clicked <a id='mntl-card-list-card--extendable_2-0'> close up view of Chicken with Quinoa and Veggies, including kale and tomatoes, on a white plate Save Recipe CHICKEN BREAST Chicken with Quinoa and Veggies 536 Ratings </a> Action dispatched; outcome not verified. Check the returned page before cla",
+        "status": "success"
+      },
+      {
+        "tool": "browser_back",
+        "input": {},
+        "call_id": "call_01a0c2c459817bc2b5a5a7e0",
+        "time_ms": 3,
+        "output_preview": "Error: unknown tool \"browser_back\"",
+        "status": "error"
+      },
+      {
+        "tool": "browser_goto",
+        "input": {
+          "url": "https://www.allrecipes.com/search?q=chicken+breast+quinoa"
+        },
+        "call_id": "call_01a0c2c46ddf7e32a18b4075",
+        "time_ms": 10770,
+        "output_preview": "Navigated to https://www.allrecipes.com/search?q=chicken+breast+quinoa\n\n\n<!-- DOM_START dom3 tab:tab0 mode:full -->\n(stateId: tab0-dom3)\n## Current Page DOM Structure\n\n\n<header></header>\n=== OFF-SCREEN above [container:0] (scroll to reveal these elements) ===\n\t<a id='mntl-skip-to-content_1-0'> SKIP ",
+        "status": "success"
+      },
+      {
+        "tool": "browser_execute_script",
+        "input": {
+          "script": "() => {\n  const cards = Array.from(document.querySelectorAll('a[id^=\"mntl-card-list-card\"]'));\n  return cards.map(card => {\n    const titleEl = card.querySelector('span');\n    const title = titleEl ? titleEl.textContent.trim() : '';\n    const metaEl = card.querySelector('[id^=\"mntl-recipe-card-meta\"]');\n    const meta = metaEl ? metaEl.innerText.trim() : '';\n    return { title, meta };\n  });\n}"
+        },
+        "call_id": "call_01a0c2c4ae4e7130bf3efbfb",
+        "time_ms": 1673,
+        "output_preview": "\n\n<!-- DOM_START dom3.1 tab:tab0 mode:nochange -->\n(stateId: tab0-dom3.1)\n## Current Page DOM Structure\n\n\nNo DOM changes detected after the previous action.\nscrollMap:\n[container:0] 5 pages (coverage resets on content/layout changes) | viewing P0 | unexplored P1-4\n[container:1] 11 pages (coverage re",
+        "status": "success"
+      },
+      {
+        "tool": "browser_execute_script",
+        "input": {
+          "script": "() => {\n  const cards = document.querySelectorAll('a[id*=\"mntl-card-list-card\"]');\n  const results = [];\n  cards.forEach(card => {\n    const titleEl = card.querySelector('h2, h3, span[class*=\"title\"]');\n    let title = '';\n    // Try to find the title from any nested span or heading\n    const spans = card.querySelectorAll('span');\n    for (const s of spans) {\n      const t = s.textContent.trim();\n      if (t && t.length > 5 && !t.includes('Save') && !t.includes('Ratings')) {\n        title = t;\n        break;\n      }\n    }\n    results.push({ id: card.id, title });\n  });\n  return results;\n}"
+        },
+        "call_id": "call_01a0c2c4db657ef1ad3d6013",
+        "time_ms": 2001,
+        "output_preview": "\n\n<!-- DOM_START dom3.2 tab:tab0 mode:nochange -->\n(stateId: tab0-dom3.2)\n## Current Page DOM Structure\n\n\nNo DOM changes detected after the previous action.\nscrollMap:\n[container:0] 5 pages (coverage resets on content/layout changes) | viewing P0 | unexplored P1-4\n[container:1] 11 pages (coverage re",
+        "status": "success"
+      },
+      {
+        "tool": "browser_execute_script",
+        "input": {
+          "script": "() => {\n  const cards = document.querySelectorAll('article, [class*=\"card\"], li[class*=\"recipe\"]');\n  const result = [];\n  cards.forEach(card => {\n    const a = card.querySelector('a');\n    const h = card.querySelector('h1,h2,h3,h4');\n    const meta = card.querySelector('[class*=\"meta\"]');\n    result.push({\n      tag: card.tagName,\n      classes: card.className.substring(0,80),\n      title: h ? h.textContent.trim() : '',\n      meta: meta ? meta.textContent.trim() : ''\n    });\n  });\n  return result.slice(0, 20);\n}"
+        },
+        "call_id": "call_01a0c2c4f3d07ac1bb83811a",
+        "time_ms": 1641,
+        "output_preview": "\n\n<!-- DOM_START dom3.3 tab:tab0 mode:nochange -->\n(stateId: tab0-dom3.3)\n## Current Page DOM Structure\n\n\nNo DOM changes detected after the previous action.\nscrollMap:\n[container:0] 5 pages (coverage resets on content/layout changes) | viewing P0 | unexplored P1-4\n[container:1] 11 pages (coverage re",
+        "status": "success"
+      },
+      {
+        "tool": "browser_execute_script",
+        "input": {
+          "script": "() => {\n  const html = document.body.innerHTML.substring(0, 2000);\n  return html;\n}"
+        },
+        "call_id": "call_01a0c2c50fa57730b497319e",
+        "time_ms": 1999,
+        "output_preview": "\n\n<!-- DOM_START dom3.4 tab:tab0 mode:nochange -->\n(stateId: tab0-dom3.4)\n## Current Page DOM Structure\n\n\nNo DOM changes detected after the previous action.\nscrollMap:\n[container:0] 5 pages (coverage resets on content/layout changes) | viewing P0 | unexplored P1-4\n[container:1] 11 pages (coverage re",
+        "status": "success"
+      },
+      {
+        "tool": "browser_observe",
+        "input": {
+          "format": "markdown"
+        },
+        "call_id": "call_01a0c2c52fec76308c244a7d",
+        "time_ms": 1843,
+        "output_preview": "\n\n<!-- DOM_START dom3.5 tab:tab0 mode:full -->\n(stateId: tab0-dom3.5)\n## Current Page DOM Structure\n\n\n#DOCUMENT\n\tHEADER\n\t\tLINK: SKIP TO CONTENT\n\t\tDIV\n\t\t\tDIV\n\t\t\t\tBUTTON (aria: Main menu for Allrecipes)\n\t\t\tDIV\n\t\t\t\tLINK: Visit Allrecipes' homepage\n\t\t\tDIV\n\t\t\t\tLI\n\t\t\t\t\tDIV\n\t\t\t\t\t\tBUTTON (aria: Search)\n\t\t\t\t",
+        "status": "success"
+      },
+      {
+        "tool": "browser_click",
+        "input": {
+          "elementIndex": 11141
+        },
+        "call_id": "call_01a0c2c5480e7813a46584e4",
+        "time_ms": 4,
+        "output_preview": "Element [11141] not found or not clickable in the current DOM. No click was performed. Call browser_observe and choose a current [N] marker in the active tab; archived observations and removed delta lines are not live targets.\n\nNext actions:\n- Inspect the failure or partial result and re-observe bef",
+        "status": "error"
+      },
+      {
+        "tool": "browser_observe",
+        "input": {
+          "format": "html"
+        },
+        "call_id": "call_01a0c2c555f973208bf57ef0",
+        "time_ms": 2096,
+        "output_preview": "\n\n<!-- DOM_START dom3.6 tab:tab0 mode:full -->\n(stateId: tab0-dom3.6)\n## Current Page DOM Structure\n\n\n<header></header>\n=== OFF-SCREEN above [container:0] (scroll to reveal these elements) ===\n\t<a id='mntl-skip-to-content_1-0'> SKIP TO CONTENT </a>\n\t\t ...\n=== END OFF-SCREEN ===\n\t<div></div>\n\t\t<div><",
+        "status": "success"
+      },
+      {
+        "tool": "browser_click",
+        "input": {
+          "elementIndex": 31338
+        },
+        "call_id": "call_01a0c2c56f6d79918fa61ce5",
+        "time_ms": 5087,
+        "output_preview": "Clicked <a id='mntl-card-list-card--extendable_3-0'> Save Recipe CHICKEN BREAST Peanut Butter Chicken 122 Ratings </a> Action dispatched; outcome not verified. Check the returned page before claiming success.\n\n\n<!-- DOM_START dom4 tab:tab0 mode:full -->\n(stateId: tab0-dom4)\n## Current Page DOM Struc",
+        "status": "success"
+      },
+      {
+        "tool": "browser_goto",
+        "input": {
+          "url": "https://www.allrecipes.com/search?q=chicken+breast+quinoa"
+        },
+        "call_id": "call_01a0c2c599d87870bfaaf273",
+        "time_ms": 2763,
+        "output_preview": "Navigated to https://www.allrecipes.com/search?q=chicken+breast+quinoa\n\n\n<!-- DOM_START dom5 tab:tab0 mode:full -->\n(stateId: tab0-dom5)\n## Current Page DOM Structure\n\n\n<header></header>\n=== OFF-SCREEN above [container:0] (scroll to reveal these elements) ===\n\t<a id='mntl-skip-to-content_1-0'> SKIP ",
+        "status": "success"
+      },
+      {
+        "tool": "browser_execute_script",
+        "input": {
+          "script": "() => {\n  const metaElements = document.querySelectorAll('[id^=\"mntl-recipe-card-meta_\"]');\n  const results = [];\n  metaElements.forEach((meta, idx) => {\n    results.push({\n      idx: idx,\n      text: meta.innerText || meta.textContent || ''\n    });\n  });\n  return results;\n}"
+        },
+        "call_id": "call_01a0c2c5aec37f61b5f3eb24",
+        "time_ms": 3902,
+        "output_preview": "\n\n<!-- DOM_START dom5.1 tab:tab0 mode:nochange -->\n(stateId: tab0-dom5.1)\n## Current Page DOM Structure\n\n\nNo DOM changes detected after the previous action.\nscrollMap:\n[container:0] 5 pages (coverage resets on content/layout changes) | viewing P0 | unexplored P1-4\n[container:1] 11 pages (coverage re",
+        "status": "success"
+      },
+      {
+        "tool": "browser_execute_script",
+        "input": {
+          "guide": true,
+          "script": "guide"
+        },
+        "call_id": "call_01a0c2c5caf07980b9c9d0b7",
+        "time_ms": 8,
+        "output_preview": "Error: browser_execute_script failed: Page script error: ReferenceError: guide is not defined\n    at HTMLHtmlElement.<anonymous> (<anonymous>:419:1)\n    at <anonymous>:420:6\n    at <anonymous>:422:3\nCorrect the script using this exception before retrying. Refreshing DOM or restarting Chromium does n",
+        "status": "error"
+      },
+      {
+        "tool": "browser_execute_script",
+        "input": {
+          "script": "() => {\n  return typeof __data;\n}"
+        },
+        "call_id": "call_01a0c2c5d0b37be19eac24c3",
+        "time_ms": 2141,
+        "output_preview": "\n\n<!-- DOM_START dom5.2 tab:tab0 mode:nochange -->\n(stateId: tab0-dom5.2)\n## Current Page DOM Structure\n\n\nNo DOM changes detected after the previous action.\nscrollMap:\n[container:0] 5 pages (coverage resets on content/layout changes) | viewing P0 | unexplored P1-4\n[container:1] 11 pages (coverage re",
+        "status": "success"
+      },
+      {
+        "tool": "browser_scroll_next_screen",
+        "input": {
+          "container": 0,
+          "direction": "down"
+        },
+        "call_id": "call_01a0c2c5e87a759295c61f0b",
+        "time_ms": 3096,
+        "output_preview": "Scrolled down to next screen on container [0]: P0 -> P0.8\n\n\n<!-- DOM_START dom5.3 tab:tab0 mode:full -->\n(stateId: tab0-dom5.3)\n## Current Page DOM Structure\n\n\n<header></header>\n=== OFF-SCREEN above [container:0] (scroll to reveal these elements) ===\n\t<a id='mntl-skip-to-content_1-0'> SKIP TO CONTEN",
+        "status": "success"
+      },
+      {
+        "tool": "browser_click",
+        "input": {
+          "elementIndex": 52656
+        },
+        "call_id": "call_01a0c2c616ba7c8192cb2e68",
+        "time_ms": 5826,
+        "output_preview": "Clicked <a id='mntl-card-list-card--extendable_11-0'> overhead view of quinoa bowl with tomatoes, chicken, zucchini, and feta Save Recipe BOWLS Air Fryer Pesto Chicken Quinoa Bowl 2 Ratings </a> Action dispatched; outcome not verified. Check the returned page before claiming success.\n\n\n<!-- DOM_STAR",
+        "status": "success"
+      },
+      {
+        "tool": "browser_execute_script",
+        "input": {
+          "script": "() => {\n  const url = window.location.href;\n  return { url: url };\n}"
+        },
+        "call_id": "call_01a0c2c64ae67ae1adb01bb7",
+        "time_ms": 1870,
+        "output_preview": "\n\n<!-- DOM_START dom6.1 tab:tab0 mode:incremental -->\n(stateId: tab0-dom6.1)\n## Incremental DOM updates\n\n\n=== OFF-SCREEN below [container:0] (scroll to reveal these elements) ===\n+|<div></div>\n\t+|Would you like to\n\t+|send this recipe\n\t+|to yourself?\n\t+|<div></div>\n\t\t+|<button aria-label='Open Anothe",
+        "status": "success"
+      },
+      {
+        "tool": "browser_scroll_to_page",
+        "input": {
+          "container": 0,
+          "page": 1
+        },
+        "call_id": "call_01a0c2c661be785095dcd294",
+        "time_ms": 11231,
+        "output_preview": "Scrolled to target page on container [0]: P0 -> P1\n\n\n<!-- DOM_START dom6.2 tab:tab0 mode:full -->\n(stateId: tab0-dom6.2)\n## Current Page DOM Structure\n\n\n<header></header>\n=== OFF-SCREEN above [container:0] (scroll to reveal these elements) ===\n\t<a id='mntl-skip-to-content_1-0'> SKIP TO CONTENT </a>\n",
+        "status": "success"
+      }
+    ],
+    "error": null,
+    "model": "MiniMax-M3",
+    "provider": "minimax-cn",
+    "protocol": "anthropic-messages",
+    "reasoning_effort": "high",
+    "session_id": "eval-Allrecipes--14-67b7a245ffa2",
+    "started_at": "2026-09-21T06:59:58.713Z",
+    "finished_at": "2026-09-21T07:03:16.067Z",
+    "duration_basis": "worker initialization to agent stop; excludes judge, screenshots and cleanup",
+    "infrastructure_error": null,
+    "request_count": 22,
+    "usage_missing_calls": 0,
+    "unpriced_calls": 0,
+    "tokens_observed": {
+      "input": 42441,
+      "output": 2984,
+      "cache_read": 140928,
+      "cache_write": 0,
+      "reasoning": 0
+    },
+    "usage_metrics": {
+      "input_tokens": 183369,
+      "output_tokens": 2984,
+      "uncached_input_tokens": 42441,
+      "cache_hit_tokens": 140928,
+      "cache_miss_tokens": 42441,
+      "cache_write_tokens": 0,
+      "output_cache_tokens": null,
+      "reasoning_tokens": 0,
+      "total_tokens": 186353,
+      "cache_hit_rate": 0.7685486641689707
+    },
+    "usage_observed": {
+      "input_tokens": 183369,
+      "output_tokens": 2984,
+      "uncached_input_tokens": 42441,
+      "cache_hit_tokens": 140928,
+      "cache_miss_tokens": 42441,
+      "cache_write_tokens": 0,
+      "output_cache_tokens": null,
+      "reasoning_tokens": 0,
+      "total_tokens": 186353,
+      "cache_hit_rate": 0.7685486641689707
+    },
+    "cost_observed": 0.02476878,
+    "model_duration_ms": 112388,
+    "model_calls": [
+      {
+        "call_index": 1,
+        "started_at": "2026-09-21T06:59:58.750Z",
+        "finished_at": "2026-09-21T07:00:03.898Z",
+        "usage": {
+          "input": 202,
+          "cache_read": 2688,
+          "cache_write": 0,
+          "output": 62,
+          "reasoning": 0
+        },
+        "cost": 0.00029628,
+        "duration_ms": 5148,
+        "status": "success",
+        "raw_usage": {
+          "prompt_tokens": 2890,
+          "completion_tokens": 62,
+          "prompt_tokens_details": {
+            "cached_tokens": 2688
+          },
+          "cache_creation_input_tokens": 0,
+          "completion_tokens_details": {
+            "reasoning_tokens": 0
+          }
+        },
+        "output_cache_tokens": null
+      },
+      {
+        "call_index": 2,
+        "started_at": "2026-09-21T07:00:18.848Z",
+        "finished_at": "2026-09-21T07:00:24.334Z",
+        "usage": {
+          "input": 3035,
+          "cache_read": 2816,
+          "cache_write": 0,
+          "output": 164,
+          "reasoning": 0
+        },
+        "cost": 0.0012762599999999998,
+        "duration_ms": 5486,
+        "status": "success",
+        "raw_usage": {
+          "prompt_tokens": 5851,
+          "completion_tokens": 164,
+          "prompt_tokens_details": {
+            "cached_tokens": 2816
+          },
+          "cache_creation_input_tokens": 0,
+          "completion_tokens_details": {
+            "reasoning_tokens": 0
+          }
+        },
+        "output_cache_tokens": null
+      },
+      {
+        "call_index": 3,
+        "started_at": "2026-09-21T07:00:30.052Z",
+        "finished_at": "2026-09-21T07:00:33.530Z",
+        "usage": {
+          "input": 3284,
+          "cache_read": 3328,
+          "cache_write": 0,
+          "output": 74,
+          "reasoning": 0
+        },
+        "cost": 0.00127368,
+        "duration_ms": 3478,
+        "status": "success",
+        "raw_usage": {
+          "prompt_tokens": 6612,
+          "completion_tokens": 74,
+          "prompt_tokens_details": {
+            "cached_tokens": 3328
+          },
+          "cache_creation_input_tokens": 0,
+          "completion_tokens_details": {
+            "reasoning_tokens": 0
+          }
+        },
+        "output_cache_tokens": null
+      },
+      {
+        "call_index": 4,
+        "started_at": "2026-09-21T07:00:39.296Z",
+        "finished_at": "2026-09-21T07:00:44.334Z",
+        "usage": {
+          "input": 2241,
+          "cache_read": 3456,
+          "cache_write": 0,
+          "output": 124,
+          "reasoning": 0
+        },
+        "cost": 0.00102846,
+        "duration_ms": 5038,
+        "status": "success",
+        "raw_usage": {
+          "prompt_tokens": 5697,
+          "completion_tokens": 124,
+          "prompt_tokens_details": {
+            "cached_tokens": 3456
+          },
+          "cache_creation_input_tokens": 0,
+          "completion_tokens_details": {
+            "reasoning_tokens": 0
+          }
+        },
+        "output_cache_tokens": null
+      },
+      {
+        "call_index": 5,
+        "started_at": "2026-09-21T07:00:44.361Z",
+        "finished_at": "2026-09-21T07:00:49.748Z",
+        "usage": {
+          "input": 208,
+          "cache_read": 5632,
+          "cache_write": 0,
+          "output": 45,
+          "reasoning": 0
+        },
+        "cost": 0.00045432,
+        "duration_ms": 5387,
+        "status": "success",
+        "raw_usage": {
+          "prompt_tokens": 5840,
+          "completion_tokens": 45,
+          "prompt_tokens_details": {
+            "cached_tokens": 5632
+          },
+          "cache_creation_input_tokens": 0,
+          "completion_tokens_details": {
+            "reasoning_tokens": 0
+          }
+        },
+        "output_cache_tokens": null
+      },
+      {
+        "call_index": 6,
+        "started_at": "2026-09-21T07:01:00.551Z",
+        "finished_at": "2026-09-21T07:01:07.506Z",
+        "usage": {
+          "input": 3363,
+          "cache_read": 3712,
+          "cache_write": 0,
+          "output": 207,
+          "reasoning": 0
+        },
+        "cost": 0.00148002,
+        "duration_ms": 6955,
+        "status": "success",
+        "raw_usage": {
+          "prompt_tokens": 7075,
+          "completion_tokens": 207,
+          "prompt_tokens_details": {
+            "cached_tokens": 3712
+          },
+          "cache_creation_input_tokens": 0,
+          "completion_tokens_details": {
+            "reasoning_tokens": 0
+          }
+        },
+        "output_cache_tokens": null
+      },
+      {
+        "call_index": 7,
+        "started_at": "2026-09-21T07:01:09.197Z",
+        "finished_at": "2026-09-21T07:01:19.552Z",
+        "usage": {
+          "input": 780,
+          "cache_read": 7040,
+          "cache_write": 0,
+          "output": 212,
+          "reasoning": 0
+        },
+        "cost": 0.0009107999999999999,
+        "duration_ms": 10355,
+        "status": "success",
+        "raw_usage": {
+          "prompt_tokens": 7820,
+          "completion_tokens": 212,
+          "prompt_tokens_details": {
+            "cached_tokens": 7040
+          },
+          "cache_creation_input_tokens": 0,
+          "completion_tokens_details": {
+            "reasoning_tokens": 0
+          }
+        },
+        "output_cache_tokens": null
+      },
+      {
+        "call_index": 8,
+        "started_at": "2026-09-21T07:01:21.581Z",
+        "finished_at": "2026-09-21T07:01:25.565Z",
+        "usage": {
+          "input": 763,
+          "cache_read": 7808,
+          "cache_write": 0,
+          "output": 208,
+          "reasoning": 0
+        },
+        "cost": 0.0009469799999999999,
+        "duration_ms": 3984,
+        "status": "success",
+        "raw_usage": {
+          "prompt_tokens": 8571,
+          "completion_tokens": 208,
+          "prompt_tokens_details": {
+            "cached_tokens": 7808
+          },
+          "cache_creation_input_tokens": 0,
+          "completion_tokens_details": {
+            "reasoning_tokens": 0
+          }
+        },
+        "output_cache_tokens": null
+      },
+      {
+        "call_index": 9,
+        "started_at": "2026-09-21T07:01:27.236Z",
+        "finished_at": "2026-09-21T07:01:31.145Z",
+        "usage": {
+          "input": 869,
+          "cache_read": 8448,
+          "cache_write": 0,
+          "output": 135,
+          "reasoning": 0
+        },
+        "cost": 0.0009295800000000001,
+        "duration_ms": 3909,
+        "status": "success",
+        "raw_usage": {
+          "prompt_tokens": 9317,
+          "completion_tokens": 135,
+          "prompt_tokens_details": {
+            "cached_tokens": 8448
+          },
+          "cache_creation_input_tokens": 0,
+          "completion_tokens_details": {
+            "reasoning_tokens": 0
+          }
+        },
+        "output_cache_tokens": null
+      },
+      {
+        "call_index": 10,
+        "started_at": "2026-09-21T07:01:33.178Z",
+        "finished_at": "2026-09-21T07:01:39.195Z",
+        "usage": {
+          "input": 773,
+          "cache_read": 9216,
+          "cache_write": 0,
+          "output": 320,
+          "reasoning": 0
+        },
+        "cost": 0.0011688599999999999,
+        "duration_ms": 6017,
+        "status": "success",
+        "raw_usage": {
+          "prompt_tokens": 9989,
+          "completion_tokens": 320,
+          "prompt_tokens_details": {
+            "cached_tokens": 9216
+          },
+          "cache_creation_input_tokens": 0,
+          "completion_tokens_details": {
+            "reasoning_tokens": 0
+          }
+        },
+        "output_cache_tokens": null
+      },
+      {
+        "call_index": 11,
+        "started_at": "2026-09-21T07:01:41.072Z",
+        "finished_at": "2026-09-21T07:01:45.538Z",
+        "usage": {
+          "input": 5400,
+          "cache_read": 3968,
+          "cache_write": 0,
+          "output": 144,
+          "reasoning": 0
+        },
+        "cost": 0.0020308799999999997,
+        "duration_ms": 4466,
+        "status": "success",
+        "raw_usage": {
+          "prompt_tokens": 9368,
+          "completion_tokens": 144,
+          "prompt_tokens_details": {
+            "cached_tokens": 3968
+          },
+          "cache_creation_input_tokens": 0,
+          "completion_tokens_details": {
+            "reasoning_tokens": 0
+          }
+        },
+        "output_cache_tokens": null
+      },
+      {
+        "call_index": 12,
+        "started_at": "2026-09-21T07:01:45.565Z",
+        "finished_at": "2026-09-21T07:01:49.032Z",
+        "usage": {
+          "input": 257,
+          "cache_read": 9344,
+          "cache_write": 0,
+          "output": 47,
+          "reasoning": 0
+        },
+        "cost": 0.00069414,
+        "duration_ms": 3467,
+        "status": "success",
+        "raw_usage": {
+          "prompt_tokens": 9601,
+          "completion_tokens": 47,
+          "prompt_tokens_details": {
+            "cached_tokens": 9344
+          },
+          "cache_creation_input_tokens": 0,
+          "completion_tokens_details": {
+            "reasoning_tokens": 0
+          }
+        },
+        "output_cache_tokens": null
+      },
+      {
+        "call_index": 13,
+        "started_at": "2026-09-21T07:01:51.158Z",
+        "finished_at": "2026-09-21T07:01:55.589Z",
+        "usage": {
+          "input": 3862,
+          "cache_read": 5248,
+          "cache_write": 0,
+          "output": 70,
+          "reasoning": 0
+        },
+        "cost": 0.00155748,
+        "duration_ms": 4431,
+        "status": "success",
+        "raw_usage": {
+          "prompt_tokens": 9110,
+          "completion_tokens": 70,
+          "prompt_tokens_details": {
+            "cached_tokens": 5248
+          },
+          "cache_creation_input_tokens": 0,
+          "completion_tokens_details": {
+            "reasoning_tokens": 0
+          }
+        },
+        "output_cache_tokens": null
+      },
+      {
+        "call_index": 14,
+        "started_at": "2026-09-21T07:02:00.714Z",
+        "finished_at": "2026-09-21T07:02:06.500Z",
+        "usage": {
+          "input": 2055,
+          "cache_read": 5632,
+          "cache_write": 0,
+          "output": 133,
+          "reasoning": 0
+        },
+        "cost": 0.0011140199999999999,
+        "duration_ms": 5786,
+        "status": "success",
+        "raw_usage": {
+          "prompt_tokens": 7687,
+          "completion_tokens": 133,
+          "prompt_tokens_details": {
+            "cached_tokens": 5632
+          },
+          "cache_creation_input_tokens": 0,
+          "completion_tokens_details": {
+            "reasoning_tokens": 0
+          }
+        },
+        "output_cache_tokens": null
+      },
+      {
+        "call_index": 15,
+        "started_at": "2026-09-21T07:02:09.299Z",
+        "finished_at": "2026-09-21T07:02:12.546Z",
+        "usage": {
+          "input": 3350,
+          "cache_read": 5760,
+          "cache_write": 0,
+          "output": 131,
+          "reasoning": 0
+        },
+        "cost": 0.0015078,
+        "duration_ms": 3247,
+        "status": "success",
+        "raw_usage": {
+          "prompt_tokens": 9110,
+          "completion_tokens": 131,
+          "prompt_tokens_details": {
+            "cached_tokens": 5760
+          },
+          "cache_creation_input_tokens": 0,
+          "completion_tokens_details": {
+            "reasoning_tokens": 0
+          }
+        },
+        "output_cache_tokens": null
+      },
+      {
+        "call_index": 16,
+        "started_at": "2026-09-21T07:02:16.479Z",
+        "finished_at": "2026-09-21T07:02:19.010Z",
+        "usage": {
+          "input": 689,
+          "cache_read": 9088,
+          "cache_write": 0,
+          "output": 58,
+          "reasoning": 0
+        },
+        "cost": 0.0008215799999999999,
+        "duration_ms": 2531,
+        "status": "success",
+        "raw_usage": {
+          "prompt_tokens": 9777,
+          "completion_tokens": 58,
+          "prompt_tokens_details": {
+            "cached_tokens": 9088
+          },
+          "cache_creation_input_tokens": 0,
+          "completion_tokens_details": {
+            "reasoning_tokens": 0
+          }
+        },
+        "output_cache_tokens": null
+      },
+      {
+        "call_index": 17,
+        "started_at": "2026-09-21T07:02:19.043Z",
+        "finished_at": "2026-09-21T07:02:20.569Z",
+        "usage": {
+          "input": 225,
+          "cache_read": 9728,
+          "cache_write": 0,
+          "output": 37,
+          "reasoning": 0
+        },
+        "cost": 0.0006955799999999999,
+        "duration_ms": 1526,
+        "status": "success",
+        "raw_usage": {
+          "prompt_tokens": 9953,
+          "completion_tokens": 37,
+          "prompt_tokens_details": {
+            "cached_tokens": 9728
+          },
+          "cache_creation_input_tokens": 0,
+          "completion_tokens_details": {
+            "reasoning_tokens": 0
+          }
+        },
+        "output_cache_tokens": null
+      },
+      {
+        "call_index": 18,
+        "started_at": "2026-09-21T07:02:22.727Z",
+        "finished_at": "2026-09-21T07:02:26.520Z",
+        "usage": {
+          "input": 669,
+          "cache_read": 9856,
+          "cache_write": 0,
+          "output": 77,
+          "reasoning": 0
+        },
+        "cost": 0.00088446,
+        "duration_ms": 3793,
+        "status": "success",
+        "raw_usage": {
+          "prompt_tokens": 10525,
+          "completion_tokens": 77,
+          "prompt_tokens_details": {
+            "cached_tokens": 9856
+          },
+          "cache_creation_input_tokens": 0,
+          "completion_tokens_details": {
+            "reasoning_tokens": 0
+          }
+        },
+        "output_cache_tokens": null
+      },
+      {
+        "call_index": 19,
+        "started_at": "2026-09-21T07:02:29.644Z",
+        "finished_at": "2026-09-21T07:02:38.416Z",
+        "usage": {
+          "input": 4669,
+          "cache_read": 6016,
+          "cache_write": 0,
+          "output": 148,
+          "reasoning": 0
+        },
+        "cost": 0.00193926,
+        "duration_ms": 8772,
+        "status": "success",
+        "raw_usage": {
+          "prompt_tokens": 10685,
+          "completion_tokens": 148,
+          "prompt_tokens_details": {
+            "cached_tokens": 6016
+          },
+          "cache_creation_input_tokens": 0,
+          "completion_tokens_details": {
+            "reasoning_tokens": 0
+          }
+        },
+        "output_cache_tokens": null
+      },
+      {
+        "call_index": 20,
+        "started_at": "2026-09-21T07:02:44.279Z",
+        "finished_at": "2026-09-21T07:02:51.881Z",
+        "usage": {
+          "input": 1972,
+          "cache_read": 6656,
+          "cache_write": 0,
+          "output": 155,
+          "reasoning": 0
+        },
+        "cost": 0.0011769600000000001,
+        "duration_ms": 7602,
+        "status": "success",
+        "raw_usage": {
+          "prompt_tokens": 8628,
+          "completion_tokens": 155,
+          "prompt_tokens_details": {
+            "cached_tokens": 6656
+          },
+          "cache_creation_input_tokens": 0,
+          "completion_tokens_details": {
+            "reasoning_tokens": 0
+          }
+        },
+        "output_cache_tokens": null
+      },
+      {
+        "call_index": 21,
+        "started_at": "2026-09-21T07:02:53.777Z",
+        "finished_at": "2026-09-21T07:02:57.619Z",
+        "usage": {
+          "input": 1070,
+          "cache_read": 8576,
+          "cache_write": 0,
+          "output": 65,
+          "reasoning": 0
+        },
+        "cost": 0.0009135599999999999,
+        "duration_ms": 3842,
+        "status": "success",
+        "raw_usage": {
+          "prompt_tokens": 9646,
+          "completion_tokens": 65,
+          "prompt_tokens_details": {
+            "cached_tokens": 8576
+          },
+          "cache_creation_input_tokens": 0,
+          "completion_tokens_details": {
+            "reasoning_tokens": 0
+          }
+        },
+        "output_cache_tokens": null
+      },
+      {
+        "call_index": 22,
+        "started_at": "2026-09-21T07:03:08.883Z",
+        "finished_at": "2026-09-21T07:03:16.051Z",
+        "usage": {
+          "input": 2705,
+          "cache_read": 6912,
+          "cache_write": 0,
+          "output": 368,
+          "reasoning": 0
+        },
+        "cost": 0.00166782,
+        "duration_ms": 7168,
+        "status": "success",
+        "raw_usage": {
+          "prompt_tokens": 9617,
+          "completion_tokens": 368,
+          "prompt_tokens_details": {
+            "cached_tokens": 6912
+          },
+          "cache_creation_input_tokens": 0,
+          "completion_tokens_details": {
+            "reasoning_tokens": 0
+          }
+        },
+        "output_cache_tokens": null
+      }
+    ],
+    "model_steps": 22,
+    "retry_count": 0,
+    "failed_steps": 3,
+    "incomplete_steps": 0,
+    "final_screenshot": "final.png",
+    "attempt_number": 1,
+    "attempt_directory": "Allrecipes--14",
+    "judge_mode": "reference",
+    "metrics": {
+      "metrics_version": 1,
+      "input_tokens": 183369,
+      "output_tokens": 2984,
+      "uncached_input_tokens": 42441,
+      "cache_hit_tokens": 140928,
+      "cache_miss_tokens": 42441,
+      "cache_write_tokens": 0,
+      "output_cache_tokens": null,
+      "reasoning_tokens": 0,
+      "total_tokens": 186353,
+      "cache_hit_rate": 0.7685486641689707,
+      "agent_cost_usd": 0.02476878,
+      "judge_cost_usd": 0.0015679199999999998,
+      "total_cost_usd": 0.0263367,
+      "observed_cost_usd": 0.0263367,
+      "agent_duration_ms": 197354,
+      "judge_duration_ms": 3045,
+      "active_duration_ms": 200399
+    },
+    "judge_result": {
+      "task_id": "Allrecipes--14",
+      "mode": "reference",
+      "rubric_version": "opencode-browser-856867996e73f7dcc5e39827bf2af7555bd63d40-judge-prompt.md",
+      "pass": true,
+      "reason": "Agent found the 'Air Fryer Pesto Chicken Quinoa Bowl' recipe on Allrecipes, which contains chicken breast, quinoa, and has a total time of 20 minutes (under 30 minutes), meeting all task requirements.",
+      "status": "judged",
+      "model": "MiniMax-M3",
+      "request_count": 1,
+      "usage_missing_calls": 0,
+      "unpriced_calls": 0,
+      "tokens": {
+        "input": 4332,
+        "output": 198,
+        "cache_read": 512,
+        "cache_write": 0,
+        "reasoning": 119
+      },
+      "tokens_observed": {
+        "input": 4332,
+        "output": 198,
+        "cache_read": 512,
+        "cache_write": 0,
+        "reasoning": 119
+      },
+      "usage_metrics": {
+        "input_tokens": 4844,
+        "output_tokens": 198,
+        "uncached_input_tokens": 4332,
+        "cache_hit_tokens": 512,
+        "cache_miss_tokens": 4332,
+        "cache_write_tokens": 0,
+        "output_cache_tokens": null,
+        "reasoning_tokens": 119,
+        "total_tokens": 5042,
+        "cache_hit_rate": 0.10569777043765483
+      },
+      "usage_observed": {
+        "input_tokens": 4844,
+        "output_tokens": 198,
+        "uncached_input_tokens": 4332,
+        "cache_hit_tokens": 512,
+        "cache_miss_tokens": 4332,
+        "cache_write_tokens": 0,
+        "output_cache_tokens": null,
+        "reasoning_tokens": 119,
+        "total_tokens": 5042,
+        "cache_hit_rate": 0.10569777043765483
+      },
+      "cost": 0.0015679199999999998,
+      "cost_observed": 0.0015679199999999998,
+      "model_duration_ms": 3042,
+      "requests": 1,
+      "model_calls": [
+        {
+          "call_index": 1,
+          "started_at": "2026-09-21T07:03:17.753Z",
+          "usage": {
+            "input": 4332,
+            "cache_read": 512,
+            "cache_write": 0,
+            "output": 198,
+            "reasoning": 119
+          },
+          "cost": 0.0015679199999999998,
+          "status": "success",
+          "output_cache_tokens": null,
+          "raw_usage": {
+            "prompt_tokens": 4844,
+            "completion_tokens": 198,
+            "prompt_tokens_details": {
+              "cached_tokens": 512
+            },
+            "cache_creation_input_tokens": 0,
+            "completion_tokens_details": {
+              "thinking_tokens": 119,
+              "reasoning_tokens": 119
+            }
+          },
+          "finished_at": "2026-09-21T07:03:20.795Z",
+          "duration_ms": 3042
+        }
+      ],
+      "started_at": "2026-09-21T07:03:17.753Z",
+      "finished_at": "2026-09-21T07:03:20.798Z",
+      "duration_ms": 3045,
+      "prompt_sha256": "bcdf403484823037eaeb6cec7918b966fe90ee31a30bc8d69094d2ff42747ccf"
+    },
+    "evaluation_finished_at": "2026-09-21T07:03:20.798Z"
+  }
+}

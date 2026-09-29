@@ -1,0 +1,601 @@
+{
+  "previous": "c9a40258b7996d0b2c420734c3d8190d48c92be742da202184bcbd50acd9e464",
+  "result": {
+    "task_id": "Amazon--16",
+    "website": "https://www.amazon.com/",
+    "task": "Find the Return Policy for Mens Rhinestone Skull Graphic Shirt on Amazon. Color: Black, Size: XX-Large. If Free return is avaliable, tell me how to return this item.",
+    "status": "completed",
+    "duration_ms": 128491,
+    "steps": 10,
+    "browser_steps": 10,
+    "model_rounds": 11,
+    "cost": 0.024007320000000002,
+    "tokens": {
+      "input": 52197,
+      "output": 3594,
+      "cache_read": 67257,
+      "cache_write": 0,
+      "reasoning": 1901
+    },
+    "final_answer": "I have all the information needed to answer the task. Here is my final response:\n\n---\n\n## Return Policy for Men's Rhinestone Skull Graphic Shirt\n\n### Product Found\n- **Product**: HZCX FASHION Mens Rhinestone Skull Graphic Shirt Round Collar Short Sleeve Tees\n- **Color**: 934 Black ✅ (selected)\n- **Size**: XX-Large ✅ (selected)\n\n### Return Policy — Yes, Free Return IS Available ✅\n\nThe product's \"Returns\" section on the product page shows: **\"FREE 30-day refund/replacement\"**\n\nWhen I clicked on it, the return policy popover revealed the following details:\n\n| Benefit | Detail |\n|---|---|\n| **Return window** | 30 days refund/replacement |\n| **Quick refund** | Usually issued within **24 hours** (see exceptions) |\n| **FREE return** | **At least one free return option available** |\n| **Convenient drop-off** | At any of Amazon's **50,000 US locations** |\n\n### How to Return This Item (Step-by-step)\n\nBased on the policy displayed on the product page:\n\n1. **Go to \"Your Orders\"** – Navigate to Amazon.com → \"Returns & Orders\" → find this shirt in your order list.\n2. **Select the item** and click **\"Return or replace items\"**.\n4. **Choose a reason** for the return and select **\"Refund\"** or **\"Replacement\"**.\n5. **Select a drop-off method** – Since it's a free return, choose one of the convenient drop-off options (e.g., Amazon Locker / Whole Foods / Kohl's / UPS / etc., from 50,000 US locations).\n6. **Print or show the return label** (if required) and drop off the package at the chosen location.\n7. **Refund** – You'll typically receive your refund within **24 hours** of Amazon receiving the item, back to your original payment method.\n\nFor full details, see the Amazon return policy page linked from the product: `https://www.amazon.com/gp/help/customer/display.html?nodeId=GKM69DUUYKQWKWX7&ref_=dp_ret_policy`\n\n**Summary**: ✅ Free return is available. You have 30 days to return it, with a free drop-off at any of 50,000 US locations and a refund typically processed within 24 hours.",
+    "tool_trace": [
+      {
+        "tool": "browser_start",
+        "input": {
+          "url": "https://www.amazon.com/"
+        },
+        "call_id": "call_01a0c3651a9474c2b5b4a391",
+        "time_ms": 6102,
+        "output_preview": "# Browser Mode\n\nThe DSH browser plugin controls a real Chromium instance isolated to the current Agent Session.\n\n- DOM markers `[N]` are clickable and `<N>` are inputs.\n- Match element labels or nearby text, and use DOM indentation to distinguish parents, children, and siblings; do not choose by mar",
+        "status": "success"
+      },
+      {
+        "tool": "browser_observe",
+        "input": {
+          "format": "markdown"
+        },
+        "call_id": "call_01a0c36554de7451a03f590f",
+        "time_ms": 3373,
+        "output_preview": "\n\n<!-- DOM_START dom0.1 tab:tab0 mode:full -->\n(stateId: tab0-dom0.1)\n## Current Page DOM Structure\n\n\n#DOCUMENT\n\tLINK: nav-top\n\tNAV\n\t\t## Skip to\n\t\tUL\n\t\t\tLINK: main content Main content\n\t\t## Keyboard shortcuts\n\t\tUL\n\t\t\tLI\n\t\t\t\tLINK: Search, alt, forward slash\n\t\t\tLI\n\t\t\t\tLINK: Cart, shift, alt, c\n\t\t\tLI\n\t",
+        "status": "success"
+      },
+      {
+        "tool": "browser_execute_script",
+        "input": {
+          "script": "document.getElementById('twotabsearchtextbox').focus();"
+        },
+        "call_id": "call_01a0c365687374ae812b8bb6",
+        "time_ms": 5561,
+        "output_preview": "\n\n<!-- DOM_START dom0.2 tab:tab0 mode:full -->\n(stateId: tab0-dom0.2)\n## Current Page DOM Structure\n\n\n<div></div>\n\t<div></div>\n\t\t<div></div>\n\t\t\t[652]<a aria-label='Amazon' id='nav-logo-sprites'></a>\n\t\t\t\t[view:gfe]<span></span>\n\t\t<div></div>\n\t\t\t[670]<a role='button' id='nav-global-location-popover-li",
+        "status": "success"
+      },
+      {
+        "tool": "browser_input",
+        "input": {
+          "elementIndex": 53,
+          "pressEnter": true,
+          "text": "Mens Rhinestone Skull Graphic Shirt"
+        },
+        "call_id": "call_01a0c36582c673cdb39f3193",
+        "time_ms": 15462,
+        "output_preview": "Input \"Mens Rhinestone Skull Graphic Shirt\" into <input role='searchbox' aria-label='Search Amazon' id='twotabsearchtextbox' aria-expanded='true' name='field-keywords' placeholder='Search Amazon'></input> and pressed Enter Action dispatched; outcome not verified. Check the returned page before claim",
+        "status": "success"
+      },
+      {
+        "tool": "browser_execute_script",
+        "input": {
+          "script": "const links = Array.from(document.querySelectorAll('a'));\nconst matches = links.filter(a => a.textContent.includes('HZCX FASHION Mens Rhinestone Skull'));\nif (matches.length > 0) {\n  matches[0].href = matches[0].href;\n  matches[0].scrollIntoView({block: 'center'});\n  window._productUrl = matches[0].href;\n}\nreturn window._productUrl;"
+        },
+        "call_id": "call_01a0c365d37a7088b8b543d1",
+        "time_ms": 4637,
+        "output_preview": "\n\n<!-- DOM_START dom2 tab:tab0 mode:nochange -->\n(stateId: tab0-dom2)\n## Current Page DOM Structure\n\n\nNo DOM changes detected after the previous action.\nscrollMap:\n[container:0] 12 pages (coverage resets on content/layout changes) | viewing P0 | unexplored P1-11\n[container:1] 2 pages (coverage reset",
+        "status": "success"
+      },
+      {
+        "tool": "browser_execute_script",
+        "input": {
+          "script": "const links = Array.from(document.querySelectorAll('a'));\nconst matches = links.filter(a => a.textContent.includes('Mens Rhinestone Skull Graphic'));\nreturn matches.map(a => ({text: a.textContent.trim().slice(0, 100), href: a.href}));"
+        },
+        "call_id": "call_01a0c365eb6d7192b53a8800",
+        "time_ms": 4540,
+        "output_preview": "\n\n<!-- DOM_START dom2.1 tab:tab0 mode:nochange -->\n(stateId: tab0-dom2.1)\n## Current Page DOM Structure\n\n\nNo DOM changes detected after the previous action.\nscrollMap:\n[container:0] 12 pages (coverage resets on content/layout changes) | viewing P0 | unexplored P1-11\n[container:1] 2 pages (coverage r",
+        "status": "success"
+      },
+      {
+        "tool": "browser_goto",
+        "input": {
+          "url": "https://www.amazon.com/HZCX-FASHION-2021032206-934-B-US-TAG/dp/B091GDWJGX/ref=sr_1_1?crid=1M4UM93B3A8CV&dib=eyJ2IjoiMSJ9.qgtqXWy5CmLMqWICwTR5YvgUS4QFV0HYRp7MqehekcDH-LrnsYPWUoafXLZwMa9Jpzg1KCBakMDl6WKU20lmSfU8pSvTcRxYZznnY7U94xbTyP-ozElBsnJDdMWIeOOZbe_GIfCjkpAV3RaEFN7tm73AYEHGW1IBF3uGJMtN7gprcUDsLC7DaTgJBD5PTmTAlyGvpM1eWTJZeZ88Mye1T_ovRuErC4EYSYBkx8N0GOzbQ9Sv9rEiUVonNc271BT1gzxUKejYBa-PaVIuiMRm4wH0fag1eEb5J5c88sVg3as.ZXDvgpD7j8icr3QXLE6b9JzhJXOyZXo6d6nBRqQN5ec&dib_tag=se&keywords=Mens+Rhinestone+Skull+Graphic+Shirt&qid=1789984606&sprefix=mens+rh%2Caps%2C824&sr=8-1"
+        },
+        "call_id": "call_01a0c36607507490aff57b6e",
+        "time_ms": 21560,
+        "output_preview": "Navigated to https://www.amazon.com/HZCX-FASHION-2021032206-934-B-US-TAG/dp/B091GDWJGX/ref=sr_1_1?crid=1M4UM93B3A8CV&dib=eyJ2IjoiMSJ9.qgtqXWy5CmLMqWICwTR5YvgUS4QFV0HYRp7MqehekcDH-LrnsYPWUoafXLZwMa9Jpzg1KCBakMDl6WKU20lmSfU8pSvTcRxYZznnY7U94xbTyP-ozElBsnJDdMWIeOOZbe_GIfCjkpAV3RaEFN7tm73AYEHGW1IBF3uGJM",
+        "status": "success"
+      },
+      {
+        "tool": "browser_click",
+        "input": {
+          "elementIndex": 31953,
+          "expectText": "XX-Large"
+        },
+        "call_id": "call_01a0c3666b28729f9fc17655",
+        "time_ms": 14712,
+        "output_preview": "Clicked <input role='radio' aria-labelledby='size_name_4-announce' aria-checked='false' type='submit'> XX-Large </input> Postcondition verified.\n\n\n<!-- DOM_START dom3.1 tab:tab0 mode:full -->\n(stateId: tab0-dom3.1)\n## Current Page DOM Structure\n\n\n<header></header>\n\t<div></div>\n\t\t<div></div>\n\t\t\t<div>",
+        "status": "success"
+      },
+      {
+        "tool": "browser_click",
+        "input": {
+          "elementIndex": 48439,
+          "expectText": "return"
+        },
+        "call_id": "call_01a0c366bc4e726bb9bba7bd",
+        "time_ms": 6661,
+        "output_preview": "Clicked <a role='button' data-action='csm-return-policy-weblab-trigger'> FREE 30-day refund/replacement </a> Postcondition verified.\n\n\n<!-- DOM_START dom4 tab:tab0 mode:incremental -->\n(stateId: tab0-dom4)\n## Incremental DOM updates\n\n\n+|Product details\n=== OFF-SCREEN below [container:0] (scroll to r",
+        "status": "success"
+      },
+      {
+        "tool": "browser_execute_script",
+        "input": {
+          "script": "const links = Array.from(document.querySelectorAll('a'));\nconst matches = links.filter(a => a.textContent.includes('See return policy'));\nif (matches.length > 0) {\n  matches[0].scrollIntoView({block: 'center'});\n  return {found: true, href: matches[0].href};\n}\nreturn {found: false};"
+        },
+        "call_id": "call_01a0c366e33571b4ac83a573",
+        "time_ms": 4447,
+        "output_preview": "\n\n<!-- DOM_START dom4.1 tab:tab0 mode:full -->\n(stateId: tab0-dom4.1)\n## Current Page DOM Structure\n\n\n=== OFF-SCREEN above [container:0] (scroll to reveal these elements) ===\n<a aria-label='Amazon' id='nav-logo-sprites'></a>\n<a role='button' id='nav-global-location-popover-link'> Delivering to Losan",
+        "status": "success"
+      }
+    ],
+    "error": null,
+    "model": "MiniMax-M3",
+    "provider": "minimax-cn",
+    "protocol": "anthropic-messages",
+    "reasoning_effort": "high",
+    "session_id": "eval-Amazon--16-cf159422634a",
+    "started_at": "2026-09-21T09:56:18.141Z",
+    "finished_at": "2026-09-21T09:58:26.632Z",
+    "duration_basis": "worker initialization to agent stop; excludes judge, screenshots and cleanup",
+    "infrastructure_error": null,
+    "request_count": 11,
+    "usage_missing_calls": 0,
+    "unpriced_calls": 0,
+    "tokens_observed": {
+      "input": 52197,
+      "output": 3594,
+      "cache_read": 67257,
+      "cache_write": 0,
+      "reasoning": 1901
+    },
+    "usage_metrics": {
+      "input_tokens": 119454,
+      "output_tokens": 3594,
+      "uncached_input_tokens": 52197,
+      "cache_hit_tokens": 67257,
+      "cache_miss_tokens": 52197,
+      "cache_write_tokens": 0,
+      "output_cache_tokens": null,
+      "reasoning_tokens": 1901,
+      "total_tokens": 123048,
+      "cache_hit_rate": 0.5630368175197147
+    },
+    "usage_observed": {
+      "input_tokens": 119454,
+      "output_tokens": 3594,
+      "uncached_input_tokens": 52197,
+      "cache_hit_tokens": 67257,
+      "cache_miss_tokens": 52197,
+      "cache_write_tokens": 0,
+      "output_cache_tokens": null,
+      "reasoning_tokens": 1901,
+      "total_tokens": 123048,
+      "cache_hit_rate": 0.5630368175197147
+    },
+    "cost_observed": 0.024007320000000002,
+    "model_duration_ms": 40880,
+    "model_calls": [
+      {
+        "call_index": 1,
+        "started_at": "2026-09-21T09:56:18.178Z",
+        "finished_at": "2026-09-21T09:56:19.594Z",
+        "usage": {
+          "input": 2694,
+          "cache_read": 128,
+          "cache_write": 0,
+          "output": 54,
+          "reasoning": 20
+        },
+        "cost": 0.0008806799999999999,
+        "duration_ms": 1416,
+        "status": "success",
+        "raw_usage": {
+          "prompt_tokens": 2822,
+          "completion_tokens": 54,
+          "prompt_tokens_details": {
+            "cached_tokens": 128
+          },
+          "cache_creation_input_tokens": 0,
+          "completion_tokens_details": {
+            "thinking_tokens": 20,
+            "reasoning_tokens": 20
+          }
+        },
+        "output_cache_tokens": null
+      },
+      {
+        "call_index": 2,
+        "started_at": "2026-09-21T09:56:25.717Z",
+        "finished_at": "2026-09-21T09:56:34.508Z",
+        "usage": {
+          "input": 650,
+          "cache_read": 2822,
+          "cache_write": 0,
+          "output": 49,
+          "reasoning": 19
+        },
+        "cost": 0.00042312,
+        "duration_ms": 8791,
+        "status": "success",
+        "raw_usage": {
+          "prompt_tokens": 3472,
+          "completion_tokens": 49,
+          "prompt_tokens_details": {
+            "cached_tokens": 2822
+          },
+          "cache_creation_input_tokens": 0,
+          "completion_tokens_details": {
+            "thinking_tokens": 19,
+            "reasoning_tokens": 19
+          }
+        },
+        "output_cache_tokens": null
+      },
+      {
+        "call_index": 3,
+        "started_at": "2026-09-21T09:56:37.942Z",
+        "finished_at": "2026-09-21T09:56:39.505Z",
+        "usage": {
+          "input": 8975,
+          "cache_read": 3330,
+          "cache_write": 0,
+          "output": 169,
+          "reasoning": 105
+        },
+        "cost": 0.0030951,
+        "duration_ms": 1563,
+        "status": "success",
+        "raw_usage": {
+          "prompt_tokens": 12305,
+          "completion_tokens": 169,
+          "prompt_tokens_details": {
+            "cached_tokens": 3330
+          },
+          "cache_creation_input_tokens": 0,
+          "completion_tokens_details": {
+            "thinking_tokens": 105,
+            "reasoning_tokens": 105
+          }
+        },
+        "output_cache_tokens": null
+      },
+      {
+        "call_index": 4,
+        "started_at": "2026-09-21T09:56:45.118Z",
+        "finished_at": "2026-09-21T09:56:46.237Z",
+        "usage": {
+          "input": 3303,
+          "cache_read": 3430,
+          "cache_write": 0,
+          "output": 94,
+          "reasoning": 26
+        },
+        "cost": 0.0013095,
+        "duration_ms": 1119,
+        "status": "success",
+        "raw_usage": {
+          "prompt_tokens": 6733,
+          "completion_tokens": 94,
+          "prompt_tokens_details": {
+            "cached_tokens": 3430
+          },
+          "cache_creation_input_tokens": 0,
+          "completion_tokens_details": {
+            "thinking_tokens": 26,
+            "reasoning_tokens": 26
+          }
+        },
+        "output_cache_tokens": null
+      },
+      {
+        "call_index": 5,
+        "started_at": "2026-09-21T09:57:01.744Z",
+        "finished_at": "2026-09-21T09:57:06.982Z",
+        "usage": {
+          "input": 7708,
+          "cache_read": 3651,
+          "cache_write": 0,
+          "output": 602,
+          "reasoning": 439
+        },
+        "cost": 0.00325386,
+        "duration_ms": 5238,
+        "status": "success",
+        "raw_usage": {
+          "prompt_tokens": 11359,
+          "completion_tokens": 602,
+          "prompt_tokens_details": {
+            "cached_tokens": 3651
+          },
+          "cache_creation_input_tokens": 0,
+          "completion_tokens_details": {
+            "thinking_tokens": 439,
+            "reasoning_tokens": 439
+          }
+        },
+        "output_cache_tokens": null
+      },
+      {
+        "call_index": 6,
+        "started_at": "2026-09-21T09:57:11.663Z",
+        "finished_at": "2026-09-21T09:57:13.019Z",
+        "usage": {
+          "input": 1110,
+          "cache_read": 11359,
+          "cache_write": 0,
+          "output": 115,
+          "reasoning": 30
+        },
+        "cost": 0.00115254,
+        "duration_ms": 1356,
+        "status": "success",
+        "raw_usage": {
+          "prompt_tokens": 12469,
+          "completion_tokens": 115,
+          "prompt_tokens_details": {
+            "cached_tokens": 11359
+          },
+          "cache_creation_input_tokens": 0,
+          "completion_tokens_details": {
+            "thinking_tokens": 30,
+            "reasoning_tokens": 30
+          }
+        },
+        "output_cache_tokens": null
+      },
+      {
+        "call_index": 7,
+        "started_at": "2026-09-21T09:57:17.604Z",
+        "finished_at": "2026-09-21T09:57:20.145Z",
+        "usage": {
+          "input": 988,
+          "cache_read": 12469,
+          "cache_write": 0,
+          "output": 398,
+          "reasoning": 18
+        },
+        "cost": 0.00152214,
+        "duration_ms": 2541,
+        "status": "success",
+        "raw_usage": {
+          "prompt_tokens": 13457,
+          "completion_tokens": 398,
+          "prompt_tokens_details": {
+            "cached_tokens": 12469
+          },
+          "cache_creation_input_tokens": 0,
+          "completion_tokens_details": {
+            "thinking_tokens": 18,
+            "reasoning_tokens": 18
+          }
+        },
+        "output_cache_tokens": null
+      },
+      {
+        "call_index": 8,
+        "started_at": "2026-09-21T09:57:41.766Z",
+        "finished_at": "2026-09-21T09:57:45.721Z",
+        "usage": {
+          "input": 9672,
+          "cache_read": 3867,
+          "cache_write": 0,
+          "output": 593,
+          "reasoning": 480
+        },
+        "cost": 0.00384522,
+        "duration_ms": 3955,
+        "status": "success",
+        "raw_usage": {
+          "prompt_tokens": 13539,
+          "completion_tokens": 593,
+          "prompt_tokens_details": {
+            "cached_tokens": 3867
+          },
+          "cache_creation_input_tokens": 0,
+          "completion_tokens_details": {
+            "thinking_tokens": 480,
+            "reasoning_tokens": 480
+          }
+        },
+        "output_cache_tokens": null
+      },
+      {
+        "call_index": 9,
+        "started_at": "2026-09-21T09:58:00.489Z",
+        "finished_at": "2026-09-21T09:58:06.519Z",
+        "usage": {
+          "input": 9030,
+          "cache_read": 5496,
+          "cache_write": 0,
+          "output": 489,
+          "reasoning": 366
+        },
+        "cost": 0.00362556,
+        "duration_ms": 6030,
+        "status": "success",
+        "raw_usage": {
+          "prompt_tokens": 14526,
+          "completion_tokens": 489,
+          "prompt_tokens_details": {
+            "cached_tokens": 5496
+          },
+          "cache_creation_input_tokens": 0,
+          "completion_tokens_details": {
+            "thinking_tokens": 366,
+            "reasoning_tokens": 366
+          }
+        },
+        "output_cache_tokens": null
+      },
+      {
+        "call_index": 10,
+        "started_at": "2026-09-21T09:58:13.228Z",
+        "finished_at": "2026-09-21T09:58:16.527Z",
+        "usage": {
+          "input": 1517,
+          "cache_read": 14526,
+          "cache_write": 0,
+          "output": 241,
+          "reasoning": 107
+        },
+        "cost": 0.0016158599999999998,
+        "duration_ms": 3299,
+        "status": "success",
+        "raw_usage": {
+          "prompt_tokens": 16043,
+          "completion_tokens": 241,
+          "prompt_tokens_details": {
+            "cached_tokens": 14526
+          },
+          "cache_creation_input_tokens": 0,
+          "completion_tokens_details": {
+            "thinking_tokens": 107,
+            "reasoning_tokens": 107
+          }
+        },
+        "output_cache_tokens": null
+      },
+      {
+        "call_index": 11,
+        "started_at": "2026-09-21T09:58:21.035Z",
+        "finished_at": "2026-09-21T09:58:26.607Z",
+        "usage": {
+          "input": 6550,
+          "cache_read": 6179,
+          "cache_write": 0,
+          "output": 790,
+          "reasoning": 291
+        },
+        "cost": 0.0032837400000000003,
+        "duration_ms": 5572,
+        "status": "success",
+        "raw_usage": {
+          "prompt_tokens": 12729,
+          "completion_tokens": 790,
+          "prompt_tokens_details": {
+            "cached_tokens": 6179
+          },
+          "cache_creation_input_tokens": 0,
+          "completion_tokens_details": {
+            "thinking_tokens": 291,
+            "reasoning_tokens": 291
+          }
+        },
+        "output_cache_tokens": null
+      }
+    ],
+    "model_steps": 11,
+    "retry_count": 0,
+    "failed_steps": 0,
+    "incomplete_steps": 0,
+    "final_screenshot": "final.png",
+    "attempt_number": 1,
+    "attempt_directory": "Amazon--16",
+    "judge_mode": "reference",
+    "metrics": {
+      "metrics_version": 1,
+      "input_tokens": 119454,
+      "output_tokens": 3594,
+      "uncached_input_tokens": 52197,
+      "cache_hit_tokens": 67257,
+      "cache_miss_tokens": 52197,
+      "cache_write_tokens": 0,
+      "output_cache_tokens": null,
+      "reasoning_tokens": 1901,
+      "total_tokens": 123048,
+      "cache_hit_rate": 0.5630368175197147,
+      "agent_cost_usd": 0.024007320000000002,
+      "judge_cost_usd": 0.00131508,
+      "total_cost_usd": 0.025322400000000002,
+      "observed_cost_usd": 0.025322400000000002,
+      "agent_duration_ms": 128491,
+      "judge_duration_ms": 1743,
+      "active_duration_ms": 130234
+    },
+    "judge_result": {
+      "task_id": "Amazon--16",
+      "mode": "reference",
+      "rubric_version": "opencode-browser-856867996e73f7dcc5e39827bf2af7555bd63d40-judge-prompt.md",
+      "pass": true,
+      "reason": "Agent found the Mens Rhinestone Skull Graphic Shirt with Black color and XX-Large size, confirmed that free return is available (FREE 30-day refund/replacement), and provided detailed step-by-step instructions on how to return the item.",
+      "status": "judged",
+      "model": "MiniMax-M3",
+      "request_count": 1,
+      "usage_missing_calls": 0,
+      "unpriced_calls": 0,
+      "tokens": {
+        "input": 3470,
+        "output": 222,
+        "cache_read": 128,
+        "cache_write": 0,
+        "reasoning": 140
+      },
+      "tokens_observed": {
+        "input": 3470,
+        "output": 222,
+        "cache_read": 128,
+        "cache_write": 0,
+        "reasoning": 140
+      },
+      "usage_metrics": {
+        "input_tokens": 3598,
+        "output_tokens": 222,
+        "uncached_input_tokens": 3470,
+        "cache_hit_tokens": 128,
+        "cache_miss_tokens": 3470,
+        "cache_write_tokens": 0,
+        "output_cache_tokens": null,
+        "reasoning_tokens": 140,
+        "total_tokens": 3820,
+        "cache_hit_rate": 0.03557531962201223
+      },
+      "usage_observed": {
+        "input_tokens": 3598,
+        "output_tokens": 222,
+        "uncached_input_tokens": 3470,
+        "cache_hit_tokens": 128,
+        "cache_miss_tokens": 3470,
+        "cache_write_tokens": 0,
+        "output_cache_tokens": null,
+        "reasoning_tokens": 140,
+        "total_tokens": 3820,
+        "cache_hit_rate": 0.03557531962201223
+      },
+      "cost": 0.00131508,
+      "cost_observed": 0.00131508,
+      "model_duration_ms": 1739,
+      "requests": 1,
+      "model_calls": [
+        {
+          "call_index": 1,
+          "started_at": "2026-09-21T09:58:28.124Z",
+          "usage": {
+            "input": 3470,
+            "cache_read": 128,
+            "cache_write": 0,
+            "output": 222,
+            "reasoning": 140
+          },
+          "cost": 0.00131508,
+          "status": "success",
+          "output_cache_tokens": null,
+          "raw_usage": {
+            "prompt_tokens": 3598,
+            "completion_tokens": 222,
+            "prompt_tokens_details": {
+              "cached_tokens": 128
+            },
+            "cache_creation_input_tokens": 0,
+            "completion_tokens_details": {
+              "thinking_tokens": 140,
+              "reasoning_tokens": 140
+            }
+          },
+          "finished_at": "2026-09-21T09:58:29.863Z",
+          "duration_ms": 1739
+        }
+      ],
+      "started_at": "2026-09-21T09:58:28.124Z",
+      "finished_at": "2026-09-21T09:58:29.867Z",
+      "duration_ms": 1743,
+      "prompt_sha256": "bcdf403484823037eaeb6cec7918b966fe90ee31a30bc8d69094d2ff42747ccf"
+    },
+    "evaluation_finished_at": "2026-09-21T09:58:29.867Z"
+  }
+}

@@ -1,0 +1,363 @@
+{
+  "task_id": "Allrecipes--32",
+  "website": "https://www.allrecipes.com/",
+  "task": "Find a high-rated beef stew recipe on Allrecipes that requires a slow cooker and has at least 30 reviews. Detail the cooking time and the first five ingredients listed in the recipe.",
+  "status": "completed",
+  "duration_ms": 97943,
+  "steps": 7,
+  "browser_steps": 7,
+  "model_rounds": 8,
+  "cost": 0.0081207,
+  "tokens": {
+    "input": 15501,
+    "output": 1260,
+    "cache_read": 32640,
+    "cache_write": 0,
+    "reasoning": 0
+  },
+  "final_answer": "I have found all the information I need. Here is my answer:\n\n## Recipe Found: Slow Cooker Beef Stew\n\nI navigated to Allrecipes.com and searched for \"slow cooker beef stew\". The top result is a highly-rated recipe that meets all your criteria:\n\n- **Rating:** 4.5 stars\n- **Reviews:** 4,045 (far exceeds the 30 review minimum)\n- **Photos:** 433\n- **Submitted by:** BUCHKO (Updated October 29, 2025)\n\n### Cooking Time\n- **Prep Time:** 20 minutes\n- **Cook Time:** 4 hours\n- **Total Time:** 4 hours 20 minutes\n- **Servings:** 6\n\n### First Five Ingredients\n1. **2 pounds** beef stew meat, cut into 1-inch pieces\n2. **¼ cup** all-purpose flour\n3. **½ teaspoon** salt\n4. **½ teaspoon** ground black pepper\n5. **1½ cups** beef broth\n\nThe full recipe page also lists additional ingredients including 4 medium sliced carrots and 3 medium diced potatoes following the first five. The page description notes it's an \"easy slow cooker beef stew recipe\" with hearty potatoes, carrots, celery, and beef creating a comforting meal.",
+  "tool_trace": [
+    {
+      "tool": "browser_start",
+      "input": {
+        "url": "https://www.allrecipes.com/"
+      },
+      "call_id": "call_01a0c30bf50372219948448e",
+      "time_ms": 8298,
+      "output_preview": "# Browser Mode\n\nThe DSH browser plugin controls a real Chromium instance isolated to the current Agent Session.\n\n- DOM markers `[N]` are clickable and `<N>` are inputs.\n- Match element labels or nearby text, and use DOM indentation to distinguish parents, children, and siblings; do not choose by mar",
+      "status": "success"
+    },
+    {
+      "tool": "browser_input",
+      "input": {
+        "elementIndex": 25,
+        "pressEnter": true,
+        "text": "slow cooker beef stew"
+      },
+      "call_id": "call_01a0c30c241d78d38b480712",
+      "time_ms": 5523,
+      "output_preview": "Input \"slow cooker beef stew\" into <input id='mntl-search-form--open__search-input' name='q' placeholder='Find a recipe or ingredient' required='required'></input> and pressed Enter Action dispatched; outcome not verified. Check the returned page before claiming success.\n\n\n<!-- DOM_START dom1 tab:ta",
+      "status": "success"
+    },
+    {
+      "tool": "browser_click",
+      "input": {
+        "elementIndex": 10591
+      },
+      "call_id": "call_01a0c30c47e77482adf4ab1d",
+      "time_ms": 5942,
+      "output_preview": "Clicked <a id='mntl-card-list-card--extendable_1-0'> a close up, overhead view of a blue and white bowl full of slow cooker beef stew served with a chunk of crusty bread Save Recipe BEEF Slow Cooker Beef Stew 5,504 Ratings </a> Action dispatched; outcome not verified. Check the returned page before ",
+      "status": "success"
+    },
+    {
+      "tool": "browser_execute_script",
+      "input": {
+        "script": "\n() => {\n  const ingredients = document.querySelectorAll('.mntl-structured-ingredients__list-item');\n  return Array.from(ingredients).slice(0, 10).map(item => item.textContent.trim().replace(/\\s+/g, ' '));\n}"
+      },
+      "call_id": "call_01a0c30c6f5f7aa088d3908a",
+      "time_ms": 11379,
+      "output_preview": "\n\n<!-- DOM_START dom2.1 tab:tab0 mode:incremental -->\n(stateId: tab0-dom2.1)\n## Incremental DOM updates\n\n\n<div></div>\n\t+|[27539][view:chfdj]<video></video>\n=== OFF-SCREEN below [container:0] (scroll to reveal these elements) ===\n+|<div></div>\n\t+|Would you like to\n\t+|send this recipe\n\t+|to yourself?\n",
+      "status": "success"
+    },
+    {
+      "tool": "browser_execute_script",
+      "input": {
+        "script": "\n() => {\n  const allElements = document.querySelectorAll('[class*=\"ingredient\"]');\n  const results = [];\n  allElements.forEach(el => {\n    if (el.textContent && el.textContent.length < 200) {\n      results.push({tag: el.tagName, class: el.className, text: el.textContent.trim().replace(/\\s+/g, ' ')});\n    }\n  });\n  return results.slice(0, 20);\n}"
+      },
+      "call_id": "call_01a0c30ca73077a399991e01",
+      "time_ms": 11256,
+      "output_preview": "\n\n<!-- DOM_START dom2.2 tab:tab0 mode:nochange -->\n(stateId: tab0-dom2.2)\n## Current Page DOM Structure\n\n\nNo DOM changes detected after the previous action.\nscrollMap:\n[container:0] 17 pages (coverage resets on content/layout changes) | viewing P0 | unexplored P1-16\n[container:1] 11 pages (coverage ",
+      "status": "success"
+    },
+    {
+      "tool": "browser_scroll_next_screen",
+      "input": {
+        "container": 0,
+        "direction": "down"
+      },
+      "call_id": "call_01a0c30cddf97ef38cd10c83",
+      "time_ms": 11886,
+      "output_preview": "Scrolled down to next screen on container [0]: P0 -> P0.8\n\n\n<!-- DOM_START dom2.3 tab:tab0 mode:full -->\n(stateId: tab0-dom2.3)\n## Current Page DOM Structure\n\n\n[view:dbdbi]<div id='layout'> Would You Like to Send This Recipe to Yourself? </div>\n\t<div></div>\n\t\t[31358][view:dbdfi]<button aria-label='C",
+      "status": "success"
+    },
+    {
+      "tool": "browser_click",
+      "input": {
+        "elementIndex": 31362
+      },
+      "call_id": "call_01a0c30d158d7213a8e56245",
+      "time_ms": 12317,
+      "output_preview": "Clicked <button aria-label='Close Modal' id='button3'> No Thanks </button> Action dispatched; outcome not verified. Check the returned page before claiming success.\n\n\n<!-- DOM_START dom2.4 tab:tab0 mode:full -->\n(stateId: tab0-dom2.4)\n## Current Page DOM Structure\n\n\n<header></header>\n=== OFF-SCREEN ",
+      "status": "success"
+    }
+  ],
+  "error": null,
+  "model": "MiniMax-M3",
+  "provider": "minimax-cn",
+  "protocol": "anthropic-messages",
+  "reasoning_effort": "high",
+  "session_id": "eval-Allrecipes--32-ed11a2573d78",
+  "started_at": "2026-09-21T08:18:53.329Z",
+  "finished_at": "2026-09-21T08:20:31.272Z",
+  "duration_basis": "worker initialization to agent stop; excludes judge, screenshots and cleanup",
+  "infrastructure_error": null,
+  "request_count": 8,
+  "usage_missing_calls": 0,
+  "unpriced_calls": 0,
+  "tokens_observed": {
+    "input": 15501,
+    "output": 1260,
+    "cache_read": 32640,
+    "cache_write": 0,
+    "reasoning": 0
+  },
+  "usage_metrics": {
+    "input_tokens": 48141,
+    "output_tokens": 1260,
+    "uncached_input_tokens": 15501,
+    "cache_hit_tokens": 32640,
+    "cache_miss_tokens": 15501,
+    "cache_write_tokens": 0,
+    "output_cache_tokens": null,
+    "reasoning_tokens": 0,
+    "total_tokens": 49401,
+    "cache_hit_rate": 0.6780083504704929
+  },
+  "usage_observed": {
+    "input_tokens": 48141,
+    "output_tokens": 1260,
+    "uncached_input_tokens": 15501,
+    "cache_hit_tokens": 32640,
+    "cache_miss_tokens": 15501,
+    "cache_write_tokens": 0,
+    "output_cache_tokens": null,
+    "reasoning_tokens": 0,
+    "total_tokens": 49401,
+    "cache_hit_rate": 0.6780083504704929
+  },
+  "cost_observed": 0.0081207,
+  "model_duration_ms": 30982,
+  "model_calls": [
+    {
+      "call_index": 1,
+      "started_at": "2026-09-21T08:18:53.365Z",
+      "finished_at": "2026-09-21T08:18:57.304Z",
+      "usage": {
+        "input": 212,
+        "cache_read": 2688,
+        "cache_write": 0,
+        "output": 58,
+        "reasoning": 0
+      },
+      "cost": 0.00029447999999999996,
+      "duration_ms": 3939,
+      "status": "success",
+      "raw_usage": {
+        "prompt_tokens": 2900,
+        "completion_tokens": 58,
+        "prompt_tokens_details": {
+          "cached_tokens": 2688
+        },
+        "cache_creation_input_tokens": 0,
+        "completion_tokens_details": {
+          "reasoning_tokens": 0
+        }
+      },
+      "output_cache_tokens": null
+    },
+    {
+      "call_index": 2,
+      "started_at": "2026-09-21T08:19:05.646Z",
+      "finished_at": "2026-09-21T08:19:09.473Z",
+      "usage": {
+        "input": 3032,
+        "cache_read": 2816,
+        "cache_write": 0,
+        "output": 107,
+        "reasoning": 0
+      },
+      "cost": 0.00120696,
+      "duration_ms": 3827,
+      "status": "success",
+      "raw_usage": {
+        "prompt_tokens": 5848,
+        "completion_tokens": 107,
+        "prompt_tokens_details": {
+          "cached_tokens": 2816
+        },
+        "cache_creation_input_tokens": 0,
+        "completion_tokens_details": {
+          "reasoning_tokens": 0
+        }
+      },
+      "output_cache_tokens": null
+    },
+    {
+      "call_index": 3,
+      "started_at": "2026-09-21T08:19:15.090Z",
+      "finished_at": "2026-09-21T08:19:18.586Z",
+      "usage": {
+        "input": 3322,
+        "cache_read": 3328,
+        "cache_write": 0,
+        "output": 205,
+        "reasoning": 0
+      },
+      "cost": 0.00144228,
+      "duration_ms": 3496,
+      "status": "success",
+      "raw_usage": {
+        "prompt_tokens": 6650,
+        "completion_tokens": 205,
+        "prompt_tokens_details": {
+          "cached_tokens": 3328
+        },
+        "cache_creation_input_tokens": 0,
+        "completion_tokens_details": {
+          "reasoning_tokens": 0
+        }
+      },
+      "output_cache_tokens": null
+    },
+    {
+      "call_index": 4,
+      "started_at": "2026-09-21T08:19:24.582Z",
+      "finished_at": "2026-09-21T08:19:28.996Z",
+      "usage": {
+        "input": 2264,
+        "cache_read": 3456,
+        "cache_write": 0,
+        "output": 186,
+        "reasoning": 0
+      },
+      "cost": 0.00110976,
+      "duration_ms": 4414,
+      "status": "success",
+      "raw_usage": {
+        "prompt_tokens": 5720,
+        "completion_tokens": 186,
+        "prompt_tokens_details": {
+          "cached_tokens": 3456
+        },
+        "cache_creation_input_tokens": 0,
+        "completion_tokens_details": {
+          "reasoning_tokens": 0
+        }
+      },
+      "output_cache_tokens": null
+    },
+    {
+      "call_index": 5,
+      "started_at": "2026-09-21T08:19:40.401Z",
+      "finished_at": "2026-09-21T08:19:43.657Z",
+      "usage": {
+        "input": 1215,
+        "cache_read": 5632,
+        "cache_write": 0,
+        "output": 143,
+        "reasoning": 0
+      },
+      "cost": 0.0008740200000000001,
+      "duration_ms": 3256,
+      "status": "success",
+      "raw_usage": {
+        "prompt_tokens": 6847,
+        "completion_tokens": 143,
+        "prompt_tokens_details": {
+          "cached_tokens": 5632
+        },
+        "cache_creation_input_tokens": 0,
+        "completion_tokens_details": {
+          "reasoning_tokens": 0
+        }
+      },
+      "output_cache_tokens": null
+    },
+    {
+      "call_index": 6,
+      "started_at": "2026-09-21T08:19:54.936Z",
+      "finished_at": "2026-09-21T08:19:56.928Z",
+      "usage": {
+        "input": 1024,
+        "cache_read": 6784,
+        "cache_write": 0,
+        "output": 61,
+        "reasoning": 0
+      },
+      "cost": 0.0007874399999999999,
+      "duration_ms": 1992,
+      "status": "success",
+      "raw_usage": {
+        "prompt_tokens": 7808,
+        "completion_tokens": 61,
+        "prompt_tokens_details": {
+          "cached_tokens": 6784
+        },
+        "cache_creation_input_tokens": 0,
+        "completion_tokens_details": {
+          "reasoning_tokens": 0
+        }
+      },
+      "output_cache_tokens": null
+    },
+    {
+      "call_index": 7,
+      "started_at": "2026-09-21T08:20:08.847Z",
+      "finished_at": "2026-09-21T08:20:11.220Z",
+      "usage": {
+        "input": 1555,
+        "cache_read": 3712,
+        "cache_write": 0,
+        "output": 41,
+        "reasoning": 0
+      },
+      "cost": 0.00073842,
+      "duration_ms": 2373,
+      "status": "success",
+      "raw_usage": {
+        "prompt_tokens": 5267,
+        "completion_tokens": 41,
+        "prompt_tokens_details": {
+          "cached_tokens": 3712
+        },
+        "cache_creation_input_tokens": 0,
+        "completion_tokens_details": {
+          "reasoning_tokens": 0
+        }
+      },
+      "output_cache_tokens": null
+    },
+    {
+      "call_index": 8,
+      "started_at": "2026-09-21T08:20:23.570Z",
+      "finished_at": "2026-09-21T08:20:31.255Z",
+      "usage": {
+        "input": 2877,
+        "cache_read": 4224,
+        "cache_write": 0,
+        "output": 459,
+        "reasoning": 0
+      },
+      "cost": 0.00166734,
+      "duration_ms": 7685,
+      "status": "success",
+      "raw_usage": {
+        "prompt_tokens": 7101,
+        "completion_tokens": 459,
+        "prompt_tokens_details": {
+          "cached_tokens": 4224
+        },
+        "cache_creation_input_tokens": 0,
+        "completion_tokens_details": {
+          "reasoning_tokens": 0
+        }
+      },
+      "output_cache_tokens": null
+    }
+  ],
+  "model_steps": 8,
+  "retry_count": 0,
+  "failed_steps": 0,
+  "incomplete_steps": 0,
+  "final_screenshot": "final.png"
+}

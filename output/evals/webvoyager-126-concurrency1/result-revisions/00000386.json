@@ -1,0 +1,921 @@
+{
+  "previous": "eb8b197e1f611c812348956d228e35be97c3f353fa17c7cf99d1db14d46776f4",
+  "result": {
+    "task_id": "Google Flights--3",
+    "website": "https://www.google.com/travel/flights/",
+    "task": "Search for the one-way flight available from Calgary to New York on Jan. 1st with the lowest carbon dioxide emissions.",
+    "status": "completed",
+    "duration_ms": 127801,
+    "steps": 19,
+    "browser_steps": 19,
+    "model_rounds": 20,
+    "cost": 0.03582552,
+    "tokens": {
+      "input": 77711,
+      "output": 3636,
+      "cache_read": 135817,
+      "cache_write": 0,
+      "reasoning": 0
+    },
+    "final_answer": "Based on the Google Flights search, I found the one-way flight from Calgary (YYC) to New York on January 1st with the lowest carbon dioxide emissions.\n\n## Result\n\n**Lowest CO2 Emissions Flight:**\n- **Airline:** WestJet / Delta\n- **Departure:** Calgary International Airport (YYC) at 10:50 AM\n- **Arrival:** John F. Kennedy International Airport (JFK) at 4:40 PM\n- **Duration:** 4 hr 50 min, **Nonstop**\n- **CO2 Emissions:** **255 kg CO2e** (-21% compared to average flights on this route)\n- **Price:** $542 USD\n\nI sorted the 11 available flights from Calgary to New York by \"Emissions\" (ascending) in Google Flights, and this non-stop WestJet/Delta flight is ranked #1, emitting 255 kg CO2e — the lowest among all options, and 21% lower than the average emissions for this route. The next-lowest flight (United with 1 stop via Denver) emits 310 kg CO2e.",
+    "tool_trace": [
+      {
+        "tool": "browser_start",
+        "input": {
+          "url": "https://www.google.com/travel/flights/"
+        },
+        "call_id": "call_tGUNQlv2Yosi5OSECV7TmYK0",
+        "time_ms": 8786,
+        "output_preview": "# Browser Mode\n\nThe DSH browser plugin controls a real Chromium instance isolated to the current Agent Session.\n\n- DOM markers `[N]` are clickable and `<N>` are inputs.\n- Match element labels or nearby text, and use DOM indentation to distinguish parents, children, and siblings; do not choose by mar",
+        "status": "success"
+      },
+      {
+        "tool": "browser_goto",
+        "input": {
+          "url": "https://www.google.com/travel/flights/?hl=en"
+        },
+        "call_id": "call_cLjpp4jUulgg47dD4Srf7UB2",
+        "time_ms": 3494,
+        "output_preview": "Navigated to https://www.google.com/travel/flights/?hl=en\n\n\n<!-- DOM_START dom1 tab:tab0 mode:full -->\n(stateId: tab0-dom1)\n## Current Page DOM Structure\n\n\n<div></div>\n\t[2651]<div role='button' aria-label='Main menu' aria-expanded='false'></div>\n\t\t[view:cgfc]<svg></svg>\n\t<div></div>\n\t\t[2662]<a aria-",
+        "status": "success"
+      },
+      {
+        "tool": "browser_click",
+        "input": {
+          "elementIndex": 2452
+        },
+        "call_id": "call_ZAvlHCnlpSX3YGX0TzCW0DWS",
+        "time_ms": 2561,
+        "output_preview": "Clicked <input role='combobox' aria-label='Where from? ' aria-expanded='false' placeholder='Where from?'></input> Action dispatched; outcome not verified. Check the returned page before claiming success.\n\n\n<!-- DOM_START dom1.1 tab:tab0 mode:incremental -->\n(stateId: tab0-dom1.1)\n## Incremental DOM ",
+        "status": "success"
+      },
+      {
+        "tool": "browser_input",
+        "input": {
+          "elementIndex": 2453,
+          "text": "Calgary"
+        },
+        "call_id": "call_er9Giy8m8lmJ3j83FEMVaB5d",
+        "time_ms": 2497,
+        "output_preview": "Input \"Calgary\" into <input role='combobox' aria-label='Where from? ' aria-expanded='true'></input> Action dispatched; outcome not verified. Check the returned page before claiming success.\n\n\n<!-- DOM_START dom1.2 tab:tab0 mode:incremental -->\n(stateId: tab0-dom1.2)\n## Incremental DOM updates\n\n\n<div",
+        "status": "success"
+      },
+      {
+        "tool": "browser_click",
+        "input": {
+          "elementIndex": 5224
+        },
+        "call_id": "call_EUV7OHVnN1H1EsA4yY7bwYFu",
+        "time_ms": 4160,
+        "output_preview": "Clicked <li role='option' aria-label='Calgary International Airport (YYC)' id='c13' data-type='1' aria-selected='false'> Calgary International AirportYYC 5 mi to destination </li> Action dispatched; outcome not verified. Check the returned page before claiming success.\n\n\n<!-- DOM_START dom1.3 tab:ta",
+        "status": "success"
+      },
+      {
+        "tool": "browser_click",
+        "input": {
+          "elementIndex": 2454
+        },
+        "call_id": "call_ATiLpT9L7GHyF4PKm7gS6McH",
+        "time_ms": 2994,
+        "output_preview": "Clicked <input role='combobox' aria-label='Where to? ' aria-expanded='false' placeholder='Where to?'></input> Action dispatched; outcome not verified. Check the returned page before claiming success.\n\n\n<!-- DOM_START dom2 tab:tab0 mode:incremental -->\n(stateId: tab0-dom2)\n## Incremental DOM updates\n",
+        "status": "success"
+      },
+      {
+        "tool": "browser_input",
+        "input": {
+          "elementIndex": 2455,
+          "text": "New York"
+        },
+        "call_id": "call_nNVAS0eo8EZvaeSv52k7EyIp",
+        "time_ms": 3388,
+        "output_preview": "Input \"New York\" into <input role='combobox' aria-label='Where to? ' aria-expanded='true'></input> Action dispatched; outcome not verified. Check the returned page before claiming success.\n\n\n<!-- DOM_START dom2.1 tab:tab0 mode:full -->\n(stateId: tab0-dom2.1)\n## Current Page DOM Structure\n\n\n<div></di",
+        "status": "success"
+      },
+      {
+        "tool": "browser_click",
+        "input": {
+          "elementIndex": 9425
+        },
+        "call_id": "call_UnNjdMYBcXPaKOFqV0hdMHW8",
+        "time_ms": 3341,
+        "output_preview": "Clicked <li role='option' id='c84' data-type='3' aria-selected='false'> New York City in New York State </li> Action dispatched; outcome not verified. Check the returned page before claiming success.\n\n\n<!-- DOM_START dom3 tab:tab0 mode:full -->\n(stateId: tab0-dom3)\n## Current Page DOM Structure\n\n\n<d",
+        "status": "success"
+      },
+      {
+        "tool": "browser_click",
+        "input": {
+          "elementIndex": 2960
+        },
+        "call_id": "call_mP9KnjsjjNOCIOW8XFSpfXWs",
+        "time_ms": 2752,
+        "output_preview": "Clicked <div role='combobox' aria-labelledby='i6 i7' aria-expanded='false'></div> Action dispatched; outcome not verified. Check the returned page before claiming success.\n\n\n<!-- DOM_START dom3.1 tab:tab0 mode:incremental -->\n(stateId: tab0-dom3.1)\n## Incremental DOM updates\n\n\n<div></div>\n\t<div></di",
+        "status": "success"
+      },
+      {
+        "tool": "browser_click",
+        "input": {
+          "elementIndex": 3001
+        },
+        "call_id": "call_ncxptqs4pzseVNm2HxQq3cQG",
+        "time_ms": 2605,
+        "output_preview": "Clicked <li role='option' data-value='2' aria-selected='false'> One way </li> Action dispatched; outcome not verified. Check the returned page before claiming success.\n\n\n<!-- DOM_START dom4 tab:tab0 mode:incremental -->\n(stateId: tab0-dom4)\n## Incremental DOM updates\n\n\n<div></div>\n\t<div></div>\n\t\t<di",
+        "status": "success"
+      },
+      {
+        "tool": "browser_click",
+        "input": {
+          "elementIndex": 2456
+        },
+        "call_id": "call_ffqw2SyCUyyqaUwNg8KKZdSz",
+        "time_ms": 5363,
+        "output_preview": "Clicked <input aria-label='Departure' placeholder='Departure'></input> Action dispatched; outcome not verified. Check the returned page before claiming success.\n\n\n<!-- DOM_START dom4.1 tab:tab0 mode:full -->\n(stateId: tab0-dom4.1)\n## Current Page DOM Structure\n\n\n<div></div>\n\t[2651]<div role='button'",
+        "status": "success"
+      },
+      {
+        "tool": "browser_input",
+        "input": {
+          "clear": true,
+          "elementIndex": 2458,
+          "text": "Jan 1"
+        },
+        "call_id": "call_Vv3xPJIga6xcnDOqYAb13xUI",
+        "time_ms": 3623,
+        "output_preview": "Input \"Jan 1\" into <input aria-label='Departure' placeholder='Departure'></input> Action dispatched; outcome not verified. Check the returned page before claiming success.\n\n\n<!-- DOM_START dom4.2 tab:tab0 mode:nochange -->\n(stateId: tab0-dom4.2)\n## Current Page DOM Structure\n\n\nNo DOM changes detecte",
+        "status": "success"
+      },
+      {
+        "tool": "browser_observe",
+        "input": {},
+        "call_id": "call_rnflyo4x57V54MmE59RSjBFN",
+        "time_ms": 2478,
+        "output_preview": "\n\n<!-- DOM_START dom4.3 tab:tab0 mode:full -->\n(stateId: tab0-dom4.3)\n## Current Page DOM Structure\n\n\n<div></div>\n\t[2651]<div role='button' aria-label='Main menu' aria-expanded='false'></div>\n\t\t[view:cgfc]<svg></svg>\n\t<div></div>\n\t\t[2662]<a aria-label='Google'></a>\nExplore\nFlights\nHotels\nVacation re",
+        "status": "success"
+      },
+      {
+        "tool": "browser_execute_script",
+        "input": {
+          "script": "const input = document.querySelector('input[aria-label=\"Departure\"]');\nconst event = new KeyboardEvent('keydown', { key: 'Enter', code: 'Enter', bubbles: true });\ninput.dispatchEvent(event);\ninput.value = '';\nreturn input.value;\n"
+        },
+        "call_id": "call_5TmngT0sqWusnpVkVdVavWfu",
+        "time_ms": 2161,
+        "output_preview": "\n\n<!-- DOM_START dom4.4 tab:tab0 mode:nochange -->\n(stateId: tab0-dom4.4)\n## Current Page DOM Structure\n\n\nNo DOM changes detected after the previous action.\nscrollMap:\n[container:0] 4 pages (coverage resets on content/layout changes) | viewing P0 | unexplored P1-3\n[container:1] 2 pages (coverage res",
+        "status": "success"
+      },
+      {
+        "tool": "browser_click",
+        "input": {
+          "elementIndex": 8347
+        },
+        "call_id": "call_1aCgG94yHIr98dflCdXz18Fg",
+        "time_ms": 6474,
+        "output_preview": "Clicked <button aria-label='Next'></button> Action dispatched; outcome not verified. Check the returned page before claiming success.\n\n\n<!-- DOM_START dom4.5 tab:tab0 mode:full -->\n(stateId: tab0-dom4.5)\n## Current Page DOM Structure\n\n\n<div></div>\n\t[2651]<div role='button' aria-label='Main menu' ari",
+        "status": "success"
+      },
+      {
+        "tool": "browser_click",
+        "input": {
+          "elementIndex": 3561
+        },
+        "call_id": "call_MPTncYLeytSsqIzaFsem5woa",
+        "time_ms": 2257,
+        "output_preview": "Clicked <button aria-label='Done. Search for one-way flights, departing on January 1, 2027'></button> Action dispatched; outcome not verified. Check the returned page before claiming success.\n\n\n<!-- DOM_START dom5 tab:tab0 mode:full -->\n(stateId: tab0-dom5)\n## Current Page DOM Structure\n\n\n<div></div",
+        "status": "success"
+      },
+      {
+        "tool": "browser_click",
+        "input": {
+          "elementIndex": 3578
+        },
+        "call_id": "call_poPmRNos2x1fHWO1ANsrBgWf",
+        "time_ms": 8170,
+        "output_preview": "Clicked <button aria-label='Search'></button> Action dispatched; outcome not verified. Check the returned page before claiming success.\n\n\n<!-- DOM_START dom6 tab:tab0 mode:full -->\n(stateId: tab0-dom6)\n## Current Page DOM Structure\n\n\n<div></div>\n\t[2651]<div role='button' aria-label='Main menu' aria-",
+        "status": "success"
+      },
+      {
+        "tool": "browser_click",
+        "input": {
+          "elementIndex": 15649
+        },
+        "call_id": "call_E1YbYRp7SSd47fk07ompxYzd",
+        "time_ms": 5201,
+        "output_preview": "Clicked <button aria-label='Sorted by top flights, Change sort order.'></button> Action dispatched; outcome not verified. Check the returned page before claiming success.\n\n\n<!-- DOM_START dom6.1 tab:tab0 mode:incremental -->\n(stateId: tab0-dom6.1)\n## Incremental DOM updates\n\n\n<c-wiz></c-wiz>\n\t<div><",
+        "status": "success"
+      },
+      {
+        "tool": "browser_click",
+        "input": {
+          "elementIndex": 30659
+        },
+        "call_id": "call_qd8OPArvRbhpjiAPzOSxBfmM",
+        "time_ms": 7772,
+        "output_preview": "Clicked <li role='menuitemradio' data-value='6' aria-checked='false'> Emissions </li> Action dispatched; outcome not verified. Check the returned page before claiming success.\n\n\n<!-- DOM_START dom7 tab:tab0 mode:full -->\n(stateId: tab0-dom7)\n## Current Page DOM Structure\n\n\n<div></div>\n\t[2651]<div ro",
+        "status": "success"
+      }
+    ],
+    "error": null,
+    "model": "MiniMax-M3",
+    "provider": "minimax-cn",
+    "protocol": "anthropic-messages",
+    "reasoning_effort": "high",
+    "session_id": "eval-Google Flights--3-8a0563662209",
+    "started_at": "2026-09-26T09:35:53.030Z",
+    "finished_at": "2026-09-26T09:38:00.831Z",
+    "duration_basis": "worker initialization to agent stop; excludes judge, screenshots and cleanup",
+    "infrastructure_error": null,
+    "request_count": 20,
+    "usage_missing_calls": 0,
+    "unpriced_calls": 0,
+    "tokens_observed": {
+      "input": 77711,
+      "output": 3636,
+      "cache_read": 135817,
+      "cache_write": 0,
+      "reasoning": 0
+    },
+    "usage_metrics": {
+      "input_tokens": 213528,
+      "output_tokens": 3636,
+      "uncached_input_tokens": 77711,
+      "cache_hit_tokens": 135817,
+      "cache_miss_tokens": 77711,
+      "cache_write_tokens": 0,
+      "output_cache_tokens": null,
+      "reasoning_tokens": 0,
+      "total_tokens": 217164,
+      "cache_hit_rate": 0.6360617811247237
+    },
+    "usage_observed": {
+      "input_tokens": 213528,
+      "output_tokens": 3636,
+      "uncached_input_tokens": 77711,
+      "cache_hit_tokens": 135817,
+      "cache_miss_tokens": 77711,
+      "cache_write_tokens": 0,
+      "output_cache_tokens": null,
+      "reasoning_tokens": 0,
+      "total_tokens": 217164,
+      "cache_hit_rate": 0.6360617811247237
+    },
+    "cost_observed": 0.03582552,
+    "model_duration_ms": 46643,
+    "model_calls": [
+      {
+        "call_index": 1,
+        "started_at": "2026-09-26T09:35:53.074Z",
+        "finished_at": "2026-09-26T09:35:54.819Z",
+        "usage": {
+          "input": 2683,
+          "cache_read": 128,
+          "cache_write": 0,
+          "output": 80,
+          "reasoning": 0
+        },
+        "cost": 0.0009085800000000001,
+        "duration_ms": 1745,
+        "status": "success",
+        "raw_usage": {
+          "prompt_tokens": 2811,
+          "completion_tokens": 80,
+          "prompt_tokens_details": {
+            "cached_tokens": 128
+          },
+          "cache_creation_input_tokens": 0,
+          "completion_tokens_details": {
+            "reasoning_tokens": 0
+          }
+        },
+        "output_cache_tokens": null
+      },
+      {
+        "call_index": 2,
+        "started_at": "2026-09-26T09:36:03.642Z",
+        "finished_at": "2026-09-26T09:36:05.928Z",
+        "usage": {
+          "input": 2522,
+          "cache_read": 2810,
+          "cache_write": 0,
+          "output": 94,
+          "reasoning": 0
+        },
+        "cost": 0.001038,
+        "duration_ms": 2286,
+        "status": "success",
+        "raw_usage": {
+          "prompt_tokens": 5332,
+          "completion_tokens": 94,
+          "prompt_tokens_details": {
+            "cached_tokens": 2810
+          },
+          "cache_creation_input_tokens": 0,
+          "completion_tokens_details": {
+            "reasoning_tokens": 0
+          }
+        },
+        "output_cache_tokens": null
+      },
+      {
+        "call_index": 3,
+        "started_at": "2026-09-26T09:36:09.463Z",
+        "finished_at": "2026-09-26T09:36:11.016Z",
+        "usage": {
+          "input": 1998,
+          "cache_read": 3349,
+          "cache_write": 0,
+          "output": 82,
+          "reasoning": 0
+        },
+        "cost": 0.00089874,
+        "duration_ms": 1553,
+        "status": "success",
+        "raw_usage": {
+          "prompt_tokens": 5347,
+          "completion_tokens": 82,
+          "prompt_tokens_details": {
+            "cached_tokens": 3349
+          },
+          "cache_creation_input_tokens": 0,
+          "completion_tokens_details": {
+            "reasoning_tokens": 0
+          }
+        },
+        "output_cache_tokens": null
+      },
+      {
+        "call_index": 4,
+        "started_at": "2026-09-26T09:36:13.642Z",
+        "finished_at": "2026-09-26T09:36:15.575Z",
+        "usage": {
+          "input": 1481,
+          "cache_read": 5346,
+          "cache_write": 0,
+          "output": 59,
+          "reasoning": 0
+        },
+        "cost": 0.00083586,
+        "duration_ms": 1934,
+        "status": "success",
+        "raw_usage": {
+          "prompt_tokens": 6827,
+          "completion_tokens": 59,
+          "prompt_tokens_details": {
+            "cached_tokens": 5346
+          },
+          "cache_creation_input_tokens": 0,
+          "completion_tokens_details": {
+            "reasoning_tokens": 0
+          }
+        },
+        "output_cache_tokens": null
+      },
+      {
+        "call_index": 5,
+        "started_at": "2026-09-26T09:36:18.097Z",
+        "finished_at": "2026-09-26T09:36:19.683Z",
+        "usage": {
+          "input": 1113,
+          "cache_read": 6826,
+          "cache_write": 0,
+          "output": 67,
+          "reasoning": 0
+        },
+        "cost": 0.00082386,
+        "duration_ms": 1586,
+        "status": "success",
+        "raw_usage": {
+          "prompt_tokens": 7939,
+          "completion_tokens": 67,
+          "prompt_tokens_details": {
+            "cached_tokens": 6826
+          },
+          "cache_creation_input_tokens": 0,
+          "completion_tokens_details": {
+            "reasoning_tokens": 0
+          }
+        },
+        "output_cache_tokens": null
+      },
+      {
+        "call_index": 6,
+        "started_at": "2026-09-26T09:36:23.927Z",
+        "finished_at": "2026-09-26T09:36:25.428Z",
+        "usage": {
+          "input": 1917,
+          "cache_read": 7938,
+          "cache_write": 0,
+          "output": 59,
+          "reasoning": 0
+        },
+        "cost": 0.00112218,
+        "duration_ms": 1501,
+        "status": "success",
+        "raw_usage": {
+          "prompt_tokens": 9855,
+          "completion_tokens": 59,
+          "prompt_tokens_details": {
+            "cached_tokens": 7938
+          },
+          "cache_creation_input_tokens": 0,
+          "completion_tokens_details": {
+            "reasoning_tokens": 0
+          }
+        },
+        "output_cache_tokens": null
+      },
+      {
+        "call_index": 7,
+        "started_at": "2026-09-26T09:36:28.468Z",
+        "finished_at": "2026-09-26T09:36:30.134Z",
+        "usage": {
+          "input": 1916,
+          "cache_read": 9854,
+          "cache_write": 0,
+          "output": 53,
+          "reasoning": 0
+        },
+        "cost": 0.0012296400000000002,
+        "duration_ms": 1666,
+        "status": "success",
+        "raw_usage": {
+          "prompt_tokens": 11770,
+          "completion_tokens": 53,
+          "prompt_tokens_details": {
+            "cached_tokens": 9854
+          },
+          "cache_creation_input_tokens": 0,
+          "completion_tokens_details": {
+            "reasoning_tokens": 0
+          }
+        },
+        "output_cache_tokens": null
+      },
+      {
+        "call_index": 8,
+        "started_at": "2026-09-26T09:36:33.624Z",
+        "finished_at": "2026-09-26T09:36:35.247Z",
+        "usage": {
+          "input": 3314,
+          "cache_read": 3510,
+          "cache_write": 0,
+          "output": 90,
+          "reasoning": 0
+        },
+        "cost": 0.0013128,
+        "duration_ms": 1623,
+        "status": "success",
+        "raw_usage": {
+          "prompt_tokens": 6824,
+          "completion_tokens": 90,
+          "prompt_tokens_details": {
+            "cached_tokens": 3510
+          },
+          "cache_creation_input_tokens": 0,
+          "completion_tokens_details": {
+            "reasoning_tokens": 0
+          }
+        },
+        "output_cache_tokens": null
+      },
+      {
+        "call_index": 9,
+        "started_at": "2026-09-26T09:36:38.650Z",
+        "finished_at": "2026-09-26T09:36:41.318Z",
+        "usage": {
+          "input": 2547,
+          "cache_read": 4326,
+          "cache_write": 0,
+          "output": 247,
+          "reasoning": 0
+        },
+        "cost": 0.00132006,
+        "duration_ms": 2668,
+        "status": "success",
+        "raw_usage": {
+          "prompt_tokens": 6873,
+          "completion_tokens": 247,
+          "prompt_tokens_details": {
+            "cached_tokens": 4326
+          },
+          "cache_creation_input_tokens": 0,
+          "completion_tokens_details": {
+            "reasoning_tokens": 0
+          }
+        },
+        "output_cache_tokens": null
+      },
+      {
+        "call_index": 10,
+        "started_at": "2026-09-26T09:36:44.132Z",
+        "finished_at": "2026-09-26T09:36:45.489Z",
+        "usage": {
+          "input": 1712,
+          "cache_read": 6872,
+          "cache_write": 0,
+          "output": 48,
+          "reasoning": 0
+        },
+        "cost": 0.0009835199999999999,
+        "duration_ms": 1357,
+        "status": "success",
+        "raw_usage": {
+          "prompt_tokens": 8584,
+          "completion_tokens": 48,
+          "prompt_tokens_details": {
+            "cached_tokens": 6872
+          },
+          "cache_creation_input_tokens": 0,
+          "completion_tokens_details": {
+            "reasoning_tokens": 0
+          }
+        },
+        "output_cache_tokens": null
+      },
+      {
+        "call_index": 11,
+        "started_at": "2026-09-26T09:36:48.138Z",
+        "finished_at": "2026-09-26T09:36:49.929Z",
+        "usage": {
+          "input": 1537,
+          "cache_read": 8583,
+          "cache_write": 0,
+          "output": 84,
+          "reasoning": 0
+        },
+        "cost": 0.0010768800000000001,
+        "duration_ms": 1791,
+        "status": "success",
+        "raw_usage": {
+          "prompt_tokens": 10120,
+          "completion_tokens": 84,
+          "prompt_tokens_details": {
+            "cached_tokens": 8583
+          },
+          "cache_creation_input_tokens": 0,
+          "completion_tokens_details": {
+            "reasoning_tokens": 0
+          }
+        },
+        "output_cache_tokens": null
+      },
+      {
+        "call_index": 12,
+        "started_at": "2026-09-26T09:36:55.350Z",
+        "finished_at": "2026-09-26T09:36:58.784Z",
+        "usage": {
+          "input": 8684,
+          "cache_read": 4516,
+          "cache_write": 0,
+          "output": 123,
+          "reasoning": 0
+        },
+        "cost": 0.0030237599999999995,
+        "duration_ms": 3434,
+        "status": "success",
+        "raw_usage": {
+          "prompt_tokens": 13200,
+          "completion_tokens": 123,
+          "prompt_tokens_details": {
+            "cached_tokens": 4516
+          },
+          "cache_creation_input_tokens": 0,
+          "completion_tokens_details": {
+            "reasoning_tokens": 0
+          }
+        },
+        "output_cache_tokens": null
+      },
+      {
+        "call_index": 13,
+        "started_at": "2026-09-26T09:37:02.438Z",
+        "finished_at": "2026-09-26T09:37:03.848Z",
+        "usage": {
+          "input": 953,
+          "cache_read": 13199,
+          "cache_write": 0,
+          "output": 44,
+          "reasoning": 0
+        },
+        "cost": 0.00113064,
+        "duration_ms": 1410,
+        "status": "success",
+        "raw_usage": {
+          "prompt_tokens": 14152,
+          "completion_tokens": 44,
+          "prompt_tokens_details": {
+            "cached_tokens": 13199
+          },
+          "cache_creation_input_tokens": 0,
+          "completion_tokens_details": {
+            "reasoning_tokens": 0
+          }
+        },
+        "output_cache_tokens": null
+      },
+      {
+        "call_index": 14,
+        "started_at": "2026-09-26T09:37:06.409Z",
+        "finished_at": "2026-09-26T09:37:10.268Z",
+        "usage": {
+          "input": 8356,
+          "cache_read": 5159,
+          "cache_write": 0,
+          "output": 480,
+          "reasoning": 0
+        },
+        "cost": 0.0033923399999999998,
+        "duration_ms": 3859,
+        "status": "success",
+        "raw_usage": {
+          "prompt_tokens": 13515,
+          "completion_tokens": 480,
+          "prompt_tokens_details": {
+            "cached_tokens": 5159
+          },
+          "cache_creation_input_tokens": 0,
+          "completion_tokens_details": {
+            "reasoning_tokens": 0
+          }
+        },
+        "output_cache_tokens": null
+      },
+      {
+        "call_index": 15,
+        "started_at": "2026-09-26T09:37:12.453Z",
+        "finished_at": "2026-09-26T09:37:14.359Z",
+        "usage": {
+          "input": 1289,
+          "cache_read": 13514,
+          "cache_write": 0,
+          "output": 98,
+          "reasoning": 0
+        },
+        "cost": 0.0013151399999999998,
+        "duration_ms": 1906,
+        "status": "success",
+        "raw_usage": {
+          "prompt_tokens": 14803,
+          "completion_tokens": 98,
+          "prompt_tokens_details": {
+            "cached_tokens": 13514
+          },
+          "cache_creation_input_tokens": 0,
+          "completion_tokens_details": {
+            "reasoning_tokens": 0
+          }
+        },
+        "output_cache_tokens": null
+      },
+      {
+        "call_index": 16,
+        "started_at": "2026-09-26T09:37:20.878Z",
+        "finished_at": "2026-09-26T09:37:24.494Z",
+        "usage": {
+          "input": 11543,
+          "cache_read": 5469,
+          "cache_write": 0,
+          "output": 399,
+          "reasoning": 0
+        },
+        "cost": 0.0042698400000000004,
+        "duration_ms": 3616,
+        "status": "success",
+        "raw_usage": {
+          "prompt_tokens": 17012,
+          "completion_tokens": 399,
+          "prompt_tokens_details": {
+            "cached_tokens": 5469
+          },
+          "cache_creation_input_tokens": 0,
+          "completion_tokens_details": {
+            "reasoning_tokens": 0
+          }
+        },
+        "output_cache_tokens": null
+      },
+      {
+        "call_index": 17,
+        "started_at": "2026-09-26T09:37:26.773Z",
+        "finished_at": "2026-09-26T09:37:28.357Z",
+        "usage": {
+          "input": 2891,
+          "cache_read": 6176,
+          "cache_write": 0,
+          "output": 92,
+          "reasoning": 0
+        },
+        "cost": 0.00134826,
+        "duration_ms": 1584,
+        "status": "success",
+        "raw_usage": {
+          "prompt_tokens": 9067,
+          "completion_tokens": 92,
+          "prompt_tokens_details": {
+            "cached_tokens": 6176
+          },
+          "cache_creation_input_tokens": 0,
+          "completion_tokens_details": {
+            "reasoning_tokens": 0
+          }
+        },
+        "output_cache_tokens": null
+      },
+      {
+        "call_index": 18,
+        "started_at": "2026-09-26T09:37:36.586Z",
+        "finished_at": "2026-09-26T09:37:40.492Z",
+        "usage": {
+          "input": 8068,
+          "cache_read": 6669,
+          "cache_write": 0,
+          "output": 546,
+          "reasoning": 0
+        },
+        "cost": 0.0034757399999999997,
+        "duration_ms": 3906,
+        "status": "success",
+        "raw_usage": {
+          "prompt_tokens": 14737,
+          "completion_tokens": 546,
+          "prompt_tokens_details": {
+            "cached_tokens": 6669
+          },
+          "cache_creation_input_tokens": 0,
+          "completion_tokens_details": {
+            "reasoning_tokens": 0
+          }
+        },
+        "output_cache_tokens": null
+      },
+      {
+        "call_index": 19,
+        "started_at": "2026-09-26T09:37:45.753Z",
+        "finished_at": "2026-09-26T09:37:47.485Z",
+        "usage": {
+          "input": 3057,
+          "cache_read": 14736,
+          "cache_write": 0,
+          "output": 51,
+          "reasoning": 0
+        },
+        "cost": 0.00186246,
+        "duration_ms": 1732,
+        "status": "success",
+        "raw_usage": {
+          "prompt_tokens": 17793,
+          "completion_tokens": 51,
+          "prompt_tokens_details": {
+            "cached_tokens": 14736
+          },
+          "cache_creation_input_tokens": 0,
+          "completion_tokens_details": {
+            "reasoning_tokens": 0
+          }
+        },
+        "output_cache_tokens": null
+      },
+      {
+        "call_index": 20,
+        "started_at": "2026-09-26T09:37:55.327Z",
+        "finished_at": "2026-09-26T09:38:00.813Z",
+        "usage": {
+          "input": 10130,
+          "cache_read": 6837,
+          "cache_write": 0,
+          "output": 840,
+          "reasoning": 0
+        },
+        "cost": 0.0044572200000000005,
+        "duration_ms": 5486,
+        "status": "success",
+        "raw_usage": {
+          "prompt_tokens": 16967,
+          "completion_tokens": 840,
+          "prompt_tokens_details": {
+            "cached_tokens": 6837
+          },
+          "cache_creation_input_tokens": 0,
+          "completion_tokens_details": {
+            "reasoning_tokens": 0
+          }
+        },
+        "output_cache_tokens": null
+      }
+    ],
+    "model_steps": 20,
+    "retry_count": 0,
+    "failed_steps": 0,
+    "incomplete_steps": 0,
+    "final_screenshot": "final.png",
+    "attempt_number": 1,
+    "attempt_directory": "Google Flights--3",
+    "judge_mode": "reference",
+    "metrics": {
+      "metrics_version": 1,
+      "input_tokens": 213528,
+      "output_tokens": 3636,
+      "uncached_input_tokens": 77711,
+      "cache_hit_tokens": 135817,
+      "cache_miss_tokens": 77711,
+      "cache_write_tokens": 0,
+      "output_cache_tokens": null,
+      "reasoning_tokens": 0,
+      "total_tokens": 217164,
+      "cache_hit_rate": 0.6360617811247237,
+      "agent_cost_usd": 0.03582552,
+      "judge_cost_usd": 0.0012823799999999998,
+      "total_cost_usd": 0.0371079,
+      "observed_cost_usd": 0.0371079,
+      "agent_duration_ms": 127801,
+      "judge_duration_ms": 1718,
+      "active_duration_ms": 129519
+    },
+    "judge_result": {
+      "task_id": "Google Flights--3",
+      "mode": "reference",
+      "rubric_version": "opencode-browser-856867996e73f7dcc5e39827bf2af7555bd63d40-judge-prompt.md",
+      "pass": true,
+      "reason": "The agent successfully searched for one-way flights from Calgary to New York on Jan 1st, sorted by emissions, and identified the lowest CO2 emission flight (255 kg CO2e, WestJet/Delta nonstop) with detailed information.",
+      "status": "judged",
+      "model": "MiniMax-M3",
+      "request_count": 1,
+      "usage_missing_calls": 0,
+      "unpriced_calls": 0,
+      "tokens": {
+        "input": 3689,
+        "output": 140,
+        "cache_read": 128,
+        "cache_write": 0,
+        "reasoning": 56
+      },
+      "tokens_observed": {
+        "input": 3689,
+        "output": 140,
+        "cache_read": 128,
+        "cache_write": 0,
+        "reasoning": 56
+      },
+      "usage_metrics": {
+        "input_tokens": 3817,
+        "output_tokens": 140,
+        "uncached_input_tokens": 3689,
+        "cache_hit_tokens": 128,
+        "cache_miss_tokens": 3689,
+        "cache_write_tokens": 0,
+        "output_cache_tokens": null,
+        "reasoning_tokens": 56,
+        "total_tokens": 3957,
+        "cache_hit_rate": 0.0335341891537857
+      },
+      "usage_observed": {
+        "input_tokens": 3817,
+        "output_tokens": 140,
+        "uncached_input_tokens": 3689,
+        "cache_hit_tokens": 128,
+        "cache_miss_tokens": 3689,
+        "cache_write_tokens": 0,
+        "output_cache_tokens": null,
+        "reasoning_tokens": 56,
+        "total_tokens": 3957,
+        "cache_hit_rate": 0.0335341891537857
+      },
+      "cost": 0.0012823799999999998,
+      "cost_observed": 0.0012823799999999998,
+      "model_duration_ms": 1714,
+      "requests": 1,
+      "model_calls": [
+        {
+          "call_index": 1,
+          "started_at": "2026-09-26T09:38:03.234Z",
+          "usage": {
+            "input": 3689,
+            "cache_read": 128,
+            "cache_write": 0,
+            "output": 140,
+            "reasoning": 56
+          },
+          "cost": 0.0012823799999999998,
+          "status": "success",
+          "output_cache_tokens": null,
+          "raw_usage": {
+            "prompt_tokens": 3817,
+            "completion_tokens": 140,
+            "prompt_tokens_details": {
+              "cached_tokens": 128
+            },
+            "cache_creation_input_tokens": 0,
+            "completion_tokens_details": {
+              "thinking_tokens": 56,
+              "reasoning_tokens": 56
+            }
+          },
+          "finished_at": "2026-09-26T09:38:04.948Z",
+          "duration_ms": 1714
+        }
+      ],
+      "started_at": "2026-09-26T09:38:03.234Z",
+      "finished_at": "2026-09-26T09:38:04.952Z",
+      "duration_ms": 1718,
+      "prompt_sha256": "bcdf403484823037eaeb6cec7918b966fe90ee31a30bc8d69094d2ff42747ccf"
+    },
+    "evaluation_finished_at": "2026-09-26T09:38:04.952Z"
+  }
+}

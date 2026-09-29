@@ -1,0 +1,639 @@
+{
+  "previous": "cb15fe363cdae469767340a028fb5b58d78873c47990d116a717bed837202b15",
+  "result": {
+    "task_id": "Allrecipes--1",
+    "website": "https://www.allrecipes.com/",
+    "task": "Find a recipe for a vegetarian lasagna that has at least a four-star rating and uses zucchini.",
+    "status": "completed",
+    "duration_ms": 123563,
+    "steps": 11,
+    "browser_steps": 11,
+    "model_rounds": 12,
+    "cost": 0.015004679999999998,
+    "tokens": {
+      "input": 26494,
+      "output": 2834,
+      "cache_read": 60928,
+      "cache_write": 0,
+      "reasoning": 1144
+    },
+    "final_answer": "I've found the recipe. Let me record the key findings:\n\n**Recipe Found: Debbie's Vegetable Lasagna**\n- **URL**: https://www.allrecipes.com/recipe/240375/debbies-vegetable-lasagna/\n- **Rating**: 4.7 stars (★★★★½) — well above the 4-star requirement ✓\n- **Number of ratings**: 20 ratings, 14 reviews\n- **Vegetarian**: Yes (categorized as \"VEGETARIAN LASAGNA RECIPES\") ✓\n- **Contains Zucchini**: Yes — \"2 cups coarsely chopped zucchini\" ✓\n- **Prep Time**: 25 mins\n- **Cook Time**: 45 mins\n- **Total Time**: 1 hr 10 mins\n- **Servings**: 8\n\n**Ingredients include**:\n- 9 lasagna noodles\n- ¼ cup margarine\n- ¼ cup all-purpose flour\n- ½ teaspoon salt\n- ¼ teaspoon ground black pepper\n- 1 cup milk\n- ½ cup vegetable broth\n- 2 tablespoons white wine\n- ½ cup grated Parmesan cheese\n- 1 cup light ricotta cheese\n- 1 egg, 1 egg white\n- 1 tablespoon olive oil\n- 2 cups coarsely shredded carrots\n- **2 cups coarsely chopped zucchini** ✓\n- 1 (10 ounce) package frozen chopped spinach, thawed\n- 1 cup shredded mozzarella cheese\n\n## Summary\n\nI successfully found a vegetarian lasagna recipe that meets all the criteria:\n\n**\"Debbie's Vegetable Lasagna\"** on Allrecipes.com has a **4.7-star rating** (well above the 4-star minimum), is vegetarian, and uses **zucchini** as an ingredient (2 cups of coarsely chopped zucchini). You can view the full recipe at: https://www.allrecipes.com/recipe/240375/debbies-vegetable-lasagna/\n\nNote: Another recipe I checked, \"Lisa's Lasagne\" (also from the search results), is categorized as a \"ZUCCHINI LASAGNA RECIPE\" but only had a 3.9 rating, so it did not meet the 4-star threshold.",
+    "tool_trace": [
+      {
+        "tool": "browser_start",
+        "input": {
+          "url": "https://www.allrecipes.com/"
+        },
+        "call_id": "call_4de23199bc30451694d633",
+        "time_ms": 9780,
+        "output_preview": "# Browser Mode\n\nThe DSH browser plugin controls a real Chromium instance isolated to the current Agent Session.\n\n- DOM markers `[N]` are clickable and `<N>` are inputs.\n- Match element labels or nearby text, and use DOM indentation to distinguish parents, children, and siblings; do not choose by mar",
+        "status": "success"
+      },
+      {
+        "tool": "browser_input",
+        "input": {
+          "elementIndex": 36,
+          "pressEnter": true,
+          "text": "vegetarian lasagna zucchini"
+        },
+        "call_id": "call_72cf0c7c204e414494bc1e",
+        "time_ms": 11466,
+        "output_preview": "Input \"vegetarian lasagna zucchini\" into <input id='mntl-search-form--open__search-input' name='q' placeholder='Find a recipe or ingredient' required='required'></input> and pressed Enter Action dispatched; outcome not verified. Check the returned page before claiming success.\n\n\n<!-- DOM_START dom1 ",
+        "status": "success"
+      },
+      {
+        "tool": "browser_click",
+        "input": {
+          "elementIndex": 10595
+        },
+        "call_id": "call_5e2ea139550c49a096da61",
+        "time_ms": 6326,
+        "output_preview": "Clicked <a id='mntl-card-list-card--extendable_2-0'> Save Recipe ZUCCHINI LASAGNA RECIPES Lisa's Lasagne 18 Ratings </a> Action dispatched; outcome not verified. Check the returned page before claiming success.\n\n\n<!-- DOM_START dom2 tab:tab0 mode:full -->\n(stateId: tab0-dom2)\n## Current Page DOM Str",
+        "status": "success"
+      },
+      {
+        "tool": "browser_goto",
+        "input": {
+          "url": "https://www.allrecipes.com/search?q=vegetarian+lasagna+zucchini"
+        },
+        "call_id": "call_342551682ed74013907845",
+        "time_ms": 11225,
+        "output_preview": "Navigated to https://www.allrecipes.com/search?q=vegetarian+lasagna+zucchini\n\n\n<!-- DOM_START dom3 tab:tab0 mode:full -->\n(stateId: tab0-dom3)\n## Current Page DOM Structure\n\n\n<header></header>\n=== OFF-SCREEN above [container:0] (scroll to reveal these elements) ===\n\t<a id='mntl-skip-to-content_1-0'>",
+        "status": "success"
+      },
+      {
+        "tool": "browser_execute_script",
+        "input": {
+          "script": "() => {\n  const cards = document.querySelectorAll('a[id^=\"mntl-card-list-card--extendable\"]');\n  const results = [];\n  cards.forEach(card => {\n    const name = card.querySelector('span[id^=\"mntl-card-list-card--extendable_\"]')?.textContent || card.textContent.split('Ratings')[0];\n    const ratingContainer = card.querySelector('[id^=\"mntl-recipe-star-rating\"]');\n    const rating = ratingContainer?.querySelector('[class*=\"rating\"]')?.getAttribute('aria-label') || ratingContainer?.textContent || 'N/A';\n    const category = card.querySelector('[class*=\"category\"]')?.textContent || '';\n    const ratingsCount = card.querySelector('[id^=\"mntl-recipe-card-meta\"] [class*=\"ratings-counts\"]')?.textContent || '';\n    results.push({name: name.trim().slice(0, 80), rating, category, ratingsCount});\n  });\n  return results;\n}"
+        },
+        "call_id": "call_74e51a88f2e2401b9f62da",
+        "time_ms": 1698,
+        "output_preview": "\n\n<!-- DOM_START dom3.1 tab:tab0 mode:nochange -->\n(stateId: tab0-dom3.1)\n## Current Page DOM Structure\n\n\nNo DOM changes detected after the previous action.\nscrollMap:\n[container:0] 5 pages (coverage resets on content/layout changes) | viewing P0 | unexplored P1-4\n[container:1] 11 pages (coverage re",
+        "status": "success"
+      },
+      {
+        "tool": "browser_execute_script",
+        "input": {
+          "script": "() => {\n  const cards = document.querySelectorAll('a[id^=\"mntl-card-list-card--extendable\"]');\n  const results = [];\n  cards.forEach(card => {\n    const ratingContainer = card.querySelector('[id^=\"mntl-recipe-star-rating\"]');\n    const rating = ratingContainer?.getAttribute('aria-label') || ratingContainer?.getAttribute('data-rating') || '';\n    const text = card.textContent.replace(/\\s+/g, ' ').trim().slice(0, 200);\n    results.push({rating, text});\n  });\n  return results;\n}"
+        },
+        "call_id": "call_ab6b8d46550347be813f48",
+        "time_ms": 2016,
+        "output_preview": "\n\n<!-- DOM_START dom3.2 tab:tab0 mode:nochange -->\n(stateId: tab0-dom3.2)\n## Current Page DOM Structure\n\n\nNo DOM changes detected after the previous action.\nscrollMap:\n[container:0] 5 pages (coverage resets on content/layout changes) | viewing P0 | unexplored P1-4\n[container:1] 11 pages (coverage re",
+        "status": "success"
+      },
+      {
+        "tool": "browser_execute_script",
+        "input": {
+          "script": "() => {\n  const cards = document.querySelectorAll('a[id^=\"mntl-card-list-card--extendable\"]');\n  const results = [];\n  cards.forEach(card => {\n    const ratingContainer = card.querySelector('[id^=\"mntl-recipe-star-rating\"]');\n    const stars = ratingContainer?.querySelectorAll('svg');\n    const filledStars = ratingContainer?.querySelectorAll('svg[fill=\"currentColor\"], svg path[fill]') || [];\n    const text = card.textContent.replace(/\\s+/g, ' ').trim().slice(0, 200);\n    results.push({title: card.querySelector('span')?.textContent, text, numStars: stars?.length});\n  });\n  return JSON.stringify(results);\n}"
+        },
+        "call_id": "call_3e96756892294ab1afdcc4",
+        "time_ms": 2042,
+        "output_preview": "\n\n<!-- DOM_START dom3.3 tab:tab0 mode:nochange -->\n(stateId: tab0-dom3.3)\n## Current Page DOM Structure\n\n\nNo DOM changes detected after the previous action.\nscrollMap:\n[container:0] 5 pages (coverage resets on content/layout changes) | viewing P0 | unexplored P1-4\n[container:1] 11 pages (coverage re",
+        "status": "success"
+      },
+      {
+        "tool": "browser_execute_script",
+        "input": {
+          "script": "() => {\n  const cards = document.querySelectorAll('a[id^=\"mntl-card-list-card--extendable\"]');\n  const results = [];\n  cards.forEach((card, idx) => {\n    const ratingDiv = card.querySelector('[id^=\"mntl-recipe-star-rating\"]');\n    const widthStyle = ratingDiv?.getAttribute('style') || '';\n    const title = card.querySelector('span')?.textContent?.trim() || '';\n    const link = card.getAttribute('href') || '';\n    results.push({idx, title, link, widthStyle, html: ratingDiv?.innerHTML?.slice(0, 200)});\n  });\n  document.title = 'RESULT:' + JSON.stringify(results);\n  return document.title;\n}"
+        },
+        "call_id": "call_fa08a0835d5e48a9bfb0a6",
+        "time_ms": 2046,
+        "output_preview": "\n\n<!-- DOM_START dom3.4 tab:tab0 mode:nochange -->\n(stateId: tab0-dom3.4)\n## Current Page DOM Structure\n\n\nNo DOM changes detected after the previous action.\nscrollMap:\n[container:0] 5 pages (coverage resets on content/layout changes) | viewing P0 | unexplored P1-4\n[container:1] 11 pages (coverage re",
+        "status": "success"
+      },
+      {
+        "tool": "browser_click",
+        "input": {
+          "elementIndex": 25669
+        },
+        "call_id": "call_1cfaf6fb4d9a4a09932fd9",
+        "time_ms": 4402,
+        "output_preview": "Clicked <a id='mntl-card-list-card--extendable_1-0'> Save Recipe VEGETARIAN LASAGNA RECIPES Debbie's Vegetable Lasagna 20 Ratings </a> Action dispatched; outcome not verified. Check the returned page before claiming success.\n\n\n<!-- DOM_START dom4 tab:tab0 mode:full -->\n(stateId: tab0-dom4)\n## Curren",
+        "status": "success"
+      },
+      {
+        "tool": "browser_reveal_offscreen",
+        "input": {
+          "container": 0,
+          "direction": "down"
+        },
+        "call_id": "call_dcb78c58b4a644c3bbf729",
+        "time_ms": 11450,
+        "output_preview": "Scrolled down on container [0]: P0 -> P0.9\n\n\n<!-- DOM_START dom4.1 tab:tab0 mode:full -->\n(stateId: tab0-dom4.1)\n## Current Page DOM Structure\n\n\n<header></header>\n=== OFF-SCREEN above [container:0] (scroll to reveal these elements) ===\n\t<a id='mntl-skip-to-content_1-0'> SKIP TO CONTENT </a>\n\t\t ...\n=",
+        "status": "success"
+      },
+      {
+        "tool": "browser_reveal_offscreen",
+        "input": {
+          "container": 0,
+          "direction": "down"
+        },
+        "call_id": "call_56b207e1debd4cbf9052e1",
+        "time_ms": 11958,
+        "output_preview": "Scrolled down on container [0]: P0.9 -> P1.8\n\n\n<!-- DOM_START dom4.2 tab:tab0 mode:full -->\n(stateId: tab0-dom4.2)\n## Current Page DOM Structure\n\n\n<header></header>\n=== OFF-SCREEN above [container:0] (scroll to reveal these elements) ===\n\t<a id='mntl-skip-to-content_1-0'> SKIP TO CONTENT </a>\n\t\t ...",
+        "status": "success"
+      }
+    ],
+    "error": null,
+    "model": "MiniMax-M3",
+    "provider": "minimax-cn",
+    "protocol": "anthropic-messages",
+    "reasoning_effort": "high",
+    "session_id": "eval-Allrecipes--1-2ddeaf86f0cc",
+    "started_at": "2026-09-21T06:27:45.261Z",
+    "finished_at": "2026-09-21T06:29:48.824Z",
+    "duration_basis": "worker initialization to agent stop; excludes judge, screenshots and cleanup",
+    "infrastructure_error": null,
+    "request_count": 12,
+    "usage_missing_calls": 0,
+    "unpriced_calls": 0,
+    "tokens_observed": {
+      "input": 26494,
+      "output": 2834,
+      "cache_read": 60928,
+      "cache_write": 0,
+      "reasoning": 1144
+    },
+    "usage_metrics": {
+      "input_tokens": 87422,
+      "output_tokens": 2834,
+      "uncached_input_tokens": 26494,
+      "cache_hit_tokens": 60928,
+      "cache_miss_tokens": 26494,
+      "cache_write_tokens": 0,
+      "output_cache_tokens": null,
+      "reasoning_tokens": 1144,
+      "total_tokens": 90256,
+      "cache_hit_rate": 0.6969412733636842
+    },
+    "usage_observed": {
+      "input_tokens": 87422,
+      "output_tokens": 2834,
+      "uncached_input_tokens": 26494,
+      "cache_hit_tokens": 60928,
+      "cache_miss_tokens": 26494,
+      "cache_write_tokens": 0,
+      "output_cache_tokens": null,
+      "reasoning_tokens": 1144,
+      "total_tokens": 90256,
+      "cache_hit_rate": 0.6969412733636842
+    },
+    "cost_observed": 0.015004679999999998,
+    "model_duration_ms": 48630,
+    "model_calls": [
+      {
+        "call_index": 1,
+        "started_at": "2026-09-21T06:27:45.305Z",
+        "finished_at": "2026-09-21T06:27:47.097Z",
+        "usage": {
+          "input": 2814,
+          "cache_read": 0,
+          "cache_write": 0,
+          "output": 72,
+          "reasoning": 39
+        },
+        "cost": 0.0009306,
+        "duration_ms": 1792,
+        "status": "success",
+        "raw_usage": {
+          "prompt_tokens": 2814,
+          "completion_tokens": 72,
+          "prompt_tokens_details": {
+            "cached_tokens": 0
+          },
+          "cache_creation_input_tokens": 0,
+          "completion_tokens_details": {
+            "thinking_tokens": 39,
+            "reasoning_tokens": 39
+          }
+        },
+        "output_cache_tokens": null
+      },
+      {
+        "call_index": 2,
+        "started_at": "2026-09-21T06:27:56.895Z",
+        "finished_at": "2026-09-21T06:28:00.314Z",
+        "usage": {
+          "input": 3239,
+          "cache_read": 2560,
+          "cache_write": 0,
+          "output": 105,
+          "reasoning": 39
+        },
+        "cost": 0.0012513,
+        "duration_ms": 3419,
+        "status": "success",
+        "raw_usage": {
+          "prompt_tokens": 5799,
+          "completion_tokens": 105,
+          "prompt_tokens_details": {
+            "cached_tokens": 2560
+          },
+          "cache_creation_input_tokens": 0,
+          "completion_tokens_details": {
+            "thinking_tokens": 39,
+            "reasoning_tokens": 39
+          }
+        },
+        "output_cache_tokens": null
+      },
+      {
+        "call_index": 3,
+        "started_at": "2026-09-21T06:28:11.812Z",
+        "finished_at": "2026-09-21T06:28:17.010Z",
+        "usage": {
+          "input": 2886,
+          "cache_read": 3328,
+          "cache_write": 0,
+          "output": 313,
+          "reasoning": 235
+        },
+        "cost": 0.00144108,
+        "duration_ms": 5198,
+        "status": "success",
+        "raw_usage": {
+          "prompt_tokens": 6214,
+          "completion_tokens": 313,
+          "prompt_tokens_details": {
+            "cached_tokens": 3328
+          },
+          "cache_creation_input_tokens": 0,
+          "completion_tokens_details": {
+            "thinking_tokens": 235,
+            "reasoning_tokens": 235
+          }
+        },
+        "output_cache_tokens": null
+      },
+      {
+        "call_index": 4,
+        "started_at": "2026-09-21T06:28:23.370Z",
+        "finished_at": "2026-09-21T06:28:26.681Z",
+        "usage": {
+          "input": 2395,
+          "cache_read": 3328,
+          "cache_write": 0,
+          "output": 188,
+          "reasoning": 114
+        },
+        "cost": 0.0011437799999999998,
+        "duration_ms": 3311,
+        "status": "success",
+        "raw_usage": {
+          "prompt_tokens": 5723,
+          "completion_tokens": 188,
+          "prompt_tokens_details": {
+            "cached_tokens": 3328
+          },
+          "cache_creation_input_tokens": 0,
+          "completion_tokens_details": {
+            "thinking_tokens": 114,
+            "reasoning_tokens": 114
+          }
+        },
+        "output_cache_tokens": null
+      },
+      {
+        "call_index": 5,
+        "started_at": "2026-09-21T06:28:37.957Z",
+        "finished_at": "2026-09-21T06:28:43.879Z",
+        "usage": {
+          "input": 3075,
+          "cache_read": 3840,
+          "cache_write": 0,
+          "output": 412,
+          "reasoning": 158
+        },
+        "cost": 0.0016473,
+        "duration_ms": 5922,
+        "status": "success",
+        "raw_usage": {
+          "prompt_tokens": 6915,
+          "completion_tokens": 412,
+          "prompt_tokens_details": {
+            "cached_tokens": 3840
+          },
+          "cache_creation_input_tokens": 0,
+          "completion_tokens_details": {
+            "thinking_tokens": 158,
+            "reasoning_tokens": 158
+          }
+        },
+        "output_cache_tokens": null
+      },
+      {
+        "call_index": 6,
+        "started_at": "2026-09-21T06:28:45.621Z",
+        "finished_at": "2026-09-21T06:28:48.725Z",
+        "usage": {
+          "input": 956,
+          "cache_read": 6912,
+          "cache_write": 0,
+          "output": 182,
+          "reasoning": 31
+        },
+        "cost": 0.0009199200000000001,
+        "duration_ms": 3104,
+        "status": "success",
+        "raw_usage": {
+          "prompt_tokens": 7868,
+          "completion_tokens": 182,
+          "prompt_tokens_details": {
+            "cached_tokens": 6912
+          },
+          "cache_creation_input_tokens": 0,
+          "completion_tokens_details": {
+            "thinking_tokens": 31,
+            "reasoning_tokens": 31
+          }
+        },
+        "output_cache_tokens": null
+      },
+      {
+        "call_index": 7,
+        "started_at": "2026-09-21T06:28:50.787Z",
+        "finished_at": "2026-09-21T06:28:56.459Z",
+        "usage": {
+          "input": 910,
+          "cache_read": 7680,
+          "cache_write": 0,
+          "output": 274,
+          "reasoning": 77
+        },
+        "cost": 0.0010626,
+        "duration_ms": 5672,
+        "status": "success",
+        "raw_usage": {
+          "prompt_tokens": 8590,
+          "completion_tokens": 274,
+          "prompt_tokens_details": {
+            "cached_tokens": 7680
+          },
+          "cache_creation_input_tokens": 0,
+          "completion_tokens_details": {
+            "thinking_tokens": 77,
+            "reasoning_tokens": 77
+          }
+        },
+        "output_cache_tokens": null
+      },
+      {
+        "call_index": 8,
+        "started_at": "2026-09-21T06:28:58.549Z",
+        "finished_at": "2026-09-21T06:29:02.463Z",
+        "usage": {
+          "input": 958,
+          "cache_read": 8448,
+          "cache_write": 0,
+          "output": 268,
+          "reasoning": 63
+        },
+        "cost": 0.00111588,
+        "duration_ms": 3914,
+        "status": "success",
+        "raw_usage": {
+          "prompt_tokens": 9406,
+          "completion_tokens": 268,
+          "prompt_tokens_details": {
+            "cached_tokens": 8448
+          },
+          "cache_creation_input_tokens": 0,
+          "completion_tokens_details": {
+            "thinking_tokens": 63,
+            "reasoning_tokens": 63
+          }
+        },
+        "output_cache_tokens": null
+      },
+      {
+        "call_index": 9,
+        "started_at": "2026-09-21T06:29:04.562Z",
+        "finished_at": "2026-09-21T06:29:06.208Z",
+        "usage": {
+          "input": 1000,
+          "cache_read": 9216,
+          "cache_write": 0,
+          "output": 75,
+          "reasoning": 29
+        },
+        "cost": 0.0009429600000000001,
+        "duration_ms": 1646,
+        "status": "success",
+        "raw_usage": {
+          "prompt_tokens": 10216,
+          "completion_tokens": 75,
+          "prompt_tokens_details": {
+            "cached_tokens": 9216
+          },
+          "cache_creation_input_tokens": 0,
+          "completion_tokens_details": {
+            "thinking_tokens": 29,
+            "reasoning_tokens": 29
+          }
+        },
+        "output_cache_tokens": null
+      },
+      {
+        "call_index": 10,
+        "started_at": "2026-09-21T06:29:10.690Z",
+        "finished_at": "2026-09-21T06:29:13.484Z",
+        "usage": {
+          "input": 3404,
+          "cache_read": 4096,
+          "cache_write": 0,
+          "output": 139,
+          "reasoning": 59
+        },
+        "cost": 0.0014337599999999999,
+        "duration_ms": 2794,
+        "status": "success",
+        "raw_usage": {
+          "prompt_tokens": 7500,
+          "completion_tokens": 139,
+          "prompt_tokens_details": {
+            "cached_tokens": 4096
+          },
+          "cache_creation_input_tokens": 0,
+          "completion_tokens_details": {
+            "thinking_tokens": 59,
+            "reasoning_tokens": 59
+          }
+        },
+        "output_cache_tokens": null
+      },
+      {
+        "call_index": 11,
+        "started_at": "2026-09-21T06:29:24.963Z",
+        "finished_at": "2026-09-21T06:29:28.259Z",
+        "usage": {
+          "input": 2636,
+          "cache_read": 5632,
+          "cache_write": 0,
+          "output": 183,
+          "reasoning": 126
+        },
+        "cost": 0.0013483199999999999,
+        "duration_ms": 3296,
+        "status": "success",
+        "raw_usage": {
+          "prompt_tokens": 8268,
+          "completion_tokens": 183,
+          "prompt_tokens_details": {
+            "cached_tokens": 5632
+          },
+          "cache_creation_input_tokens": 0,
+          "completion_tokens_details": {
+            "thinking_tokens": 126,
+            "reasoning_tokens": 126
+          }
+        },
+        "output_cache_tokens": null
+      },
+      {
+        "call_index": 12,
+        "started_at": "2026-09-21T06:29:40.248Z",
+        "finished_at": "2026-09-21T06:29:48.810Z",
+        "usage": {
+          "input": 2221,
+          "cache_read": 5888,
+          "cache_write": 0,
+          "output": 623,
+          "reasoning": 174
+        },
+        "cost": 0.0017671800000000001,
+        "duration_ms": 8562,
+        "status": "success",
+        "raw_usage": {
+          "prompt_tokens": 8109,
+          "completion_tokens": 623,
+          "prompt_tokens_details": {
+            "cached_tokens": 5888
+          },
+          "cache_creation_input_tokens": 0,
+          "completion_tokens_details": {
+            "thinking_tokens": 174,
+            "reasoning_tokens": 174
+          }
+        },
+        "output_cache_tokens": null
+      }
+    ],
+    "model_steps": 12,
+    "retry_count": 0,
+    "failed_steps": 0,
+    "incomplete_steps": 0,
+    "final_screenshot": "final.png",
+    "attempt_number": 1,
+    "attempt_directory": "Allrecipes--1",
+    "judge_mode": "reference",
+    "metrics": {
+      "metrics_version": 1,
+      "input_tokens": 87422,
+      "output_tokens": 2834,
+      "uncached_input_tokens": 26494,
+      "cache_hit_tokens": 60928,
+      "cache_miss_tokens": 26494,
+      "cache_write_tokens": 0,
+      "output_cache_tokens": null,
+      "reasoning_tokens": 1144,
+      "total_tokens": 90256,
+      "cache_hit_rate": 0.6969412733636842,
+      "agent_cost_usd": 0.015004679999999998,
+      "judge_cost_usd": 0.0012349799999999999,
+      "total_cost_usd": 0.016239659999999996,
+      "observed_cost_usd": 0.016239659999999996,
+      "agent_duration_ms": 123563,
+      "judge_duration_ms": 3649,
+      "active_duration_ms": 127212
+    },
+    "judge_result": {
+      "task_id": "Allrecipes--1",
+      "mode": "reference",
+      "rubric_version": "opencode-browser-856867996e73f7dcc5e39827bf2af7555bd63d40-judge-prompt.md",
+      "pass": true,
+      "reason": "Agent found 'Debbie's Vegetable Lasagna' which is vegetarian, has a 4.7-star rating (above 4-star minimum), and includes zucchini (2 cups coarsely chopped zucchini), meeting all task requirements.",
+      "status": "judged",
+      "model": "MiniMax-M3",
+      "request_count": 1,
+      "usage_missing_calls": 0,
+      "unpriced_calls": 0,
+      "tokens": {
+        "input": 3527,
+        "output": 141,
+        "cache_read": 128,
+        "cache_write": 0,
+        "reasoning": 62
+      },
+      "tokens_observed": {
+        "input": 3527,
+        "output": 141,
+        "cache_read": 128,
+        "cache_write": 0,
+        "reasoning": 62
+      },
+      "usage_metrics": {
+        "input_tokens": 3655,
+        "output_tokens": 141,
+        "uncached_input_tokens": 3527,
+        "cache_hit_tokens": 128,
+        "cache_miss_tokens": 3527,
+        "cache_write_tokens": 0,
+        "output_cache_tokens": null,
+        "reasoning_tokens": 62,
+        "total_tokens": 3796,
+        "cache_hit_rate": 0.03502051983584131
+      },
+      "usage_observed": {
+        "input_tokens": 3655,
+        "output_tokens": 141,
+        "uncached_input_tokens": 3527,
+        "cache_hit_tokens": 128,
+        "cache_miss_tokens": 3527,
+        "cache_write_tokens": 0,
+        "output_cache_tokens": null,
+        "reasoning_tokens": 62,
+        "total_tokens": 3796,
+        "cache_hit_rate": 0.03502051983584131
+      },
+      "cost": 0.0012349799999999999,
+      "cost_observed": 0.0012349799999999999,
+      "model_duration_ms": 3646,
+      "requests": 1,
+      "model_calls": [
+        {
+          "call_index": 1,
+          "started_at": "2026-09-21T06:29:50.689Z",
+          "usage": {
+            "input": 3527,
+            "cache_read": 128,
+            "cache_write": 0,
+            "output": 141,
+            "reasoning": 62
+          },
+          "cost": 0.0012349799999999999,
+          "status": "success",
+          "output_cache_tokens": null,
+          "raw_usage": {
+            "prompt_tokens": 3655,
+            "completion_tokens": 141,
+            "prompt_tokens_details": {
+              "cached_tokens": 128
+            },
+            "cache_creation_input_tokens": 0,
+            "completion_tokens_details": {
+              "thinking_tokens": 62,
+              "reasoning_tokens": 62
+            }
+          },
+          "finished_at": "2026-09-21T06:29:54.335Z",
+          "duration_ms": 3646
+        }
+      ],
+      "started_at": "2026-09-21T06:29:50.689Z",
+      "finished_at": "2026-09-21T06:29:54.338Z",
+      "duration_ms": 3649,
+      "prompt_sha256": "bcdf403484823037eaeb6cec7918b966fe90ee31a30bc8d69094d2ff42747ccf"
+    },
+    "evaluation_finished_at": "2026-09-21T06:29:54.338Z"
+  }
+}

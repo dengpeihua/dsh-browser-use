@@ -1,0 +1,560 @@
+{
+  "task_id": "Allrecipes--16",
+  "website": "https://www.allrecipes.com/",
+  "task": "Find a five-star rated chocolate chip cookie recipe that takes less than 1 hour to make on Allrecipes. Note how many reviews the recipe has and the main ingredients required.",
+  "status": "completed",
+  "duration_ms": 162565,
+  "steps": 12,
+  "browser_steps": 12,
+  "model_rounds": 13,
+  "cost": 0.0201153,
+  "tokens": {
+    "input": 30555,
+    "output": 5220,
+    "cache_read": 78080,
+    "cache_write": 0,
+    "reasoning": 3306
+  },
+  "final_answer": "I have all the information needed. Let me compile the complete answer.\n\n## Recipe Found: Chocolate Chocolate Chip Cookies\n\nI successfully found a five-star rated chocolate chip cookie recipe on Allrecipes that takes less than 1 hour to make.\n\n### Recipe Details:\n- **Name**: Chocolate Chocolate Chip Cookies\n- **Rating**: ⭐ 4.8 stars (displayed as 5 full stars on the search results page — the highest visual rating among chocolate chip cookie recipes)\n- **Number of Reviews**: **3,330 Reviews** (with 4,270 total ratings)\n- **Total Time**: **25 minutes** (15 mins prep + 10 mins cook) — well under 1 hour ✓\n- **Yield**: 48 cookies\n- **Submitted by**: Kathy\n\n### Main Ingredients:\n1. **1½ cups white sugar**\n2. **1 cup butter, softened**\n3. **2 large eggs**\n4. **2 teaspoons vanilla extract**\n5. **2 cups all-purpose flour**\n6. **⅔ cup cocoa powder**\n7. **¾ teaspoon baking soda**\n8. **¼ teaspoon salt**\n9. **2 cups semisweet chocolate chips**\n10. **½ cup chopped walnuts** (Optional)\n\nThis recipe is described as chewy chocolate chocolate chip cookies made with cocoa powder and chocolate chips to guarantee chocolaty flavor in every bite. The recipe qualifies as a \"five-star rated\" chocolate chip cookie recipe that takes well under 1 hour to prepare and bake.",
+  "tool_trace": [
+    {
+      "tool": "browser_start",
+      "input": {
+        "url": "https://www.allrecipes.com/"
+      },
+      "call_id": "call_69097813f6f54cdaac7455",
+      "time_ms": 9123,
+      "output_preview": "# Browser Mode\n\nThe DSH browser plugin controls a real Chromium instance isolated to the current Agent Session.\n\n- DOM markers `[N]` are clickable and `<N>` are inputs.\n- Match element labels or nearby text, and use DOM indentation to distinguish parents, children, and siblings; do not choose by mar",
+      "status": "success"
+    },
+    {
+      "tool": "browser_click",
+      "input": {
+        "elementIndex": 22
+      },
+      "call_id": "call_5720265fd3354ad8b3923a",
+      "time_ms": 12093,
+      "output_preview": "Clicked <input id='mntl-search-form--open__search-input' name='q' placeholder='Find a recipe or ingredient' required='required'></input> Action dispatched; outcome not verified. Check the returned page before claiming success.\n\n\n<!-- DOM_START dom0.1 tab:tab0 mode:nochange -->\n(stateId: tab0-dom0.1)",
+      "status": "success"
+    },
+    {
+      "tool": "browser_input",
+      "input": {
+        "elementIndex": 22,
+        "pressEnter": true,
+        "text": "chocolate chip cookies"
+      },
+      "call_id": "call_b9eff19aedaa44b785204f",
+      "time_ms": 4235,
+      "output_preview": "Input \"chocolate chip cookies\" into <input id='mntl-search-form--open__search-input' name='q' placeholder='Find a recipe or ingredient' required='required'></input> and pressed Enter Action dispatched; outcome not verified. Check the returned page before claiming success.\n\n\n<!-- DOM_START dom1 tab:t",
+      "status": "success"
+    },
+    {
+      "tool": "browser_click",
+      "input": {
+        "elementIndex": 10969
+      },
+      "call_id": "call_9375aa059c68406692d6fe",
+      "time_ms": 7462,
+      "output_preview": "Clicked <a id='mntl-card-list-card--extendable_1-0'> a close up view of a pile of best ever chocolate chip cookies with one broken in half Save Recipe CHOCOLATE CHIP COOKIE RECIPES Best Chocolate Chip Cookies 19,465 Ratings </a> Action dispatched; outcome not verified. Check the returned page before",
+      "status": "success"
+    },
+    {
+      "tool": "browser_goto",
+      "input": {
+        "url": "https://www.allrecipes.com/search?q=chocolate+chip+cookies&rating=5"
+      },
+      "call_id": "call_3f54dfafc20548be9a33dd",
+      "time_ms": 11223,
+      "output_preview": "Navigated to https://www.allrecipes.com/search?q=chocolate+chip+cookies&rating=5\n\n\n<!-- DOM_START dom3 tab:tab0 mode:full -->\n(stateId: tab0-dom3)\n## Current Page DOM Structure\n\n\n<header></header>\n=== OFF-SCREEN above [container:0] (scroll to reveal these elements) ===\n\t<a id='mntl-skip-to-content_1",
+      "status": "success"
+    },
+    {
+      "tool": "browser_goto",
+      "input": {
+        "url": "https://www.allrecipes.com/search?q=chocolate+chip+cookies&sort=relevance"
+      },
+      "call_id": "call_f81fc594428d4aaabd99b4",
+      "time_ms": 3112,
+      "output_preview": "Navigated to https://www.allrecipes.com/search?q=chocolate+chip+cookies&sort=relevance\n\n\n<!-- DOM_START dom4 tab:tab0 mode:full -->\n(stateId: tab0-dom4)\n## Current Page DOM Structure\n\n\n<header></header>\n=== OFF-SCREEN above [container:0] (scroll to reveal these elements) ===\n\t<a id='mntl-skip-to-con",
+      "status": "success"
+    },
+    {
+      "tool": "browser_execute_script",
+      "input": {
+        "script": "const results = [];\ndocument.querySelectorAll('a[id*=\"mntl-card-list-card\"]').forEach(card => {\n  const titleEl = card.querySelector('span');\n  const ratingTextEl = card.querySelector('[id*=\"mntl-recipe-card-meta\"] div div');\n  const ratingCount = card.querySelector('[id*=\"mntl-recipe-star-rating\"]')?.parentElement?.nextElementSibling?.textContent;\n  const ratingImg = card.querySelectorAll('svg');\n  results.push({\n    title: titleEl?.textContent?.trim(),\n    ratingEl: ratingTextEl?.textContent?.trim(),\n    ratingCount: ratingCount,\n    fullCardText: card.textContent.trim().substring(0, 300)\n  });\n});\nreturn results;\n"
+      },
+      "call_id": "call_1170af8202d3429887d388",
+      "time_ms": 2258,
+      "output_preview": "\n\n<!-- DOM_START dom4.1 tab:tab0 mode:nochange -->\n(stateId: tab0-dom4.1)\n## Current Page DOM Structure\n\n\nNo DOM changes detected after the previous action.\nscrollMap:\n[container:0] 5 pages (coverage resets on content/layout changes) | viewing P0 | unexplored P1-4\n[container:1] 11 pages (coverage re",
+      "status": "success"
+    },
+    {
+      "tool": "browser_execute_script",
+      "input": {
+        "script": "const data = [];\ndocument.querySelectorAll('a[id*=\"mntl-card-list-card\"]').forEach(card => {\n  const title = card.querySelector('span')?.textContent?.trim();\n  // Get rating container with the actual rating text\n  const allDivs = card.querySelectorAll('div');\n  let rating = '';\n  let reviewCount = '';\n  allDivs.forEach(div => {\n    const txt = div.textContent.trim();\n    if (/^\\d\\.\\d$/.test(txt) && !rating) rating = txt;\n    if (txt.includes('Reviews') && !reviewCount) reviewCount = txt;\n  });\n  data.push({title, rating, reviewCount});\n});\nreturn data;\n"
+      },
+      "call_id": "call_5a75cb7f00f14c1eb76d60",
+      "time_ms": 2022,
+      "output_preview": "\n\n<!-- DOM_START dom4.2 tab:tab0 mode:nochange -->\n(stateId: tab0-dom4.2)\n## Current Page DOM Structure\n\n\nNo DOM changes detected after the previous action.\nscrollMap:\n[container:0] 5 pages (coverage resets on content/layout changes) | viewing P0 | unexplored P1-4\n[container:1] 11 pages (coverage re",
+      "status": "success"
+    },
+    {
+      "tool": "browser_execute_script",
+      "input": {
+        "script": "const ratingEls = document.querySelectorAll('[id*=\"mntl-recipe-star-rating\"]');\nconst result = [];\nratingEls.forEach(el => {\n  result.push({\n    id: el.id,\n    ariaLabel: el.getAttribute('aria-label'),\n    title: el.getAttribute('title'),\n    innerHTML: el.innerHTML.substring(0, 500),\n    outerHTML: el.outerHTML.substring(0, 1000)\n  });\n});\nreturn result.slice(0, 3);\n"
+      },
+      "call_id": "call_71808e0905d84d4aa64d85",
+      "time_ms": 1970,
+      "output_preview": "\n\n<!-- DOM_START dom4.3 tab:tab0 mode:nochange -->\n(stateId: tab0-dom4.3)\n## Current Page DOM Structure\n\n\nNo DOM changes detected after the previous action.\nscrollMap:\n[container:0] 5 pages (coverage resets on content/layout changes) | viewing P0 | unexplored P1-4\n[container:1] 11 pages (coverage re",
+      "status": "success"
+    },
+    {
+      "tool": "browser_execute_script",
+      "input": {
+        "script": "const results = [];\ndocument.querySelectorAll('a[id*=\"mntl-card-list-card\"]').forEach(card => {\n  const title = card.querySelector('span')?.textContent?.trim();\n  const ratingEl = card.querySelector('[id*=\"mntl-recipe-star-rating\"]');\n  let rating = 0;\n  if (ratingEl) {\n    const fullStars = ratingEl.querySelectorAll('svg.icon-star').length;\n    const halfStars = ratingEl.querySelectorAll('svg.icon-star-half').length;\n    const emptyStars = ratingEl.querySelectorAll('svg.icon-star-empty').length;\n    // Use SVG count: full + half = (e.g. 4 full + 1 half = 4.5)\n    rating = fullStars + (halfStars * 0.5);\n  }\n  const ratingCountEl = ratingEl?.parentElement?.querySelector('div[class*=\"rating-count\"]') || card.querySelector('[id*=\"mntl-recipe-card-meta\"] > div:last-child');\n  const ratingCount = ratingCountEl?.textContent?.trim();\n  // Get reviews from the full text\n  const allText = card.textContent;\n  const reviewMatch = allText.match(/(\\d+)\\s*Reviews?/);\n  const ratingsMatch = allText.match(/(\\d+)\\s*Ratings?/);\n  results.push({title, rating, ratingsCount: ratingsMatch?.[1], reviewsCount: reviewMatch?.[1]});\n});\nreturn results;\n"
+      },
+      "call_id": "call_51b11c1944384f5dabbecf",
+      "time_ms": 1844,
+      "output_preview": "\n\n<!-- DOM_START dom4.4 tab:tab0 mode:nochange -->\n(stateId: tab0-dom4.4)\n## Current Page DOM Structure\n\n\nNo DOM changes detected after the previous action.\nscrollMap:\n[container:0] 5 pages (coverage resets on content/layout changes) | viewing P0 | unexplored P1-4\n[container:1] 11 pages (coverage re",
+      "status": "success"
+    },
+    {
+      "tool": "browser_click",
+      "input": {
+        "elementIndex": 37022
+      },
+      "call_id": "call_7180a52fbc90420cba0d59",
+      "time_ms": 5353,
+      "output_preview": "Clicked <a id='mntl-card-list-card--extendable_2-0'> a plate full of chocolate chocolate chip cookies Save Recipe DOUBLE CHOCOLATE Chocolate Chocolate Chip Cookies 4,270 Ratings </a> Action dispatched; outcome not verified. Check the returned page before claiming success.\n\n\n<!-- DOM_START dom5 tab:t",
+      "status": "success"
+    },
+    {
+      "tool": "browser_execute_script",
+      "input": {
+        "script": "const ingredients = [];\ndocument.querySelectorAll('li[data-ingredient-name], ul.mm-recipes-ingredients__list li, #mntl-structured-ingredients__list_1-0 li, [class*=\"ingredient\"] li').forEach(li => {\n  const txt = li.textContent.trim().replace(/\\s+/g, ' ');\n  if (txt && txt.length < 200) ingredients.push(txt);\n});\nreturn ingredients.length ? ingredients : Array.from(document.querySelectorAll('ul li')).slice(0, 30).map(li => li.textContent.trim().replace(/\\s+/g, ' ')).filter(t => t.length > 5 && t.length < 200);\n"
+      },
+      "call_id": "call_b97aa7be8b7c4890801a01",
+      "time_ms": 11507,
+      "output_preview": "\n\n<!-- DOM_START dom5.1 tab:tab0 mode:incremental -->\n(stateId: tab0-dom5.1)\n## Incremental DOM updates\n\n\n<div></div>\n\t+|[55416][view:ffebg]<video></video>\n=== OFF-SCREEN below [container:0] (scroll to reveal these elements) ===\n+|<div></div>\n\t+|Would you like to\n\t+|send this recipe\n\t+|to yourself?\n",
+      "status": "success"
+    }
+  ],
+  "error": null,
+  "model": "MiniMax-M3",
+  "provider": "minimax-cn",
+  "protocol": "anthropic-messages",
+  "reasoning_effort": "high",
+  "session_id": "eval-Allrecipes--16-f0e2e391ccf7",
+  "started_at": "2026-09-21T07:06:00.105Z",
+  "finished_at": "2026-09-21T07:08:42.670Z",
+  "duration_basis": "worker initialization to agent stop; excludes judge, screenshots and cleanup",
+  "infrastructure_error": null,
+  "request_count": 13,
+  "usage_missing_calls": 0,
+  "unpriced_calls": 0,
+  "tokens_observed": {
+    "input": 30555,
+    "output": 5220,
+    "cache_read": 78080,
+    "cache_write": 0,
+    "reasoning": 3306
+  },
+  "usage_metrics": {
+    "input_tokens": 108635,
+    "output_tokens": 5220,
+    "uncached_input_tokens": 30555,
+    "cache_hit_tokens": 78080,
+    "cache_miss_tokens": 30555,
+    "cache_write_tokens": 0,
+    "output_cache_tokens": null,
+    "reasoning_tokens": 3306,
+    "total_tokens": 113855,
+    "cache_hit_rate": 0.7187370552768445
+  },
+  "usage_observed": {
+    "input_tokens": 108635,
+    "output_tokens": 5220,
+    "uncached_input_tokens": 30555,
+    "cache_hit_tokens": 78080,
+    "cache_miss_tokens": 30555,
+    "cache_write_tokens": 0,
+    "output_cache_tokens": null,
+    "reasoning_tokens": 3306,
+    "total_tokens": 113855,
+    "cache_hit_rate": 0.7187370552768445
+  },
+  "cost_observed": 0.0201153,
+  "model_duration_ms": 89814,
+  "model_calls": [
+    {
+      "call_index": 1,
+      "started_at": "2026-09-21T07:06:00.149Z",
+      "finished_at": "2026-09-21T07:06:02.805Z",
+      "usage": {
+        "input": 269,
+        "cache_read": 2560,
+        "cache_write": 0,
+        "output": 114,
+        "reasoning": 56
+      },
+      "cost": 0.00037109999999999997,
+      "duration_ms": 2656,
+      "status": "success",
+      "raw_usage": {
+        "prompt_tokens": 2829,
+        "completion_tokens": 114,
+        "prompt_tokens_details": {
+          "cached_tokens": 2560
+        },
+        "cache_creation_input_tokens": 0,
+        "completion_tokens_details": {
+          "thinking_tokens": 56,
+          "reasoning_tokens": 56
+        }
+      },
+      "output_cache_tokens": null
+    },
+    {
+      "call_index": 2,
+      "started_at": "2026-09-21T07:06:11.967Z",
+      "finished_at": "2026-09-21T07:06:13.741Z",
+      "usage": {
+        "input": 3044,
+        "cache_read": 2816,
+        "cache_write": 0,
+        "output": 78,
+        "reasoning": 29
+      },
+      "cost": 0.0011757599999999999,
+      "duration_ms": 1774,
+      "status": "success",
+      "raw_usage": {
+        "prompt_tokens": 5860,
+        "completion_tokens": 78,
+        "prompt_tokens_details": {
+          "cached_tokens": 2816
+        },
+        "cache_creation_input_tokens": 0,
+        "completion_tokens_details": {
+          "thinking_tokens": 29,
+          "reasoning_tokens": 29
+        }
+      },
+      "output_cache_tokens": null
+    },
+    {
+      "call_index": 3,
+      "started_at": "2026-09-21T07:06:25.857Z",
+      "finished_at": "2026-09-21T07:06:27.890Z",
+      "usage": {
+        "input": 926,
+        "cache_read": 5632,
+        "cache_write": 0,
+        "output": 81,
+        "reasoning": 18
+      },
+      "cost": 0.0007129199999999999,
+      "duration_ms": 2033,
+      "status": "success",
+      "raw_usage": {
+        "prompt_tokens": 6558,
+        "completion_tokens": 81,
+        "prompt_tokens_details": {
+          "cached_tokens": 5632
+        },
+        "cache_creation_input_tokens": 0,
+        "completion_tokens_details": {
+          "thinking_tokens": 18,
+          "reasoning_tokens": 18
+        }
+      },
+      "output_cache_tokens": null
+    },
+    {
+      "call_index": 4,
+      "started_at": "2026-09-21T07:06:32.176Z",
+      "finished_at": "2026-09-21T07:06:35.195Z",
+      "usage": {
+        "input": 3511,
+        "cache_read": 3328,
+        "cache_write": 0,
+        "output": 155,
+        "reasoning": 85
+      },
+      "cost": 0.0014389799999999999,
+      "duration_ms": 3019,
+      "status": "success",
+      "raw_usage": {
+        "prompt_tokens": 6839,
+        "completion_tokens": 155,
+        "prompt_tokens_details": {
+          "cached_tokens": 3328
+        },
+        "cache_creation_input_tokens": 0,
+        "completion_tokens_details": {
+          "thinking_tokens": 85,
+          "reasoning_tokens": 85
+        }
+      },
+      "output_cache_tokens": null
+    },
+    {
+      "call_index": 5,
+      "started_at": "2026-09-21T07:06:42.684Z",
+      "finished_at": "2026-09-21T07:06:47.595Z",
+      "usage": {
+        "input": 2384,
+        "cache_read": 3584,
+        "cache_write": 0,
+        "output": 312,
+        "reasoning": 216
+      },
+      "cost": 0.0013046400000000001,
+      "duration_ms": 4911,
+      "status": "success",
+      "raw_usage": {
+        "prompt_tokens": 5968,
+        "completion_tokens": 312,
+        "prompt_tokens_details": {
+          "cached_tokens": 3584
+        },
+        "cache_creation_input_tokens": 0,
+        "completion_tokens_details": {
+          "thinking_tokens": 216,
+          "reasoning_tokens": 216
+        }
+      },
+      "output_cache_tokens": null
+    },
+    {
+      "call_index": 6,
+      "started_at": "2026-09-21T07:06:58.851Z",
+      "finished_at": "2026-09-21T07:07:07.574Z",
+      "usage": {
+        "input": 3665,
+        "cache_read": 3840,
+        "cache_write": 0,
+        "output": 322,
+        "reasoning": 258
+      },
+      "cost": 0.0017163,
+      "duration_ms": 8723,
+      "status": "success",
+      "raw_usage": {
+        "prompt_tokens": 7505,
+        "completion_tokens": 322,
+        "prompt_tokens_details": {
+          "cached_tokens": 3840
+        },
+        "cache_creation_input_tokens": 0,
+        "completion_tokens_details": {
+          "thinking_tokens": 258,
+          "reasoning_tokens": 258
+        }
+      },
+      "output_cache_tokens": null
+    },
+    {
+      "call_index": 7,
+      "started_at": "2026-09-21T07:07:10.743Z",
+      "finished_at": "2026-09-21T07:07:15.965Z",
+      "usage": {
+        "input": 3560,
+        "cache_read": 4352,
+        "cache_write": 0,
+        "output": 283,
+        "reasoning": 74
+      },
+      "cost": 0.0016687199999999998,
+      "duration_ms": 5222,
+      "status": "success",
+      "raw_usage": {
+        "prompt_tokens": 7912,
+        "completion_tokens": 283,
+        "prompt_tokens_details": {
+          "cached_tokens": 4352
+        },
+        "cache_creation_input_tokens": 0,
+        "completion_tokens_details": {
+          "thinking_tokens": 74,
+          "reasoning_tokens": 74
+        }
+      },
+      "output_cache_tokens": null
+    },
+    {
+      "call_index": 8,
+      "started_at": "2026-09-21T07:07:18.282Z",
+      "finished_at": "2026-09-21T07:07:23.883Z",
+      "usage": {
+        "input": 1116,
+        "cache_read": 7680,
+        "cache_write": 0,
+        "output": 225,
+        "reasoning": 33
+      },
+      "cost": 0.0010655999999999999,
+      "duration_ms": 5601,
+      "status": "success",
+      "raw_usage": {
+        "prompt_tokens": 8796,
+        "completion_tokens": 225,
+        "prompt_tokens_details": {
+          "cached_tokens": 7680
+        },
+        "cache_creation_input_tokens": 0,
+        "completion_tokens_details": {
+          "thinking_tokens": 33,
+          "reasoning_tokens": 33
+        }
+      },
+      "output_cache_tokens": null
+    },
+    {
+      "call_index": 9,
+      "started_at": "2026-09-21T07:07:25.939Z",
+      "finished_at": "2026-09-21T07:07:29.346Z",
+      "usage": {
+        "input": 1305,
+        "cache_read": 8704,
+        "cache_write": 0,
+        "output": 187,
+        "reasoning": 44
+      },
+      "cost": 0.00113814,
+      "duration_ms": 3407,
+      "status": "success",
+      "raw_usage": {
+        "prompt_tokens": 10009,
+        "completion_tokens": 187,
+        "prompt_tokens_details": {
+          "cached_tokens": 8704
+        },
+        "cache_creation_input_tokens": 0,
+        "completion_tokens_details": {
+          "thinking_tokens": 44,
+          "reasoning_tokens": 44
+        }
+      },
+      "output_cache_tokens": null
+    },
+    {
+      "call_index": 10,
+      "started_at": "2026-09-21T07:07:31.348Z",
+      "finished_at": "2026-09-21T07:07:40.761Z",
+      "usage": {
+        "input": 2461,
+        "cache_read": 9984,
+        "cache_write": 0,
+        "output": 701,
+        "reasoning": 316
+      },
+      "cost": 0.00217854,
+      "duration_ms": 9413,
+      "status": "success",
+      "raw_usage": {
+        "prompt_tokens": 12445,
+        "completion_tokens": 701,
+        "prompt_tokens_details": {
+          "cached_tokens": 9984
+        },
+        "cache_creation_input_tokens": 0,
+        "completion_tokens_details": {
+          "thinking_tokens": 316,
+          "reasoning_tokens": 316
+        }
+      },
+      "output_cache_tokens": null
+    },
+    {
+      "call_index": 11,
+      "started_at": "2026-09-21T07:07:42.640Z",
+      "finished_at": "2026-09-21T07:07:48.925Z",
+      "usage": {
+        "input": 1906,
+        "cache_read": 12288,
+        "cache_write": 0,
+        "output": 351,
+        "reasoning": 287
+      },
+      "cost": 0.0017302799999999998,
+      "duration_ms": 6285,
+      "status": "success",
+      "raw_usage": {
+        "prompt_tokens": 14194,
+        "completion_tokens": 351,
+        "prompt_tokens_details": {
+          "cached_tokens": 12288
+        },
+        "cache_creation_input_tokens": 0,
+        "completion_tokens_details": {
+          "thinking_tokens": 287,
+          "reasoning_tokens": 287
+        }
+      },
+      "output_cache_tokens": null
+    },
+    {
+      "call_index": 12,
+      "started_at": "2026-09-21T07:07:54.343Z",
+      "finished_at": "2026-09-21T07:08:10.469Z",
+      "usage": {
+        "input": 4182,
+        "cache_read": 4608,
+        "cache_write": 0,
+        "output": 1065,
+        "reasoning": 846
+      },
+      "cost": 0.00280908,
+      "duration_ms": 16126,
+      "status": "success",
+      "raw_usage": {
+        "prompt_tokens": 8790,
+        "completion_tokens": 1065,
+        "prompt_tokens_details": {
+          "cached_tokens": 4608
+        },
+        "cache_creation_input_tokens": 0,
+        "completion_tokens_details": {
+          "thinking_tokens": 846,
+          "reasoning_tokens": 846
+        }
+      },
+      "output_cache_tokens": null
+    },
+    {
+      "call_index": 13,
+      "started_at": "2026-09-21T07:08:22.001Z",
+      "finished_at": "2026-09-21T07:08:42.645Z",
+      "usage": {
+        "input": 2226,
+        "cache_read": 8704,
+        "cache_write": 0,
+        "output": 1346,
+        "reasoning": 1044
+      },
+      "cost": 0.0028052399999999996,
+      "duration_ms": 20644,
+      "status": "success",
+      "raw_usage": {
+        "prompt_tokens": 10930,
+        "completion_tokens": 1346,
+        "prompt_tokens_details": {
+          "cached_tokens": 8704
+        },
+        "cache_creation_input_tokens": 0,
+        "completion_tokens_details": {
+          "thinking_tokens": 1044,
+          "reasoning_tokens": 1044
+        }
+      },
+      "output_cache_tokens": null
+    }
+  ],
+  "model_steps": 13,
+  "retry_count": 0,
+  "failed_steps": 0,
+  "incomplete_steps": 0,
+  "final_screenshot": "final.png"
+}

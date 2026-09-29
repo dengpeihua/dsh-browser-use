@@ -1,0 +1,2107 @@
+{
+  "previous": "b0b5a0d0f6b25106a4dc76e38519aa7a3742412e7b86b4d78815771bc8dccf8d",
+  "result": {
+    "task_id": "Google Map--12",
+    "website": "https://www.google.com/maps/",
+    "task": "Find 5 places that serve burgers near 44012 zip code and sort these 5 places by highest rating.",
+    "status": "step_limit",
+    "duration_ms": 282162,
+    "steps": 50,
+    "browser_steps": 50,
+    "model_rounds": 50,
+    "cost": 0.07034526,
+    "tokens": {
+      "input": 89857,
+      "output": 9936,
+      "cache_read": 524416,
+      "cache_write": 0,
+      "reasoning": 6295
+    },
+    "final_answer": "",
+    "tool_trace": [
+      {
+        "tool": "browser_goto",
+        "input": {
+          "url": "https://www.google.com/maps/"
+        },
+        "call_id": "call_b022caa3fd724ea7b13a659a",
+        "time_ms": 3,
+        "output_preview": "Error: browser_goto failed: Browser not started. Call browser_start first to enter browser mode.\nSafe retry: verify browser_start succeeded, refresh the DOM snapshot, and retry once with current element/tab IDs.\nStop condition: stop retrying if Chromium is unavailable, approval is denied, or the sam",
+        "status": "error"
+      },
+      {
+        "tool": "browser_start",
+        "input": {
+          "url": "https://www.google.com/maps/"
+        },
+        "call_id": "call_c926c3f83aa94e768087716e",
+        "time_ms": 13986,
+        "output_preview": "# Browser Mode\n\nThe DSH browser plugin controls a real Chromium instance isolated to the current Agent Session.\n\n- DOM markers `[N]` are clickable and `<N>` are inputs.\n- Match element labels or nearby text, and use DOM indentation to distinguish parents, children, and siblings; do not choose by mar",
+        "status": "success"
+      },
+      {
+        "tool": "browser_input",
+        "input": {
+          "elementIndex": 3,
+          "pressEnter": true,
+          "text": "burgers near 44012"
+        },
+        "call_id": "call_dded173b77ba44098b377d05",
+        "time_ms": 3307,
+        "output_preview": "Input \"burgers near 44012\" into <input role='combobox' id='ucc-1' aria-expanded='false' name='q'></input> and pressed Enter Action dispatched; outcome not verified. Check the returned page before claiming success.\n\n\n<!-- DOM_START dom1 tab:tab0 mode:full -->\n(stateId: tab0-dom1)\n## Current Page DOM ",
+        "status": "success"
+      },
+      {
+        "tool": "browser_click",
+        "input": {
+          "elementIndex": 756,
+          "expectText": "评分"
+        },
+        "call_id": "call_dea648d492ae4af88a033561",
+        "time_ms": 2498,
+        "output_preview": "Clicked <button> 评分 </button> Postcondition verified.\n\n\n<!-- DOM_START dom2 tab:tab0 mode:incremental -->\n(stateId: tab0-dom2)\n## Incremental DOM updates\n\n\n+|[1745]<div role='menuitemradio' aria-checked='false'> 评分不限 </div>\n\t+|<div> 评分不限 </div>\n+|[1748]<div role='menuitemradio' aria-checked='false'>",
+        "status": "success"
+      },
+      {
+        "tool": "browser_click",
+        "input": {
+          "elementIndex": 760
+        },
+        "call_id": "call_e7f3a48f814a414d96170dc6",
+        "time_ms": 1896,
+        "output_preview": "Clicked <span> 评分 </span> Action dispatched; outcome not verified. Check the returned page before claiming success.\n\n\n<!-- DOM_START dom2.1 tab:tab0 mode:incremental -->\n(stateId: tab0-dom2.1)\n## Incremental DOM updates\n\n\n+|<div></div>\n\t+|[1976]<div role='menuitemradio' aria-checked='false'> 评分不限 </",
+        "status": "success"
+      },
+      {
+        "tool": "browser_execute_script",
+        "input": {
+          "script": "() => { document.body.click(); return 'clicked'; }"
+        },
+        "call_id": "call_4fdc57b91ff64aaf92674596",
+        "time_ms": 532,
+        "output_preview": "\n\n<!-- DOM_START dom2.2 tab:tab0 mode:nochange -->\n(stateId: tab0-dom2.2)\n## Current Page DOM Structure\n\n\nNo DOM changes detected after the previous action.\nscrollMap:\n[container:1] 2 pages (coverage resets on content/layout changes) | viewing P0 | unexplored P1\n[container:2] 2 pages (coverage reset",
+        "status": "success"
+      },
+      {
+        "tool": "browser_observe",
+        "input": {
+          "format": "markdown"
+        },
+        "call_id": "call_54963986e72140898b1d8e7c",
+        "time_ms": 528,
+        "output_preview": "\n\n<!-- DOM_START dom2.3 tab:tab0 mode:full -->\n(stateId: tab0-dom2.3)\n## Current Page DOM Structure\n\n\n#DOCUMENT\n\tDIV\n\t\tDIV: 评分不限\n\t\tDIV: 2.0 星级\n\t\tDIV: 2.5 星级\n\t\tDIV: 3.0 星级\n\t\tDIV: 3.5 星级\n\t\tDIV: 4.0 星级\n\t\tDIV: 4.5 星级\n\tDIV\n\t\tDIV\n\t\t\tFORM\n\t\t\t\tCOMBOBOX: q | burgers near 44012 [expanded=false]\n\t\t\t\t\tDIV: burg",
+        "status": "success"
+      },
+      {
+        "tool": "browser_execute_script",
+        "input": {
+          "script": "() => { \n  const event = new KeyboardEvent('keydown', { key: 'Escape', keyCode: 27, which: 27, bubbles: true });\n  document.dispatchEvent(event);\n  document.body.dispatchEvent(event);\n  return 'escape pressed';\n}"
+        },
+        "call_id": "call_9d03db621c5643e0a839ea6e",
+        "time_ms": 593,
+        "output_preview": "\n\n<!-- DOM_START dom2.4 tab:tab0 mode:nochange -->\n(stateId: tab0-dom2.4)\n## Current Page DOM Structure\n\n\nNo DOM changes detected after the previous action.\nscrollMap:\n[container:1] 2 pages (coverage resets on content/layout changes) | viewing P0 | unexplored P1\n[container:2] 2 pages (coverage reset",
+        "status": "success"
+      },
+      {
+        "tool": "browser_execute_script",
+        "input": {
+          "script": "() => { \n  // Try to find and click the rating button to close the dropdown\n  const buttons = document.querySelectorAll('button');\n  for (const btn of buttons) {\n    if (btn.textContent.includes('评分')) {\n      btn.click();\n      return 'clicked 评分 button';\n    }\n  }\n  return 'not found';\n}"
+        },
+        "call_id": "call_507f8c8216dc46939dfdf030",
+        "time_ms": 777,
+        "output_preview": "\n\n<!-- DOM_START dom2.5 tab:tab0 mode:nochange -->\n(stateId: tab0-dom2.5)\n## Current Page DOM Structure\n\n\nNo DOM changes detected after the previous action.\nscrollMap:\n[container:1] 2 pages (coverage resets on content/layout changes) | viewing P0 | unexplored P1\n[container:2] 2 pages (coverage reset",
+        "status": "success"
+      },
+      {
+        "tool": "browser_observe",
+        "input": {
+          "format": "markdown"
+        },
+        "call_id": "call_e8d7e20f25f443e4bbf0c80f",
+        "time_ms": 401,
+        "output_preview": "\n\n<!-- DOM_START dom2.6 tab:tab0 mode:full -->\n(stateId: tab0-dom2.6)\n## Current Page DOM Structure\n\n\n#DOCUMENT\n\tDIV\n\t\tDIV: 评分不限\n\t\tDIV: 2.0 星级\n\t\tDIV: 2.5 星级\n\t\tDIV: 3.0 星级\n\t\tDIV: 3.5 星级\n\t\tDIV: 4.0 星级\n\t\tDIV: 4.5 星级\n\tDIV\n\t\tDIV\n\t\t\tFORM\n\t\t\t\tCOMBOBOX: q | burgers near 44012 [expanded=false]\n\t\t\t\t\tDIV: burg",
+        "status": "success"
+      },
+      {
+        "tool": "browser_click",
+        "input": {
+          "elementIndex": 672,
+          "expectText": "评分不限"
+        },
+        "call_id": "call_a582b94da10445debf42a08f",
+        "time_ms": 12,
+        "output_preview": "Element [672] not found or not clickable in the current DOM. No click was performed. Call browser_observe and choose a current [N] marker in the active tab; archived observations and removed delta lines are not live targets.\n\nNext actions:\n- Inspect the failure or partial result and re-observe befor",
+        "status": "error"
+      },
+      {
+        "tool": "browser_observe",
+        "input": {
+          "format": "markdown"
+        },
+        "call_id": "call_1b56c52d684b4b38be96cf78",
+        "time_ms": 705,
+        "output_preview": "\n\n<!-- DOM_START dom2.7 tab:tab0 mode:full -->\n(stateId: tab0-dom2.7)\n## Current Page DOM Structure\n\n\n#DOCUMENT\n\tDIV\n\t\tDIV: 评分不限\n\t\tDIV: 2.0 星级\n\t\tDIV: 2.5 星级\n\t\tDIV: 3.0 星级\n\t\tDIV: 3.5 星级\n\t\tDIV: 4.0 星级\n\t\tDIV: 4.5 星级\n\tDIV\n\t\tDIV\n\t\t\tFORM\n\t\t\t\tCOMBOBOX: q | burgers near 44012 [expanded=false]\n\t\t\t\t\tDIV: burg",
+        "status": "success"
+      },
+      {
+        "tool": "browser_click",
+        "input": {
+          "elementIndex": 1,
+          "expectText": "评分不限"
+        },
+        "call_id": "call_4135fd9c7a214a0695ffb067",
+        "time_ms": 4,
+        "output_preview": "Element [1] not found or not clickable in the current DOM. No click was performed. Call browser_observe and choose a current [N] marker in the active tab; archived observations and removed delta lines are not live targets.\n\nNext actions:\n- Inspect the failure or partial result and re-observe before ",
+        "status": "error"
+      },
+      {
+        "tool": "browser_execute_script",
+        "input": {
+          "script": "() => { \n  // Find the rating dropdown div and click on the 评分不限 element to close\n  const items = document.querySelectorAll('[role=\"menuitemradio\"]');\n  for (const item of items) {\n    if (item.textContent.includes('评分不限')) {\n      item.click();\n      return 'clicked 评分不限';\n    }\n  }\n  return 'not found, items: ' + items.length;\n}"
+        },
+        "call_id": "call_445421669c66481fac2e5a94",
+        "time_ms": 682,
+        "output_preview": "\n\n<!-- DOM_START dom2.8 tab:tab0 mode:nochange -->\n(stateId: tab0-dom2.8)\n## Current Page DOM Structure\n\n\nNo DOM changes detected after the previous action.\nscrollMap:\n[container:1] 2 pages (coverage resets on content/layout changes) | viewing P0 | unexplored P1\n[container:2] 2 pages (coverage reset",
+        "status": "success"
+      },
+      {
+        "tool": "browser_refresh",
+        "input": {},
+        "call_id": "call_f10f64a24a87446a9d5c27a7",
+        "time_ms": 11385,
+        "output_preview": "Page refreshed\n\n\n<!-- DOM_START dom2.9 tab:tab0 mode:full -->\n(stateId: tab0-dom2.9)\n## Current Page DOM Structure\n\n\n[3477]<div></div>\n\t[view:dcha]<canvas></canvas>\n<div></div>\n\t<form></form>\n\t\t<3275><input role='combobox' aria-expanded='false' name='q' value='burgers near 44012'></input>\n\t<div></di",
+        "status": "success"
+      },
+      {
+        "tool": "browser_execute_script",
+        "input": {
+          "script": "() => {\n  // Find all place listings in the search results\n  const resultItems = document.querySelectorAll('a[aria-label]');\n  const places = [];\n  for (const item of resultItems) {\n    const ariaLabel = item.getAttribute('aria-label');\n    if (ariaLabel && ariaLabel !== 'Google 应用' && !ariaLabel.includes('菜单') && !ariaLabel.includes('关闭')) {\n      // Get parent container to find rating\n      const parent = item.closest('[role=\"article\"]') || item.parentElement;\n      const parentText = parent ? parent.textContent : '';\n      // Try to find rating\n      const ratingMatch = parentText.match(/(\\d+\\.\\d+)\\s*\\(/);\n      places.push({\n        name: ariaLabel,\n        text: parentText.substring(0, 200),\n        rating: ratingMatch ? ratingMatch[1] : null\n      });\n    }\n  }\n  return places.slice(0, 15);\n}"
+        },
+        "call_id": "call_0766da28cf194a389274275a",
+        "time_ms": 303,
+        "output_preview": "\n\n<!-- DOM_START dom3 tab:tab0 mode:nochange -->\n(stateId: tab0-dom3)\n## Current Page DOM Structure\n\n\nNo DOM changes detected after the previous action.\nscrollMap:\n[container:1] 2 pages (coverage resets on content/layout changes) | viewing P0 | unexplored P1\n[container:2] 2 pages (coverage resets on",
+        "status": "success"
+      },
+      {
+        "tool": "browser_execute_script",
+        "input": {
+          "script": "() => {\n  // Find close buttons or overlay and dismiss\n  const closeButtons = document.querySelectorAll('button[aria-label=\"关闭\"], button[aria-label=\"Close\"]');\n  for (const btn of closeButtons) {\n    btn.click();\n    return 'closed one button';\n  }\n  // Also try pressing escape on body\n  return 'close buttons: ' + closeButtons.length;\n}"
+        },
+        "call_id": "call_7ad1db006c9943809af6c6f2",
+        "time_ms": 370,
+        "output_preview": "\n\n<!-- DOM_START dom3.1 tab:tab0 mode:nochange -->\n(stateId: tab0-dom3.1)\n## Current Page DOM Structure\n\n\nNo DOM changes detected after the previous action.\nscrollMap:\n[container:1] 2 pages (coverage resets on content/layout changes) | viewing P0 | unexplored P1\n[container:2] 2 pages (coverage reset",
+        "status": "success"
+      },
+      {
+        "tool": "browser_observe",
+        "input": {
+          "format": "html"
+        },
+        "call_id": "call_a872ad252f5249f98517131a",
+        "time_ms": 376,
+        "output_preview": "\n\n<!-- DOM_START dom3.2 tab:tab0 mode:full -->\n(stateId: tab0-dom3.2)\n## Current Page DOM Structure\n\n\n[3477]<div></div>\n\t[view:dcha]<canvas></canvas>\n<div></div>\n\t<form></form>\n\t\t<3275><input role='combobox' aria-expanded='false' name='q' value='burgers near 44012'></input>\n\t<div></div>\n\t\t[3497]<but",
+        "status": "success"
+      },
+      {
+        "tool": "browser_click",
+        "input": {
+          "elementIndex": 3533,
+          "expectText": "搜索"
+        },
+        "call_id": "call_b799f623be3049ba88566b37",
+        "time_ms": 2728,
+        "output_preview": "Clicked <button aria-label='关闭'>  </button> Postcondition verified.\n\n\n<!-- DOM_START dom4 tab:tab0 mode:full -->\n(stateId: tab0-dom4)\n## Current Page DOM Structure\n\n\n[3477]<div></div>\n\t[view:dcha]<canvas></canvas>\n<div></div>\n\t<div></div>\n\t\t<form></form>\n\t\t\t<3275><input role='combobox' id='ucc-5' a",
+        "status": "success"
+      },
+      {
+        "tool": "browser_input",
+        "input": {
+          "elementIndex": 3275,
+          "pressEnter": true,
+          "text": "burgers near 44012"
+        },
+        "call_id": "call_856b4e4039f94aaa9de43346",
+        "time_ms": 4460,
+        "output_preview": "Input \"burgers near 44012\" into <input role='combobox' id='ucc-5' aria-expanded='false' name='q'></input> and pressed Enter Action dispatched; outcome not verified. Check the returned page before claiming success.\n\n\n<!-- DOM_START dom5 tab:tab0 mode:full -->\n(stateId: tab0-dom5)\n## Current Page DOM ",
+        "status": "success"
+      },
+      {
+        "tool": "browser_execute_script",
+        "input": {
+          "script": "() => {\n  // Find all place listings in the search results panel\n  const allText = document.querySelector('[role='main']') ? document.querySelector('[role='main']').textContent : 'no main';\n  return allText.substring(0, 3000);\n}"
+        },
+        "call_id": "call_e3b634e1bb07417ab1c2f05e",
+        "time_ms": 13,
+        "output_preview": "Error: browser_execute_script failed: Page script error: SyntaxError: missing ) after argument list\nCorrect the script using this exception before retrying. Refreshing DOM or restarting Chromium does not fix JavaScript syntax errors. Pass a function body with return; escape it only once when encodin",
+        "status": "error"
+      },
+      {
+        "tool": "browser_execute_script",
+        "input": {
+          "script": "() => {\n  const allText = document.querySelector('[role=\"main\"]') ? document.querySelector('[role=\"main\"]').textContent : 'no main';\n  return allText.substring(0, 3000);\n}"
+        },
+        "call_id": "call_c62784ec91824c7185623f37",
+        "time_ms": 369,
+        "output_preview": "\n\n<!-- DOM_START dom6 tab:tab0 mode:nochange -->\n(stateId: tab0-dom6)\n## Current Page DOM Structure\n\n\nNo DOM changes detected after the previous action.\nscrollMap:\n[container:1] 2 pages (coverage resets on content/layout changes) | viewing P0 | unexplored P1\n[container:2] 2 pages (coverage resets on",
+        "status": "success"
+      },
+      {
+        "tool": "browser_execute_script",
+        "input": {
+          "script": "() => {\n  // Find any overlay/modal\n  const overlay = document.querySelector('[role=\"dialog\"]');\n  if (overlay) {\n    const closeBtn = overlay.querySelector('button[aria-label=\"关闭\"], button[aria-label=\"Close\"]');\n    if (closeBtn) {\n      closeBtn.click();\n      return 'overlay closed';\n    }\n    return 'overlay found but no close button';\n  }\n  return 'no overlay';\n}"
+        },
+        "call_id": "call_bb1770431dbf4363b7b92bea",
+        "time_ms": 316,
+        "output_preview": "\n\n<!-- DOM_START dom6.1 tab:tab0 mode:nochange -->\n(stateId: tab0-dom6.1)\n## Current Page DOM Structure\n\n\nNo DOM changes detected after the previous action.\nscrollMap:\n[container:1] 2 pages (coverage resets on content/layout changes) | viewing P0 | unexplored P1\n[container:2] 2 pages (coverage reset",
+        "status": "success"
+      },
+      {
+        "tool": "browser_view_elements",
+        "input": {
+          "viewIds": [
+            "eefi"
+          ]
+        },
+        "call_id": "call_ec8b9ce6f4b640848bd3fcf8",
+        "time_ms": 222,
+        "output_preview": "view:eefi <svg>: [see attachment]\n\nNext actions:\n- Use the images together with the current DOM snapshot before interacting.",
+        "status": "success"
+      },
+      {
+        "tool": "browser_goto",
+        "input": {
+          "url": "https://www.google.com/maps/search/burgers+near+44012"
+        },
+        "call_id": "call_faded94ddd0f4968ae2ad726",
+        "time_ms": 11701,
+        "output_preview": "Navigated to https://www.google.com/maps/search/burgers+near+44012\n\n\n<!-- DOM_START dom7 tab:tab0 mode:full -->\n(stateId: tab0-dom7)\n## Current Page DOM Structure\n\n\n[6917]<div></div>\n\t[view:ghea]<canvas></canvas>\n<div></div>\n\t<form></form>\n\t\t<6741><input role='combobox' aria-expanded='false' name='q",
+        "status": "success"
+      },
+      {
+        "tool": "browser_execute_script",
+        "input": {
+          "guide": true
+        },
+        "call_id": "call_5262180a87c54005aa329c8c",
+        "time_ms": 1,
+        "output_preview": "# Extraction guide\n\nReturn plain objects or arrays using page data. Record important results in your text output before changing pages. The Host archives page observations automatically; use browser_recall only when an older source has left working context. Narrow truncated extractions before relyin",
+        "status": "success"
+      },
+      {
+        "tool": "browser_execute_script",
+        "input": {
+          "script": "() => {\n  const anchor = __find(\"Jake's On Lake\")[0];\n  const records = __records(anchor);\n  return {\n    count: records.length,\n    sample: __skeleton(records[0])\n  };\n}"
+        },
+        "call_id": "call_7ee7cb56f1aa4b2e8064b080",
+        "time_ms": 435,
+        "output_preview": "\n\n<!-- DOM_START dom8 tab:tab0 mode:nochange -->\n(stateId: tab0-dom8)\n## Current Page DOM Structure\n\n\nNo DOM changes detected after the previous action.\nscrollMap:\n[container:1] 2 pages (coverage resets on content/layout changes) | viewing P0 | unexplored P1\n[container:2] 2 pages (coverage resets on",
+        "status": "success"
+      },
+      {
+        "tool": "browser_execute_script",
+        "input": {
+          "script": "() => {\n  return document.title + ' | ' + window.location.href;\n}"
+        },
+        "call_id": "call_9cec354011e54cb598b4be32",
+        "time_ms": 367,
+        "output_preview": "\n\n<!-- DOM_START dom8.1 tab:tab0 mode:nochange -->\n(stateId: tab0-dom8.1)\n## Current Page DOM Structure\n\n\nNo DOM changes detected after the previous action.\nscrollMap:\n[container:1] 2 pages (coverage resets on content/layout changes) | viewing P0 | unexplored P1\n[container:2] 2 pages (coverage reset",
+        "status": "success"
+      },
+      {
+        "tool": "browser_observe",
+        "input": {
+          "format": "html"
+        },
+        "call_id": "call_2e881e5e8d8345cba184a00c",
+        "time_ms": 401,
+        "output_preview": "\n\n<!-- DOM_START dom8.2 tab:tab0 mode:full -->\n(stateId: tab0-dom8.2)\n## Current Page DOM Structure\n\n\n[6917]<div></div>\n\t[view:ghea]<canvas></canvas>\n<div></div>\n\t<form></form>\n\t\t<6741><input role='combobox' aria-expanded='false' name='q' value='burgers near 44012'></input>\n\t<div></div>\n\t\t[6938]<but",
+        "status": "success"
+      },
+      {
+        "tool": "browser_execute_script",
+        "input": {
+          "script": "() => {\n  const anchor = document.querySelector('[aria-label=\"Jake\\\\'s On Lake\"]');\n  if (!anchor) return 'no anchor';\n  const records = __records(anchor);\n  return {\n    count: records.length,\n    first: __skeleton(records[0])\n  };\n}"
+        },
+        "call_id": "call_22233acc6f2f408e92c9cb85",
+        "time_ms": 6,
+        "output_preview": "Error: browser_execute_script failed: Page script error: SyntaxError: missing ) after argument list\nCorrect the script using this exception before retrying. Refreshing DOM or restarting Chromium does not fix JavaScript syntax errors. Pass a function body with return; escape it only once when encodin",
+        "status": "error"
+      },
+      {
+        "tool": "browser_execute_script",
+        "input": {
+          "script": "() => {\n  const anchor = document.querySelector(\"a[aria-label]\");\n  if (!anchor) return 'no anchor';\n  const records = __records(anchor);\n  return JSON.stringify({\n    count: records.length,\n    first: __skeleton(records[0])\n  });\n}"
+        },
+        "call_id": "call_480d3c58401947269da4eb6a",
+        "time_ms": 500,
+        "output_preview": "\n\n<!-- DOM_START dom8.3 tab:tab0 mode:nochange -->\n(stateId: tab0-dom8.3)\n## Current Page DOM Structure\n\n\nNo DOM changes detected after the previous action.\nscrollMap:\n[container:1] 2 pages (coverage resets on content/layout changes) | viewing P0 | unexplored P1\n[container:2] 2 pages (coverage reset",
+        "status": "success"
+      },
+      {
+        "tool": "browser_execute_script",
+        "input": {
+          "script": "() => {\n  // Find all anchors that look like place listings\n  const anchors = document.querySelectorAll(\"a[aria-label]\");\n  const places = [];\n  for (const a of anchors) {\n    const label = a.getAttribute(\"aria-label\");\n    if (label && !label.includes(\"关闭\") && !label.includes(\"Close\") && !label.includes(\"菜单\") && label.length > 2) {\n      const parent = a.closest(\"div\");\n      let text = \"\";\n      let curr = parent;\n      for (let i = 0; i < 5 && curr; i++) {\n        text = curr.textContent || \"\";\n        if (text.length > 30) break;\n        curr = curr.parentElement;\n      }\n      places.push({\n        name: label,\n        text: text.substring(0, 300)\n      });\n    }\n  }\n  return places.slice(0, 10);\n}"
+        },
+        "call_id": "call_9319331cd6e24e65b5768c24",
+        "time_ms": 485,
+        "output_preview": "\n\n<!-- DOM_START dom8.4 tab:tab0 mode:nochange -->\n(stateId: tab0-dom8.4)\n## Current Page DOM Structure\n\n\nNo DOM changes detected after the previous action.\nscrollMap:\n[container:1] 2 pages (coverage resets on content/layout changes) | viewing P0 | unexplored P1\n[container:2] 2 pages (coverage reset",
+        "status": "success"
+      },
+      {
+        "tool": "browser_click",
+        "input": {
+          "elementIndex": 6974
+        },
+        "call_id": "call_7535d3867d4d4fc884a08180",
+        "time_ms": 7168,
+        "output_preview": "Clicked <button aria-label='关闭'>  </button> Action dispatched; outcome not verified. Check the returned page before claiming success.\n\n\n<!-- DOM_START dom8.5 tab:tab0 mode:nochange -->\n(stateId: tab0-dom8.5)\n## Current Page DOM Structure\n\n\nNo DOM changes detected after the previous action.\nscrollMa",
+        "status": "success"
+      },
+      {
+        "tool": "browser_execute_script",
+        "input": {
+          "script": "() => {\n  // Find the overlay dialog\n  const dialogs = document.querySelectorAll('[role=\"dialog\"]');\n  const result = [];\n  for (const d of dialogs) {\n    result.push({\n      ariaLabel: d.getAttribute('aria-label'),\n      role: d.getAttribute('role'),\n      text: (d.textContent || '').substring(0, 200)\n    });\n  }\n  return result;\n}"
+        },
+        "call_id": "call_081c617244f24b56a13e12bb",
+        "time_ms": 451,
+        "output_preview": "\n\n<!-- DOM_START dom8.6 tab:tab0 mode:nochange -->\n(stateId: tab0-dom8.6)\n## Current Page DOM Structure\n\n\nNo DOM changes detected after the previous action.\nscrollMap:\n[container:1] 2 pages (coverage resets on content/layout changes) | viewing P0 | unexplored P1\n[container:2] 2 pages (coverage reset",
+        "status": "success"
+      },
+      {
+        "tool": "browser_view_elements",
+        "input": {
+          "viewIds": [
+            "iacj"
+          ]
+        },
+        "call_id": "call_6361f8028442459d99760a9c",
+        "time_ms": 162,
+        "output_preview": "view:iacj <div>: [see attachment]\n\nNext actions:\n- Use the images together with the current DOM snapshot before interacting.",
+        "status": "success"
+      },
+      {
+        "tool": "browser_wait",
+        "input": {
+          "seconds": 3
+        },
+        "call_id": "call_c7999e30af9441bb9a6b5716",
+        "time_ms": 3015,
+        "output_preview": "Waited 3 seconds\n\nNext actions:\n- Continue the delayed action and verify the resulting page state.",
+        "status": "success"
+      },
+      {
+        "tool": "browser_observe",
+        "input": {
+          "format": "html"
+        },
+        "call_id": "call_1a5530e1dedf40048cdb02ee",
+        "time_ms": 575,
+        "output_preview": "\n\n<!-- DOM_START dom8.7 tab:tab0 mode:full -->\n(stateId: tab0-dom8.7)\n## Current Page DOM Structure\n\n\n[6917]<div></div>\n\t[view:ghea]<canvas></canvas>\n<div></div>\n\t<form></form>\n\t\t<6741><input role='combobox' aria-expanded='false' name='q'></input>\n\t<div></div>\n\t\t[6938]<button aria-label='搜索'>  </bu",
+        "status": "success"
+      },
+      {
+        "tool": "browser_input",
+        "input": {
+          "clear": true,
+          "elementIndex": 6741,
+          "pressEnter": true,
+          "text": "burger restaurant 44012"
+        },
+        "call_id": "call_27f3e2812be145debff04e6f",
+        "time_ms": 6904,
+        "output_preview": "Input \"burger restaurant 44012\" into <input role='combobox' aria-expanded='false' name='q'></input> and pressed Enter Action dispatched; outcome not verified. Check the returned page before claiming success.\n\n\n<!-- DOM_START dom8.8 tab:tab0 mode:incremental -->\n(stateId: tab0-dom8.8)\n## Incremental ",
+        "status": "success"
+      },
+      {
+        "tool": "browser_observe",
+        "input": {
+          "format": "html"
+        },
+        "call_id": "call_33ca1314c8e94abb801ac1a2",
+        "time_ms": 543,
+        "output_preview": "\n\n<!-- DOM_START dom8.9 tab:tab0 mode:full -->\n(stateId: tab0-dom8.9)\n## Current Page DOM Structure\n\n\n[6917]<div></div>\n\t[view:ghea]<canvas></canvas>\n<div></div>\n\t<form></form>\n\t\t<6741><input role='combobox' aria-expanded='false' name='q' value='burger restaurant 44012'></input>\n\t<div></div>\n\t\t[6938",
+        "status": "success"
+      },
+      {
+        "tool": "browser_input",
+        "input": {
+          "clear": true,
+          "elementIndex": 6741,
+          "pressEnter": true,
+          "text": "burgers near Avon Lake OH"
+        },
+        "call_id": "call_51f74c5e057a428db4518cc0",
+        "time_ms": 7203,
+        "output_preview": "Input \"burgers near Avon Lake OH\" into <input role='combobox' aria-expanded='false' name='q' value='burger restaurant 44012'></input> and pressed Enter Action dispatched; outcome not verified. Check the returned page before claiming success.\n\n\n<!-- DOM_START dom8.10 tab:tab0 mode:nochange -->\n(state",
+        "status": "success"
+      },
+      {
+        "tool": "browser_wait",
+        "input": {
+          "seconds": 3
+        },
+        "call_id": "call_f231fd62f410473bb4a09193",
+        "time_ms": 3009,
+        "output_preview": "Waited 3 seconds\n\nNext actions:\n- Continue the delayed action and verify the resulting page state.",
+        "status": "success"
+      },
+      {
+        "tool": "browser_observe",
+        "input": {
+          "format": "html"
+        },
+        "call_id": "call_1a3bcaaa057040fdbff31aff",
+        "time_ms": 351,
+        "output_preview": "\n\n<!-- DOM_START dom8.11 tab:tab0 mode:full -->\n(stateId: tab0-dom8.11)\n## Current Page DOM Structure\n\n\n[6917]<div></div>\n\t[view:ghea]<canvas></canvas>\n<div></div>\n\t<form></form>\n\t\t<6741><input role='combobox' aria-expanded='false' name='q' value='burgers near Avon Lake OH'></input>\n\t<div></div>\n\t\t[",
+        "status": "success"
+      },
+      {
+        "tool": "browser_execute_script",
+        "input": {
+          "script": "() => {\n  // Find all rating spans\n  const ratings = document.querySelectorAll('span[role=\"img\"]');\n  const result = [];\n  for (const r of ratings) {\n    const label = r.getAttribute('aria-label');\n    if (label && (label.includes('星级') || label.includes('stars'))) {\n      result.push({\n        label: label,\n        text: r.textContent\n      });\n    }\n  }\n  return result;\n}"
+        },
+        "call_id": "call_0545bf77006b4f0fa7783a29",
+        "time_ms": 355,
+        "output_preview": "\n\n<!-- DOM_START dom8.12 tab:tab0 mode:nochange -->\n(stateId: tab0-dom8.12)\n## Current Page DOM Structure\n\n\nNo DOM changes detected after the previous action.\nscrollMap:\n[container:1] 2 pages (coverage resets on content/layout changes) | viewing P0 | unexplored P1\n[container:2] 2 pages (coverage res",
+        "status": "success"
+      },
+      {
+        "tool": "browser_execute_script",
+        "input": {
+          "script": "() => {\n  // Get the text content of the results panel\n  const panels = document.querySelectorAll('[role=\"main\"], [role=\"region\"]');\n  for (const p of panels) {\n    const text = p.textContent || '';\n    if (text.includes('Jake')) {\n      // Found the results panel - extract rating info\n      const matches = text.match(/(\\d+\\.\\d+)\\((\\d+)\\)/g) || [];\n      return {\n        panelText: text.substring(0, 1500),\n        ratings: matches\n      };\n    }\n  }\n  return 'no results panel found';\n}"
+        },
+        "call_id": "call_7909c8b01a6e49c1b5364e25",
+        "time_ms": 494,
+        "output_preview": "\n\n<!-- DOM_START dom8.13 tab:tab0 mode:nochange -->\n(stateId: tab0-dom8.13)\n## Current Page DOM Structure\n\n\nNo DOM changes detected after the previous action.\nscrollMap:\n[container:1] 2 pages (coverage resets on content/layout changes) | viewing P0 | unexplored P1\n[container:2] 2 pages (coverage res",
+        "status": "success"
+      },
+      {
+        "tool": "browser_execute_script",
+        "input": {
+          "script": "() => {\n  // Find all visible fixed/sticky/absolute elements that could be overlays\n  const candidates = document.querySelectorAll('div');\n  const overlays = [];\n  for (const d of candidates) {\n    const style = window.getComputedStyle(d);\n    const zIndex = parseInt(style.zIndex);\n    if (zIndex > 100 && style.position === 'fixed' && d.offsetWidth > 200 && d.offsetHeight > 200) {\n      overlays.push({\n        zIndex: zIndex,\n        id: d.id,\n        className: d.className.substring(0, 100),\n        role: d.getAttribute('role'),\n        text: (d.textContent || '').substring(0, 100)\n      });\n    }\n  }\n  return overlays;\n}"
+        },
+        "call_id": "call_d0f09b4213b947c59fad2539",
+        "time_ms": 548,
+        "output_preview": "\n\n<!-- DOM_START dom8.14 tab:tab0 mode:nochange -->\n(stateId: tab0-dom8.14)\n## Current Page DOM Structure\n\n\nNo DOM changes detected after the previous action.\nscrollMap:\n[container:1] 2 pages (coverage resets on content/layout changes) | viewing P0 | unexplored P1\n[container:2] 2 pages (coverage res",
+        "status": "success"
+      },
+      {
+        "tool": "browser_click",
+        "input": {
+          "elementIndex": 7204,
+          "expectText": "Jake's On Lake"
+        },
+        "call_id": "call_bfe84b9ffccc459abb2d616b",
+        "time_ms": 7086,
+        "output_preview": "Clicked <a aria-label='Jake's On Lake'></a> Postcondition verified.\n\n\n<!-- DOM_START dom8.15 tab:tab0 mode:nochange -->\n(stateId: tab0-dom8.15)\n## Current Page DOM Structure\n\n\nNo DOM changes detected after the previous action.\nscrollMap:\n[container:1] 2 pages (coverage resets on content/layout chang",
+        "status": "success"
+      },
+      {
+        "tool": "browser_wait",
+        "input": {
+          "seconds": 3
+        },
+        "call_id": "call_e8ae24772941430687316743",
+        "time_ms": 3006,
+        "output_preview": "Waited 3 seconds\n\nNext actions:\n- Continue the delayed action and verify the resulting page state.",
+        "status": "success"
+      },
+      {
+        "tool": "browser_observe",
+        "input": {
+          "format": "markdown"
+        },
+        "call_id": "call_f021b0782f724524b3bb9d9e",
+        "time_ms": 189,
+        "output_preview": "\n\n<!-- DOM_START dom8.16 tab:tab0 mode:full -->\n(stateId: tab0-dom8.16)\n## Current Page DOM Structure\n\n\n#DOCUMENT\n\tDIV\n\t\tFORM\n\t\t\tCOMBOBOX: q | burgers near Avon Lake OH [expanded=false]\n\t\t\t\tDIV: burgers near Avon Lake OH\n\t\tDIV\n\t\t\tBUTTON: 搜索\n\t\tDIV\n\t\t\tBUTTON (aria: 关闭)\n\tDIV\n\t\tDIV\n\t\t\tBUTTON: 价格\n\t\tDIV\n\t",
+        "status": "success"
+      },
+      {
+        "tool": "browser_scroll_next_screen",
+        "input": {
+          "container": 16,
+          "direction": "down"
+        },
+        "call_id": "call_f2d97ec89fb544ada028d82d",
+        "time_ms": 830,
+        "output_preview": "Scrolled down to next screen on container [16]: P0 -> P1\n\n\n<!-- DOM_START dom8.17 tab:tab0 mode:nochange -->\n(stateId: tab0-dom8.17)\n## Current Page DOM Structure\n\n\nNo DOM changes detected after the previous action.\nscrollMap:\n[container:1] 2 pages (coverage resets on content/layout changes) | viewi",
+        "status": "success"
+      },
+      {
+        "tool": "browser_execute_script",
+        "input": {
+          "script": "() => {\n  const ratings = __find(\"星级\");\n  return ratings.slice(0, 20).map(function(r) {\n    return {\n      tag: r.tagName,\n      label: r.getAttribute('aria-label'),\n      text: r.textContent.substring(0, 100)\n    };\n  });\n}"
+        },
+        "call_id": "call_4a49b25eb16144d9ace872a2",
+        "time_ms": 607,
+        "output_preview": "\n\n<!-- DOM_START dom8.18 tab:tab0 mode:nochange -->\n(stateId: tab0-dom8.18)\n## Current Page DOM Structure\n\n\nNo DOM changes detected after the previous action.\nscrollMap:\n[container:1] 2 pages (coverage resets on content/layout changes) | viewing P0 | unexplored P1\n[container:2] 2 pages (coverage res",
+        "status": "success"
+      }
+    ],
+    "error": "step_limit",
+    "model": "MiniMax-M3",
+    "provider": "minimax-cn",
+    "protocol": "anthropic-messages",
+    "reasoning_effort": "high",
+    "session_id": "eval-Google Map--12-63f21432a05d",
+    "started_at": "2026-09-26T13:00:29.906Z",
+    "finished_at": "2026-09-26T13:05:12.068Z",
+    "duration_basis": "worker initialization to agent stop; excludes judge, screenshots and cleanup",
+    "infrastructure_error": null,
+    "request_count": 50,
+    "usage_missing_calls": 0,
+    "unpriced_calls": 0,
+    "tokens_observed": {
+      "input": 89857,
+      "output": 9936,
+      "cache_read": 524416,
+      "cache_write": 0,
+      "reasoning": 6295
+    },
+    "usage_metrics": {
+      "input_tokens": 614273,
+      "output_tokens": 9936,
+      "uncached_input_tokens": 89857,
+      "cache_hit_tokens": 524416,
+      "cache_miss_tokens": 89857,
+      "cache_write_tokens": 0,
+      "output_cache_tokens": null,
+      "reasoning_tokens": 6295,
+      "total_tokens": 624209,
+      "cache_hit_rate": 0.8537181350962846
+    },
+    "usage_observed": {
+      "input_tokens": 614273,
+      "output_tokens": 9936,
+      "uncached_input_tokens": 89857,
+      "cache_hit_tokens": 524416,
+      "cache_miss_tokens": 89857,
+      "cache_write_tokens": 0,
+      "output_cache_tokens": null,
+      "reasoning_tokens": 6295,
+      "total_tokens": 624209,
+      "cache_hit_rate": 0.8537181350962846
+    },
+    "cost_observed": 0.07034526,
+    "model_duration_ms": 177598,
+    "model_calls": [
+      {
+        "call_index": 1,
+        "started_at": "2026-09-26T13:00:29.939Z",
+        "finished_at": "2026-09-26T13:00:31.298Z",
+        "usage": {
+          "input": 2679,
+          "cache_read": 128,
+          "cache_write": 0,
+          "output": 55,
+          "reasoning": 20
+        },
+        "cost": 0.00087738,
+        "duration_ms": 1359,
+        "status": "success",
+        "raw_usage": {
+          "prompt_tokens": 2807,
+          "completion_tokens": 55,
+          "prompt_tokens_details": {
+            "cached_tokens": 128
+          },
+          "cache_creation_input_tokens": 0,
+          "completion_tokens_details": {
+            "thinking_tokens": 20,
+            "reasoning_tokens": 20
+          }
+        },
+        "output_cache_tokens": null
+      },
+      {
+        "call_index": 2,
+        "started_at": "2026-09-26T13:00:31.315Z",
+        "finished_at": "2026-09-26T13:00:33.183Z",
+        "usage": {
+          "input": 128,
+          "cache_read": 2816,
+          "cache_write": 0,
+          "output": 42,
+          "reasoning": 8
+        },
+        "cost": 0.00025776,
+        "duration_ms": 1868,
+        "status": "success",
+        "raw_usage": {
+          "prompt_tokens": 2944,
+          "completion_tokens": 42,
+          "prompt_tokens_details": {
+            "cached_tokens": 2816
+          },
+          "cache_creation_input_tokens": 0,
+          "completion_tokens_details": {
+            "thinking_tokens": 8,
+            "reasoning_tokens": 8
+          }
+        },
+        "output_cache_tokens": null
+      },
+      {
+        "call_index": 3,
+        "started_at": "2026-09-26T13:00:47.191Z",
+        "finished_at": "2026-09-26T13:00:50.198Z",
+        "usage": {
+          "input": 1185,
+          "cache_read": 2944,
+          "cache_write": 0,
+          "output": 102,
+          "reasoning": 49
+        },
+        "cost": 0.00065454,
+        "duration_ms": 3007,
+        "status": "success",
+        "raw_usage": {
+          "prompt_tokens": 4129,
+          "completion_tokens": 102,
+          "prompt_tokens_details": {
+            "cached_tokens": 2944
+          },
+          "cache_creation_input_tokens": 0,
+          "completion_tokens_details": {
+            "thinking_tokens": 49,
+            "reasoning_tokens": 49
+          }
+        },
+        "output_cache_tokens": null
+      },
+      {
+        "call_index": 4,
+        "started_at": "2026-09-26T13:00:53.528Z",
+        "finished_at": "2026-09-26T13:00:58.035Z",
+        "usage": {
+          "input": 2347,
+          "cache_read": 3328,
+          "cache_write": 0,
+          "output": 451,
+          "reasoning": 384
+        },
+        "cost": 0.00144498,
+        "duration_ms": 4507,
+        "status": "success",
+        "raw_usage": {
+          "prompt_tokens": 5675,
+          "completion_tokens": 451,
+          "prompt_tokens_details": {
+            "cached_tokens": 3328
+          },
+          "cache_creation_input_tokens": 0,
+          "completion_tokens_details": {
+            "thinking_tokens": 384,
+            "reasoning_tokens": 384
+          }
+        },
+        "output_cache_tokens": null
+      },
+      {
+        "call_index": 5,
+        "started_at": "2026-09-26T13:01:00.554Z",
+        "finished_at": "2026-09-26T13:01:05.078Z",
+        "usage": {
+          "input": 1407,
+          "cache_read": 6016,
+          "cache_write": 0,
+          "output": 176,
+          "reasoning": 124
+        },
+        "cost": 0.0009942599999999998,
+        "duration_ms": 4524,
+        "status": "success",
+        "raw_usage": {
+          "prompt_tokens": 7423,
+          "completion_tokens": 176,
+          "prompt_tokens_details": {
+            "cached_tokens": 6016
+          },
+          "cache_creation_input_tokens": 0,
+          "completion_tokens_details": {
+            "thinking_tokens": 124,
+            "reasoning_tokens": 124
+          }
+        },
+        "output_cache_tokens": null
+      },
+      {
+        "call_index": 6,
+        "started_at": "2026-09-26T13:01:07.005Z",
+        "finished_at": "2026-09-26T13:01:09.318Z",
+        "usage": {
+          "input": 1681,
+          "cache_read": 7552,
+          "cache_write": 0,
+          "output": 80,
+          "reasoning": 26
+        },
+        "cost": 0.00105342,
+        "duration_ms": 2313,
+        "status": "success",
+        "raw_usage": {
+          "prompt_tokens": 9233,
+          "completion_tokens": 80,
+          "prompt_tokens_details": {
+            "cached_tokens": 7552
+          },
+          "cache_creation_input_tokens": 0,
+          "completion_tokens_details": {
+            "thinking_tokens": 26,
+            "reasoning_tokens": 26
+          }
+        },
+        "output_cache_tokens": null
+      },
+      {
+        "call_index": 7,
+        "started_at": "2026-09-26T13:01:09.901Z",
+        "finished_at": "2026-09-26T13:01:11.334Z",
+        "usage": {
+          "input": 659,
+          "cache_read": 9216,
+          "cache_write": 0,
+          "output": 49,
+          "reasoning": 21
+        },
+        "cost": 0.00080946,
+        "duration_ms": 1433,
+        "status": "success",
+        "raw_usage": {
+          "prompt_tokens": 9875,
+          "completion_tokens": 49,
+          "prompt_tokens_details": {
+            "cached_tokens": 9216
+          },
+          "cache_creation_input_tokens": 0,
+          "completion_tokens_details": {
+            "thinking_tokens": 21,
+            "reasoning_tokens": 21
+          }
+        },
+        "output_cache_tokens": null
+      },
+      {
+        "call_index": 8,
+        "started_at": "2026-09-26T13:01:11.907Z",
+        "finished_at": "2026-09-26T13:01:14.996Z",
+        "usage": {
+          "input": 3529,
+          "cache_read": 3584,
+          "cache_write": 0,
+          "output": 164,
+          "reasoning": 73
+        },
+        "cost": 0.0014705400000000002,
+        "duration_ms": 3089,
+        "status": "success",
+        "raw_usage": {
+          "prompt_tokens": 7113,
+          "completion_tokens": 164,
+          "prompt_tokens_details": {
+            "cached_tokens": 3584
+          },
+          "cache_creation_input_tokens": 0,
+          "completion_tokens_details": {
+            "thinking_tokens": 73,
+            "reasoning_tokens": 73
+          }
+        },
+        "output_cache_tokens": null
+      },
+      {
+        "call_index": 9,
+        "started_at": "2026-09-26T13:01:15.627Z",
+        "finished_at": "2026-09-26T13:01:17.952Z",
+        "usage": {
+          "input": 669,
+          "cache_read": 7168,
+          "cache_write": 0,
+          "output": 119,
+          "reasoning": 19
+        },
+        "cost": 0.00077358,
+        "duration_ms": 2325,
+        "status": "success",
+        "raw_usage": {
+          "prompt_tokens": 7837,
+          "completion_tokens": 119,
+          "prompt_tokens_details": {
+            "cached_tokens": 7168
+          },
+          "cache_creation_input_tokens": 0,
+          "completion_tokens_details": {
+            "thinking_tokens": 19,
+            "reasoning_tokens": 19
+          }
+        },
+        "output_cache_tokens": null
+      },
+      {
+        "call_index": 10,
+        "started_at": "2026-09-26T13:01:18.799Z",
+        "finished_at": "2026-09-26T13:01:19.783Z",
+        "usage": {
+          "input": 581,
+          "cache_read": 7936,
+          "cache_write": 0,
+          "output": 40,
+          "reasoning": 12
+        },
+        "cost": 0.0006984599999999999,
+        "duration_ms": 984,
+        "status": "success",
+        "raw_usage": {
+          "prompt_tokens": 8517,
+          "completion_tokens": 40,
+          "prompt_tokens_details": {
+            "cached_tokens": 7936
+          },
+          "cache_creation_input_tokens": 0,
+          "completion_tokens_details": {
+            "thinking_tokens": 12,
+            "reasoning_tokens": 12
+          }
+        },
+        "output_cache_tokens": null
+      },
+      {
+        "call_index": 11,
+        "started_at": "2026-09-26T13:01:20.235Z",
+        "finished_at": "2026-09-26T13:01:24.771Z",
+        "usage": {
+          "input": 2989,
+          "cache_read": 4608,
+          "cache_write": 0,
+          "output": 438,
+          "reasoning": 381
+        },
+        "cost": 0.00169878,
+        "duration_ms": 4536,
+        "status": "success",
+        "raw_usage": {
+          "prompt_tokens": 7597,
+          "completion_tokens": 438,
+          "prompt_tokens_details": {
+            "cached_tokens": 4608
+          },
+          "cache_creation_input_tokens": 0,
+          "completion_tokens_details": {
+            "thinking_tokens": 381,
+            "reasoning_tokens": 381
+          }
+        },
+        "output_cache_tokens": null
+      },
+      {
+        "call_index": 12,
+        "started_at": "2026-09-26T13:01:24.856Z",
+        "finished_at": "2026-09-26T13:01:26.815Z",
+        "usage": {
+          "input": 189,
+          "cache_read": 7936,
+          "cache_write": 0,
+          "output": 45,
+          "reasoning": 17
+        },
+        "cost": 0.00058686,
+        "duration_ms": 1959,
+        "status": "success",
+        "raw_usage": {
+          "prompt_tokens": 8125,
+          "completion_tokens": 45,
+          "prompt_tokens_details": {
+            "cached_tokens": 7936
+          },
+          "cache_creation_input_tokens": 0,
+          "completion_tokens_details": {
+            "thinking_tokens": 17,
+            "reasoning_tokens": 17
+          }
+        },
+        "output_cache_tokens": null
+      },
+      {
+        "call_index": 13,
+        "started_at": "2026-09-26T13:01:27.615Z",
+        "finished_at": "2026-09-26T13:01:28.878Z",
+        "usage": {
+          "input": 3107,
+          "cache_read": 5120,
+          "cache_write": 0,
+          "output": 73,
+          "reasoning": 32
+        },
+        "cost": 0.0013268999999999998,
+        "duration_ms": 1263,
+        "status": "success",
+        "raw_usage": {
+          "prompt_tokens": 8227,
+          "completion_tokens": 73,
+          "prompt_tokens_details": {
+            "cached_tokens": 5120
+          },
+          "cache_creation_input_tokens": 0,
+          "completion_tokens_details": {
+            "thinking_tokens": 32,
+            "reasoning_tokens": 32
+          }
+        },
+        "output_cache_tokens": null
+      },
+      {
+        "call_index": 14,
+        "started_at": "2026-09-26T13:01:28.916Z",
+        "finished_at": "2026-09-26T13:01:33.101Z",
+        "usage": {
+          "input": 198,
+          "cache_read": 8192,
+          "cache_write": 0,
+          "output": 137,
+          "reasoning": 21
+        },
+        "cost": 0.00071532,
+        "duration_ms": 4185,
+        "status": "success",
+        "raw_usage": {
+          "prompt_tokens": 8390,
+          "completion_tokens": 137,
+          "prompt_tokens_details": {
+            "cached_tokens": 8192
+          },
+          "cache_creation_input_tokens": 0,
+          "completion_tokens_details": {
+            "thinking_tokens": 21,
+            "reasoning_tokens": 21
+          }
+        },
+        "output_cache_tokens": null
+      },
+      {
+        "call_index": 15,
+        "started_at": "2026-09-26T13:01:33.825Z",
+        "finished_at": "2026-09-26T13:01:40.036Z",
+        "usage": {
+          "input": 643,
+          "cache_read": 8448,
+          "cache_write": 0,
+          "output": 106,
+          "reasoning": 73
+        },
+        "cost": 0.0008269800000000001,
+        "duration_ms": 6211,
+        "status": "success",
+        "raw_usage": {
+          "prompt_tokens": 9091,
+          "completion_tokens": 106,
+          "prompt_tokens_details": {
+            "cached_tokens": 8448
+          },
+          "cache_creation_input_tokens": 0,
+          "completion_tokens_details": {
+            "thinking_tokens": 73,
+            "reasoning_tokens": 73
+          }
+        },
+        "output_cache_tokens": null
+      },
+      {
+        "call_index": 16,
+        "started_at": "2026-09-26T13:01:51.480Z",
+        "finished_at": "2026-09-26T13:01:56.578Z",
+        "usage": {
+          "input": 2358,
+          "cache_read": 5760,
+          "cache_write": 0,
+          "output": 460,
+          "reasoning": 206
+        },
+        "cost": 0.0016049999999999999,
+        "duration_ms": 5098,
+        "status": "success",
+        "raw_usage": {
+          "prompt_tokens": 8118,
+          "completion_tokens": 460,
+          "prompt_tokens_details": {
+            "cached_tokens": 5760
+          },
+          "cache_creation_input_tokens": 0,
+          "completion_tokens_details": {
+            "thinking_tokens": 206,
+            "reasoning_tokens": 206
+          }
+        },
+        "output_cache_tokens": null
+      },
+      {
+        "call_index": 17,
+        "started_at": "2026-09-26T13:01:56.911Z",
+        "finished_at": "2026-09-26T13:02:00.451Z",
+        "usage": {
+          "input": 536,
+          "cache_read": 8576,
+          "cache_write": 0,
+          "output": 181,
+          "reasoning": 65
+        },
+        "cost": 0.0008925599999999999,
+        "duration_ms": 3540,
+        "status": "success",
+        "raw_usage": {
+          "prompt_tokens": 9112,
+          "completion_tokens": 181,
+          "prompt_tokens_details": {
+            "cached_tokens": 8576
+          },
+          "cache_creation_input_tokens": 0,
+          "completion_tokens_details": {
+            "thinking_tokens": 65,
+            "reasoning_tokens": 65
+          }
+        },
+        "output_cache_tokens": null
+      },
+      {
+        "call_index": 18,
+        "started_at": "2026-09-26T13:02:00.848Z",
+        "finished_at": "2026-09-26T13:02:02.168Z",
+        "usage": {
+          "input": 613,
+          "cache_read": 9216,
+          "cache_write": 0,
+          "output": 53,
+          "reasoning": 25
+        },
+        "cost": 0.00080046,
+        "duration_ms": 1320,
+        "status": "success",
+        "raw_usage": {
+          "prompt_tokens": 9829,
+          "completion_tokens": 53,
+          "prompt_tokens_details": {
+            "cached_tokens": 9216
+          },
+          "cache_creation_input_tokens": 0,
+          "completion_tokens_details": {
+            "thinking_tokens": 25,
+            "reasoning_tokens": 25
+          }
+        },
+        "output_cache_tokens": null
+      },
+      {
+        "call_index": 19,
+        "started_at": "2026-09-26T13:02:02.583Z",
+        "finished_at": "2026-09-26T13:02:05.660Z",
+        "usage": {
+          "input": 3037,
+          "cache_read": 6272,
+          "cache_write": 0,
+          "output": 237,
+          "reasoning": 185
+        },
+        "cost": 0.0015718199999999998,
+        "duration_ms": 3077,
+        "status": "success",
+        "raw_usage": {
+          "prompt_tokens": 9309,
+          "completion_tokens": 237,
+          "prompt_tokens_details": {
+            "cached_tokens": 6272
+          },
+          "cache_creation_input_tokens": 0,
+          "completion_tokens_details": {
+            "thinking_tokens": 185,
+            "reasoning_tokens": 185
+          }
+        },
+        "output_cache_tokens": null
+      },
+      {
+        "call_index": 20,
+        "started_at": "2026-09-26T13:02:08.422Z",
+        "finished_at": "2026-09-26T13:02:10.381Z",
+        "usage": {
+          "input": 1346,
+          "cache_read": 7040,
+          "cache_write": 0,
+          "output": 115,
+          "reasoning": 45
+        },
+        "cost": 0.0009642,
+        "duration_ms": 1959,
+        "status": "success",
+        "raw_usage": {
+          "prompt_tokens": 8386,
+          "completion_tokens": 115,
+          "prompt_tokens_details": {
+            "cached_tokens": 7040
+          },
+          "cache_creation_input_tokens": 0,
+          "completion_tokens_details": {
+            "thinking_tokens": 45,
+            "reasoning_tokens": 45
+          }
+        },
+        "output_cache_tokens": null
+      },
+      {
+        "call_index": 21,
+        "started_at": "2026-09-26T13:02:14.870Z",
+        "finished_at": "2026-09-26T13:02:24.729Z",
+        "usage": {
+          "input": 2459,
+          "cache_read": 7424,
+          "cache_write": 0,
+          "output": 591,
+          "reasoning": 494
+        },
+        "cost": 0.0018923399999999997,
+        "duration_ms": 9859,
+        "status": "success",
+        "raw_usage": {
+          "prompt_tokens": 9883,
+          "completion_tokens": 591,
+          "prompt_tokens_details": {
+            "cached_tokens": 7424
+          },
+          "cache_creation_input_tokens": 0,
+          "completion_tokens_details": {
+            "thinking_tokens": 494,
+            "reasoning_tokens": 494
+          }
+        },
+        "output_cache_tokens": null
+      },
+      {
+        "call_index": 22,
+        "started_at": "2026-09-26T13:02:24.782Z",
+        "finished_at": "2026-09-26T13:02:27.708Z",
+        "usage": {
+          "input": 194,
+          "cache_read": 10368,
+          "cache_write": 0,
+          "output": 87,
+          "reasoning": 14
+        },
+        "cost": 0.0007846799999999998,
+        "duration_ms": 2926,
+        "status": "success",
+        "raw_usage": {
+          "prompt_tokens": 10562,
+          "completion_tokens": 87,
+          "prompt_tokens_details": {
+            "cached_tokens": 10368
+          },
+          "cache_creation_input_tokens": 0,
+          "completion_tokens_details": {
+            "thinking_tokens": 14,
+            "reasoning_tokens": 14
+          }
+        },
+        "output_cache_tokens": null
+      },
+      {
+        "call_index": 23,
+        "started_at": "2026-09-26T13:02:28.101Z",
+        "finished_at": "2026-09-26T13:02:31.450Z",
+        "usage": {
+          "input": 557,
+          "cache_read": 10624,
+          "cache_write": 0,
+          "output": 264,
+          "reasoning": 134
+        },
+        "cost": 0.00112134,
+        "duration_ms": 3349,
+        "status": "success",
+        "raw_usage": {
+          "prompt_tokens": 11181,
+          "completion_tokens": 264,
+          "prompt_tokens_details": {
+            "cached_tokens": 10624
+          },
+          "cache_creation_input_tokens": 0,
+          "completion_tokens_details": {
+            "thinking_tokens": 134,
+            "reasoning_tokens": 134
+          }
+        },
+        "output_cache_tokens": null
+      },
+      {
+        "call_index": 24,
+        "started_at": "2026-09-26T13:02:31.791Z",
+        "finished_at": "2026-09-26T13:02:34.445Z",
+        "usage": {
+          "input": 592,
+          "cache_read": 11392,
+          "cache_write": 0,
+          "output": 84,
+          "reasoning": 33
+        },
+        "cost": 0.00096192,
+        "duration_ms": 2654,
+        "status": "success",
+        "raw_usage": {
+          "prompt_tokens": 11984,
+          "completion_tokens": 84,
+          "prompt_tokens_details": {
+            "cached_tokens": 11392
+          },
+          "cache_creation_input_tokens": 0,
+          "completion_tokens_details": {
+            "thinking_tokens": 33,
+            "reasoning_tokens": 33
+          }
+        },
+        "output_cache_tokens": null
+      },
+      {
+        "call_index": 25,
+        "started_at": "2026-09-26T13:02:34.684Z",
+        "finished_at": "2026-09-26T13:02:38.341Z",
+        "usage": {
+          "input": 102,
+          "cache_read": 12032,
+          "cache_write": 0,
+          "output": 153,
+          "reasoning": 98
+        },
+        "cost": 0.0009361199999999999,
+        "duration_ms": 3657,
+        "status": "success",
+        "raw_usage": {
+          "prompt_tokens": 12134,
+          "completion_tokens": 153,
+          "prompt_tokens_details": {
+            "cached_tokens": 12032
+          },
+          "cache_creation_input_tokens": 0,
+          "completion_tokens_details": {
+            "thinking_tokens": 98,
+            "reasoning_tokens": 98
+          }
+        },
+        "output_cache_tokens": null
+      },
+      {
+        "call_index": 26,
+        "started_at": "2026-09-26T13:02:50.081Z",
+        "finished_at": "2026-09-26T13:02:54.405Z",
+        "usage": {
+          "input": 3379,
+          "cache_read": 7552,
+          "cache_write": 0,
+          "output": 204,
+          "reasoning": 162
+        },
+        "cost": 0.00171162,
+        "duration_ms": 4324,
+        "status": "success",
+        "raw_usage": {
+          "prompt_tokens": 10931,
+          "completion_tokens": 204,
+          "prompt_tokens_details": {
+            "cached_tokens": 7552
+          },
+          "cache_creation_input_tokens": 0,
+          "completion_tokens_details": {
+            "thinking_tokens": 162,
+            "reasoning_tokens": 162
+          }
+        },
+        "output_cache_tokens": null
+      },
+      {
+        "call_index": 27,
+        "started_at": "2026-09-26T13:02:54.422Z",
+        "finished_at": "2026-09-26T13:02:57.563Z",
+        "usage": {
+          "input": 1053,
+          "cache_read": 11136,
+          "cache_write": 0,
+          "output": 115,
+          "reasoning": 22
+        },
+        "cost": 0.00112206,
+        "duration_ms": 3141,
+        "status": "success",
+        "raw_usage": {
+          "prompt_tokens": 12189,
+          "completion_tokens": 115,
+          "prompt_tokens_details": {
+            "cached_tokens": 11136
+          },
+          "cache_creation_input_tokens": 0,
+          "completion_tokens_details": {
+            "thinking_tokens": 22,
+            "reasoning_tokens": 22
+          }
+        },
+        "output_cache_tokens": null
+      },
+      {
+        "call_index": 28,
+        "started_at": "2026-09-26T13:02:58.023Z",
+        "finished_at": "2026-09-26T13:02:59.825Z",
+        "usage": {
+          "input": 450,
+          "cache_read": 12288,
+          "cache_write": 0,
+          "output": 161,
+          "reasoning": 118
+        },
+        "cost": 0.00106548,
+        "duration_ms": 1802,
+        "status": "success",
+        "raw_usage": {
+          "prompt_tokens": 12738,
+          "completion_tokens": 161,
+          "prompt_tokens_details": {
+            "cached_tokens": 12288
+          },
+          "cache_creation_input_tokens": 0,
+          "completion_tokens_details": {
+            "thinking_tokens": 118,
+            "reasoning_tokens": 118
+          }
+        },
+        "output_cache_tokens": null
+      },
+      {
+        "call_index": 29,
+        "started_at": "2026-09-26T13:03:00.205Z",
+        "finished_at": "2026-09-26T13:03:03.054Z",
+        "usage": {
+          "input": 537,
+          "cache_read": 12800,
+          "cache_write": 0,
+          "output": 157,
+          "reasoning": 116
+        },
+        "cost": 0.0011175,
+        "duration_ms": 2849,
+        "status": "success",
+        "raw_usage": {
+          "prompt_tokens": 13337,
+          "completion_tokens": 157,
+          "prompt_tokens_details": {
+            "cached_tokens": 12800
+          },
+          "cache_creation_input_tokens": 0,
+          "completion_tokens_details": {
+            "thinking_tokens": 116,
+            "reasoning_tokens": 116
+          }
+        },
+        "output_cache_tokens": null
+      },
+      {
+        "call_index": 30,
+        "started_at": "2026-09-26T13:03:03.483Z",
+        "finished_at": "2026-09-26T13:03:08.584Z",
+        "usage": {
+          "input": 3935,
+          "cache_read": 9088,
+          "cache_write": 0,
+          "output": 392,
+          "reasoning": 293
+        },
+        "cost": 0.00219618,
+        "duration_ms": 5101,
+        "status": "success",
+        "raw_usage": {
+          "prompt_tokens": 13023,
+          "completion_tokens": 392,
+          "prompt_tokens_details": {
+            "cached_tokens": 9088
+          },
+          "cache_creation_input_tokens": 0,
+          "completion_tokens_details": {
+            "thinking_tokens": 293,
+            "reasoning_tokens": 293
+          }
+        },
+        "output_cache_tokens": null
+      },
+      {
+        "call_index": 31,
+        "started_at": "2026-09-26T13:03:08.611Z",
+        "finished_at": "2026-09-26T13:03:11.106Z",
+        "usage": {
+          "input": 191,
+          "cache_read": 13312,
+          "cache_write": 0,
+          "output": 100,
+          "reasoning": 14
+        },
+        "cost": 0.0009760200000000001,
+        "duration_ms": 2495,
+        "status": "success",
+        "raw_usage": {
+          "prompt_tokens": 13503,
+          "completion_tokens": 100,
+          "prompt_tokens_details": {
+            "cached_tokens": 13312
+          },
+          "cache_creation_input_tokens": 0,
+          "completion_tokens_details": {
+            "thinking_tokens": 14,
+            "reasoning_tokens": 14
+          }
+        },
+        "output_cache_tokens": null
+      },
+      {
+        "call_index": 32,
+        "started_at": "2026-09-26T13:03:11.632Z",
+        "finished_at": "2026-09-26T13:03:14.898Z",
+        "usage": {
+          "input": 475,
+          "cache_read": 13568,
+          "cache_write": 0,
+          "output": 243,
+          "reasoning": 26
+        },
+        "cost": 0.0012481799999999998,
+        "duration_ms": 3266,
+        "status": "success",
+        "raw_usage": {
+          "prompt_tokens": 14043,
+          "completion_tokens": 243,
+          "prompt_tokens_details": {
+            "cached_tokens": 13568
+          },
+          "cache_creation_input_tokens": 0,
+          "completion_tokens_details": {
+            "thinking_tokens": 26,
+            "reasoning_tokens": 26
+          }
+        },
+        "output_cache_tokens": null
+      },
+      {
+        "call_index": 33,
+        "started_at": "2026-09-26T13:03:15.402Z",
+        "finished_at": "2026-09-26T13:03:18.950Z",
+        "usage": {
+          "input": 514,
+          "cache_read": 14208,
+          "cache_write": 0,
+          "output": 137,
+          "reasoning": 96
+        },
+        "cost": 0.00117108,
+        "duration_ms": 3548,
+        "status": "success",
+        "raw_usage": {
+          "prompt_tokens": 14722,
+          "completion_tokens": 137,
+          "prompt_tokens_details": {
+            "cached_tokens": 14208
+          },
+          "cache_creation_input_tokens": 0,
+          "completion_tokens_details": {
+            "thinking_tokens": 96,
+            "reasoning_tokens": 96
+          }
+        },
+        "output_cache_tokens": null
+      },
+      {
+        "call_index": 34,
+        "started_at": "2026-09-26T13:03:26.157Z",
+        "finished_at": "2026-09-26T13:03:28.952Z",
+        "usage": {
+          "input": 464,
+          "cache_read": 14848,
+          "cache_write": 0,
+          "output": 135,
+          "reasoning": 19
+        },
+        "cost": 0.00119208,
+        "duration_ms": 2795,
+        "status": "success",
+        "raw_usage": {
+          "prompt_tokens": 15312,
+          "completion_tokens": 135,
+          "prompt_tokens_details": {
+            "cached_tokens": 14848
+          },
+          "cache_creation_input_tokens": 0,
+          "completion_tokens_details": {
+            "thinking_tokens": 19,
+            "reasoning_tokens": 19
+          }
+        },
+        "output_cache_tokens": null
+      },
+      {
+        "call_index": 35,
+        "started_at": "2026-09-26T13:03:29.430Z",
+        "finished_at": "2026-09-26T13:03:32.933Z",
+        "usage": {
+          "input": 522,
+          "cache_read": 15360,
+          "cache_write": 0,
+          "output": 134,
+          "reasoning": 82
+        },
+        "cost": 0.0012389999999999999,
+        "duration_ms": 3503,
+        "status": "success",
+        "raw_usage": {
+          "prompt_tokens": 15882,
+          "completion_tokens": 134,
+          "prompt_tokens_details": {
+            "cached_tokens": 15360
+          },
+          "cache_creation_input_tokens": 0,
+          "completion_tokens_details": {
+            "thinking_tokens": 82,
+            "reasoning_tokens": 82
+          }
+        },
+        "output_cache_tokens": null
+      },
+      {
+        "call_index": 36,
+        "started_at": "2026-09-26T13:03:33.123Z",
+        "finished_at": "2026-09-26T13:03:35.175Z",
+        "usage": {
+          "input": 86,
+          "cache_read": 16000,
+          "cache_write": 0,
+          "output": 55,
+          "reasoning": 28
+        },
+        "cost": 0.0010518,
+        "duration_ms": 2052,
+        "status": "success",
+        "raw_usage": {
+          "prompt_tokens": 16086,
+          "completion_tokens": 55,
+          "prompt_tokens_details": {
+            "cached_tokens": 16000
+          },
+          "cache_creation_input_tokens": 0,
+          "completion_tokens_details": {
+            "thinking_tokens": 28,
+            "reasoning_tokens": 28
+          }
+        },
+        "output_cache_tokens": null
+      },
+      {
+        "call_index": 37,
+        "started_at": "2026-09-26T13:03:38.224Z",
+        "finished_at": "2026-09-26T13:03:41.743Z",
+        "usage": {
+          "input": 50,
+          "cache_read": 16128,
+          "cache_write": 0,
+          "output": 40,
+          "reasoning": 12
+        },
+        "cost": 0.00103068,
+        "duration_ms": 3519,
+        "status": "success",
+        "raw_usage": {
+          "prompt_tokens": 16178,
+          "completion_tokens": 40,
+          "prompt_tokens_details": {
+            "cached_tokens": 16128
+          },
+          "cache_creation_input_tokens": 0,
+          "completion_tokens_details": {
+            "thinking_tokens": 12,
+            "reasoning_tokens": 12
+          }
+        },
+        "output_cache_tokens": null
+      },
+      {
+        "call_index": 38,
+        "started_at": "2026-09-26T13:03:42.370Z",
+        "finished_at": "2026-09-26T13:03:47.815Z",
+        "usage": {
+          "input": 3918,
+          "cache_read": 11008,
+          "cache_write": 0,
+          "output": 432,
+          "reasoning": 354
+        },
+        "cost": 0.00235428,
+        "duration_ms": 5445,
+        "status": "success",
+        "raw_usage": {
+          "prompt_tokens": 14926,
+          "completion_tokens": 432,
+          "prompt_tokens_details": {
+            "cached_tokens": 11008
+          },
+          "cache_creation_input_tokens": 0,
+          "completion_tokens_details": {
+            "thinking_tokens": 354,
+            "reasoning_tokens": 354
+          }
+        },
+        "output_cache_tokens": null
+      },
+      {
+        "call_index": 39,
+        "started_at": "2026-09-26T13:03:54.746Z",
+        "finished_at": "2026-09-26T13:03:57.388Z",
+        "usage": {
+          "input": 1086,
+          "cache_read": 15232,
+          "cache_write": 0,
+          "output": 46,
+          "reasoning": 18
+        },
+        "cost": 0.00129492,
+        "duration_ms": 2642,
+        "status": "success",
+        "raw_usage": {
+          "prompt_tokens": 16318,
+          "completion_tokens": 46,
+          "prompt_tokens_details": {
+            "cached_tokens": 15232
+          },
+          "cache_creation_input_tokens": 0,
+          "completion_tokens_details": {
+            "thinking_tokens": 18,
+            "reasoning_tokens": 18
+          }
+        },
+        "output_cache_tokens": null
+      },
+      {
+        "call_index": 40,
+        "started_at": "2026-09-26T13:03:57.978Z",
+        "finished_at": "2026-09-26T13:04:02.740Z",
+        "usage": {
+          "input": 15714,
+          "cache_read": 128,
+          "cache_write": 0,
+          "output": 485,
+          "reasoning": 405
+        },
+        "cost": 0.00530388,
+        "duration_ms": 4762,
+        "status": "success",
+        "raw_usage": {
+          "prompt_tokens": 15842,
+          "completion_tokens": 485,
+          "prompt_tokens_details": {
+            "cached_tokens": 128
+          },
+          "cache_creation_input_tokens": 0,
+          "completion_tokens_details": {
+            "thinking_tokens": 405,
+            "reasoning_tokens": 405
+          }
+        },
+        "output_cache_tokens": null
+      },
+      {
+        "call_index": 41,
+        "started_at": "2026-09-26T13:04:09.974Z",
+        "finished_at": "2026-09-26T13:04:15.285Z",
+        "usage": {
+          "input": 4563,
+          "cache_read": 12672,
+          "cache_write": 0,
+          "output": 152,
+          "reasoning": 125
+        },
+        "cost": 0.00231162,
+        "duration_ms": 5311,
+        "status": "success",
+        "raw_usage": {
+          "prompt_tokens": 17235,
+          "completion_tokens": 152,
+          "prompt_tokens_details": {
+            "cached_tokens": 12672
+          },
+          "cache_creation_input_tokens": 0,
+          "completion_tokens_details": {
+            "thinking_tokens": 125,
+            "reasoning_tokens": 125
+          }
+        },
+        "output_cache_tokens": null
+      },
+      {
+        "call_index": 42,
+        "started_at": "2026-09-26T13:04:18.317Z",
+        "finished_at": "2026-09-26T13:04:19.379Z",
+        "usage": {
+          "input": 144,
+          "cache_read": 17280,
+          "cache_write": 0,
+          "output": 39,
+          "reasoning": 11
+        },
+        "cost": 0.0011268,
+        "duration_ms": 1062,
+        "status": "success",
+        "raw_usage": {
+          "prompt_tokens": 17424,
+          "completion_tokens": 39,
+          "prompt_tokens_details": {
+            "cached_tokens": 17280
+          },
+          "cache_creation_input_tokens": 0,
+          "completion_tokens_details": {
+            "thinking_tokens": 11,
+            "reasoning_tokens": 11
+          }
+        },
+        "output_cache_tokens": null
+      },
+      {
+        "call_index": 43,
+        "started_at": "2026-09-26T13:04:19.746Z",
+        "finished_at": "2026-09-26T13:04:28.753Z",
+        "usage": {
+          "input": 3407,
+          "cache_read": 13312,
+          "cache_write": 0,
+          "output": 524,
+          "reasoning": 391
+        },
+        "cost": 0.00244962,
+        "duration_ms": 9007,
+        "status": "success",
+        "raw_usage": {
+          "prompt_tokens": 16719,
+          "completion_tokens": 524,
+          "prompt_tokens_details": {
+            "cached_tokens": 13312
+          },
+          "cache_creation_input_tokens": 0,
+          "completion_tokens_details": {
+            "thinking_tokens": 391,
+            "reasoning_tokens": 391
+          }
+        },
+        "output_cache_tokens": null
+      },
+      {
+        "call_index": 44,
+        "started_at": "2026-09-26T13:04:29.126Z",
+        "finished_at": "2026-09-26T13:04:33.219Z",
+        "usage": {
+          "input": 962,
+          "cache_read": 17152,
+          "cache_write": 0,
+          "output": 350,
+          "reasoning": 181
+        },
+        "cost": 0.0017377199999999999,
+        "duration_ms": 4093,
+        "status": "success",
+        "raw_usage": {
+          "prompt_tokens": 18114,
+          "completion_tokens": 350,
+          "prompt_tokens_details": {
+            "cached_tokens": 17152
+          },
+          "cache_creation_input_tokens": 0,
+          "completion_tokens_details": {
+            "thinking_tokens": 181,
+            "reasoning_tokens": 181
+          }
+        },
+        "output_cache_tokens": null
+      },
+      {
+        "call_index": 45,
+        "started_at": "2026-09-26T13:04:33.753Z",
+        "finished_at": "2026-09-26T13:04:37.478Z",
+        "usage": {
+          "input": 6021,
+          "cache_read": 13312,
+          "cache_write": 0,
+          "output": 292,
+          "reasoning": 90
+        },
+        "cost": 0.0029554200000000003,
+        "duration_ms": 3725,
+        "status": "success",
+        "raw_usage": {
+          "prompt_tokens": 19333,
+          "completion_tokens": 292,
+          "prompt_tokens_details": {
+            "cached_tokens": 13312
+          },
+          "cache_creation_input_tokens": 0,
+          "completion_tokens_details": {
+            "thinking_tokens": 90,
+            "reasoning_tokens": 90
+          }
+        },
+        "output_cache_tokens": null
+      },
+      {
+        "call_index": 46,
+        "started_at": "2026-09-26T13:04:38.045Z",
+        "finished_at": "2026-09-26T13:04:44.011Z",
+        "usage": {
+          "input": 2065,
+          "cache_read": 18432,
+          "cache_write": 0,
+          "output": 398,
+          "reasoning": 340
+        },
+        "cost": 0.00220302,
+        "duration_ms": 5966,
+        "status": "success",
+        "raw_usage": {
+          "prompt_tokens": 20497,
+          "completion_tokens": 398,
+          "prompt_tokens_details": {
+            "cached_tokens": 18432
+          },
+          "cache_creation_input_tokens": 0,
+          "completion_tokens_details": {
+            "thinking_tokens": 340,
+            "reasoning_tokens": 340
+          }
+        },
+        "output_cache_tokens": null
+      },
+      {
+        "call_index": 47,
+        "started_at": "2026-09-26T13:04:51.132Z",
+        "finished_at": "2026-09-26T13:04:53.917Z",
+        "usage": {
+          "input": 898,
+          "cache_read": 20864,
+          "cache_write": 0,
+          "output": 61,
+          "reasoning": 34
+        },
+        "cost": 0.00159444,
+        "duration_ms": 2785,
+        "status": "success",
+        "raw_usage": {
+          "prompt_tokens": 21762,
+          "completion_tokens": 61,
+          "prompt_tokens_details": {
+            "cached_tokens": 20864
+          },
+          "cache_creation_input_tokens": 0,
+          "completion_tokens_details": {
+            "thinking_tokens": 34,
+            "reasoning_tokens": 34
+          }
+        },
+        "output_cache_tokens": null
+      },
+      {
+        "call_index": 48,
+        "started_at": "2026-09-26T13:04:56.943Z",
+        "finished_at": "2026-09-26T13:04:59.475Z",
+        "usage": {
+          "input": 100,
+          "cache_read": 21760,
+          "cache_write": 0,
+          "output": 35,
+          "reasoning": 7
+        },
+        "cost": 0.0013775999999999999,
+        "duration_ms": 2532,
+        "status": "success",
+        "raw_usage": {
+          "prompt_tokens": 21860,
+          "completion_tokens": 35,
+          "prompt_tokens_details": {
+            "cached_tokens": 21760
+          },
+          "cache_creation_input_tokens": 0,
+          "completion_tokens_details": {
+            "thinking_tokens": 7,
+            "reasoning_tokens": 7
+          }
+        },
+        "output_cache_tokens": null
+      },
+      {
+        "call_index": 49,
+        "started_at": "2026-09-26T13:04:59.678Z",
+        "finished_at": "2026-09-26T13:05:04.433Z",
+        "usage": {
+          "input": 4531,
+          "cache_read": 14208,
+          "cache_write": 0,
+          "output": 468,
+          "reasoning": 414
+        },
+        "cost": 0.0027733799999999998,
+        "duration_ms": 4755,
+        "status": "success",
+        "raw_usage": {
+          "prompt_tokens": 18739,
+          "completion_tokens": 468,
+          "prompt_tokens_details": {
+            "cached_tokens": 14208
+          },
+          "cache_creation_input_tokens": 0,
+          "completion_tokens_details": {
+            "thinking_tokens": 414,
+            "reasoning_tokens": 414
+          }
+        },
+        "output_cache_tokens": null
+      },
+      {
+        "call_index": 50,
+        "started_at": "2026-09-26T13:05:05.297Z",
+        "finished_at": "2026-09-26T13:05:11.413Z",
+        "usage": {
+          "input": 1007,
+          "cache_read": 19072,
+          "cache_write": 0,
+          "output": 479,
+          "reasoning": 378
+        },
+        "cost": 0.00202122,
+        "duration_ms": 6116,
+        "status": "success",
+        "raw_usage": {
+          "prompt_tokens": 20079,
+          "completion_tokens": 479,
+          "prompt_tokens_details": {
+            "cached_tokens": 19072
+          },
+          "cache_creation_input_tokens": 0,
+          "completion_tokens_details": {
+            "thinking_tokens": 378,
+            "reasoning_tokens": 378
+          }
+        },
+        "output_cache_tokens": null
+      }
+    ],
+    "model_steps": 50,
+    "retry_count": 0,
+    "failed_steps": 5,
+    "incomplete_steps": 0,
+    "final_screenshot": "final.png",
+    "attempt_number": 1,
+    "attempt_directory": "Google Map--12",
+    "judge_mode": "reference",
+    "metrics": {
+      "metrics_version": 1,
+      "input_tokens": 614273,
+      "output_tokens": 9936,
+      "uncached_input_tokens": 89857,
+      "cache_hit_tokens": 524416,
+      "cache_miss_tokens": 89857,
+      "cache_write_tokens": 0,
+      "output_cache_tokens": null,
+      "reasoning_tokens": 6295,
+      "total_tokens": 624209,
+      "cache_hit_rate": 0.8537181350962846,
+      "agent_cost_usd": 0.07034526,
+      "judge_cost_usd": 0.00304158,
+      "total_cost_usd": 0.07338684000000001,
+      "observed_cost_usd": 0.07338684000000001,
+      "agent_duration_ms": 282162,
+      "judge_duration_ms": 1346,
+      "active_duration_ms": 283508
+    },
+    "judge_result": {
+      "task_id": "Google Map--12",
+      "mode": "reference",
+      "rubric_version": "opencode-browser-856867996e73f7dcc5e39827bf2af7555bd63d40-judge-prompt.md",
+      "pass": false,
+      "reason": "Agent hit the step limit with an empty final_answer and never successfully extracted or listed the 5 burger places sorted by rating near zip 44012.",
+      "status": "judged",
+      "model": "MiniMax-M3",
+      "request_count": 1,
+      "usage_missing_calls": 0,
+      "unpriced_calls": 0,
+      "tokens": {
+        "input": 9465,
+        "output": 162,
+        "cache_read": 128,
+        "cache_write": 0,
+        "reasoning": 97
+      },
+      "tokens_observed": {
+        "input": 9465,
+        "output": 162,
+        "cache_read": 128,
+        "cache_write": 0,
+        "reasoning": 97
+      },
+      "usage_metrics": {
+        "input_tokens": 9593,
+        "output_tokens": 162,
+        "uncached_input_tokens": 9465,
+        "cache_hit_tokens": 128,
+        "cache_miss_tokens": 9465,
+        "cache_write_tokens": 0,
+        "output_cache_tokens": null,
+        "reasoning_tokens": 97,
+        "total_tokens": 9755,
+        "cache_hit_rate": 0.013343062649848848
+      },
+      "usage_observed": {
+        "input_tokens": 9593,
+        "output_tokens": 162,
+        "uncached_input_tokens": 9465,
+        "cache_hit_tokens": 128,
+        "cache_miss_tokens": 9465,
+        "cache_write_tokens": 0,
+        "output_cache_tokens": null,
+        "reasoning_tokens": 97,
+        "total_tokens": 9755,
+        "cache_hit_rate": 0.013343062649848848
+      },
+      "cost": 0.00304158,
+      "cost_observed": 0.00304158,
+      "model_duration_ms": 1345,
+      "requests": 1,
+      "model_calls": [
+        {
+          "call_index": 1,
+          "started_at": "2026-09-26T13:05:14.781Z",
+          "usage": {
+            "input": 9465,
+            "cache_read": 128,
+            "cache_write": 0,
+            "output": 162,
+            "reasoning": 97
+          },
+          "cost": 0.00304158,
+          "status": "success",
+          "output_cache_tokens": null,
+          "raw_usage": {
+            "prompt_tokens": 9593,
+            "completion_tokens": 162,
+            "prompt_tokens_details": {
+              "cached_tokens": 128
+            },
+            "cache_creation_input_tokens": 0,
+            "completion_tokens_details": {
+              "thinking_tokens": 97,
+              "reasoning_tokens": 97
+            }
+          },
+          "finished_at": "2026-09-26T13:05:16.126Z",
+          "duration_ms": 1345
+        }
+      ],
+      "started_at": "2026-09-26T13:05:14.781Z",
+      "finished_at": "2026-09-26T13:05:16.127Z",
+      "duration_ms": 1346,
+      "prompt_sha256": "bcdf403484823037eaeb6cec7918b966fe90ee31a30bc8d69094d2ff42747ccf"
+    },
+    "evaluation_finished_at": "2026-09-26T13:05:16.127Z"
+  }
+}

@@ -1,0 +1,488 @@
+{
+  "previous": "65804b91576f6d75c5c5b52c6aaccf91de636921ba850315ed880f07cfe4a284",
+  "result": {
+    "task_id": "Huggingface--16",
+    "website": "https://huggingface.co/",
+    "task": "Find information on the latest (as of today's date) pre-trained language model on Huggingface suitable for text classification and briefly describe its intended use case and architecture.",
+    "status": "completed",
+    "duration_ms": 53696,
+    "steps": 7,
+    "browser_steps": 7,
+    "model_rounds": 8,
+    "cost": 0.0143628,
+    "tokens": {
+      "input": 32628,
+      "output": 2250,
+      "cache_read": 31240,
+      "cache_write": 0,
+      "reasoning": 1409
+    },
+    "final_answer": "I have found the information needed. Let me provide a clear summary.\n\n## Answer\n\n**Latest Pre-trained Language Model Suitable for Text Classification on Hugging Face**\n\nThe latest model in the **Text Classification** filter (sorted by \"Recently updated\") on Hugging Face is:\n\n### **`orpe42/deberta_MP_dynamic`**\n- **URL**: https://huggingface.co/orpe42/deberta_MP_dynamic\n- **Updated**: Less than a minute ago (most recently updated as of today)\n- **License**: MIT\n- **Model size**: ~0.4B parameters\n- **Tags**: Transformers, TensorBoard, Safetensors, Generated from Trainer, text-embeddings-inference, deberta-v2\n\n### Intended Use Case\nThe model is a **fine-tuned version of `microsoft/deberta-v3-large`** intended for **text classification** tasks. Based on the reported evaluation metrics (Macro F1: 0.5491, Micro F1: 0.6332, Macro Roc Auc: 0.9217, Exact Match Ratio: 0.0853), it appears to be designed for multi-class or multi-label text classification tasks where distinguishing between multiple text categories is the goal. The high ROC AUC (~0.92) indicates strong class separability, while the lower Exact Match Ratio suggests it may also handle tasks with many possible labels (e.g., large-label classification).\n\n### Architecture\nThe architecture is based on **DeBERTa (Decoding-enhanced BERT with Disentangled Attention), specifically the v3-large variant from Microsoft**. Key architectural features of DeBERTa include:\n- **Disentangled attention mechanism**: Uses separate vectors for content and relative position, rather than mixing them.\n- **Enhanced mask decoder**: Incorporates absolute positions in the decoding layer to better predict masked tokens.\n- **Electra-style pre-training (v3)**: Replaces the masked language modeling objective with replaced token detection for more efficient pre-training.\n- **Large variant**: ~435M parameters, using 24 layers with a hidden size of 1024.\n\nThe underlying pre-trained foundation model (`microsoft/deberta-v3-large`) is a state-of-the-art transformer-based language model that excels at a wide variety of natural language understanding tasks, including text classification, and is itself widely used as a base model for downstream fine-tuning.",
+    "tool_trace": [
+      {
+        "tool": "browser_start",
+        "input": {
+          "url": "https://huggingface.co/"
+        },
+        "call_id": "call_01a0df0460787605ac9cf0d2",
+        "time_ms": 11204,
+        "output_preview": "# Browser Mode\n\nThe DSH browser plugin controls a real Chromium instance isolated to the current Agent Session.\n\n- DOM markers `[N]` are clickable and `<N>` are inputs.\n- Match element labels or nearby text, and use DOM indentation to distinguish parents, children, and siblings; do not choose by mar",
+        "status": "success"
+      },
+      {
+        "tool": "browser_click",
+        "input": {
+          "elementIndex": 184
+        },
+        "call_id": "call_01a0df048fbe74eb85fa8341",
+        "time_ms": 8780,
+        "output_preview": "Clicked <a> Models </a> Action dispatched; outcome not verified. Check the returned page before claiming success.\n\n\n<!-- DOM_START dom1 tab:tab0 mode:full -->\n(stateId: tab0-dom1)\n## Current Page DOM Structure\n\n\n<div></div>\n\t[3259]<a> Hugging Face's logo Hugging Face </a>\n\t\t[3260][view:dcga]<img alt",
+        "status": "success"
+      },
+      {
+        "tool": "browser_click",
+        "input": {
+          "elementIndex": 5672,
+          "expectText": "Sort:"
+        },
+        "call_id": "call_01a0df04b79c729f895bdf49",
+        "time_ms": 4016,
+        "output_preview": "Clicked <button type='button'> Sort:  Trending </button> Postcondition verified.\n\n\n<!-- DOM_START dom1.1 tab:tab0 mode:incremental -->\n(stateId: tab0-dom1.1)\n## Incremental DOM updates\n\n\n<div></div>\n\t<div></div>\n\t\t+|<div></div>\n\t\t\t+|<li></li>\n\t\t\t\t+|[9058]<button> Trending </button>\n\t\t\t\t\t+|[9056]<spa",
+        "status": "success"
+      },
+      {
+        "tool": "browser_click",
+        "input": {
+          "elementIndex": 9070,
+          "expectText": "Recently updated"
+        },
+        "call_id": "call_01a0df04ca8373b5a7415d96",
+        "time_ms": 2459,
+        "output_preview": "Clicked <button> Recently updated </button> Postcondition verified.\n\n\n<!-- DOM_START dom2 tab:tab0 mode:full -->\n(stateId: tab0-dom2)\n## Current Page DOM Structure\n\n\n<div></div>\n\t[3259]<a> Hugging Face's logo Hugging Face </a>\n\t\t[3260][view:dcga]<img alt='Hugging Face's logo'></img>\n\t\t[3262]<span> H",
+        "status": "success"
+      },
+      {
+        "tool": "browser_click",
+        "input": {
+          "elementIndex": 4081,
+          "expectText": "Text Classification"
+        },
+        "call_id": "call_01a0df04d9607079a246ced6",
+        "time_ms": 2940,
+        "output_preview": "Clicked <button> + 44 </button> Postcondition verified.\n\n\n<!-- DOM_START dom2.1 tab:tab0 mode:full -->\n(stateId: tab0-dom2.1)\n## Current Page DOM Structure\n\n\n<div></div>\n\t[3259]<a> Hugging Face's logo Hugging Face </a>\n\t\t[3260][view:dcga]<img alt='Hugging Face's logo'></img>\n\t\t[3262]<span> Hugging F",
+        "status": "success"
+      },
+      {
+        "tool": "browser_click",
+        "input": {
+          "elementIndex": 12165,
+          "expectText": "Text Classification"
+        },
+        "call_id": "call_01a0df04ea4777e5848719d9",
+        "time_ms": 3144,
+        "output_preview": "Clicked <a> Text Classification </a> Postcondition verified.\n\n\n<!-- DOM_START dom3 tab:tab0 mode:full -->\n(stateId: tab0-dom3)\n## Current Page DOM Structure\n\n\n<div></div>\n\t[3259]<a> Hugging Face's logo Hugging Face </a>\n\t\t[3260][view:dcga]<img alt='Hugging Face's logo'></img>\n\t\t[3262]<span> Hugging ",
+        "status": "success"
+      },
+      {
+        "tool": "browser_click",
+        "input": {
+          "elementIndex": 10023,
+          "expectText": "deberta_MP_dynamic"
+        },
+        "call_id": "call_01a0df04fcd677a088256f30",
+        "time_ms": 8349,
+        "output_preview": "Clicked <header title='orpe42/deberta_MP_dynamic'></header> Postcondition verified.\n\n\n<!-- DOM_START dom4 tab:tab0 mode:full -->\n(stateId: tab0-dom4)\n## Current Page DOM Structure\n\n\n<div></div>\n\t[18888]<a> Hugging Face's logo Hugging Face </a>\n\t\t[18889][view:biiij]<img alt='Hugging Face's logo'></im",
+        "status": "success"
+      }
+    ],
+    "error": null,
+    "model": "MiniMax-M3",
+    "provider": "minimax-cn",
+    "protocol": "anthropic-messages",
+    "reasoning_effort": "high",
+    "session_id": "eval-Huggingface--16-912e1c178720",
+    "started_at": "2026-09-26T18:40:00.603Z",
+    "finished_at": "2026-09-26T18:40:54.299Z",
+    "duration_basis": "worker initialization to agent stop; excludes judge, screenshots and cleanup",
+    "infrastructure_error": null,
+    "request_count": 8,
+    "usage_missing_calls": 0,
+    "unpriced_calls": 0,
+    "tokens_observed": {
+      "input": 32628,
+      "output": 2250,
+      "cache_read": 31240,
+      "cache_write": 0,
+      "reasoning": 1409
+    },
+    "usage_metrics": {
+      "input_tokens": 63868,
+      "output_tokens": 2250,
+      "uncached_input_tokens": 32628,
+      "cache_hit_tokens": 31240,
+      "cache_miss_tokens": 32628,
+      "cache_write_tokens": 0,
+      "output_cache_tokens": null,
+      "reasoning_tokens": 1409,
+      "total_tokens": 66118,
+      "cache_hit_rate": 0.4891338385419929
+    },
+    "usage_observed": {
+      "input_tokens": 63868,
+      "output_tokens": 2250,
+      "uncached_input_tokens": 32628,
+      "cache_hit_tokens": 31240,
+      "cache_miss_tokens": 32628,
+      "cache_write_tokens": 0,
+      "output_cache_tokens": null,
+      "reasoning_tokens": 1409,
+      "total_tokens": 66118,
+      "cache_hit_rate": 0.4891338385419929
+    },
+    "cost_observed": 0.0143628,
+    "model_duration_ms": 12581,
+    "model_calls": [
+      {
+        "call_index": 1,
+        "started_at": "2026-09-26T18:40:00.638Z",
+        "finished_at": "2026-09-26T18:40:01.592Z",
+        "usage": {
+          "input": 2688,
+          "cache_read": 128,
+          "cache_write": 0,
+          "output": 72,
+          "reasoning": 37
+        },
+        "cost": 0.00090048,
+        "duration_ms": 954,
+        "status": "success",
+        "raw_usage": {
+          "prompt_tokens": 2816,
+          "completion_tokens": 72,
+          "prompt_tokens_details": {
+            "cached_tokens": 128
+          },
+          "cache_creation_input_tokens": 0,
+          "completion_tokens_details": {
+            "thinking_tokens": 37,
+            "reasoning_tokens": 37
+          }
+        },
+        "output_cache_tokens": null
+      },
+      {
+        "call_index": 2,
+        "started_at": "2026-09-26T18:40:12.811Z",
+        "finished_at": "2026-09-26T18:40:13.693Z",
+        "usage": {
+          "input": 1962,
+          "cache_read": 2816,
+          "cache_write": 0,
+          "output": 70,
+          "reasoning": 39
+        },
+        "cost": 0.00084156,
+        "duration_ms": 883,
+        "status": "success",
+        "raw_usage": {
+          "prompt_tokens": 4778,
+          "completion_tokens": 70,
+          "prompt_tokens_details": {
+            "cached_tokens": 2816
+          },
+          "cache_creation_input_tokens": 0,
+          "completion_tokens_details": {
+            "thinking_tokens": 39,
+            "reasoning_tokens": 39
+          }
+        },
+        "output_cache_tokens": null
+      },
+      {
+        "call_index": 3,
+        "started_at": "2026-09-26T18:40:22.500Z",
+        "finished_at": "2026-09-26T18:40:23.899Z",
+        "usage": {
+          "input": 5669,
+          "cache_read": 3343,
+          "cache_write": 0,
+          "output": 239,
+          "reasoning": 178
+        },
+        "cost": 0.0021880800000000002,
+        "duration_ms": 1399,
+        "status": "success",
+        "raw_usage": {
+          "prompt_tokens": 9012,
+          "completion_tokens": 239,
+          "prompt_tokens_details": {
+            "cached_tokens": 3343
+          },
+          "cache_creation_input_tokens": 0,
+          "completion_tokens_details": {
+            "thinking_tokens": 178,
+            "reasoning_tokens": 178
+          }
+        },
+        "output_cache_tokens": null
+      },
+      {
+        "call_index": 4,
+        "started_at": "2026-09-26T18:40:27.948Z",
+        "finished_at": "2026-09-26T18:40:28.737Z",
+        "usage": {
+          "input": 1402,
+          "cache_read": 9012,
+          "cache_write": 0,
+          "output": 65,
+          "reasoning": 21
+        },
+        "cost": 0.00103932,
+        "duration_ms": 789,
+        "status": "success",
+        "raw_usage": {
+          "prompt_tokens": 10414,
+          "completion_tokens": 65,
+          "prompt_tokens_details": {
+            "cached_tokens": 9012
+          },
+          "cache_creation_input_tokens": 0,
+          "completion_tokens_details": {
+            "thinking_tokens": 21,
+            "reasoning_tokens": 21
+          }
+        },
+        "output_cache_tokens": null
+      },
+      {
+        "call_index": 5,
+        "started_at": "2026-09-26T18:40:31.229Z",
+        "finished_at": "2026-09-26T18:40:32.589Z",
+        "usage": {
+          "input": 5089,
+          "cache_read": 3487,
+          "cache_write": 0,
+          "output": 201,
+          "reasoning": 145
+        },
+        "cost": 0.00197712,
+        "duration_ms": 1360,
+        "status": "success",
+        "raw_usage": {
+          "prompt_tokens": 8576,
+          "completion_tokens": 201,
+          "prompt_tokens_details": {
+            "cached_tokens": 3487
+          },
+          "cache_creation_input_tokens": 0,
+          "completion_tokens_details": {
+            "thinking_tokens": 145,
+            "reasoning_tokens": 145
+          }
+        },
+        "output_cache_tokens": null
+      },
+      {
+        "call_index": 6,
+        "started_at": "2026-09-26T18:40:35.564Z",
+        "finished_at": "2026-09-26T18:40:36.901Z",
+        "usage": {
+          "input": 5635,
+          "cache_read": 3927,
+          "cache_write": 0,
+          "output": 75,
+          "reasoning": 21
+        },
+        "cost": 0.00201612,
+        "duration_ms": 1337,
+        "status": "success",
+        "raw_usage": {
+          "prompt_tokens": 9562,
+          "completion_tokens": 75,
+          "prompt_tokens_details": {
+            "cached_tokens": 3927
+          },
+          "cache_creation_input_tokens": 0,
+          "completion_tokens_details": {
+            "thinking_tokens": 21,
+            "reasoning_tokens": 21
+          }
+        },
+        "output_cache_tokens": null
+      },
+      {
+        "call_index": 7,
+        "started_at": "2026-09-26T18:40:40.060Z",
+        "finished_at": "2026-09-26T18:40:41.607Z",
+        "usage": {
+          "input": 6110,
+          "cache_read": 4193,
+          "cache_write": 0,
+          "output": 404,
+          "reasoning": 327
+        },
+        "cost": 0.00256938,
+        "duration_ms": 1547,
+        "status": "success",
+        "raw_usage": {
+          "prompt_tokens": 10303,
+          "completion_tokens": 404,
+          "prompt_tokens_details": {
+            "cached_tokens": 4193
+          },
+          "cache_creation_input_tokens": 0,
+          "completion_tokens_details": {
+            "thinking_tokens": 327,
+            "reasoning_tokens": 327
+          }
+        },
+        "output_cache_tokens": null
+      },
+      {
+        "call_index": 8,
+        "started_at": "2026-09-26T18:40:49.980Z",
+        "finished_at": "2026-09-26T18:40:54.292Z",
+        "usage": {
+          "input": 4073,
+          "cache_read": 4334,
+          "cache_write": 0,
+          "output": 1124,
+          "reasoning": 641
+        },
+        "cost": 0.00283074,
+        "duration_ms": 4312,
+        "status": "success",
+        "raw_usage": {
+          "prompt_tokens": 8407,
+          "completion_tokens": 1124,
+          "prompt_tokens_details": {
+            "cached_tokens": 4334
+          },
+          "cache_creation_input_tokens": 0,
+          "completion_tokens_details": {
+            "thinking_tokens": 641,
+            "reasoning_tokens": 641
+          }
+        },
+        "output_cache_tokens": null
+      }
+    ],
+    "model_steps": 8,
+    "retry_count": 0,
+    "failed_steps": 0,
+    "incomplete_steps": 0,
+    "final_screenshot": "final.png",
+    "attempt_number": 1,
+    "attempt_directory": "Huggingface--16",
+    "judge_mode": "reference",
+    "metrics": {
+      "metrics_version": 1,
+      "input_tokens": 63868,
+      "output_tokens": 2250,
+      "uncached_input_tokens": 32628,
+      "cache_hit_tokens": 31240,
+      "cache_miss_tokens": 32628,
+      "cache_write_tokens": 0,
+      "output_cache_tokens": null,
+      "reasoning_tokens": 1409,
+      "total_tokens": 66118,
+      "cache_hit_rate": 0.4891338385419929,
+      "agent_cost_usd": 0.0143628,
+      "judge_cost_usd": 0.0011548799999999998,
+      "total_cost_usd": 0.01551768,
+      "observed_cost_usd": 0.01551768,
+      "agent_duration_ms": 53696,
+      "judge_duration_ms": 1597,
+      "active_duration_ms": 55293
+    },
+    "judge_result": {
+      "task_id": "Huggingface--16",
+      "mode": "reference",
+      "rubric_version": "opencode-browser-856867996e73f7dcc5e39827bf2af7555bd63d40-judge-prompt.md",
+      "pass": true,
+      "reason": "Agent found the most recently updated text classification model on Hugging Face (orpe42/deberta_MP_dynamic), and provided a detailed description of its intended use case (multi-class/multi-label text classification) and architecture (DeBERTa v3-large with disentangled attention).",
+      "status": "judged",
+      "model": "MiniMax-M3",
+      "request_count": 1,
+      "usage_missing_calls": 0,
+      "unpriced_calls": 0,
+      "tokens": {
+        "input": 2376,
+        "output": 362,
+        "cache_read": 128,
+        "cache_write": 0,
+        "reasoning": 271
+      },
+      "tokens_observed": {
+        "input": 2376,
+        "output": 362,
+        "cache_read": 128,
+        "cache_write": 0,
+        "reasoning": 271
+      },
+      "usage_metrics": {
+        "input_tokens": 2504,
+        "output_tokens": 362,
+        "uncached_input_tokens": 2376,
+        "cache_hit_tokens": 128,
+        "cache_miss_tokens": 2376,
+        "cache_write_tokens": 0,
+        "output_cache_tokens": null,
+        "reasoning_tokens": 271,
+        "total_tokens": 2866,
+        "cache_hit_rate": 0.051118210862619806
+      },
+      "usage_observed": {
+        "input_tokens": 2504,
+        "output_tokens": 362,
+        "uncached_input_tokens": 2376,
+        "cache_hit_tokens": 128,
+        "cache_miss_tokens": 2376,
+        "cache_write_tokens": 0,
+        "output_cache_tokens": null,
+        "reasoning_tokens": 271,
+        "total_tokens": 2866,
+        "cache_hit_rate": 0.051118210862619806
+      },
+      "cost": 0.0011548799999999998,
+      "cost_observed": 0.0011548799999999998,
+      "model_duration_ms": 1594,
+      "requests": 1,
+      "model_calls": [
+        {
+          "call_index": 1,
+          "started_at": "2026-09-26T18:40:55.914Z",
+          "usage": {
+            "input": 2376,
+            "cache_read": 128,
+            "cache_write": 0,
+            "output": 362,
+            "reasoning": 271
+          },
+          "cost": 0.0011548799999999998,
+          "status": "success",
+          "output_cache_tokens": null,
+          "raw_usage": {
+            "prompt_tokens": 2504,
+            "completion_tokens": 362,
+            "prompt_tokens_details": {
+              "cached_tokens": 128
+            },
+            "cache_creation_input_tokens": 0,
+            "completion_tokens_details": {
+              "thinking_tokens": 271,
+              "reasoning_tokens": 271
+            }
+          },
+          "finished_at": "2026-09-26T18:40:57.508Z",
+          "duration_ms": 1594
+        }
+      ],
+      "started_at": "2026-09-26T18:40:55.914Z",
+      "finished_at": "2026-09-26T18:40:57.511Z",
+      "duration_ms": 1597,
+      "prompt_sha256": "bcdf403484823037eaeb6cec7918b966fe90ee31a30bc8d69094d2ff42747ccf"
+    },
+    "evaluation_finished_at": "2026-09-26T18:40:57.511Z"
+  }
+}

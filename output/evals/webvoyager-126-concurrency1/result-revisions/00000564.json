@@ -1,0 +1,641 @@
+{
+  "previous": "9a86782fbe82ba6775e15afd5c72c3fbc8550ada4c084a77f8bc83b9b8c93576",
+  "result": {
+    "task_id": "Wolfram Alpha--44",
+    "website": "https://www.wolframalpha.com/",
+    "task": "Solve the ODE, g' + cos(g) = 0, if there is a constant in the result, determine the value of the constant by the condition that g(0) = 1.",
+    "status": "completed",
+    "duration_ms": 82476,
+    "steps": 11,
+    "browser_steps": 11,
+    "model_rounds": 12,
+    "cost": 0.037065,
+    "tokens": {
+      "input": 39190,
+      "output": 15785,
+      "cache_read": 106100,
+      "cache_write": 0,
+      "reasoning": 14710
+    },
+    "final_answer": "I have all the information I need from WolframAlpha. Let me provide the final answer.\n\n## WolframAlpha Solution\n\n**ODE solved:** g'(t) + cos(g(t)) = 0, with g(0) = 1\n\n**Classification:** First-order nonlinear ODE (separable)\n\n**Separable form:** -(g'(t))/cos(g(t)) = 1\n\n### Solution\n\n$$g(t) = -\\sin^{-1}\\!\\left(\\coth\\!\\left(t - \\coth^{-1}(\\sin(1))\\right)\\right)$$\n\nIn Wolfram Language notation: `g[t] == -ArcSin[Coth[t - ArcCoth[Sin[1]]]]`\n\n### Constant Determination\n\nThe constant of integration is $C = \\coth^{-1}(\\sin(1))$, which is determined by the condition $g(0) = 1$:\n\n$$1 = g(0) = -\\arcsin\\!\\left(\\coth\\!\\left(-C\\right)\\right) = -\\arcsin\\!\\left(-\\coth(C)\\right) = \\arcsin\\!\\left(\\coth(C)\\right)$$\n\nTherefore: $\\coth(C) = \\sin(1)$, so $C = \\coth^{-1}(\\sin(1))$.\n\n### Value of the Constant\n\n$$C = \\coth^{-1}(\\sin(1)) = \\frac{1}{2}\\ln\\!\\left(\\frac{1+\\sin(1)}{\\sin(1)-1}\\right) = \\ln(\\sec(1) + \\tan(1)) + \\frac{i\\pi}{2} \\approx 1.22627 + 1.57080\\,i$$\n\n(Note: Since $|\\sin(1)| \\approx 0.8415 < 1$, this constant is complex, but the resulting $g(t)$ is real, and $g(0) = \\arcsin(\\sin(1)) = 1$ since 1 radian lies in $[-\\pi/2, \\pi/2]$.)\n\n### Equivalent Real Form\n\nThe same solution can be expressed in a real form as:\n\n$$g(t) = 2\\arctan\\!\\left((\\sec(1)+\\tan(1))\\,e^{-t}\\right) - \\frac{\\pi}{2}$$\n\nwhich clearly satisfies $g(0) = 2\\arctan(\\sec(1)+\\tan(1)) - \\pi/2 = 2(\\pi/4 + 1/2) - \\pi/2 = 1$.",
+    "tool_trace": [
+      {
+        "tool": "browser_start",
+        "input": {
+          "url": "https://www.wolframalpha.com/"
+        },
+        "call_id": "call_01a0e1c9895d7511b62cfcf1",
+        "time_ms": 6341,
+        "output_preview": "# Browser Mode\n\nThe DSH browser plugin controls a real Chromium instance isolated to the current Agent Session.\n\n- DOM markers `[N]` are clickable and `<N>` are inputs.\n- Match element labels or nearby text, and use DOM indentation to distinguish parents, children, and siblings; do not choose by mar",
+        "status": "success"
+      },
+      {
+        "tool": "browser_click",
+        "input": {
+          "elementIndex": 5
+        },
+        "call_id": "call_01a0e1c9a6db765baeceeeba",
+        "time_ms": 1227,
+        "output_preview": "Clicked <textarea aria-label='Wolfram|Alpha 输入栏'></textarea> Action dispatched; outcome not verified. Check the returned page before claiming success.\n\n\n<!-- DOM_START dom0.1 tab:tab0 mode:incremental -->\n(stateId: tab0-dom0.1)\n## Incremental DOM updates\n\n\n<header></header>\n\t<li></li>\n\t\t[72]<button ",
+        "status": "success"
+      },
+      {
+        "tool": "browser_input",
+        "input": {
+          "elementIndex": 5,
+          "pressEnter": true,
+          "text": "solve g'(t) + cos(g(t)) = 0, g(0) = 1"
+        },
+        "call_id": "call_01a0e1c9af7674c38247e062",
+        "time_ms": 3096,
+        "output_preview": "Input \"solve g'(t) + cos(g(t)) = 0, g(0) = 1\" into <textarea aria-label='Wolfram|Alpha 输入栏'></textarea> and pressed Enter Action dispatched; outcome not verified. Check the returned page before claiming success.\n\n\n<!-- DOM_START dom0.2 tab:tab0 mode:full -->\n(stateId: tab0-dom0.2)\n## Current Page DO",
+        "status": "success"
+      },
+      {
+        "tool": "browser_scroll_next_screen",
+        "input": {
+          "container": 0,
+          "direction": "down"
+        },
+        "call_id": "call_01a0e1c9c06d77b592d7ab23",
+        "time_ms": 566,
+        "output_preview": "Scrolled down to next screen on container [0]: P0 -> P0.3 (Reached the BOTTOM of the page)\n\n\n<!-- DOM_START dom1 tab:tab0 mode:full -->\n(stateId: tab0-dom1)\n## Current Page DOM Structure\n\n\n=== OFF-SCREEN above [container:0] (scroll to reveal these elements) ===\n<header></header>\n\t<li></li>\n\t\t<button",
+        "status": "success"
+      },
+      {
+        "tool": "browser_click",
+        "input": {
+          "elementIndex": 2024,
+          "expectText": "纯文本"
+        },
+        "call_id": "call_01a0e1ca00547447a93a207c",
+        "time_ms": 1449,
+        "output_preview": "Clicked <button type='button'> 纯文本 </button> Postcondition verified.\n\n\n<!-- DOM_START dom1.1 tab:tab0 mode:full -->\n(stateId: tab0-dom1.1)\n## Current Page DOM Structure\n\n\n=== OFF-SCREEN above [container:0] (scroll to reveal these elements) ===\n<header></header>\n\t<li></li>\n\t\t<button type='button'> 升级",
+        "status": "success"
+      },
+      {
+        "tool": "browser_click",
+        "input": {
+          "elementIndex": 2315
+        },
+        "call_id": "call_01a0e1ca0bb172978437e125",
+        "time_ms": 1391,
+        "output_preview": "Clicked <button aria-label='关闭' type='button'></button> Action dispatched; outcome not verified. Check the returned page before claiming success.\n\n\n<!-- DOM_START dom1.2 tab:tab0 mode:full -->\n(stateId: tab0-dom1.2)\n## Current Page DOM Structure\n\n\n=== OFF-SCREEN above [container:0] (scroll to reveal",
+        "status": "success"
+      },
+      {
+        "tool": "browser_click",
+        "input": {
+          "elementIndex": 1971,
+          "expectText": "近似"
+        },
+        "call_id": "call_01a0e1ca2b6673e2b690c691",
+        "time_ms": 5885,
+        "output_preview": "Clicked <button type='button'> 近似形式 </button> Postcondition failed.\n\n\n<!-- DOM_START dom1.3 tab:tab0 mode:full -->\n(stateId: tab0-dom1.3)\n## Current Page DOM Structure\n\n\n=== OFF-SCREEN above [container:0] (scroll to reveal these elements) ===\n<header></header>\n\t<li></li>\n\t\t<button type='button'> 升级到",
+        "status": "error"
+      },
+      {
+        "tool": "browser_observe",
+        "input": {
+          "format": "html"
+        },
+        "call_id": "call_01a0e1ca82b47373b78eccca",
+        "time_ms": 157,
+        "output_preview": "\n\n<!-- DOM_START dom1.4 tab:tab0 mode:full -->\n(stateId: tab0-dom1.4)\n## Current Page DOM Structure\n\n\n=== OFF-SCREEN above [container:0] (scroll to reveal these elements) ===\n<header></header>\n\t<li></li>\n\t\t<button type='button'> 升级到 PRO </button>\n\t\t\t ...\n\t<li></li>\n\t\t<button type='button'> 应用程序 </bu",
+        "status": "success"
+      },
+      {
+        "tool": "browser_click",
+        "input": {
+          "elementIndex": 2665,
+          "expectText": "精确形式"
+        },
+        "call_id": "call_01a0e1ca87167641a21607bf",
+        "time_ms": 6018,
+        "output_preview": "Clicked <button type='button'> 精确形式 </button> Postcondition failed.\n\n\n<!-- DOM_START dom1.5 tab:tab0 mode:full -->\n(stateId: tab0-dom1.5)\n## Current Page DOM Structure\n\n\n=== OFF-SCREEN above [container:0] (scroll to reveal these elements) ===\n<header></header>\n\t<li></li>\n\t\t<button type='button'> 升级到",
+        "status": "error"
+      },
+      {
+        "tool": "browser_click",
+        "input": {
+          "elementIndex": 2918,
+          "expectText": "纯文本"
+        },
+        "call_id": "call_01a0e1caa2647270a37d18b9",
+        "time_ms": 1475,
+        "output_preview": "Clicked <button type='button'> 纯文本 </button> Postcondition verified.\n\n\n<!-- DOM_START dom1.6 tab:tab0 mode:incremental -->\n(stateId: tab0-dom1.6)\n## Incremental DOM updates\n\n\n<main></main>\n\t<div></div>\n\t\t<div></div>\n\t\t\t<div></div>\n\t\t\t\t<section></section>\n\t\t\t\t\t<div></div>\n\t\t\t\t\t\t<div></div>\n\t\t\t\t\t\t\t-|[",
+        "status": "success"
+      },
+      {
+        "tool": "browser_click",
+        "input": {
+          "elementIndex": 3113
+        },
+        "call_id": "call_01a0e1cab1e87126a4e1b557",
+        "time_ms": 1314,
+        "output_preview": "Clicked <button aria-label='关闭' type='button'></button> Action dispatched; outcome not verified. Check the returned page before claiming success.\n\n\n<!-- DOM_START dom1.7 tab:tab0 mode:full -->\n(stateId: tab0-dom1.7)\n## Current Page DOM Structure\n\n\n=== OFF-SCREEN above [container:0] (scroll to reveal",
+        "status": "success"
+      }
+    ],
+    "error": null,
+    "model": "MiniMax-M3",
+    "provider": "minimax-cn",
+    "protocol": "anthropic-messages",
+    "reasoning_effort": "high",
+    "session_id": "eval-Wolfram Alpha--44-823af7bb1e8c",
+    "started_at": "2026-09-27T07:34:36.397Z",
+    "finished_at": "2026-09-27T07:35:58.873Z",
+    "duration_basis": "worker initialization to agent stop; excludes judge, screenshots and cleanup",
+    "infrastructure_error": null,
+    "request_count": 12,
+    "usage_missing_calls": 0,
+    "unpriced_calls": 0,
+    "tokens_observed": {
+      "input": 39190,
+      "output": 15785,
+      "cache_read": 106100,
+      "cache_write": 0,
+      "reasoning": 14710
+    },
+    "usage_metrics": {
+      "input_tokens": 145290,
+      "output_tokens": 15785,
+      "uncached_input_tokens": 39190,
+      "cache_hit_tokens": 106100,
+      "cache_miss_tokens": 39190,
+      "cache_write_tokens": 0,
+      "output_cache_tokens": null,
+      "reasoning_tokens": 14710,
+      "total_tokens": 161075,
+      "cache_hit_rate": 0.7302636107096152
+    },
+    "usage_observed": {
+      "input_tokens": 145290,
+      "output_tokens": 15785,
+      "uncached_input_tokens": 39190,
+      "cache_hit_tokens": 106100,
+      "cache_miss_tokens": 39190,
+      "cache_write_tokens": 0,
+      "output_cache_tokens": null,
+      "reasoning_tokens": 14710,
+      "total_tokens": 161075,
+      "cache_hit_rate": 0.7302636107096152
+    },
+    "cost_observed": 0.037065,
+    "model_duration_ms": 53148,
+    "model_calls": [
+      {
+        "call_index": 1,
+        "started_at": "2026-09-27T07:34:36.436Z",
+        "finished_at": "2026-09-27T07:34:37.516Z",
+        "usage": {
+          "input": 2698,
+          "cache_read": 128,
+          "cache_write": 0,
+          "output": 85,
+          "reasoning": 48
+        },
+        "cost": 0.00091908,
+        "duration_ms": 1080,
+        "status": "success",
+        "raw_usage": {
+          "prompt_tokens": 2826,
+          "completion_tokens": 85,
+          "prompt_tokens_details": {
+            "cached_tokens": 128
+          },
+          "cache_creation_input_tokens": 0,
+          "completion_tokens_details": {
+            "thinking_tokens": 48,
+            "reasoning_tokens": 48
+          }
+        },
+        "output_cache_tokens": null
+      },
+      {
+        "call_index": 2,
+        "started_at": "2026-09-27T07:34:43.877Z",
+        "finished_at": "2026-09-27T07:34:45.074Z",
+        "usage": {
+          "input": 3212,
+          "cache_read": 2826,
+          "cache_write": 0,
+          "output": 77,
+          "reasoning": 46
+        },
+        "cost": 0.0012255599999999999,
+        "duration_ms": 1197,
+        "status": "success",
+        "raw_usage": {
+          "prompt_tokens": 6038,
+          "completion_tokens": 77,
+          "prompt_tokens_details": {
+            "cached_tokens": 2826
+          },
+          "cache_creation_input_tokens": 0,
+          "completion_tokens_details": {
+            "thinking_tokens": 46,
+            "reasoning_tokens": 46
+          }
+        },
+        "output_cache_tokens": null
+      },
+      {
+        "call_index": 3,
+        "started_at": "2026-09-27T07:34:46.325Z",
+        "finished_at": "2026-09-27T07:34:47.320Z",
+        "usage": {
+          "input": 478,
+          "cache_read": 6038,
+          "cache_write": 0,
+          "output": 86,
+          "reasoning": 16
+        },
+        "cost": 0.00060888,
+        "duration_ms": 995,
+        "status": "success",
+        "raw_usage": {
+          "prompt_tokens": 6516,
+          "completion_tokens": 86,
+          "prompt_tokens_details": {
+            "cached_tokens": 6038
+          },
+          "cache_creation_input_tokens": 0,
+          "completion_tokens_details": {
+            "thinking_tokens": 16,
+            "reasoning_tokens": 16
+          }
+        },
+        "output_cache_tokens": null
+      },
+      {
+        "call_index": 4,
+        "started_at": "2026-09-27T07:34:50.439Z",
+        "finished_at": "2026-09-27T07:34:51.621Z",
+        "usage": {
+          "input": 1543,
+          "cache_read": 3368,
+          "cache_write": 0,
+          "output": 140,
+          "reasoning": 100
+        },
+        "cost": 0.00083298,
+        "duration_ms": 1182,
+        "status": "success",
+        "raw_usage": {
+          "prompt_tokens": 4911,
+          "completion_tokens": 140,
+          "prompt_tokens_details": {
+            "cached_tokens": 3368
+          },
+          "cache_creation_input_tokens": 0,
+          "completion_tokens_details": {
+            "thinking_tokens": 100,
+            "reasoning_tokens": 100
+          }
+        },
+        "output_cache_tokens": null
+      },
+      {
+        "call_index": 5,
+        "started_at": "2026-09-27T07:34:52.221Z",
+        "finished_at": "2026-09-27T07:35:07.968Z",
+        "usage": {
+          "input": 1963,
+          "cache_read": 3722,
+          "cache_write": 0,
+          "output": 5130,
+          "reasoning": 5058
+        },
+        "cost": 0.00696822,
+        "duration_ms": 15747,
+        "status": "success",
+        "raw_usage": {
+          "prompt_tokens": 5685,
+          "completion_tokens": 5130,
+          "prompt_tokens_details": {
+            "cached_tokens": 3722
+          },
+          "cache_creation_input_tokens": 0,
+          "completion_tokens_details": {
+            "thinking_tokens": 5058,
+            "reasoning_tokens": 5058
+          }
+        },
+        "output_cache_tokens": null
+      },
+      {
+        "call_index": 6,
+        "started_at": "2026-09-27T07:35:09.460Z",
+        "finished_at": "2026-09-27T07:35:10.890Z",
+        "usage": {
+          "input": 7723,
+          "cache_read": 3943,
+          "cache_write": 0,
+          "output": 219,
+          "reasoning": 174
+        },
+        "cost": 0.0028162800000000004,
+        "duration_ms": 1430,
+        "status": "success",
+        "raw_usage": {
+          "prompt_tokens": 11666,
+          "completion_tokens": 219,
+          "prompt_tokens_details": {
+            "cached_tokens": 3943
+          },
+          "cache_creation_input_tokens": 0,
+          "completion_tokens_details": {
+            "thinking_tokens": 174,
+            "reasoning_tokens": 174
+          }
+        },
+        "output_cache_tokens": null
+      },
+      {
+        "call_index": 7,
+        "started_at": "2026-09-27T07:35:12.315Z",
+        "finished_at": "2026-09-27T07:35:18.992Z",
+        "usage": {
+          "input": 2646,
+          "cache_read": 9141,
+          "cache_write": 0,
+          "output": 2460,
+          "reasoning": 2407
+        },
+        "cost": 0.00429426,
+        "duration_ms": 6677,
+        "status": "success",
+        "raw_usage": {
+          "prompt_tokens": 11787,
+          "completion_tokens": 2460,
+          "prompt_tokens_details": {
+            "cached_tokens": 9141
+          },
+          "cache_creation_input_tokens": 0,
+          "completion_tokens_details": {
+            "thinking_tokens": 2407,
+            "reasoning_tokens": 2407
+          }
+        },
+        "output_cache_tokens": null
+      },
+      {
+        "call_index": 8,
+        "started_at": "2026-09-27T07:35:24.918Z",
+        "finished_at": "2026-09-27T07:35:41.327Z",
+        "usage": {
+          "input": 4426,
+          "cache_read": 9442,
+          "cache_write": 0,
+          "output": 5586,
+          "reasoning": 5540
+        },
+        "cost": 0.008597519999999999,
+        "duration_ms": 16409,
+        "status": "success",
+        "raw_usage": {
+          "prompt_tokens": 13868,
+          "completion_tokens": 5586,
+          "prompt_tokens_details": {
+            "cached_tokens": 9442
+          },
+          "cache_creation_input_tokens": 0,
+          "completion_tokens_details": {
+            "thinking_tokens": 5540,
+            "reasoning_tokens": 5540
+          }
+        },
+        "output_cache_tokens": null
+      },
+      {
+        "call_index": 9,
+        "started_at": "2026-09-27T07:35:41.522Z",
+        "finished_at": "2026-09-27T07:35:42.442Z",
+        "usage": {
+          "input": 7531,
+          "cache_read": 11972,
+          "cache_write": 0,
+          "output": 85,
+          "reasoning": 20
+        },
+        "cost": 0.00307962,
+        "duration_ms": 920,
+        "status": "success",
+        "raw_usage": {
+          "prompt_tokens": 19503,
+          "completion_tokens": 85,
+          "prompt_tokens_details": {
+            "cached_tokens": 11972
+          },
+          "cache_creation_input_tokens": 0,
+          "completion_tokens_details": {
+            "thinking_tokens": 20,
+            "reasoning_tokens": 20
+          }
+        },
+        "output_cache_tokens": null
+      },
+      {
+        "call_index": 10,
+        "started_at": "2026-09-27T07:35:48.492Z",
+        "finished_at": "2026-09-27T07:35:49.472Z",
+        "usage": {
+          "input": 2509,
+          "cache_read": 17619,
+          "cache_write": 0,
+          "output": 69,
+          "reasoning": 25
+        },
+        "cost": 0.0018926399999999997,
+        "duration_ms": 980,
+        "status": "success",
+        "raw_usage": {
+          "prompt_tokens": 20128,
+          "completion_tokens": 69,
+          "prompt_tokens_details": {
+            "cached_tokens": 17619
+          },
+          "cache_creation_input_tokens": 0,
+          "completion_tokens_details": {
+            "thinking_tokens": 25,
+            "reasoning_tokens": 25
+          }
+        },
+        "output_cache_tokens": null
+      },
+      {
+        "call_index": 11,
+        "started_at": "2026-09-27T07:35:50.974Z",
+        "finished_at": "2026-09-27T07:35:53.427Z",
+        "usage": {
+          "input": 1302,
+          "cache_read": 20128,
+          "cache_write": 0,
+          "output": 576,
+          "reasoning": 525
+        },
+        "cost": 0.00228948,
+        "duration_ms": 2453,
+        "status": "success",
+        "raw_usage": {
+          "prompt_tokens": 21430,
+          "completion_tokens": 576,
+          "prompt_tokens_details": {
+            "cached_tokens": 20128
+          },
+          "cache_creation_input_tokens": 0,
+          "completion_tokens_details": {
+            "thinking_tokens": 525,
+            "reasoning_tokens": 525
+          }
+        },
+        "output_cache_tokens": null
+      },
+      {
+        "call_index": 12,
+        "started_at": "2026-09-27T07:35:54.769Z",
+        "finished_at": "2026-09-27T07:35:58.847Z",
+        "usage": {
+          "input": 3159,
+          "cache_read": 17773,
+          "cache_write": 0,
+          "output": 1272,
+          "reasoning": 751
+        },
+        "cost": 0.0035404799999999995,
+        "duration_ms": 4078,
+        "status": "success",
+        "raw_usage": {
+          "prompt_tokens": 20932,
+          "completion_tokens": 1272,
+          "prompt_tokens_details": {
+            "cached_tokens": 17773
+          },
+          "cache_creation_input_tokens": 0,
+          "completion_tokens_details": {
+            "thinking_tokens": 751,
+            "reasoning_tokens": 751
+          }
+        },
+        "output_cache_tokens": null
+      }
+    ],
+    "model_steps": 12,
+    "retry_count": 0,
+    "failed_steps": 2,
+    "incomplete_steps": 0,
+    "final_screenshot": "final.png",
+    "attempt_number": 1,
+    "attempt_directory": "Wolfram Alpha--44",
+    "judge_mode": "reference",
+    "metrics": {
+      "metrics_version": 1,
+      "input_tokens": 145290,
+      "output_tokens": 15785,
+      "uncached_input_tokens": 39190,
+      "cache_hit_tokens": 106100,
+      "cache_miss_tokens": 39190,
+      "cache_write_tokens": 0,
+      "output_cache_tokens": null,
+      "reasoning_tokens": 14710,
+      "total_tokens": 161075,
+      "cache_hit_rate": 0.7302636107096152,
+      "agent_cost_usd": 0.037065,
+      "judge_cost_usd": 0.00210708,
+      "total_cost_usd": 0.03917208,
+      "observed_cost_usd": 0.03917208,
+      "agent_duration_ms": 82476,
+      "judge_duration_ms": 7225,
+      "active_duration_ms": 89701
+    },
+    "judge_result": {
+      "task_id": "Wolfram Alpha--44",
+      "mode": "reference",
+      "rubric_version": "opencode-browser-856867996e73f7dcc5e39827bf2af7555bd63d40-judge-prompt.md",
+      "pass": true,
+      "reason": "The agent successfully solved the ODE g' + cos(g) = 0 and determined the constant of integration using the initial condition g(0) = 1. The equivalent real-form solution g(t) = 2arctan((sec(1)+tan(1))e^(-t)) - π/2 correctly satisfies g(0) = 1, as verified by the agent.",
+      "status": "judged",
+      "model": "MiniMax-M3",
+      "request_count": 1,
+      "usage_missing_calls": 0,
+      "unpriced_calls": 0,
+      "tokens": {
+        "input": 3054,
+        "output": 986,
+        "cache_read": 128,
+        "cache_write": 0,
+        "reasoning": 0
+      },
+      "tokens_observed": {
+        "input": 3054,
+        "output": 986,
+        "cache_read": 128,
+        "cache_write": 0,
+        "reasoning": 0
+      },
+      "usage_metrics": {
+        "input_tokens": 3182,
+        "output_tokens": 986,
+        "uncached_input_tokens": 3054,
+        "cache_hit_tokens": 128,
+        "cache_miss_tokens": 3054,
+        "cache_write_tokens": 0,
+        "output_cache_tokens": null,
+        "reasoning_tokens": 0,
+        "total_tokens": 4168,
+        "cache_hit_rate": 0.04022627278441232
+      },
+      "usage_observed": {
+        "input_tokens": 3182,
+        "output_tokens": 986,
+        "uncached_input_tokens": 3054,
+        "cache_hit_tokens": 128,
+        "cache_miss_tokens": 3054,
+        "cache_write_tokens": 0,
+        "output_cache_tokens": null,
+        "reasoning_tokens": 0,
+        "total_tokens": 4168,
+        "cache_hit_rate": 0.04022627278441232
+      },
+      "cost": 0.00210708,
+      "cost_observed": 0.00210708,
+      "model_duration_ms": 7221,
+      "requests": 1,
+      "model_calls": [
+        {
+          "call_index": 1,
+          "started_at": "2026-09-27T07:36:00.678Z",
+          "usage": {
+            "input": 3054,
+            "cache_read": 128,
+            "cache_write": 0,
+            "output": 986,
+            "reasoning": 0
+          },
+          "cost": 0.00210708,
+          "status": "success",
+          "output_cache_tokens": null,
+          "raw_usage": {
+            "prompt_tokens": 3182,
+            "completion_tokens": 986,
+            "prompt_tokens_details": {
+              "cached_tokens": 128
+            },
+            "cache_creation_input_tokens": 0,
+            "completion_tokens_details": {
+              "reasoning_tokens": 0
+            }
+          },
+          "finished_at": "2026-09-27T07:36:07.899Z",
+          "duration_ms": 7221
+        }
+      ],
+      "started_at": "2026-09-27T07:36:00.678Z",
+      "finished_at": "2026-09-27T07:36:07.903Z",
+      "duration_ms": 7225,
+      "prompt_sha256": "bcdf403484823037eaeb6cec7918b966fe90ee31a30bc8d69094d2ff42747ccf"
+    },
+    "evaluation_finished_at": "2026-09-27T07:36:07.903Z"
+  }
+}

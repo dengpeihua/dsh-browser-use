@@ -4,7 +4,7 @@
 
 <p align="center">Native Chromium browser Agent tools for DeepSeek Harness</p>
 
-在 WebVoyager 126 tasks / 3 站点上取得 92.9 % 的成功率，平均 15.3 steps / 任务，耗时149 s / 任务，成本约 $ 0.031 / 任务。成本为 Agent 标价等价估算，Judge 费用另计；评测方法和历史归档见[评测指南](docs/evaluation.md)。
+在 WebVoyager 549 tasks / 13 站点上，按[逐题复核规则](assets/benchmark/judge-prompt.md)及明确缺项修正后取得 **88.0%（483/549）** 的成功率，平均 16.3 steps、140 s、Agent 标价估算 $0.028 / 任务。原 `reference` Judge 为 495/549（90.2%）；两种口径及逐题结果见[评测归档](output/evals/webvoyager-126-concurrency1/reference-review-20260928/report.md)。
 
 浏览器命令失败的处理、点击检查和脚本异常说明见[可靠性文档](docs/reliability.md)；原文引用的获取方式见[证据文档](docs/evidence.md)。
 
@@ -284,15 +284,34 @@ npm run eval -- --out output/evals/pilot-run1 --ids "Allrecipes--0,Apple--0,Amaz
 
 正式评测条件固定为 `--headed --timeout 600000 --judge reference`：显示浏览器窗口、每题最多运行 600 秒，并逐字加载固定上游版本 opencode-browser 的 `judge-prompt.md`。每次评分提供对应任务和 Agent 结果，要求返回单项 JSON 数组；error/timeout 只要最终答案有效也允许 PASS。它们也是评测器的默认值，但命令中仍显式写出，便于复核 manifest 和复现实验。`reference` 不提交浏览器文本证据或截图；旧的严格证据评分仍可显式选择 `--judge evidence`，但不属于上游同口径。`--reasoning-effort high` 显式固定 Agent 和默认 Judge 的推理档位，并写入 manifest 和运行指纹。真实试跑和全量评测都会消耗 Agent、Judge 的 API 额度；`npm run eval:smoke` 则使用真实浏览器和确定性模型替身，不调用收费 API，也不产生正式评测成绩。
 
-### 3. 顺序运行全部 126 题
+### 3. 当前 549 题评测与历史 126 题
 
 ```powershell
-npm run eval -- --out output/evals/webvoyager-126-concurrency1 --reasoning-effort high --concurrency 1 --headed --timeout 600000 --judge reference
+# 全新 549 题运行必须使用独立目录；下方现存目录由旧 126 题逐步补齐，具有混合来源
+npm run eval -- --data assets/benchmark/WebVoyager_data.json --out output/evals/webvoyager-549-fresh --reasoning-effort high --concurrency 1 --headed --timeout 600000 --judge reference
 ```
 
-数据集包含 Allrecipes 45 题、Apple 42 题、Amazon 39 题。完整运行使用可见浏览器、`reference` 评分、每题 600 秒上限、50 轮模型请求和 `--concurrency 1`。并发会影响限流频率和延迟，对照运行必须保持一致；每次全新评测使用独立输出目录。
+现存的 [`webvoyager-126-concurrency1`](output/evals/webvoyager-126-concurrency1/) 先完成 Allrecipes 45 题、Amazon 39 题和 Apple 42 题，再按数据集顺序补齐至 549 题、13 个站点，并对部分失败或用量缺失的任务保留旧尝试后定点重测。目录名称保留历史 126 题来源；它不是同一时间完成的全新 549 题运行。当前 549 题均有最新轨迹、评分及成本记录，并发为 1、每题最多 600 秒、最多 50 轮模型请求。
 
-当前本地评测汇总覆盖 126/126 题，全部已评分，117/126 通过，成功率 92.9%。平均每题调用浏览器工具 15.3 次，Agent 耗时 149 秒，Agent 成本按标价估算约 $0.031；Judge 成本另计。评分模式为 `reference`，成功率分母包含失败和超时任务。此处的成本是估算值，不是实际账单。
+原 [`summary.json`](output/evals/webvoyager-126-concurrency1/summary.json) 的 `reference` Judge 为 **495/549（90.2%）**。按照[固定评测规则](assets/benchmark/judge-prompt.md)复用该 549 项评分，并依据最终答案对 12 项明确缺少关键条件的通过判定作修正后，[逐题复核报告](output/evals/webvoyager-126-concurrency1/reference-review-20260928/report.md)为 **483/549（88.0%）**。复核没有重新调用模型或浏览器；原运行结果和修订链保持原样。[逐题 JSON 数组](output/evals/webvoyager-126-concurrency1/reference-review-20260928/judgments.json)、[最新尝试 `results.ndjson`](output/evals/webvoyager-126-concurrency1/reference-review-20260928/results.ndjson)和[12 项改判明细](output/evals/webvoyager-126-concurrency1/reference-review-20260928/corrections.json)可供独立检查。
+
+| 站点 | 复核通过/总数 | 成功率 |
+|---|---:|---:|
+| Allrecipes | 42/45 | 93.3% |
+| Amazon | 34/39 | 87.2% |
+| Apple | 39/42 | 92.9% |
+| ArXiv | 38/38 | 100.0% |
+| BBC News | 35/41 | 85.4% |
+| Booking | 11/12 | 91.7% |
+| Cambridge Dictionary | 24/43 | 55.8% |
+| Coursera | 37/42 | 88.1% |
+| ESPN | 33/36 | 91.7% |
+| GitHub | 36/38 | 94.7% |
+| Google | 79/91 | 86.8% |
+| Hugging Face | 37/41 | 90.2% |
+| Wolfram Alpha | 38/41 | 92.7% |
+
+复核口径平均 16.3 个浏览器步骤、Agent 耗时 140 秒、Agent 成本约 $0.028 / 任务；加上 Judge 约 $0.029 / 任务。成本按配置或历史美元标价估算，只计算每题最新尝试，不是 MiniMax Token Plan 账单。历史最初 126 题原始结果为 117/126（92.9%），不应与重测后的 549 题复核口径混用。公开归档中 71 个文件的本机用户目录路径及 6 个文件中的 Google Maps API key 已脱敏；本地原始轨迹未改动，处理范围见归档中的 `PUBLICATION.md`。
 
 启动时会用小请求检查模型服务，默认准入超时为 60000 ms，可通过 `--preflight-timeout` 调整。Agent 运行中的临时限流、服务端错误、超时和传输错误会按有界指数退避自动重试；preflight 和独立 Judge 请求均为单次调用。Judge API、截断或格式异常记录为未评分，不能算作任务 FAIL；可在服务恢复后用 `--judge-only` 补评。额度耗尽与认证失败不会重试。若出现 `quota_exhausted`，需先恢复对应模型账户的额度。
 
@@ -392,7 +411,7 @@ Remove-Item Env:DSH_TEST_SESSION_MODULE
 
 We build `dsh-browser-plugin` as a standalone [DeepSeek Harness (DSH)](https://github.com/deepseek-ai/deepseek-harness) plugin for the Web profile. It launches a local Chrome or Chromium instance and exposes 16 browser operations plus one archive recall tool through Puppeteer, the Chrome DevTools Protocol (CDP), and incremental DOM snapshots.
 
-Our current local WebVoyager result covers all 126 tasks across three sites. All tasks were judged with the `reference` judge, and 117 passed: 92.9% success, 15.3 browser tool calls and 149 seconds per task. Estimated Agent cost is about $0.031 per task at list prices; Judge cost is separate.
+The current WebVoyager archive covers 549 tasks across 13 sites. Its saved `reference` Judge scored 495/549 (90.2%); a review using the same [rubric](assets/benchmark/judge-prompt.md) corrected 12 clear missing-requirement passes and scored 483/549 (88.0%). The review averages 16.3 browser steps and 140 seconds per task, with estimated Agent list-price cost of $0.028 per task ($0.029 including Judge). See the [per-task results and site breakdown](output/evals/webvoyager-126-concurrency1/reference-review-20260928/report.md); the original 126-task result is historical and the extended run has mixed provenance. The public archive redacts local user-directory paths in 71 files and Google Maps API keys in 6 files while leaving the original local trajectories intact.
 
 This repository contains only the browser plugin's own source. It neither contains DeepSeek Harness source nor requires users to clone the Harness repository.
 

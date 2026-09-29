@@ -1,0 +1,408 @@
+{
+  "previous": "3ee6ca312631106c82fdcdf31a6e71a66caf4f471279844edb92da38657ac0f7",
+  "result": {
+    "task_id": "Huggingface--15",
+    "website": "https://huggingface.co/",
+    "task": "Identify the most downloaded models on Hugging face that use the PaddlePaddle library.",
+    "status": "completed",
+    "duration_ms": 39723,
+    "steps": 5,
+    "browser_steps": 5,
+    "model_rounds": 6,
+    "cost": 0.0125196,
+    "tokens": {
+      "input": 20721,
+      "output": 3717,
+      "cache_read": 30715,
+      "cache_write": 0,
+      "reasoning": 2270
+    },
+    "final_answer": "I have successfully retrieved the list of most downloaded models on Hugging Face that use the PaddlePaddle library, sorted by downloads. Here are the results:\n\n## Most Downloaded PaddlePaddle Models on Hugging Face (Sorted by Downloads)\n\n| Rank | Model | Task | Downloads |\n|------|-------|------|-----------|\n| 1 | **PaddlePaddle/PP-DocLayoutV3_safetensors** | Object Detection (33.3M params) | 1.08M |\n| 2 | **PaddlePaddle/PP-OCRv5_server_det** | Image-to-Text | 615k |\n| 3 | **PaddlePaddle/UVDoc** | Image-to-Text | 480k |\n| 4 | **PaddlePaddle/PP-LCNet_x1_0_doc_ori** | Image-to-Text | 427k |\n| 5 | **PaddlePaddle/en_PP-OCRv5_mobile_rec** | Image-to-Text | 313k |\n| 6 | **PaddlePaddle/PP-OCRv5_server_rec** | Image-to-Text | 194k |\n| 7 | **PaddlePaddle/PP-OCRv6_medium_rec_onnx** | Image-to-Text | 170k |\n| 8 | **PaddlePaddle/PP-LCNet_x1_0_textline_ori** | Image-to-Text | 123k |\n| 9 | **PaddlePaddle/PP-OCRv6_medium_det** | Image-to-Text | 79.4k |\n| 10 | **PaddlePaddle/PP-OCRv6_medium_det_onnx** | Image-to-Text | 66.5k |\n| 11 | **PaddlePaddle/PP-OCRv6_medium_rec** | Image-to-Text | 65.5k |\n| 12 | **PaddlePaddle/PP-OCRv5_mobile_det** | Image-to-Text | 56.6k |\n| 13 | **PaddlePaddle/PaddleOCR-VL-1.6** | Image-Text-to-Text (1.0B params) | 37.8k |\n| 14 | **PaddlePaddle/latin_PP-OCRv5_mobile_rec** | Image-to-Text | 36k |\n| 15 | **PaddlePaddle/PP-OCRv4_server_rec** | Image-to-Text | 29.8k |\n| 16 | **PaddlePaddle/en_PP-OCRv4_mobile_rec** | Image-to-Text | 29.3k |\n| 17 | **PaddlePaddle/PP-DocLayoutV3** | Image Segmentation | 28.4k |\n| 18 | **PaddlePaddle/PP-OCRv5_mobile_rec** | Image-to-Text | 21k |\n| 19 | **PaddlePaddle/PP-OCRv5_mobile_det_onnx** | Image-to-Text | 20.3k |\n| 20 | **PaddlePaddle/PP-OCRv3_mobile_det** | Image-to-Text | 18.1k |\n\n### Key Observations:\n- **Total models using the PaddlePaddle library**: 230 models on Hugging Face\n- **Dominant task**: The vast majority are **Image-to-Text** (OCR) models, followed by Object Detection and Image Segmentation — this reflects PaddlePaddle's strength in OCR and document AI\n- **Top model**: PaddlePaddle's PP-DocLayoutV3_safetensors (document layout detection) leads with over **1 million downloads**\n- **Notable large models**: The PaddleOCR-VL family (V1, V1.5, and V1.6) are 1.0B parameter multimodal models for document understanding\n- All top models are authored by the official **PaddlePaddle** organization\n\nThe list was obtained by navigating to `https://huggingface.co/models?library=PaddlePaddle&sort=downloads`.",
+    "tool_trace": [
+      {
+        "tool": "browser_start",
+        "input": {
+          "url": "https://huggingface.co/"
+        },
+        "call_id": "call_01a0df03b72873238b96c634",
+        "time_ms": 11990,
+        "output_preview": "# Browser Mode\n\nThe DSH browser plugin controls a real Chromium instance isolated to the current Agent Session.\n\n- DOM markers `[N]` are clickable and `<N>` are inputs.\n- Match element labels or nearby text, and use DOM indentation to distinguish parents, children, and siblings; do not choose by mar",
+        "status": "success"
+      },
+      {
+        "tool": "browser_goto",
+        "input": {
+          "url": "https://huggingface.co/models?library=PaddlePaddle&sort=downloads"
+        },
+        "call_id": "call_01a0df03ea637751bcda79b6",
+        "time_ms": 8249,
+        "output_preview": "Navigated to https://huggingface.co/models?library=PaddlePaddle&sort=downloads\n\n\n<!-- DOM_START dom1 tab:tab0 mode:full -->\n(stateId: tab0-dom1)\n## Current Page DOM Structure\n\n\n<div></div>\n\t[3258]<a> Hugging Face's logo Hugging Face </a>\n\t\t[3259][view:dcfj]<img alt='Hugging Face's logo'></img>\n\t\t[32",
+        "status": "success"
+      },
+      {
+        "tool": "browser_scroll_next_screen",
+        "input": {
+          "container": 0,
+          "direction": "down"
+        },
+        "call_id": "call_01a0df041579723ab6fa5f92",
+        "time_ms": 2191,
+        "output_preview": "Scrolled down to next screen on container [0]: P0 -> P0.8\n\n\n<!-- DOM_START dom1.1 tab:tab0 mode:full -->\n(stateId: tab0-dom1.1)\n## Current Page DOM Structure\n\n\n<div></div>\n=== OFF-SCREEN above [container:0] (scroll to reveal these elements) ===\n\t<div></div>\n\t\t<a> Hugging Face's logo Hugging Face </a",
+        "status": "success"
+      },
+      {
+        "tool": "browser_execute_script",
+        "input": {
+          "guide": true
+        },
+        "call_id": "call_01a0df04293e7182888f9036",
+        "time_ms": 3,
+        "output_preview": "# Extraction guide\n\nReturn plain objects or arrays using page data. Record important results in your text output before changing pages. The Host archives page observations automatically; use browser_recall only when an older source has left working context. Narrow truncated extractions before relyin",
+        "status": "success"
+      },
+      {
+        "tool": "browser_execute_script",
+        "input": {
+          "script": "var articles = document.querySelectorAll(\"article\");\nvar results = [];\narticles.forEach(function(el) {\n  var header = el.querySelector(\"header\");\n  var name = header ? header.getAttribute(\"title\") : null;\n  var div = el.querySelector(\"div\");\n  var text = div ? div.textContent.trim() : null;\n  results.push({name: name, info: text});\n});\nreturn results;"
+        },
+        "call_id": "call_01a0df042ddd70c3a8e79173",
+        "time_ms": 1914,
+        "output_preview": "\n\n<!-- DOM_START dom1.2 tab:tab0 mode:nochange -->\n(stateId: tab0-dom1.2)\n## Current Page DOM Structure\n\n\nNo DOM changes detected after the previous action.\nscrollMap:\n[container:0] 4 pages (coverage resets on content/layout changes) | unexplored P0-3 (use browser_scroll_to_page to jump directly)\n**",
+        "status": "success"
+      }
+    ],
+    "error": null,
+    "model": "MiniMax-M3",
+    "provider": "minimax-cn",
+    "protocol": "anthropic-messages",
+    "reasoning_effort": "high",
+    "session_id": "eval-Huggingface--15-2bba8408b71e",
+    "started_at": "2026-09-26T18:39:17.188Z",
+    "finished_at": "2026-09-26T18:39:56.911Z",
+    "duration_basis": "worker initialization to agent stop; excludes judge, screenshots and cleanup",
+    "infrastructure_error": null,
+    "request_count": 6,
+    "usage_missing_calls": 0,
+    "unpriced_calls": 0,
+    "tokens_observed": {
+      "input": 20721,
+      "output": 3717,
+      "cache_read": 30715,
+      "cache_write": 0,
+      "reasoning": 2270
+    },
+    "usage_metrics": {
+      "input_tokens": 51436,
+      "output_tokens": 3717,
+      "uncached_input_tokens": 20721,
+      "cache_hit_tokens": 30715,
+      "cache_miss_tokens": 20721,
+      "cache_write_tokens": 0,
+      "output_cache_tokens": null,
+      "reasoning_tokens": 2270,
+      "total_tokens": 55153,
+      "cache_hit_rate": 0.5971498561318921
+    },
+    "usage_observed": {
+      "input_tokens": 51436,
+      "output_tokens": 3717,
+      "uncached_input_tokens": 20721,
+      "cache_hit_tokens": 30715,
+      "cache_miss_tokens": 20721,
+      "cache_write_tokens": 0,
+      "output_cache_tokens": null,
+      "reasoning_tokens": 2270,
+      "total_tokens": 55153,
+      "cache_hit_rate": 0.5971498561318921
+    },
+    "cost_observed": 0.0125196,
+    "model_duration_ms": 15209,
+    "model_calls": [
+      {
+        "call_index": 1,
+        "started_at": "2026-09-26T18:39:17.224Z",
+        "finished_at": "2026-09-26T18:39:18.291Z",
+        "usage": {
+          "input": 2673,
+          "cache_read": 128,
+          "cache_write": 0,
+          "output": 80,
+          "reasoning": 45
+        },
+        "cost": 0.0009055800000000001,
+        "duration_ms": 1067,
+        "status": "success",
+        "raw_usage": {
+          "prompt_tokens": 2801,
+          "completion_tokens": 80,
+          "prompt_tokens_details": {
+            "cached_tokens": 128
+          },
+          "cache_creation_input_tokens": 0,
+          "completion_tokens_details": {
+            "thinking_tokens": 45,
+            "reasoning_tokens": 45
+          }
+        },
+        "output_cache_tokens": null
+      },
+      {
+        "call_index": 2,
+        "started_at": "2026-09-26T18:39:30.296Z",
+        "finished_at": "2026-09-26T18:39:31.370Z",
+        "usage": {
+          "input": 1968,
+          "cache_read": 2801,
+          "cache_write": 0,
+          "output": 118,
+          "reasoning": 42
+        },
+        "cost": 0.0009000599999999999,
+        "duration_ms": 1074,
+        "status": "success",
+        "raw_usage": {
+          "prompt_tokens": 4769,
+          "completion_tokens": 118,
+          "prompt_tokens_details": {
+            "cached_tokens": 2801
+          },
+          "cache_creation_input_tokens": 0,
+          "completion_tokens_details": {
+            "thinking_tokens": 42,
+            "reasoning_tokens": 42
+          }
+        },
+        "output_cache_tokens": null
+      },
+      {
+        "call_index": 3,
+        "started_at": "2026-09-26T18:39:39.647Z",
+        "finished_at": "2026-09-26T18:39:42.458Z",
+        "usage": {
+          "input": 6082,
+          "cache_read": 3336,
+          "cache_write": 0,
+          "output": 771,
+          "reasoning": 490
+        },
+        "cost": 0.00294996,
+        "duration_ms": 2811,
+        "status": "success",
+        "raw_usage": {
+          "prompt_tokens": 9418,
+          "completion_tokens": 771,
+          "prompt_tokens_details": {
+            "cached_tokens": 3336
+          },
+          "cache_creation_input_tokens": 0,
+          "completion_tokens_details": {
+            "thinking_tokens": 490,
+            "reasoning_tokens": 490
+          }
+        },
+        "output_cache_tokens": null
+      },
+      {
+        "call_index": 4,
+        "started_at": "2026-09-26T18:39:44.667Z",
+        "finished_at": "2026-09-26T18:39:47.489Z",
+        "usage": {
+          "input": 5954,
+          "cache_read": 3527,
+          "cache_write": 0,
+          "output": 909,
+          "reasoning": 842
+        },
+        "cost": 0.0030886200000000003,
+        "duration_ms": 2822,
+        "status": "success",
+        "raw_usage": {
+          "prompt_tokens": 9481,
+          "completion_tokens": 909,
+          "prompt_tokens_details": {
+            "cached_tokens": 3527
+          },
+          "cache_creation_input_tokens": 0,
+          "completion_tokens_details": {
+            "thinking_tokens": 842,
+            "reasoning_tokens": 842
+          }
+        },
+        "output_cache_tokens": null
+      },
+      {
+        "call_index": 5,
+        "started_at": "2026-09-26T18:39:47.511Z",
+        "finished_at": "2026-09-26T18:39:48.674Z",
+        "usage": {
+          "input": 1961,
+          "cache_read": 9481,
+          "cache_write": 0,
+          "output": 136,
+          "reasoning": 13
+        },
+        "cost": 0.00132036,
+        "duration_ms": 1163,
+        "status": "success",
+        "raw_usage": {
+          "prompt_tokens": 11442,
+          "completion_tokens": 136,
+          "prompt_tokens_details": {
+            "cached_tokens": 9481
+          },
+          "cache_creation_input_tokens": 0,
+          "completion_tokens_details": {
+            "thinking_tokens": 13,
+            "reasoning_tokens": 13
+          }
+        },
+        "output_cache_tokens": null
+      },
+      {
+        "call_index": 6,
+        "started_at": "2026-09-26T18:39:50.616Z",
+        "finished_at": "2026-09-26T18:39:56.888Z",
+        "usage": {
+          "input": 2083,
+          "cache_read": 11442,
+          "cache_write": 0,
+          "output": 1703,
+          "reasoning": 838
+        },
+        "cost": 0.00335502,
+        "duration_ms": 6272,
+        "status": "success",
+        "raw_usage": {
+          "prompt_tokens": 13525,
+          "completion_tokens": 1703,
+          "prompt_tokens_details": {
+            "cached_tokens": 11442
+          },
+          "cache_creation_input_tokens": 0,
+          "completion_tokens_details": {
+            "thinking_tokens": 838,
+            "reasoning_tokens": 838
+          }
+        },
+        "output_cache_tokens": null
+      }
+    ],
+    "model_steps": 6,
+    "retry_count": 0,
+    "failed_steps": 0,
+    "incomplete_steps": 0,
+    "final_screenshot": "final.png",
+    "attempt_number": 1,
+    "attempt_directory": "Huggingface--15",
+    "judge_mode": "reference",
+    "metrics": {
+      "metrics_version": 1,
+      "input_tokens": 51436,
+      "output_tokens": 3717,
+      "uncached_input_tokens": 20721,
+      "cache_hit_tokens": 30715,
+      "cache_miss_tokens": 20721,
+      "cache_write_tokens": 0,
+      "output_cache_tokens": null,
+      "reasoning_tokens": 2270,
+      "total_tokens": 55153,
+      "cache_hit_rate": 0.5971498561318921,
+      "agent_cost_usd": 0.0125196,
+      "judge_cost_usd": 0.0009571800000000001,
+      "total_cost_usd": 0.01347678,
+      "observed_cost_usd": 0.01347678,
+      "agent_duration_ms": 39723,
+      "judge_duration_ms": 1185,
+      "active_duration_ms": 40908
+    },
+    "judge_result": {
+      "task_id": "Huggingface--15",
+      "mode": "reference",
+      "rubric_version": "opencode-browser-856867996e73f7dcc5e39827bf2af7555bd63d40-judge-prompt.md",
+      "pass": true,
+      "reason": "Agent successfully identified the most downloaded models on Hugging Face using the PaddlePaddle library by navigating to the correct filter URL and providing a detailed, sorted list of 20 models with download counts.",
+      "status": "judged",
+      "model": "MiniMax-M3",
+      "request_count": 1,
+      "usage_missing_calls": 0,
+      "unpriced_calls": 0,
+      "tokens": {
+        "input": 2461,
+        "output": 176,
+        "cache_read": 128,
+        "cache_write": 0,
+        "reasoning": 100
+      },
+      "tokens_observed": {
+        "input": 2461,
+        "output": 176,
+        "cache_read": 128,
+        "cache_write": 0,
+        "reasoning": 100
+      },
+      "usage_metrics": {
+        "input_tokens": 2589,
+        "output_tokens": 176,
+        "uncached_input_tokens": 2461,
+        "cache_hit_tokens": 128,
+        "cache_miss_tokens": 2461,
+        "cache_write_tokens": 0,
+        "output_cache_tokens": null,
+        "reasoning_tokens": 100,
+        "total_tokens": 2765,
+        "cache_hit_rate": 0.04943993820007725
+      },
+      "usage_observed": {
+        "input_tokens": 2589,
+        "output_tokens": 176,
+        "uncached_input_tokens": 2461,
+        "cache_hit_tokens": 128,
+        "cache_miss_tokens": 2461,
+        "cache_write_tokens": 0,
+        "output_cache_tokens": null,
+        "reasoning_tokens": 100,
+        "total_tokens": 2765,
+        "cache_hit_rate": 0.04943993820007725
+      },
+      "cost": 0.0009571800000000001,
+      "cost_observed": 0.0009571800000000001,
+      "model_duration_ms": 1183,
+      "requests": 1,
+      "model_calls": [
+        {
+          "call_index": 1,
+          "started_at": "2026-09-26T18:39:58.703Z",
+          "usage": {
+            "input": 2461,
+            "cache_read": 128,
+            "cache_write": 0,
+            "output": 176,
+            "reasoning": 100
+          },
+          "cost": 0.0009571800000000001,
+          "status": "success",
+          "output_cache_tokens": null,
+          "raw_usage": {
+            "prompt_tokens": 2589,
+            "completion_tokens": 176,
+            "prompt_tokens_details": {
+              "cached_tokens": 128
+            },
+            "cache_creation_input_tokens": 0,
+            "completion_tokens_details": {
+              "thinking_tokens": 100,
+              "reasoning_tokens": 100
+            }
+          },
+          "finished_at": "2026-09-26T18:39:59.886Z",
+          "duration_ms": 1183
+        }
+      ],
+      "started_at": "2026-09-26T18:39:58.703Z",
+      "finished_at": "2026-09-26T18:39:59.888Z",
+      "duration_ms": 1185,
+      "prompt_sha256": "bcdf403484823037eaeb6cec7918b966fe90ee31a30bc8d69094d2ff42747ccf"
+    },
+    "evaluation_finished_at": "2026-09-26T18:39:59.889Z"
+  }
+}

@@ -1,0 +1,874 @@
+{
+  "task_id": "Huggingface--30",
+  "website": "https://huggingface.co/",
+  "task": "Identify the most downloaded English-Chinese (en-zh) machine translation model on Huggingface and report its latest performance metrics and usage guidelines.",
+  "status": "completed",
+  "duration_ms": 172683,
+  "steps": 20,
+  "browser_steps": 20,
+  "model_rounds": 21,
+  "cost": 0.05337587999999999,
+  "tokens": {
+    "input": 83010,
+    "output": 13972,
+    "cache_read": 195108,
+    "cache_write": 0,
+    "reasoning": 11776
+  },
+  "final_answer": "I have all the information I need. Let me provide the final answer.\n\n## Final Answer\n\n### Most Downloaded English-Chinese (en-zh) Machine Translation Model\n\n**Model**: **Helsinki-NLP/opus-mt-en-zh**\n\nAfter filtering Hugging Face's translation models by language pair (en-zh) and sorting by downloads, **Helsinki-NLP/opus-mt-en-zh** is identified as the most downloaded model specifically designed for English→Chinese translation.\n\n**Note on candidates considered:**\n- `facebook/nllb-200-distilled-600M` (854k downloads) - multilingual model, not specifically en-zh\n- `Helsinki-NLP/opus-mt-zh-en` (178k downloads) - zh→en direction only\n- **`Helsinki-NLP/opus-mt-en-zh` (98,564 downloads last month)** - specifically en→zh ✓\n\n### Model Overview\n| Attribute | Value |\n|-----------|-------|\n| **Repository** | Helsinki-NLP/opus-mt-en-zh |\n| **Languages** | eng-zho (English → Chinese) |\n| **Model Type** | Transformer (MarianMT) |\n| **License** | Apache-2.0 |\n| **Downloads/month** | 98,564 |\n| **Likes** | 406 |\n| **Original Repo** | Tatoeba-Challenge |\n| **Training Date** | 2020-07-17 |\n| **Released** | 2020-08-21 |\n| **Pre-processing** | Normalization + SentencePiece (spm32k) |\n\n### Latest Performance Metrics\n| Test Set | BLEU | chr-F |\n|----------|------|-------|\n| Tatoeba-test.eng.zho | **31.4** | **0.268** |\n\nAdditional metrics: `brevity_penalty = 0.8959`, `ref_len = 110,468.0`\n\n### Usage Guidelines\n\n**1. Sentence Initial Language Token Required** — Input text must be prefixed with a language token in the format `>>id<<` (specifically `>>zho<<` for the target language).\n\n**2. Quick Python Example (using Hugging Face Hub):**\n```python\nimport os\nfrom huggingface_hub import InferenceClient\n\nclient = InferenceClient(\n    provider=\"hf-inference\",\n    api_key=os.environ[\"HF_TOKEN\"],\n)\n\nresult = client.translation(\n    \"Your English text here\",\n    model=\"Helsinki-NLP/opus-mt-en-zh\",\n)\n```\n\n**3. Direct Use via Web UI** — The model can also be tested directly on Hugging Face's hosted Inference API widget on the model page.\n\n**4. Transformers Library Usage** — Standard MarianMT loading pattern works with the `transformers` library (`AutoTokenizer` + `AutoModelForSeq2SeqLM`).\n\n**5. Target Language Variants** — The model handles multiple Chinese script variants: `cjy_Hans`, `cjy_Hant`, `cmn`, `cmn_Hans`, `cmn_Hant`, `gan`, `lzh`, `lzh_Hans`, `nan`, `wuu`, `yue`, `yue_Hans`, `yue_Hant`.",
+  "tool_trace": [
+    {
+      "tool": "browser_start",
+      "input": {
+        "url": "https://huggingface.co/"
+      },
+      "call_id": "call_01a0df3c1478737b93c13e44",
+      "time_ms": 15010,
+      "output_preview": "# Browser Mode\n\nThe DSH browser plugin controls a real Chromium instance isolated to the current Agent Session.\n\n- DOM markers `[N]` are clickable and `<N>` are inputs.\n- Match element labels or nearby text, and use DOM indentation to distinguish parents, children, and siblings; do not choose by mar",
+      "status": "success"
+    },
+    {
+      "tool": "browser_goto",
+      "input": {
+        "url": "https://huggingface.co/models?pipeline_tag=translation&language=zh&language=en&sort=downloads&direction=-1"
+      },
+      "call_id": "call_01a0df3c546a7256bd22babb",
+      "time_ms": 7664,
+      "output_preview": "Navigated to https://huggingface.co/models?pipeline_tag=translation&language=zh&language=en&sort=downloads&direction=-1\n\n\n<!-- DOM_START dom1 tab:tab0 mode:full -->\n(stateId: tab0-dom1)\n## Current Page DOM Structure\n\n\n<div></div>\n\t[3165]<a> Hugging Face's logo Hugging Face </a>\n\t\t[3166][view:dbgg]<i",
+      "status": "success"
+    },
+    {
+      "tool": "browser_goto",
+      "input": {
+        "url": "https://huggingface.co/models?pipeline_tag=translation&language=en&sort=downloads&direction=-1"
+      },
+      "call_id": "call_01a0df3c77d473a7a18cc86f",
+      "time_ms": 7760,
+      "output_preview": "Navigated to https://huggingface.co/models?pipeline_tag=translation&language=en&sort=downloads&direction=-1\n\n\n<!-- DOM_START dom2 tab:tab0 mode:full -->\n(stateId: tab0-dom2)\n## Current Page DOM Structure\n\n\n<div></div>\n\t[4180]<a> Hugging Face's logo Hugging Face </a>\n\t\t[4181][view:ebib]<img alt='Hugg",
+      "status": "success"
+    },
+    {
+      "tool": "browser_goto",
+      "input": {
+        "url": "https://huggingface.co/models?pipeline_tag=translation&language=en&sort=downloads"
+      },
+      "call_id": "call_01a0df3c9b8c779ba464d386",
+      "time_ms": 9233,
+      "output_preview": "Navigated to https://huggingface.co/models?pipeline_tag=translation&language=en&sort=downloads\n\n\n<!-- DOM_START dom3 tab:tab0 mode:full -->\n(stateId: tab0-dom3)\n## Current Page DOM Structure\n\n\n<div></div>\n\t[5274]<a> Hugging Face's logo Hugging Face </a>\n\t\t[5275][view:fchf]<img alt='Hugging Face's lo",
+      "status": "success"
+    },
+    {
+      "tool": "browser_click",
+      "input": {
+        "elementIndex": 5837,
+        "expectText": "Chinese"
+      },
+      "call_id": "call_01a0df3cc5f57731a2dd7a88",
+      "time_ms": 3880,
+      "output_preview": "Clicked <button> Languages </button> Postcondition verified.\n\n\n<!-- DOM_START dom3.1 tab:tab0 mode:full -->\n(stateId: tab0-dom3.1)\n## Current Page DOM Structure\n\n\n<div></div>\n\t[5274]<a> Hugging Face's logo Hugging Face </a>\n\t\t[5275][view:fchf]<img alt='Hugging Face's logo'></img>\n\t\t[5277]<span> Hugg",
+      "status": "success"
+    },
+    {
+      "tool": "browser_click",
+      "input": {
+        "elementIndex": 10871
+      },
+      "call_id": "call_01a0df3cdc82731a8cd44e0c",
+      "time_ms": 4877,
+      "output_preview": "Clicked <a> Chinese </a> Action dispatched; outcome not verified. Check the returned page before claiming success.\n\n\n<!-- DOM_START dom4 tab:tab0 mode:full -->\n(stateId: tab0-dom4)\n## Current Page DOM Structure\n\n\n<div></div>\n\t[5274]<a> Hugging Face's logo Hugging Face </a>\n\t\t[5275][view:fchf]<img al",
+      "status": "success"
+    },
+    {
+      "tool": "browser_click",
+      "input": {
+        "elementIndex": 13966
+      },
+      "call_id": "call_01a0df3d16447498aa6b5a2a",
+      "time_ms": 4711,
+      "output_preview": "Clicked <a> Chinese </a> Action dispatched; outcome not verified. Check the returned page before claiming success.\n\n\n<!-- DOM_START dom5 tab:tab0 mode:full -->\n(stateId: tab0-dom5)\n## Current Page DOM Structure\n\n\n<div></div>\n\t[5274]<a> Hugging Face's logo Hugging Face </a>\n\t\t[5275][view:fchf]<img al",
+      "status": "success"
+    },
+    {
+      "tool": "browser_click",
+      "input": {
+        "elementIndex": 19342,
+        "expectText": "Chinese"
+      },
+      "call_id": "call_01a0df3d2fdf7007bd7fc5df",
+      "time_ms": 4635,
+      "output_preview": "Clicked <button> Languages </button> Postcondition verified.\n\n\n<!-- DOM_START dom5.1 tab:tab0 mode:nochange -->\n(stateId: tab0-dom5.1)\n## Current Page DOM Structure\n\n\nNo DOM changes detected after the previous action.\nscrollMap:\n[container:0] 4 pages (coverage resets on content/layout changes) | vie",
+      "status": "success"
+    },
+    {
+      "tool": "browser_goto",
+      "input": {
+        "url": "https://huggingface.co/models?pipeline_tag=translation&language=zh"
+      },
+      "call_id": "call_01a0df3d5c8273dc963bb1e8",
+      "time_ms": 9759,
+      "output_preview": "Navigated to https://huggingface.co/models?pipeline_tag=translation&language=zh\n\n\n<!-- DOM_START dom6 tab:tab0 mode:full -->\n(stateId: tab0-dom6)\n## Current Page DOM Structure\n\n\n<div></div>\n\t[24883]<a> Hugging Face's logo Hugging Face </a>\n\t\t[24884][view:ceiie]<img alt='Hugging Face's logo'></img>\n\t",
+      "status": "success"
+    },
+    {
+      "tool": "browser_click",
+      "input": {
+        "elementIndex": 27063,
+        "expectText": "Sort"
+      },
+      "call_id": "call_01a0df3d8a557177a19b1436",
+      "time_ms": 3911,
+      "output_preview": "Clicked <button type='button'> Sort:  Trending </button> Postcondition verified.\n\n\n<!-- DOM_START dom6.1 tab:tab0 mode:incremental -->\n(stateId: tab0-dom6.1)\n## Incremental DOM updates\n\n\n<div></div>\n\t<div></div>\n\t\t+|<div></div>\n\t\t\t+|<li></li>\n\t\t\t\t+|[30447]<button> Trending </button>\n\t\t\t\t\t+|[30445]<s",
+      "status": "success"
+    },
+    {
+      "tool": "browser_click",
+      "input": {
+        "elementIndex": 30453,
+        "expectText": "downloads"
+      },
+      "call_id": "call_01a0df3d9f1273cc8341b31b",
+      "time_ms": 4085,
+      "output_preview": "Clicked <button> Most downloads </button> Postcondition verified.\n\n\n<!-- DOM_START dom7 tab:tab0 mode:full -->\n(stateId: tab0-dom7)\n## Current Page DOM Structure\n\n\n<div></div>\n\t[24883]<a> Hugging Face's logo Hugging Face </a>\n\t\t[24884][view:ceiie]<img alt='Hugging Face's logo'></img>\n\t\t[24886]<span>",
+      "status": "success"
+    },
+    {
+      "tool": "browser_click",
+      "input": {
+        "elementIndex": 29229,
+        "expectText": "Helsinki-NLP/opus-mt-en-zh"
+      },
+      "call_id": "call_01a0df3de1c6759ca2825d3c",
+      "time_ms": 9921,
+      "output_preview": "Clicked <h4> Helsinki-NLP/opus-mt-en-zh </h4> Postcondition verified.\n\n\n<!-- DOM_START dom8 tab:tab0 mode:full -->\n(stateId: tab0-dom8)\n## Current Page DOM Structure\n\n\n<div></div>\n\t[33751]<a> Hugging Face's logo Hugging Face </a>\n\t\t[33752][view:ddhfc]<img alt='Hugging Face's logo'></img>\n\t\t[33754]<s",
+      "status": "success"
+    },
+    {
+      "tool": "browser_reveal_offscreen",
+      "input": {
+        "container": 0,
+        "direction": "down"
+      },
+      "call_id": "call_01a0df3e11677009abea8b0f",
+      "time_ms": 2103,
+      "output_preview": "Scrolled down on container [0]: P0 -> P0.9\n\n\n<!-- DOM_START dom8.1 tab:tab0 mode:full -->\n(stateId: tab0-dom8.1)\n## Current Page DOM Structure\n\n\n<div></div>\n=== OFF-SCREEN above [container:0] (scroll to reveal these elements) ===\n\t<h1></h1>\n\t\t<div></div>\n\t\t\t<span></span>\n\t\t\t\t<a> Helsinki-NLP </a>\n\t\t",
+      "status": "success"
+    },
+    {
+      "tool": "browser_reveal_offscreen",
+      "input": {
+        "container": 0,
+        "direction": "down"
+      },
+      "call_id": "call_01a0df3e1f7976f383f58cf7",
+      "time_ms": 1820,
+      "output_preview": "Scrolled down on container [0]: P0.9 -> P1.8\n\n\n<!-- DOM_START dom8.2 tab:tab0 mode:full -->\n(stateId: tab0-dom8.2)\n## Current Page DOM Structure\n\n\n<section></section>\n=== OFF-SCREEN above [container:0] (scroll to reveal these elements) ===\n\t<li></li>\n\t\ttest set translations:\n\t\t<a> opus-2020-07-17.te",
+      "status": "success"
+    },
+    {
+      "tool": "browser_reveal_offscreen",
+      "input": {
+        "container": 0,
+        "direction": "down"
+      },
+      "call_id": "call_01a0df3e2c947566bb7d4525",
+      "time_ms": 1859,
+      "output_preview": "Scrolled down on container [0]: P1.8 -> P2.7 (Already at the BOTTOM of the page)\n\n\n<!-- DOM_START dom8.3 tab:tab0 mode:full -->\n(stateId: tab0-dom8.3)\n## Current Page DOM Structure\n\n\n=== OFF-SCREEN above [container:0] (scroll to reveal these elements) ===\nsrc_constituents: {'eng'}\ntgt_constituents: ",
+      "status": "success"
+    },
+    {
+      "tool": "browser_reveal_offscreen",
+      "input": {
+        "container": 0,
+        "direction": "up"
+      },
+      "call_id": "call_01a0df3e3a94770b947d6d1c",
+      "time_ms": 1776,
+      "output_preview": "Scrolled up on container [0]: P2.7 -> P1.8\n\n\n<!-- DOM_START dom8.4 tab:tab0 mode:full -->\n(stateId: tab0-dom8.4)\n## Current Page DOM Structure\n\n\n<section></section>\n=== OFF-SCREEN above [container:0] (scroll to reveal these elements) ===\n\t<li></li>\n\t\ttest set translations:\n\t\t<a> opus-2020-07-17.test",
+      "status": "success"
+    },
+    {
+      "tool": "browser_scroll_to_page",
+      "input": {
+        "container": 0,
+        "page": 0
+      },
+      "call_id": "call_01a0df3e4581715fb22f8d9e",
+      "time_ms": 2098,
+      "output_preview": "Scrolled to target page on container [0]: P1.8 -> P0 (At the TOP of the page)\n\n\n<!-- DOM_START dom8.5 tab:tab0 mode:full -->\n(stateId: tab0-dom8.5)\n## Current Page DOM Structure\n\n\n<div></div>\n\t[33751]<a> Hugging Face's logo Hugging Face </a>\n\t\t[33752][view:ddhfc]<img alt='Hugging Face's logo'></img>",
+      "status": "success"
+    },
+    {
+      "tool": "browser_click",
+      "input": {
+        "elementIndex": 35860,
+        "expectText": "Code Snippets"
+      },
+      "call_id": "call_01a0df3e664075899c0b3d5b",
+      "time_ms": 2527,
+      "output_preview": "Clicked <button type='button'> View Code Snippets </button> Postcondition verified.\n\n\n<!-- DOM_START dom9 tab:tab0 mode:full -->\n(stateId: tab0-dom9)\n## Current Page DOM Structure\n\n\n=== OFF-SCREEN below [container:0] (scroll to reveal these elements) ===\ntest set scores:\n<a> opus-2020-07-17.eval.txt",
+      "status": "success"
+    },
+    {
+      "tool": "browser_reveal_offscreen",
+      "input": {
+        "container": 0,
+        "direction": "down"
+      },
+      "call_id": "call_01a0df3e851d712382c7204c",
+      "time_ms": 2132,
+      "output_preview": "Scrolled down on container [0]: P0 -> P0.9\n\n\n<!-- DOM_START dom9.1 tab:tab0 mode:full -->\n(stateId: tab0-dom9.1)\n## Current Page DOM Structure\n\n\n=== OFF-SCREEN above [container:0] (scroll to reveal these elements) ===\n<h1></h1>\n\t<div></div>\n\t\t<span></span>\n\t\t\t<a> Helsinki-NLP </a>\n\t\t\t\t ...\n\t\t/\n\t<div",
+      "status": "success"
+    },
+    {
+      "tool": "browser_click",
+      "input": {
+        "elementIndex": 37097
+      },
+      "call_id": "call_01a0df3e95ce711da9dcc2a9",
+      "time_ms": 2590,
+      "output_preview": "Clicked <button type='button'></button> Action dispatched; outcome not verified. Check the returned page before claiming success.\n\n\n<!-- DOM_START dom10 tab:tab0 mode:full -->\n(stateId: tab0-dom10)\n## Current Page DOM Structure\n\n\n=== OFF-SCREEN above [container:0] (scroll to reveal these elements) =",
+      "status": "success"
+    }
+  ],
+  "error": null,
+  "model": "MiniMax-M3",
+  "provider": "minimax-cn",
+  "protocol": "anthropic-messages",
+  "reasoning_effort": "high",
+  "session_id": "eval-Huggingface--30-9c6b70b23b30",
+  "started_at": "2026-09-26T19:40:50.727Z",
+  "finished_at": "2026-09-26T19:43:43.410Z",
+  "duration_basis": "worker initialization to agent stop; excludes judge, screenshots and cleanup",
+  "infrastructure_error": null,
+  "request_count": 21,
+  "usage_missing_calls": 0,
+  "unpriced_calls": 0,
+  "tokens_observed": {
+    "input": 83010,
+    "output": 13972,
+    "cache_read": 195108,
+    "cache_write": 0,
+    "reasoning": 11776
+  },
+  "usage_metrics": {
+    "input_tokens": 278118,
+    "output_tokens": 13972,
+    "uncached_input_tokens": 83010,
+    "cache_hit_tokens": 195108,
+    "cache_miss_tokens": 83010,
+    "cache_write_tokens": 0,
+    "output_cache_tokens": null,
+    "reasoning_tokens": 11776,
+    "total_tokens": 292090,
+    "cache_hit_rate": 0.7015295665868444
+  },
+  "usage_observed": {
+    "input_tokens": 278118,
+    "output_tokens": 13972,
+    "uncached_input_tokens": 83010,
+    "cache_hit_tokens": 195108,
+    "cache_miss_tokens": 83010,
+    "cache_write_tokens": 0,
+    "output_cache_tokens": null,
+    "reasoning_tokens": 11776,
+    "total_tokens": 292090,
+    "cache_hit_rate": 0.7015295665868444
+  },
+  "cost_observed": 0.05337587999999999,
+  "model_duration_ms": 69173,
+  "model_calls": [
+    {
+      "call_index": 1,
+      "started_at": "2026-09-26T19:40:50.807Z",
+      "finished_at": "2026-09-26T19:40:52.184Z",
+      "usage": {
+        "input": 2684,
+        "cache_read": 128,
+        "cache_write": 0,
+        "output": 146,
+        "reasoning": 84
+      },
+      "cost": 0.00098808,
+      "duration_ms": 1377,
+      "status": "success",
+      "raw_usage": {
+        "prompt_tokens": 2812,
+        "completion_tokens": 146,
+        "prompt_tokens_details": {
+          "cached_tokens": 128
+        },
+        "cache_creation_input_tokens": 0,
+        "completion_tokens_details": {
+          "thinking_tokens": 84,
+          "reasoning_tokens": 84
+        }
+      },
+      "output_cache_tokens": null
+    },
+    {
+      "call_index": 2,
+      "started_at": "2026-09-26T19:41:07.239Z",
+      "finished_at": "2026-09-26T19:41:08.595Z",
+      "usage": {
+        "input": 2043,
+        "cache_read": 2812,
+        "cache_write": 0,
+        "output": 99,
+        "reasoning": 28
+      },
+      "cost": 0.00090042,
+      "duration_ms": 1356,
+      "status": "success",
+      "raw_usage": {
+        "prompt_tokens": 4855,
+        "completion_tokens": 99,
+        "prompt_tokens_details": {
+          "cached_tokens": 2812
+        },
+        "cache_creation_input_tokens": 0,
+        "completion_tokens_details": {
+          "thinking_tokens": 28,
+          "reasoning_tokens": 28
+        }
+      },
+      "output_cache_tokens": null
+    },
+    {
+      "call_index": 3,
+      "started_at": "2026-09-26T19:41:16.308Z",
+      "finished_at": "2026-09-26T19:41:17.634Z",
+      "usage": {
+        "input": 1298,
+        "cache_read": 3413,
+        "cache_write": 0,
+        "output": 136,
+        "reasoning": 67
+      },
+      "cost": 0.00075738,
+      "duration_ms": 1326,
+      "status": "success",
+      "raw_usage": {
+        "prompt_tokens": 4711,
+        "completion_tokens": 136,
+        "prompt_tokens_details": {
+          "cached_tokens": 3413
+        },
+        "cache_creation_input_tokens": 0,
+        "completion_tokens_details": {
+          "thinking_tokens": 67,
+          "reasoning_tokens": 67
+        }
+      },
+      "output_cache_tokens": null
+    },
+    {
+      "call_index": 4,
+      "started_at": "2026-09-26T19:41:25.440Z",
+      "finished_at": "2026-09-26T19:41:26.778Z",
+      "usage": {
+        "input": 1317,
+        "cache_read": 3595,
+        "cache_write": 0,
+        "output": 111,
+        "reasoning": 52
+      },
+      "cost": 0.000744,
+      "duration_ms": 1338,
+      "status": "success",
+      "raw_usage": {
+        "prompt_tokens": 4912,
+        "completion_tokens": 111,
+        "prompt_tokens_details": {
+          "cached_tokens": 3595
+        },
+        "cache_creation_input_tokens": 0,
+        "completion_tokens_details": {
+          "thinking_tokens": 52,
+          "reasoning_tokens": 52
+        }
+      },
+      "output_cache_tokens": null
+    },
+    {
+      "call_index": 5,
+      "started_at": "2026-09-26T19:41:36.058Z",
+      "finished_at": "2026-09-26T19:41:37.643Z",
+      "usage": {
+        "input": 6114,
+        "cache_read": 3810,
+        "cache_write": 0,
+        "output": 143,
+        "reasoning": 74
+      },
+      "cost": 0.0022343999999999997,
+      "duration_ms": 1585,
+      "status": "success",
+      "raw_usage": {
+        "prompt_tokens": 9924,
+        "completion_tokens": 143,
+        "prompt_tokens_details": {
+          "cached_tokens": 3810
+        },
+        "cache_creation_input_tokens": 0,
+        "completion_tokens_details": {
+          "thinking_tokens": 74,
+          "reasoning_tokens": 74
+        }
+      },
+      "output_cache_tokens": null
+    },
+    {
+      "call_index": 6,
+      "started_at": "2026-09-26T19:41:41.577Z",
+      "finished_at": "2026-09-26T19:41:43.437Z",
+      "usage": {
+        "input": 8377,
+        "cache_read": 3996,
+        "cache_write": 0,
+        "output": 82,
+        "reasoning": 37
+      },
+      "cost": 0.0028512599999999996,
+      "duration_ms": 1860,
+      "status": "success",
+      "raw_usage": {
+        "prompt_tokens": 12373,
+        "completion_tokens": 82,
+        "prompt_tokens_details": {
+          "cached_tokens": 3996
+        },
+        "cache_creation_input_tokens": 0,
+        "completion_tokens_details": {
+          "thinking_tokens": 37,
+          "reasoning_tokens": 37
+        }
+      },
+      "output_cache_tokens": null
+    },
+    {
+      "call_index": 7,
+      "started_at": "2026-09-26T19:41:48.371Z",
+      "finished_at": "2026-09-26T19:41:58.176Z",
+      "usage": {
+        "input": 8275,
+        "cache_read": 4202,
+        "cache_write": 0,
+        "output": 2886,
+        "reasoning": 2809
+      },
+      "cost": 0.00619782,
+      "duration_ms": 9805,
+      "status": "success",
+      "raw_usage": {
+        "prompt_tokens": 12477,
+        "completion_tokens": 2886,
+        "prompt_tokens_details": {
+          "cached_tokens": 4202
+        },
+        "cache_creation_input_tokens": 0,
+        "completion_tokens_details": {
+          "thinking_tokens": 2809,
+          "reasoning_tokens": 2809
+        }
+      },
+      "output_cache_tokens": null
+    },
+    {
+      "call_index": 8,
+      "started_at": "2026-09-26T19:42:02.931Z",
+      "finished_at": "2026-09-26T19:42:04.746Z",
+      "usage": {
+        "input": 11154,
+        "cache_read": 4360,
+        "cache_write": 0,
+        "output": 218,
+        "reasoning": 147
+      },
+      "cost": 0.0038693999999999994,
+      "duration_ms": 1815,
+      "status": "success",
+      "raw_usage": {
+        "prompt_tokens": 15514,
+        "completion_tokens": 218,
+        "prompt_tokens_details": {
+          "cached_tokens": 4360
+        },
+        "cache_creation_input_tokens": 0,
+        "completion_tokens_details": {
+          "thinking_tokens": 147,
+          "reasoning_tokens": 147
+        }
+      },
+      "output_cache_tokens": null
+    },
+    {
+      "call_index": 9,
+      "started_at": "2026-09-26T19:42:09.414Z",
+      "finished_at": "2026-09-26T19:42:16.301Z",
+      "usage": {
+        "input": 448,
+        "cache_read": 15514,
+        "cache_write": 0,
+        "output": 268,
+        "reasoning": 208
+      },
+      "cost": 0.0013868399999999999,
+      "duration_ms": 6887,
+      "status": "success",
+      "raw_usage": {
+        "prompt_tokens": 15962,
+        "completion_tokens": 268,
+        "prompt_tokens_details": {
+          "cached_tokens": 15514
+        },
+        "cache_creation_input_tokens": 0,
+        "completion_tokens_details": {
+          "thinking_tokens": 208,
+          "reasoning_tokens": 208
+        }
+      },
+      "output_cache_tokens": null
+    },
+    {
+      "call_index": 10,
+      "started_at": "2026-09-26T19:42:26.138Z",
+      "finished_at": "2026-09-26T19:42:27.935Z",
+      "usage": {
+        "input": 7013,
+        "cache_read": 7320,
+        "cache_write": 0,
+        "output": 215,
+        "reasoning": 140
+      },
+      "cost": 0.0028011,
+      "duration_ms": 1797,
+      "status": "success",
+      "raw_usage": {
+        "prompt_tokens": 14333,
+        "completion_tokens": 215,
+        "prompt_tokens_details": {
+          "cached_tokens": 7320
+        },
+        "cache_creation_input_tokens": 0,
+        "completion_tokens_details": {
+          "thinking_tokens": 140,
+          "reasoning_tokens": 140
+        }
+      },
+      "output_cache_tokens": null
+    },
+    {
+      "call_index": 11,
+      "started_at": "2026-09-26T19:42:31.910Z",
+      "finished_at": "2026-09-26T19:42:33.231Z",
+      "usage": {
+        "input": 1356,
+        "cache_read": 14333,
+        "cache_write": 0,
+        "output": 86,
+        "reasoning": 27
+      },
+      "cost": 0.00136998,
+      "duration_ms": 1321,
+      "status": "success",
+      "raw_usage": {
+        "prompt_tokens": 15689,
+        "completion_tokens": 86,
+        "prompt_tokens_details": {
+          "cached_tokens": 14333
+        },
+        "cache_creation_input_tokens": 0,
+        "completion_tokens_details": {
+          "thinking_tokens": 27,
+          "reasoning_tokens": 27
+        }
+      },
+      "output_cache_tokens": null
+    },
+    {
+      "call_index": 12,
+      "started_at": "2026-09-26T19:42:37.367Z",
+      "finished_at": "2026-09-26T19:42:50.498Z",
+      "usage": {
+        "input": 6910,
+        "cache_read": 7942,
+        "cache_write": 0,
+        "output": 4526,
+        "reasoning": 4274
+      },
+      "cost": 0.00798072,
+      "duration_ms": 13131,
+      "status": "success",
+      "raw_usage": {
+        "prompt_tokens": 14852,
+        "completion_tokens": 4526,
+        "prompt_tokens_details": {
+          "cached_tokens": 7942
+        },
+        "cache_creation_input_tokens": 0,
+        "completion_tokens_details": {
+          "thinking_tokens": 4274,
+          "reasoning_tokens": 4274
+        }
+      },
+      "output_cache_tokens": null
+    },
+    {
+      "call_index": 13,
+      "started_at": "2026-09-26T19:43:00.474Z",
+      "finished_at": "2026-09-26T19:43:02.485Z",
+      "usage": {
+        "input": 7646,
+        "cache_read": 8379,
+        "cache_write": 0,
+        "output": 368,
+        "reasoning": 255
+      },
+      "cost": 0.0032381399999999996,
+      "duration_ms": 2011,
+      "status": "success",
+      "raw_usage": {
+        "prompt_tokens": 16025,
+        "completion_tokens": 368,
+        "prompt_tokens_details": {
+          "cached_tokens": 8379
+        },
+        "cache_creation_input_tokens": 0,
+        "completion_tokens_details": {
+          "thinking_tokens": 255,
+          "reasoning_tokens": 255
+        }
+      },
+      "output_cache_tokens": null
+    },
+    {
+      "call_index": 14,
+      "started_at": "2026-09-26T19:43:04.661Z",
+      "finished_at": "2026-09-26T19:43:06.171Z",
+      "usage": {
+        "input": 2738,
+        "cache_read": 12979,
+        "cache_write": 0,
+        "output": 283,
+        "reasoning": 221
+      },
+      "cost": 0.00193974,
+      "duration_ms": 1510,
+      "status": "success",
+      "raw_usage": {
+        "prompt_tokens": 15717,
+        "completion_tokens": 283,
+        "prompt_tokens_details": {
+          "cached_tokens": 12979
+        },
+        "cache_creation_input_tokens": 0,
+        "completion_tokens_details": {
+          "thinking_tokens": 221,
+          "reasoning_tokens": 221
+        }
+      },
+      "output_cache_tokens": null
+    },
+    {
+      "call_index": 15,
+      "started_at": "2026-09-26T19:43:08.044Z",
+      "finished_at": "2026-09-26T19:43:09.469Z",
+      "usage": {
+        "input": 1561,
+        "cache_read": 13414,
+        "cache_write": 0,
+        "output": 292,
+        "reasoning": 238
+      },
+      "cost": 0.0016235399999999997,
+      "duration_ms": 1425,
+      "status": "success",
+      "raw_usage": {
+        "prompt_tokens": 14975,
+        "completion_tokens": 292,
+        "prompt_tokens_details": {
+          "cached_tokens": 13414
+        },
+        "cache_creation_input_tokens": 0,
+        "completion_tokens_details": {
+          "thinking_tokens": 238,
+          "reasoning_tokens": 238
+        }
+      },
+      "output_cache_tokens": null
+    },
+    {
+      "call_index": 16,
+      "started_at": "2026-09-26T19:43:11.381Z",
+      "finished_at": "2026-09-26T19:43:13.037Z",
+      "usage": {
+        "input": 1050,
+        "cache_read": 13768,
+        "cache_write": 0,
+        "output": 359,
+        "reasoning": 295
+      },
+      "cost": 0.00157188,
+      "duration_ms": 1656,
+      "status": "success",
+      "raw_usage": {
+        "prompt_tokens": 14818,
+        "completion_tokens": 359,
+        "prompt_tokens_details": {
+          "cached_tokens": 13768
+        },
+        "cache_creation_input_tokens": 0,
+        "completion_tokens_details": {
+          "thinking_tokens": 295,
+          "reasoning_tokens": 295
+        }
+      },
+      "output_cache_tokens": null
+    },
+    {
+      "call_index": 17,
+      "started_at": "2026-09-26T19:43:14.862Z",
+      "finished_at": "2026-09-26T19:43:15.841Z",
+      "usage": {
+        "input": 1648,
+        "cache_read": 14140,
+        "cache_write": 0,
+        "output": 93,
+        "reasoning": 34
+      },
+      "cost": 0.0014544,
+      "duration_ms": 979,
+      "status": "success",
+      "raw_usage": {
+        "prompt_tokens": 15788,
+        "completion_tokens": 93,
+        "prompt_tokens_details": {
+          "cached_tokens": 14140
+        },
+        "cache_creation_input_tokens": 0,
+        "completion_tokens_details": {
+          "thinking_tokens": 34,
+          "reasoning_tokens": 34
+        }
+      },
+      "output_cache_tokens": null
+    },
+    {
+      "call_index": 18,
+      "started_at": "2026-09-26T19:43:17.977Z",
+      "finished_at": "2026-09-26T19:43:24.210Z",
+      "usage": {
+        "input": 3356,
+        "cache_read": 14570,
+        "cache_write": 0,
+        "output": 135,
+        "reasoning": 69
+      },
+      "cost": 0.0020429999999999997,
+      "duration_ms": 6233,
+      "status": "success",
+      "raw_usage": {
+        "prompt_tokens": 17926,
+        "completion_tokens": 135,
+        "prompt_tokens_details": {
+          "cached_tokens": 14570
+        },
+        "cache_creation_input_tokens": 0,
+        "completion_tokens_details": {
+          "thinking_tokens": 69,
+          "reasoning_tokens": 69
+        }
+      },
+      "output_cache_tokens": null
+    },
+    {
+      "call_index": 19,
+      "started_at": "2026-09-26T19:43:26.793Z",
+      "finished_at": "2026-09-26T19:43:32.191Z",
+      "usage": {
+        "input": 1590,
+        "cache_read": 14741,
+        "cache_write": 0,
+        "output": 1731,
+        "reasoning": 1658
+      },
+      "cost": 0.0034386599999999996,
+      "duration_ms": 5398,
+      "status": "success",
+      "raw_usage": {
+        "prompt_tokens": 16331,
+        "completion_tokens": 1731,
+        "prompt_tokens_details": {
+          "cached_tokens": 14741
+        },
+        "cache_creation_input_tokens": 0,
+        "completion_tokens_details": {
+          "thinking_tokens": 1658,
+          "reasoning_tokens": 1658
+        }
+      },
+      "output_cache_tokens": null
+    },
+    {
+      "call_index": 20,
+      "started_at": "2026-09-26T19:43:34.369Z",
+      "finished_at": "2026-09-26T19:43:36.460Z",
+      "usage": {
+        "input": 3840,
+        "cache_read": 14947,
+        "cache_write": 0,
+        "output": 443,
+        "reasoning": 392
+      },
+      "cost": 0.00258042,
+      "duration_ms": 2091,
+      "status": "success",
+      "raw_usage": {
+        "prompt_tokens": 18787,
+        "completion_tokens": 443,
+        "prompt_tokens_details": {
+          "cached_tokens": 14947
+        },
+        "cache_creation_input_tokens": 0,
+        "completion_tokens_details": {
+          "thinking_tokens": 392,
+          "reasoning_tokens": 392
+        }
+      },
+      "output_cache_tokens": null
+    },
+    {
+      "call_index": 21,
+      "started_at": "2026-09-26T19:43:39.110Z",
+      "finished_at": "2026-09-26T19:43:43.382Z",
+      "usage": {
+        "input": 2592,
+        "cache_read": 16745,
+        "cache_write": 0,
+        "output": 1352,
+        "reasoning": 667
+      },
+      "cost": 0.0034047,
+      "duration_ms": 4272,
+      "status": "success",
+      "raw_usage": {
+        "prompt_tokens": 19337,
+        "completion_tokens": 1352,
+        "prompt_tokens_details": {
+          "cached_tokens": 16745
+        },
+        "cache_creation_input_tokens": 0,
+        "completion_tokens_details": {
+          "thinking_tokens": 667,
+          "reasoning_tokens": 667
+        }
+      },
+      "output_cache_tokens": null
+    }
+  ],
+  "model_steps": 21,
+  "retry_count": 0,
+  "failed_steps": 0,
+  "incomplete_steps": 0,
+  "final_screenshot": "final.png"
+}

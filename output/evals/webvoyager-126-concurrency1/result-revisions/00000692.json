@@ -1,0 +1,974 @@
+{
+  "previous": "6534b32eec2ba8b03ab050f15f961eb3972ac8315b651cbd2147caeb1d106ac9",
+  "result": {
+    "task_id": "Google Map--0",
+    "website": "https://www.google.com/maps/",
+    "task": "Find 5 beauty salons with ratings greater than 4.8 in Seattle, WA.",
+    "status": "completed",
+    "duration_ms": 86377,
+    "steps": 22,
+    "browser_steps": 22,
+    "model_rounds": 23,
+    "cost": 0.03632837999999999,
+    "tokens": {
+      "input": 51659,
+      "output": 8232,
+      "cache_read": 182538,
+      "cache_write": 0,
+      "reasoning": 6053
+    },
+    "final_answer": "I have completed the task. Here are the 5 beauty salons with ratings greater than 4.8 in Seattle, WA:\n\n## 5 Beauty Salons with Ratings > 4.8 in Seattle, WA\n\n| # | Name | Rating | Reviews |\n|---|------|--------|---------|\n| 1 | **Lady Neptune Hair Salon, University District** | ⭐ 5.0 | 515 |\n| 2 | **Lady Neptune Hair Salon, Capitol Hill** | ⭐ 5.0 | 154 |\n| 3 | **Antonio Salon** | ⭐ 4.9 | 681 |\n| 4 | **Salon Mérite – Luxury Hair Salon & Balayage Seattle WA** | ⭐ 4.9 | 162 |\n| 5 | **YSA Beauty Studio** | ⭐ 5.0 | 25 |\n\n### How I found them:\n1. Navigated to Google Maps and searched for \"Beauty salons in Seattle WA\"\n2. Applied a 4.5+ star filter to narrow the results\n3. Scrolled through the entire results list (~22 salons total)\n4. Filtered for those with ratings **strictly greater than 4.8** (i.e., 4.9 or 5.0 stars)\n\n### Notes:\n- **YSA Beauty Studio** is marked as a sponsored (paid) listing, but it does have a legitimate 5.0 star rating with 25 reviews.\n- The search returned a mix of \"Beauty salons\" (美容院) and \"Hair salons\" (美发沙龙) — both categories are commonly referred to as \"beauty salons\" in general usage, which is what Google Maps returned for the query.\n- All five salons are located within Seattle, WA and currently have ratings strictly greater than 4.8 stars.",
+    "tool_trace": [
+      {
+        "tool": "browser_start",
+        "input": {
+          "url": "https://www.google.com/maps/"
+        },
+        "call_id": "call_01a0e302dbb8705cb98f9e98",
+        "time_ms": 14308,
+        "output_preview": "# Browser Mode\n\nThe DSH browser plugin controls a real Chromium instance isolated to the current Agent Session.\n\n- DOM markers `[N]` are clickable and `<N>` are inputs.\n- Match element labels or nearby text, and use DOM indentation to distinguish parents, children, and siblings; do not choose by mar",
+        "status": "success"
+      },
+      {
+        "tool": "browser_click",
+        "input": {
+          "elementIndex": 167
+        },
+        "call_id": "call_01a0e303202e71e897eefb62",
+        "time_ms": 866,
+        "output_preview": "Clicked <input role='combobox' id='ucc-1' aria-expanded='false' name='q'></input> Action dispatched; outcome not verified. Check the returned page before claiming success.\n\n\n<!-- DOM_START dom1 tab:tab0 mode:nochange -->\n(stateId: tab0-dom1)\n## Current Page DOM Structure\n\n\nNo DOM changes detected af",
+        "status": "success"
+      },
+      {
+        "tool": "browser_input",
+        "input": {
+          "elementIndex": 167,
+          "pressEnter": true,
+          "text": "Beauty salons in Seattle WA"
+        },
+        "call_id": "call_01a0e303277874d98a5e9660",
+        "time_ms": 4090,
+        "output_preview": "Input \"Beauty salons in Seattle WA\" into <input role='combobox' id='ucc-1' aria-expanded='false' name='q'></input> and pressed Enter Action dispatched; outcome not verified. Check the returned page before claiming success.\n\n\n<!-- DOM_START dom2 tab:tab0 mode:full -->\n(stateId: tab0-dom2)\n## Current ",
+        "status": "success"
+      },
+      {
+        "tool": "browser_scroll_next_screen",
+        "input": {
+          "container": 2,
+          "direction": "down"
+        },
+        "call_id": "call_01a0e3033dc67318adbc9944",
+        "time_ms": 1315,
+        "output_preview": "Scrolled down to next screen on container [2]: P0 -> P0.8\n\n\n<!-- DOM_START dom3 tab:tab0 mode:full -->\n(stateId: tab0-dom3)\n## Current Page DOM Structure\n\n\n[60]<div></div>\n\t[view:bei]<canvas></canvas>\n<div></div>\n\t<form></form>\n\t\t<167><input role='combobox' aria-expanded='false' name='q' value='Beau",
+        "status": "success"
+      },
+      {
+        "tool": "browser_click",
+        "input": {
+          "elementIndex": 940
+        },
+        "call_id": "call_01a0e30349a37554a16df3b4",
+        "time_ms": 1568,
+        "output_preview": "Clicked <button> 评分 </button> Action dispatched; outcome not verified. Check the returned page before claiming success.\n\n\n<!-- DOM_START dom3.1 tab:tab0 mode:incremental -->\n(stateId: tab0-dom3.1)\n## Incremental DOM updates\n\n\n+|[1992]<div role='menuitemradio' aria-checked='false'> 评分不限 </div>\n\t+|<di",
+        "status": "success"
+      },
+      {
+        "tool": "browser_click",
+        "input": {
+          "elementIndex": 2040
+        },
+        "call_id": "call_01a0e3036f9e75b48c402742",
+        "time_ms": 1817,
+        "output_preview": "Clicked <div role='menuitemradio' aria-checked='false'> 4.5 星级 </div> Action dispatched; outcome not verified. Check the returned page before claiming success.\n\n\n<!-- DOM_START dom4 tab:tab0 mode:incremental -->\n(stateId: tab0-dom4)\n## Incremental DOM updates\n\n\n-|[1992]<div role='menuitemradio' aria",
+        "status": "success"
+      },
+      {
+        "tool": "browser_observe",
+        "input": {
+          "format": "markdown"
+        },
+        "call_id": "call_01a0e30379eb70be88e4f32d",
+        "time_ms": 606,
+        "output_preview": "\n\n<!-- DOM_START dom4.1 tab:tab0 mode:full -->\n(stateId: tab0-dom4.1)\n## Current Page DOM Structure\n\n\n#DOCUMENT\n\tDIV\n\t\tFORM\n\t\t\tCOMBOBOX: q | Beauty salons in Seattle WA [expanded=false]\n\t\t\t\tDIV: Beauty salons in Seattle WA\n\t\tDIV\n\t\t\tBUTTON: 搜索\n\t\tDIV\n\t\t\tBUTTON: 关闭\n\tDIV\n\t\tBUTTON (aria: 在此区域搜索)\n\tDIV\n\t\tD",
+        "status": "success"
+      },
+      {
+        "tool": "browser_execute_script",
+        "input": {
+          "guide": true
+        },
+        "call_id": "call_01a0e303801271e4a8ee6e7a",
+        "time_ms": 5,
+        "output_preview": "# Extraction guide\n\nReturn plain objects or arrays using page data. Record important results in your text output before changing pages. The Host archives page observations automatically; use browser_recall only when an older source has left working context. Narrow truncated extractions before relyin",
+        "status": "success"
+      },
+      {
+        "tool": "browser_execute_script",
+        "input": {
+          "script": "var r = __records(__find(\"YSA Beauty Studio\")[0]); return { count: r.length, sample: __skeleton(r[0]) };"
+        },
+        "call_id": "call_01a0e30383ad707ab4e460b4",
+        "time_ms": 609,
+        "output_preview": "\n\n<!-- DOM_START dom5 tab:tab0 mode:nochange -->\n(stateId: tab0-dom5)\n## Current Page DOM Structure\n\n\nNo DOM changes detected after the previous action.\nscrollMap:\n[container:1] 2 pages (coverage resets on content/layout changes) | viewing P0 | unexplored P1\n[container:2] 3 pages (coverage resets on",
+        "status": "success"
+      },
+      {
+        "tool": "browser_execute_script",
+        "input": {
+          "script": "var r = __records(__find(\"YSA Beauty Studio\")[0]); return __skeleton(r[0], 8);"
+        },
+        "call_id": "call_01a0e3038a5d70d88b99c7ac",
+        "time_ms": 275,
+        "output_preview": "\n\n<!-- DOM_START dom5.1 tab:tab0 mode:nochange -->\n(stateId: tab0-dom5.1)\n## Current Page DOM Structure\n\n\nNo DOM changes detected after the previous action.\nscrollMap:\n[container:1] 2 pages (coverage resets on content/layout changes) | viewing P0 | unexplored P1\n[container:2] 3 pages (coverage reset",
+        "status": "success"
+      },
+      {
+        "tool": "browser_execute_script",
+        "input": {
+          "script": "var r = __records(__find(\"YSA Beauty Studio\")[0]); return r.map(function(el) { var name = el.querySelector(\".fontHeadlineSmall, h1, .xX8ybd, a.hfpxzc span\")?.textContent || el.querySelector(\"a.hfpxzc\")?.getAttribute(\"aria-label\"); var ratingSpan = el.querySelector(\".MW4etd\"); var rating = ratingSpan ? ratingSpan.textContent : null; var reviewSpan = el.querySelector(\".UY7F9\"); var reviews = reviewSpan ? reviewSpan.textContent : null; return { name: name, rating: rating, reviews: reviews }; });"
+        },
+        "call_id": "call_01a0e3039072708781e1c90d",
+        "time_ms": 283,
+        "output_preview": "\n\n<!-- DOM_START dom5.2 tab:tab0 mode:nochange -->\n(stateId: tab0-dom5.2)\n## Current Page DOM Structure\n\n\nNo DOM changes detected after the previous action.\nscrollMap:\n[container:1] 2 pages (coverage resets on content/layout changes) | viewing P0 | unexplored P1\n[container:2] 3 pages (coverage reset",
+        "status": "success"
+      },
+      {
+        "tool": "browser_reveal_offscreen",
+        "input": {
+          "container": 2,
+          "direction": "down"
+        },
+        "call_id": "call_01a0e30397347547ba1603c7",
+        "time_ms": 1338,
+        "output_preview": "Scrolled down on container [2]: P0 -> P0.9\n\n\n<!-- DOM_START dom5.3 tab:tab0 mode:full -->\n(stateId: tab0-dom5.3)\n## Current Page DOM Structure\n\n\n[60]<div></div>\n\t[view:bei]<canvas></canvas>\n<div></div>\n\t<form></form>\n\t\t<167><input role='combobox' aria-expanded='false' name='q' value='Beauty salons i",
+        "status": "success"
+      },
+      {
+        "tool": "browser_scroll_to_page",
+        "input": {
+          "container": 2,
+          "page": 1
+        },
+        "call_id": "call_01a0e303a6cd7536b2741f30",
+        "time_ms": 1584,
+        "output_preview": "Scrolled to target page on container [2]: P0.9 -> P1\n\n\n<!-- DOM_START dom5.4 tab:tab0 mode:full -->\n(stateId: tab0-dom5.4)\n## Current Page DOM Structure\n\n\n[60]<div></div>\n\t[view:bei]<canvas></canvas>\n<div></div>\n\t<form></form>\n\t\t<167><input role='combobox' aria-expanded='false' name='q' value='Beaut",
+        "status": "success"
+      },
+      {
+        "tool": "browser_execute_script",
+        "input": {
+          "script": "var all = document.querySelectorAll('span[role=\"img\"]'); return Array.from(all).map(function(el){return el.getAttribute('aria-label')}).filter(function(t){return /星级/.test(t||'') && /评价/.test(t||'')});"
+        },
+        "call_id": "call_01a0e303b671714aa111bdbf",
+        "time_ms": 433,
+        "output_preview": "\n\n<!-- DOM_START dom5.5 tab:tab0 mode:nochange -->\n(stateId: tab0-dom5.5)\n## Current Page DOM Structure\n\n\nNo DOM changes detected after the previous action.\nscrollMap:\n[container:1] 2 pages (coverage resets on content/layout changes) | viewing P0 | unexplored P1\n[container:2] 4 pages (coverage reset",
+        "status": "success"
+      },
+      {
+        "tool": "browser_execute_script",
+        "input": {
+          "script": "var cards = document.querySelectorAll('div[role=\"feed\"] > div > div > div'); var results = []; for (var i = 0; i < cards.length; i++) { var c = cards[i]; var nameEl = c.querySelector('div.qBF1Pd, div.fontHeadlineSmall, a.hfpxzc span, a[aria-label]'); var name = nameEl ? (nameEl.getAttribute('aria-label') || nameEl.textContent.trim()) : null; var ratingEl = c.querySelector('span[role=\"img\"][aria-label*=\"星级\"]'); var rating = ratingEl ? ratingEl.getAttribute('aria-label') : null; if (name && rating) results.push({name: name, rating: rating}); } return results;"
+        },
+        "call_id": "call_01a0e303c11c7333aef27d26",
+        "time_ms": 424,
+        "output_preview": "\n\n<!-- DOM_START dom5.6 tab:tab0 mode:nochange -->\n(stateId: tab0-dom5.6)\n## Current Page DOM Structure\n\n\nNo DOM changes detected after the previous action.\nscrollMap:\n[container:1] 2 pages (coverage resets on content/layout changes) | viewing P0 | unexplored P1\n[container:2] 4 pages (coverage reset",
+        "status": "success"
+      },
+      {
+        "tool": "browser_scroll_to_page",
+        "input": {
+          "container": 2,
+          "page": 2
+        },
+        "call_id": "call_01a0e303cbdf77cd9d3caad3",
+        "time_ms": 705,
+        "output_preview": "Scrolled to target page on container [2]: P1 -> P2\n\n\n<!-- DOM_START dom5.7 tab:tab0 mode:full -->\n(stateId: tab0-dom5.7)\n## Current Page DOM Structure\n\n\n[60]<div></div>\n\t[view:bei]<canvas></canvas>\n<div></div>\n\t<form></form>\n\t\t<167><input role='combobox' aria-expanded='false' name='q' value='Beauty ",
+        "status": "success"
+      },
+      {
+        "tool": "browser_scroll_to_page",
+        "input": {
+          "container": 2,
+          "page": 3
+        },
+        "call_id": "call_01a0e303d90c75b99cb4fe01",
+        "time_ms": 1712,
+        "output_preview": "Scrolled to target page on container [2]: P2 -> P2.7\n\n\n<!-- DOM_START dom5.8 tab:tab0 mode:full -->\n(stateId: tab0-dom5.8)\n## Current Page DOM Structure\n\n\n[60]<div></div>\n\t[view:bei]<canvas></canvas>\n<div></div>\n\t<form></form>\n\t\t<167><input role='combobox' aria-expanded='false' name='q' value='Beaut",
+        "status": "success"
+      },
+      {
+        "tool": "browser_scroll_to_page",
+        "input": {
+          "container": 2,
+          "page": 3
+        },
+        "call_id": "call_01a0e303e52873e9abfed040",
+        "time_ms": 786,
+        "output_preview": "Scrolled to target page on container [2]: P2.7 -> P3\n\n\n<!-- DOM_START dom5.9 tab:tab0 mode:full -->\n(stateId: tab0-dom5.9)\n## Current Page DOM Structure\n\n\n[60]<div></div>\n\t[view:bei]<canvas></canvas>\n<div></div>\n\t<form></form>\n\t\t<167><input role='combobox' aria-expanded='false' name='q' value='Beaut",
+        "status": "success"
+      },
+      {
+        "tool": "browser_execute_script",
+        "input": {
+          "script": "var cards = document.querySelectorAll('div[role=\"feed\"] > div > div > div'); var results = []; for (var i = 0; i < cards.length; i++) { var c = cards[i]; var nameEl = c.querySelector('div.qBF1Pd, div.fontHeadlineSmall, a.hfpxzc span, a[aria-label]'); var name = nameEl ? (nameEl.getAttribute('aria-label') || nameEl.textContent.trim()) : null; var ratingEl = c.querySelector('span[role=\"img\"][aria-label*=\"星级\"]'); var rating = ratingEl ? ratingEl.getAttribute('aria-label') : null; if (name && rating) results.push({name: name, rating: rating}); } return results;"
+        },
+        "call_id": "call_01a0e303ef7c7393b340c847",
+        "time_ms": 412,
+        "output_preview": "\n\n<!-- DOM_START dom5.10 tab:tab0 mode:nochange -->\n(stateId: tab0-dom5.10)\n## Current Page DOM Structure\n\n\nNo DOM changes detected after the previous action.\nscrollMap:\n[container:1] 2 pages (coverage resets on content/layout changes) | viewing P0 | unexplored P1\n[container:2] 6 pages (coverage res",
+        "status": "success"
+      },
+      {
+        "tool": "browser_scroll_to_page",
+        "input": {
+          "container": 2,
+          "page": 4
+        },
+        "call_id": "call_01a0e303f86374e4aa6588c8",
+        "time_ms": 1531,
+        "output_preview": "Scrolled to target page on container [2]: P3 -> P4\n\n\n<!-- DOM_START dom5.11 tab:tab0 mode:full -->\n(stateId: tab0-dom5.11)\n## Current Page DOM Structure\n\n\n[60]<div></div>\n\t[view:bei]<canvas></canvas>\n<div></div>\n\t<form></form>\n\t\t<167><input role='combobox' aria-expanded='false' name='q' value='Beaut",
+        "status": "success"
+      },
+      {
+        "tool": "browser_scroll_to_page",
+        "input": {
+          "container": 2,
+          "page": 5
+        },
+        "call_id": "call_01a0e3040bb776f8ae7e1a09",
+        "time_ms": 1668,
+        "output_preview": "Scrolled to target page on container [2]: P4 -> P4.1\n\n\n<!-- DOM_START dom5.12 tab:tab0 mode:incremental -->\n(stateId: tab0-dom5.12)\n## Incremental DOM updates\n\n\n<div></div>\n\t<div></div>\n\t\t<div></div>\n\t\t\t<div></div>\n=== OFF-SCREEN above [container:2] (scroll to reveal these elements) ===\n\t\t\t\t+|<div><",
+        "status": "success"
+      },
+      {
+        "tool": "browser_execute_script",
+        "input": {
+          "script": "var cards = document.querySelectorAll('div[role=\"feed\"] > div > div > div'); var results = []; for (var i = 0; i < cards.length; i++) { var c = cards[i]; var nameEl = c.querySelector('div.qBF1Pd, div.fontHeadlineSmall, a.hfpxzc span, a[aria-label]'); var name = nameEl ? (nameEl.getAttribute('aria-label') || nameEl.textContent.trim()) : null; var ratingEl = c.querySelector('span[role=\"img\"][aria-label*=\"星级\"]'); var rating = ratingEl ? ratingEl.getAttribute('aria-label') : null; var sponsored = c.textContent.indexOf('赞助商') >= 0; if (name && rating) results.push({name: name, rating: rating, sponsored: sponsored}); } return results;"
+        },
+        "call_id": "call_01a0e30417c2762da8bfa039",
+        "time_ms": 485,
+        "output_preview": "\n\n<!-- DOM_START dom5.13 tab:tab0 mode:nochange -->\n(stateId: tab0-dom5.13)\n## Current Page DOM Structure\n\n\nNo DOM changes detected after the previous action.\nscrollMap:\n[container:1] 2 pages (coverage resets on content/layout changes) | viewing P0 | unexplored P1\n[container:2] 6 pages (coverage res",
+        "status": "success"
+      }
+    ],
+    "error": null,
+    "model": "MiniMax-M3",
+    "provider": "minimax-cn",
+    "protocol": "anthropic-messages",
+    "reasoning_effort": "high",
+    "session_id": "eval-Google Map--0-4a7e8f889013",
+    "started_at": "2026-09-27T13:16:50.580Z",
+    "finished_at": "2026-09-27T13:18:16.957Z",
+    "duration_basis": "worker initialization to agent stop; excludes judge, screenshots and cleanup",
+    "infrastructure_error": null,
+    "request_count": 23,
+    "usage_missing_calls": 0,
+    "unpriced_calls": 0,
+    "tokens_observed": {
+      "input": 51659,
+      "output": 8232,
+      "cache_read": 182538,
+      "cache_write": 0,
+      "reasoning": 6053
+    },
+    "usage_metrics": {
+      "input_tokens": 234197,
+      "output_tokens": 8232,
+      "uncached_input_tokens": 51659,
+      "cache_hit_tokens": 182538,
+      "cache_miss_tokens": 51659,
+      "cache_write_tokens": 0,
+      "output_cache_tokens": null,
+      "reasoning_tokens": 6053,
+      "total_tokens": 242429,
+      "cache_hit_rate": 0.7794207440744331
+    },
+    "usage_observed": {
+      "input_tokens": 234197,
+      "output_tokens": 8232,
+      "uncached_input_tokens": 51659,
+      "cache_hit_tokens": 182538,
+      "cache_miss_tokens": 51659,
+      "cache_write_tokens": 0,
+      "output_cache_tokens": null,
+      "reasoning_tokens": 6053,
+      "total_tokens": 242429,
+      "cache_hit_rate": 0.7794207440744331
+    },
+    "cost_observed": 0.03632837999999999,
+    "model_duration_ms": 48670,
+    "model_calls": [
+      {
+        "call_index": 1,
+        "started_at": "2026-09-27T13:16:50.615Z",
+        "finished_at": "2026-09-27T13:16:51.568Z",
+        "usage": {
+          "input": 2674,
+          "cache_read": 128,
+          "cache_write": 0,
+          "output": 71,
+          "reasoning": 35
+        },
+        "cost": 0.00089508,
+        "duration_ms": 953,
+        "status": "success",
+        "raw_usage": {
+          "prompt_tokens": 2802,
+          "completion_tokens": 71,
+          "prompt_tokens_details": {
+            "cached_tokens": 128
+          },
+          "cache_creation_input_tokens": 0,
+          "completion_tokens_details": {
+            "thinking_tokens": 35,
+            "reasoning_tokens": 35
+          }
+        },
+        "output_cache_tokens": null
+      },
+      {
+        "call_index": 2,
+        "started_at": "2026-09-27T13:17:05.896Z",
+        "finished_at": "2026-09-27T13:17:09.108Z",
+        "usage": {
+          "input": 1211,
+          "cache_read": 2802,
+          "cache_write": 0,
+          "output": 110,
+          "reasoning": 69
+        },
+        "cost": 0.00066342,
+        "duration_ms": 3212,
+        "status": "success",
+        "raw_usage": {
+          "prompt_tokens": 4013,
+          "completion_tokens": 110,
+          "prompt_tokens_details": {
+            "cached_tokens": 2802
+          },
+          "cache_creation_input_tokens": 0,
+          "completion_tokens_details": {
+            "thinking_tokens": 69,
+            "reasoning_tokens": 69
+          }
+        },
+        "output_cache_tokens": null
+      },
+      {
+        "call_index": 3,
+        "started_at": "2026-09-27T13:17:10.007Z",
+        "finished_at": "2026-09-27T13:17:10.976Z",
+        "usage": {
+          "input": 362,
+          "cache_read": 4013,
+          "cache_write": 0,
+          "output": 64,
+          "reasoning": 10
+        },
+        "cost": 0.00042618,
+        "duration_ms": 969,
+        "status": "success",
+        "raw_usage": {
+          "prompt_tokens": 4375,
+          "completion_tokens": 64,
+          "prompt_tokens_details": {
+            "cached_tokens": 4013
+          },
+          "cache_creation_input_tokens": 0,
+          "completion_tokens_details": {
+            "thinking_tokens": 10,
+            "reasoning_tokens": 10
+          }
+        },
+        "output_cache_tokens": null
+      },
+      {
+        "call_index": 4,
+        "started_at": "2026-09-27T13:17:15.111Z",
+        "finished_at": "2026-09-27T13:17:16.719Z",
+        "usage": {
+          "input": 2648,
+          "cache_read": 3329,
+          "cache_write": 0,
+          "output": 283,
+          "reasoning": 234
+        },
+        "cost": 0.00133374,
+        "duration_ms": 1608,
+        "status": "success",
+        "raw_usage": {
+          "prompt_tokens": 5977,
+          "completion_tokens": 283,
+          "prompt_tokens_details": {
+            "cached_tokens": 3329
+          },
+          "cache_creation_input_tokens": 0,
+          "completion_tokens_details": {
+            "thinking_tokens": 234,
+            "reasoning_tokens": 234
+          }
+        },
+        "output_cache_tokens": null
+      },
+      {
+        "call_index": 5,
+        "started_at": "2026-09-27T13:17:18.080Z",
+        "finished_at": "2026-09-27T13:17:19.717Z",
+        "usage": {
+          "input": 2656,
+          "cache_read": 3698,
+          "cache_write": 0,
+          "output": 303,
+          "reasoning": 260
+        },
+        "cost": 0.0013822799999999998,
+        "duration_ms": 1637,
+        "status": "success",
+        "raw_usage": {
+          "prompt_tokens": 6354,
+          "completion_tokens": 303,
+          "prompt_tokens_details": {
+            "cached_tokens": 3698
+          },
+          "cache_creation_input_tokens": 0,
+          "completion_tokens_details": {
+            "thinking_tokens": 260,
+            "reasoning_tokens": 260
+          }
+        },
+        "output_cache_tokens": null
+      },
+      {
+        "call_index": 6,
+        "started_at": "2026-09-27T13:17:21.332Z",
+        "finished_at": "2026-09-27T13:17:29.458Z",
+        "usage": {
+          "input": 1509,
+          "cache_read": 6354,
+          "cache_write": 0,
+          "output": 414,
+          "reasoning": 368
+        },
+        "cost": 0.00133074,
+        "duration_ms": 8126,
+        "status": "success",
+        "raw_usage": {
+          "prompt_tokens": 7863,
+          "completion_tokens": 414,
+          "prompt_tokens_details": {
+            "cached_tokens": 6354
+          },
+          "cache_creation_input_tokens": 0,
+          "completion_tokens_details": {
+            "thinking_tokens": 368,
+            "reasoning_tokens": 368
+          }
+        },
+        "output_cache_tokens": null
+      },
+      {
+        "call_index": 7,
+        "started_at": "2026-09-27T13:17:31.300Z",
+        "finished_at": "2026-09-27T13:17:32.073Z",
+        "usage": {
+          "input": 1557,
+          "cache_read": 7863,
+          "cache_write": 0,
+          "output": 62,
+          "reasoning": 17
+        },
+        "cost": 0.00101328,
+        "duration_ms": 773,
+        "status": "success",
+        "raw_usage": {
+          "prompt_tokens": 9420,
+          "completion_tokens": 62,
+          "prompt_tokens_details": {
+            "cached_tokens": 7863
+          },
+          "cache_creation_input_tokens": 0,
+          "completion_tokens_details": {
+            "thinking_tokens": 17,
+            "reasoning_tokens": 17
+          }
+        },
+        "output_cache_tokens": null
+      },
+      {
+        "call_index": 8,
+        "started_at": "2026-09-27T13:17:32.710Z",
+        "finished_at": "2026-09-27T13:17:33.627Z",
+        "usage": {
+          "input": 3446,
+          "cache_read": 4051,
+          "cache_write": 0,
+          "output": 130,
+          "reasoning": 85
+        },
+        "cost": 0.00143286,
+        "duration_ms": 917,
+        "status": "success",
+        "raw_usage": {
+          "prompt_tokens": 7497,
+          "completion_tokens": 130,
+          "prompt_tokens_details": {
+            "cached_tokens": 4051
+          },
+          "cache_creation_input_tokens": 0,
+          "completion_tokens_details": {
+            "thinking_tokens": 85,
+            "reasoning_tokens": 85
+          }
+        },
+        "output_cache_tokens": null
+      },
+      {
+        "call_index": 9,
+        "started_at": "2026-09-27T13:17:33.660Z",
+        "finished_at": "2026-09-27T13:17:34.563Z",
+        "usage": {
+          "input": 1182,
+          "cache_read": 7497,
+          "cache_write": 0,
+          "output": 102,
+          "reasoning": 27
+        },
+        "cost": 0.0009268199999999999,
+        "duration_ms": 903,
+        "status": "success",
+        "raw_usage": {
+          "prompt_tokens": 8679,
+          "completion_tokens": 102,
+          "prompt_tokens_details": {
+            "cached_tokens": 7497
+          },
+          "cache_creation_input_tokens": 0,
+          "completion_tokens_details": {
+            "thinking_tokens": 27,
+            "reasoning_tokens": 27
+          }
+        },
+        "output_cache_tokens": null
+      },
+      {
+        "call_index": 10,
+        "started_at": "2026-09-27T13:17:35.222Z",
+        "finished_at": "2026-09-27T13:17:36.291Z",
+        "usage": {
+          "input": 2041,
+          "cache_read": 7238,
+          "cache_write": 0,
+          "output": 163,
+          "reasoning": 95
+        },
+        "cost": 0.0012421799999999998,
+        "duration_ms": 1069,
+        "status": "success",
+        "raw_usage": {
+          "prompt_tokens": 9279,
+          "completion_tokens": 163,
+          "prompt_tokens_details": {
+            "cached_tokens": 7238
+          },
+          "cache_creation_input_tokens": 0,
+          "completion_tokens_details": {
+            "thinking_tokens": 95,
+            "reasoning_tokens": 95
+          }
+        },
+        "output_cache_tokens": null
+      },
+      {
+        "call_index": 11,
+        "started_at": "2026-09-27T13:17:36.596Z",
+        "finished_at": "2026-09-27T13:17:37.821Z",
+        "usage": {
+          "input": 1153,
+          "cache_read": 9279,
+          "cache_write": 0,
+          "output": 225,
+          "reasoning": 46
+        },
+        "cost": 0.00117264,
+        "duration_ms": 1225,
+        "status": "success",
+        "raw_usage": {
+          "prompt_tokens": 10432,
+          "completion_tokens": 225,
+          "prompt_tokens_details": {
+            "cached_tokens": 9279
+          },
+          "cache_creation_input_tokens": 0,
+          "completion_tokens_details": {
+            "thinking_tokens": 46,
+            "reasoning_tokens": 46
+          }
+        },
+        "output_cache_tokens": null
+      },
+      {
+        "call_index": 12,
+        "started_at": "2026-09-27T13:17:38.138Z",
+        "finished_at": "2026-09-27T13:17:39.575Z",
+        "usage": {
+          "input": 913,
+          "cache_read": 10432,
+          "cache_write": 0,
+          "output": 348,
+          "reasoning": 277
+        },
+        "cost": 0.00131742,
+        "duration_ms": 1437,
+        "status": "success",
+        "raw_usage": {
+          "prompt_tokens": 11345,
+          "completion_tokens": 348,
+          "prompt_tokens_details": {
+            "cached_tokens": 10432
+          },
+          "cache_creation_input_tokens": 0,
+          "completion_tokens_details": {
+            "thinking_tokens": 277,
+            "reasoning_tokens": 277
+          }
+        },
+        "output_cache_tokens": null
+      },
+      {
+        "call_index": 13,
+        "started_at": "2026-09-27T13:17:40.953Z",
+        "finished_at": "2026-09-27T13:17:43.555Z",
+        "usage": {
+          "input": 4773,
+          "cache_read": 5048,
+          "cache_write": 0,
+          "output": 175,
+          "reasoning": 123
+        },
+        "cost": 0.00194478,
+        "duration_ms": 2602,
+        "status": "success",
+        "raw_usage": {
+          "prompt_tokens": 9821,
+          "completion_tokens": 175,
+          "prompt_tokens_details": {
+            "cached_tokens": 5048
+          },
+          "cache_creation_input_tokens": 0,
+          "completion_tokens_details": {
+            "thinking_tokens": 123,
+            "reasoning_tokens": 123
+          }
+        },
+        "output_cache_tokens": null
+      },
+      {
+        "call_index": 14,
+        "started_at": "2026-09-27T13:17:45.172Z",
+        "finished_at": "2026-09-27T13:17:47.554Z",
+        "usage": {
+          "input": 3043,
+          "cache_read": 7319,
+          "cache_write": 0,
+          "output": 517,
+          "reasoning": 422
+        },
+        "cost": 0.00197244,
+        "duration_ms": 2382,
+        "status": "success",
+        "raw_usage": {
+          "prompt_tokens": 10362,
+          "completion_tokens": 517,
+          "prompt_tokens_details": {
+            "cached_tokens": 7319
+          },
+          "cache_creation_input_tokens": 0,
+          "completion_tokens_details": {
+            "thinking_tokens": 422,
+            "reasoning_tokens": 422
+          }
+        },
+        "output_cache_tokens": null
+      },
+      {
+        "call_index": 15,
+        "started_at": "2026-09-27T13:17:48.025Z",
+        "finished_at": "2026-09-27T13:17:50.312Z",
+        "usage": {
+          "input": 1196,
+          "cache_read": 10362,
+          "cache_write": 0,
+          "output": 631,
+          "reasoning": 426
+        },
+        "cost": 0.0017377199999999999,
+        "duration_ms": 2287,
+        "status": "success",
+        "raw_usage": {
+          "prompt_tokens": 11558,
+          "completion_tokens": 631,
+          "prompt_tokens_details": {
+            "cached_tokens": 10362
+          },
+          "cache_creation_input_tokens": 0,
+          "completion_tokens_details": {
+            "thinking_tokens": 426,
+            "reasoning_tokens": 426
+          }
+        },
+        "output_cache_tokens": null
+      },
+      {
+        "call_index": 16,
+        "started_at": "2026-09-27T13:17:50.766Z",
+        "finished_at": "2026-09-27T13:17:53.042Z",
+        "usage": {
+          "input": 1454,
+          "cache_read": 11558,
+          "cache_write": 0,
+          "output": 592,
+          "reasoning": 540
+        },
+        "cost": 0.00184008,
+        "duration_ms": 2277,
+        "status": "success",
+        "raw_usage": {
+          "prompt_tokens": 13012,
+          "completion_tokens": 592,
+          "prompt_tokens_details": {
+            "cached_tokens": 11558
+          },
+          "cache_creation_input_tokens": 0,
+          "completion_tokens_details": {
+            "thinking_tokens": 540,
+            "reasoning_tokens": 540
+          }
+        },
+        "output_cache_tokens": null
+      },
+      {
+        "call_index": 17,
+        "started_at": "2026-09-27T13:17:53.798Z",
+        "finished_at": "2026-09-27T13:17:56.434Z",
+        "usage": {
+          "input": 4500,
+          "cache_read": 7565,
+          "cache_write": 0,
+          "output": 738,
+          "reasoning": 688
+        },
+        "cost": 0.0026895,
+        "duration_ms": 2636,
+        "status": "success",
+        "raw_usage": {
+          "prompt_tokens": 12065,
+          "completion_tokens": 738,
+          "prompt_tokens_details": {
+            "cached_tokens": 7565
+          },
+          "cache_creation_input_tokens": 0,
+          "completion_tokens_details": {
+            "thinking_tokens": 688,
+            "reasoning_tokens": 688
+          }
+        },
+        "output_cache_tokens": null
+      },
+      {
+        "call_index": 18,
+        "started_at": "2026-09-27T13:17:58.197Z",
+        "finished_at": "2026-09-27T13:17:59.517Z",
+        "usage": {
+          "input": 3818,
+          "cache_read": 9478,
+          "cache_write": 0,
+          "output": 263,
+          "reasoning": 211
+        },
+        "cost": 0.0020296799999999994,
+        "duration_ms": 1320,
+        "status": "success",
+        "raw_usage": {
+          "prompt_tokens": 13296,
+          "completion_tokens": 263,
+          "prompt_tokens_details": {
+            "cached_tokens": 9478
+          },
+          "cache_creation_input_tokens": 0,
+          "completion_tokens_details": {
+            "thinking_tokens": 211,
+            "reasoning_tokens": 211
+          }
+        },
+        "output_cache_tokens": null
+      },
+      {
+        "call_index": 19,
+        "started_at": "2026-09-27T13:18:00.343Z",
+        "finished_at": "2026-09-27T13:18:02.165Z",
+        "usage": {
+          "input": 3291,
+          "cache_read": 10287,
+          "cache_write": 0,
+          "output": 424,
+          "reasoning": 215
+        },
+        "cost": 0.00211332,
+        "duration_ms": 1822,
+        "status": "success",
+        "raw_usage": {
+          "prompt_tokens": 13578,
+          "completion_tokens": 424,
+          "prompt_tokens_details": {
+            "cached_tokens": 10287
+          },
+          "cache_creation_input_tokens": 0,
+          "completion_tokens_details": {
+            "thinking_tokens": 215,
+            "reasoning_tokens": 215
+          }
+        },
+        "output_cache_tokens": null
+      },
+      {
+        "call_index": 20,
+        "started_at": "2026-09-27T13:18:02.623Z",
+        "finished_at": "2026-09-27T13:18:04.499Z",
+        "usage": {
+          "input": 1359,
+          "cache_read": 13578,
+          "cache_write": 0,
+          "output": 399,
+          "reasoning": 346
+        },
+        "cost": 0.0017011799999999998,
+        "duration_ms": 1876,
+        "status": "success",
+        "raw_usage": {
+          "prompt_tokens": 14937,
+          "completion_tokens": 399,
+          "prompt_tokens_details": {
+            "cached_tokens": 13578
+          },
+          "cache_creation_input_tokens": 0,
+          "completion_tokens_details": {
+            "thinking_tokens": 346,
+            "reasoning_tokens": 346
+          }
+        },
+        "output_cache_tokens": null
+      },
+      {
+        "call_index": 21,
+        "started_at": "2026-09-27T13:18:06.076Z",
+        "finished_at": "2026-09-27T13:18:09.394Z",
+        "usage": {
+          "input": 3463,
+          "cache_read": 10621,
+          "cache_write": 0,
+          "output": 736,
+          "reasoning": 681
+        },
+        "cost": 0.00255936,
+        "duration_ms": 3318,
+        "status": "success",
+        "raw_usage": {
+          "prompt_tokens": 14084,
+          "completion_tokens": 736,
+          "prompt_tokens_details": {
+            "cached_tokens": 10621
+          },
+          "cache_creation_input_tokens": 0,
+          "completion_tokens_details": {
+            "thinking_tokens": 681,
+            "reasoning_tokens": 681
+          }
+        },
+        "output_cache_tokens": null
+      },
+      {
+        "call_index": 22,
+        "started_at": "2026-09-27T13:18:11.097Z",
+        "finished_at": "2026-09-27T13:18:12.495Z",
+        "usage": {
+          "input": 1870,
+          "cache_read": 14084,
+          "cache_write": 0,
+          "output": 253,
+          "reasoning": 27
+        },
+        "cost": 0.0017096399999999997,
+        "duration_ms": 1398,
+        "status": "success",
+        "raw_usage": {
+          "prompt_tokens": 15954,
+          "completion_tokens": 253,
+          "prompt_tokens_details": {
+            "cached_tokens": 14084
+          },
+          "cache_creation_input_tokens": 0,
+          "completion_tokens_details": {
+            "thinking_tokens": 27,
+            "reasoning_tokens": 27
+          }
+        },
+        "output_cache_tokens": null
+      },
+      {
+        "call_index": 23,
+        "started_at": "2026-09-27T13:18:13.013Z",
+        "finished_at": "2026-09-27T13:18:16.936Z",
+        "usage": {
+          "input": 1540,
+          "cache_read": 15954,
+          "cache_write": 0,
+          "output": 1229,
+          "reasoning": 851
+        },
+        "cost": 0.0028940399999999996,
+        "duration_ms": 3923,
+        "status": "success",
+        "raw_usage": {
+          "prompt_tokens": 17494,
+          "completion_tokens": 1229,
+          "prompt_tokens_details": {
+            "cached_tokens": 15954
+          },
+          "cache_creation_input_tokens": 0,
+          "completion_tokens_details": {
+            "thinking_tokens": 851,
+            "reasoning_tokens": 851
+          }
+        },
+        "output_cache_tokens": null
+      }
+    ],
+    "model_steps": 23,
+    "retry_count": 0,
+    "failed_steps": 0,
+    "incomplete_steps": 0,
+    "final_screenshot": "final.png",
+    "attempt_number": 2,
+    "attempt_directory": "Google Map--0\\attempts\\2",
+    "judge_mode": "reference",
+    "metrics": {
+      "metrics_version": 1,
+      "input_tokens": 234197,
+      "output_tokens": 8232,
+      "uncached_input_tokens": 51659,
+      "cache_hit_tokens": 182538,
+      "cache_miss_tokens": 51659,
+      "cache_write_tokens": 0,
+      "output_cache_tokens": null,
+      "reasoning_tokens": 6053,
+      "total_tokens": 242429,
+      "cache_hit_rate": 0.7794207440744331,
+      "agent_cost_usd": 0.03632837999999999,
+      "judge_cost_usd": null,
+      "total_cost_usd": null,
+      "observed_cost_usd": 0.03632837999999999,
+      "agent_duration_ms": 86377,
+      "judge_duration_ms": null,
+      "active_duration_ms": null
+    }
+  }
+}

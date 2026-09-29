@@ -1,0 +1,973 @@
+{
+  "previous": "89bccb53daadb73a07c7065802c846dc6a8e0c5c8fd515df2785b9fcf802dab6",
+  "result": {
+    "task_id": "Google Map--26",
+    "website": "https://www.google.com/maps/",
+    "task": "Search for Los Angeles on Google Map, try to print the map as PDF and summarize the information on the map.",
+    "status": "timeout",
+    "duration_ms": 620800,
+    "steps": 24,
+    "browser_steps": 24,
+    "tool_trace": [
+      {
+        "tool": "browser_start",
+        "input": "{\"url\":\"https://www.google.com/maps/\"}",
+        "status": "incomplete"
+      },
+      {
+        "tool": "browser_click",
+        "input": "{\"elementIndex\":2}",
+        "status": "incomplete"
+      },
+      {
+        "tool": "browser_input",
+        "input": "{\"elementIndex\":2,\"pressEnter\":true,\"text\":\"Los Angeles\"}",
+        "status": "incomplete"
+      },
+      {
+        "tool": "browser_observe",
+        "input": "{}",
+        "status": "incomplete"
+      },
+      {
+        "tool": "browser_click",
+        "input": "{\"elementIndex\":187}",
+        "status": "incomplete"
+      },
+      {
+        "tool": "browser_wait",
+        "input": "{\"seconds\":3}",
+        "status": "incomplete"
+      },
+      {
+        "tool": "browser_observe",
+        "input": "{}",
+        "status": "incomplete"
+      },
+      {
+        "tool": "browser_input",
+        "input": "{\"elementIndex\":2,\"pressEnter\":true,\"text\":\"Los Angeles\"}",
+        "status": "incomplete"
+      },
+      {
+        "tool": "browser_click",
+        "input": "{\"elementIndex\":2}",
+        "status": "incomplete"
+      },
+      {
+        "tool": "browser_execute_script",
+        "input": "{\"script\":\"return window.location.href;\"}",
+        "status": "incomplete"
+      },
+      {
+        "tool": "browser_goto",
+        "input": "{\"url\":\"https://www.google.com/maps/search/Los+Angeles\"}",
+        "status": "incomplete"
+      },
+      {
+        "tool": "browser_view_elements",
+        "input": "{\"viewIds\":[\"beaj\"]}",
+        "status": "incomplete"
+      },
+      {
+        "tool": "browser_execute_script",
+        "input": "{\"script\":\"return {url: window.location.href, title: document.title, hasMap: !!document.querySelector('canvas')};\"}",
+        "status": "incomplete"
+      },
+      {
+        "tool": "browser_execute_script",
+        "input": "{\"script\":\"try { window.print(); return 'Print triggered'; } catch(e) { return 'Error: ' + e.message; }\"}",
+        "status": "incomplete"
+      },
+      {
+        "tool": "browser_execute_script",
+        "input": "{\"script\":\"return {readyState: document.readyState, bodyContent: document.body.innerHTML.substring(0, 200)};\"}",
+        "status": "incomplete"
+      },
+      {
+        "tool": "browser_wait",
+        "input": "{\"seconds\":3}",
+        "status": "incomplete"
+      },
+      {
+        "tool": "browser_observe",
+        "input": "{}",
+        "status": "incomplete"
+      },
+      {
+        "tool": "browser_wait",
+        "input": "{\"seconds\":5}",
+        "status": "incomplete"
+      },
+      {
+        "tool": "browser_observe",
+        "input": "{}",
+        "status": "incomplete"
+      },
+      {
+        "tool": "browser_refresh",
+        "input": "{}",
+        "status": "incomplete"
+      },
+      {
+        "tool": "browser_execute_script",
+        "input": "{\"script\":\"return {url: window.location.href, title: document.title, readyState: document.readyState};\"}",
+        "status": "incomplete"
+      },
+      {
+        "tool": "browser_view_elements",
+        "input": "{\"viewIds\":[\"cije\"]}",
+        "status": "incomplete"
+      },
+      {
+        "tool": "browser_execute_script",
+        "input": "{\"script\":\"document.dispatchEvent(new KeyboardEvent('keydown', {key: 'p', code: 'KeyP', ctrlKey: true, bubbles: true})); window.dispatchEvent(new KeyboardEvent('keydown', {key: 'p', code: 'KeyP', ctrlKey: true, bubbles: true})); return 'Keyboard event dispatched';\"}",
+        "status": "incomplete"
+      },
+      {
+        "tool": "browser_execute_script",
+        "input": "{\"script\":\"setTimeout(function(){window.print();}, 100); return 'Print scheduled';\"}",
+        "status": "incomplete"
+      }
+    ],
+    "final_answer": "",
+    "cost": 0.02218602,
+    "tokens": {
+      "input": 28836,
+      "output": 4041,
+      "cache_read": 144767,
+      "cache_write": 0,
+      "reasoning": 3014
+    },
+    "error": "Worker exited 1 after deadline",
+    "model": "MiniMax-M3",
+    "provider": "minimax-cn",
+    "protocol": "anthropic-messages",
+    "reasoning_effort": "high",
+    "request_count": 24,
+    "usage_missing_calls": 0,
+    "unpriced_calls": 0,
+    "tokens_observed": {
+      "input": 28836,
+      "output": 4041,
+      "cache_read": 144767,
+      "cache_write": 0,
+      "reasoning": 3014
+    },
+    "usage_metrics": {
+      "input_tokens": 173603,
+      "output_tokens": 4041,
+      "uncached_input_tokens": 28836,
+      "cache_hit_tokens": 144767,
+      "cache_miss_tokens": 28836,
+      "cache_write_tokens": 0,
+      "output_cache_tokens": null,
+      "reasoning_tokens": 3014,
+      "total_tokens": 177644,
+      "cache_hit_rate": 0.8338968796622178
+    },
+    "usage_observed": {
+      "input_tokens": 173603,
+      "output_tokens": 4041,
+      "uncached_input_tokens": 28836,
+      "cache_hit_tokens": 144767,
+      "cache_miss_tokens": 28836,
+      "cache_write_tokens": 0,
+      "output_cache_tokens": null,
+      "reasoning_tokens": 3014,
+      "total_tokens": 177644,
+      "cache_hit_rate": 0.8338968796622178
+    },
+    "cost_observed": 0.02218602,
+    "model_duration_ms": 36621,
+    "started_at": "2026-09-26T13:45:43.440Z",
+    "finished_at": "2026-09-26T13:56:04.241Z",
+    "duration_basis": "dispatcher spawn to worker exit; may include cleanup",
+    "model_calls": [
+      {
+        "call_index": 1,
+        "started_at": "2026-09-26T13:45:43.845Z",
+        "usage": {
+          "input": 2679,
+          "cache_read": 128,
+          "cache_write": 0,
+          "output": 85,
+          "reasoning": 49
+        },
+        "cost": 0.00091338,
+        "duration_ms": 971,
+        "status": "success",
+        "finished_at": "2026-09-26T13:45:44.816Z",
+        "raw_usage": {
+          "prompt_tokens": 2807,
+          "completion_tokens": 85,
+          "prompt_tokens_details": {
+            "cached_tokens": 128
+          },
+          "cache_creation_input_tokens": 0,
+          "completion_tokens_details": {
+            "thinking_tokens": 49,
+            "reasoning_tokens": 49
+          }
+        },
+        "output_cache_tokens": null
+      },
+      {
+        "call_index": 2,
+        "started_at": "2026-09-26T13:45:58.266Z",
+        "usage": {
+          "input": 1209,
+          "cache_read": 2807,
+          "cache_write": 0,
+          "output": 64,
+          "reasoning": 33
+        },
+        "cost": 0.00060792,
+        "duration_ms": 1264,
+        "status": "success",
+        "finished_at": "2026-09-26T13:45:59.530Z",
+        "raw_usage": {
+          "prompt_tokens": 4016,
+          "completion_tokens": 64,
+          "prompt_tokens_details": {
+            "cached_tokens": 2807
+          },
+          "cache_creation_input_tokens": 0,
+          "completion_tokens_details": {
+            "thinking_tokens": 33,
+            "reasoning_tokens": 33
+          }
+        },
+        "output_cache_tokens": null
+      },
+      {
+        "call_index": 3,
+        "started_at": "2026-09-26T13:46:05.600Z",
+        "usage": {
+          "input": 318,
+          "cache_read": 4016,
+          "cache_write": 0,
+          "output": 64,
+          "reasoning": 13
+        },
+        "cost": 0.00041316,
+        "duration_ms": 880,
+        "status": "success",
+        "finished_at": "2026-09-26T13:46:06.480Z",
+        "raw_usage": {
+          "prompt_tokens": 4334,
+          "completion_tokens": 64,
+          "prompt_tokens_details": {
+            "cached_tokens": 4016
+          },
+          "cache_creation_input_tokens": 0,
+          "completion_tokens_details": {
+            "thinking_tokens": 13,
+            "reasoning_tokens": 13
+          }
+        },
+        "output_cache_tokens": null
+      },
+      {
+        "call_index": 4,
+        "started_at": "2026-09-26T13:46:13.098Z",
+        "usage": {
+          "input": 709,
+          "cache_read": 4334,
+          "cache_write": 0,
+          "output": 40,
+          "reasoning": 19
+        },
+        "cost": 0.00052074,
+        "duration_ms": 870,
+        "status": "success",
+        "finished_at": "2026-09-26T13:46:13.968Z",
+        "raw_usage": {
+          "prompt_tokens": 5043,
+          "completion_tokens": 40,
+          "prompt_tokens_details": {
+            "cached_tokens": 4334
+          },
+          "cache_creation_input_tokens": 0,
+          "completion_tokens_details": {
+            "thinking_tokens": 19,
+            "reasoning_tokens": 19
+          }
+        },
+        "output_cache_tokens": null
+      },
+      {
+        "call_index": 5,
+        "started_at": "2026-09-26T13:46:14.218Z",
+        "usage": {
+          "input": 1388,
+          "cache_read": 3348,
+          "cache_write": 0,
+          "output": 65,
+          "reasoning": 34
+        },
+        "cost": 0.0006952799999999999,
+        "duration_ms": 828,
+        "status": "success",
+        "finished_at": "2026-09-26T13:46:15.046Z",
+        "raw_usage": {
+          "prompt_tokens": 4736,
+          "completion_tokens": 65,
+          "prompt_tokens_details": {
+            "cached_tokens": 3348
+          },
+          "cache_creation_input_tokens": 0,
+          "completion_tokens_details": {
+            "thinking_tokens": 34,
+            "reasoning_tokens": 34
+          }
+        },
+        "output_cache_tokens": null
+      },
+      {
+        "call_index": 6,
+        "started_at": "2026-09-26T13:46:21.511Z",
+        "usage": {
+          "input": 617,
+          "cache_read": 4736,
+          "cache_write": 0,
+          "output": 50,
+          "reasoning": 21
+        },
+        "cost": 0.0005292599999999999,
+        "duration_ms": 1024,
+        "status": "success",
+        "finished_at": "2026-09-26T13:46:22.535Z",
+        "raw_usage": {
+          "prompt_tokens": 5353,
+          "completion_tokens": 50,
+          "prompt_tokens_details": {
+            "cached_tokens": 4736
+          },
+          "cache_creation_input_tokens": 0,
+          "completion_tokens_details": {
+            "thinking_tokens": 21,
+            "reasoning_tokens": 21
+          }
+        },
+        "output_cache_tokens": null
+      },
+      {
+        "call_index": 7,
+        "started_at": "2026-09-26T13:46:25.561Z",
+        "usage": {
+          "input": 85,
+          "cache_read": 5353,
+          "cache_write": 0,
+          "output": 20,
+          "reasoning": 0
+        },
+        "cost": 0.00037068,
+        "duration_ms": 727,
+        "status": "success",
+        "finished_at": "2026-09-26T13:46:26.288Z",
+        "raw_usage": {
+          "prompt_tokens": 5438,
+          "completion_tokens": 20,
+          "prompt_tokens_details": {
+            "cached_tokens": 5353
+          },
+          "cache_creation_input_tokens": 0,
+          "completion_tokens_details": {
+            "reasoning_tokens": 0
+          }
+        },
+        "output_cache_tokens": null
+      },
+      {
+        "call_index": 8,
+        "started_at": "2026-09-26T13:46:26.483Z",
+        "usage": {
+          "input": 1293,
+          "cache_read": 3761,
+          "cache_write": 0,
+          "output": 83,
+          "reasoning": 32
+        },
+        "cost": 0.00071316,
+        "duration_ms": 859,
+        "status": "success",
+        "finished_at": "2026-09-26T13:46:27.342Z",
+        "raw_usage": {
+          "prompt_tokens": 5054,
+          "completion_tokens": 83,
+          "prompt_tokens_details": {
+            "cached_tokens": 3761
+          },
+          "cache_creation_input_tokens": 0,
+          "completion_tokens_details": {
+            "thinking_tokens": 32,
+            "reasoning_tokens": 32
+          }
+        },
+        "output_cache_tokens": null
+      },
+      {
+        "call_index": 9,
+        "started_at": "2026-09-26T13:46:34.018Z",
+        "usage": {
+          "input": 661,
+          "cache_read": 5054,
+          "cache_write": 0,
+          "output": 180,
+          "reasoning": 149
+        },
+        "cost": 0.00071754,
+        "duration_ms": 1387,
+        "status": "success",
+        "finished_at": "2026-09-26T13:46:35.405Z",
+        "raw_usage": {
+          "prompt_tokens": 5715,
+          "completion_tokens": 180,
+          "prompt_tokens_details": {
+            "cached_tokens": 5054
+          },
+          "cache_creation_input_tokens": 0,
+          "completion_tokens_details": {
+            "thinking_tokens": 149,
+            "reasoning_tokens": 149
+          }
+        },
+        "output_cache_tokens": null
+      },
+      {
+        "call_index": 10,
+        "started_at": "2026-09-26T13:46:41.339Z",
+        "usage": {
+          "input": 750,
+          "cache_read": 5715,
+          "cache_write": 0,
+          "output": 51,
+          "reasoning": 17
+        },
+        "cost": 0.0006291000000000001,
+        "duration_ms": 865,
+        "status": "success",
+        "finished_at": "2026-09-26T13:46:42.204Z",
+        "raw_usage": {
+          "prompt_tokens": 6465,
+          "completion_tokens": 51,
+          "prompt_tokens_details": {
+            "cached_tokens": 5715
+          },
+          "cache_creation_input_tokens": 0,
+          "completion_tokens_details": {
+            "thinking_tokens": 17,
+            "reasoning_tokens": 17
+          }
+        },
+        "output_cache_tokens": null
+      },
+      {
+        "call_index": 11,
+        "started_at": "2026-09-26T13:46:42.487Z",
+        "usage": {
+          "input": 649,
+          "cache_read": 6465,
+          "cache_write": 0,
+          "output": 129,
+          "reasoning": 87
+        },
+        "cost": 0.0007374,
+        "duration_ms": 1147,
+        "status": "success",
+        "finished_at": "2026-09-26T13:46:43.634Z",
+        "raw_usage": {
+          "prompt_tokens": 7114,
+          "completion_tokens": 129,
+          "prompt_tokens_details": {
+            "cached_tokens": 6465
+          },
+          "cache_creation_input_tokens": 0,
+          "completion_tokens_details": {
+            "thinking_tokens": 87,
+            "reasoning_tokens": 87
+          }
+        },
+        "output_cache_tokens": null
+      },
+      {
+        "call_index": 12,
+        "started_at": "2026-09-26T13:46:55.173Z",
+        "usage": {
+          "input": 2212,
+          "cache_read": 4065,
+          "cache_write": 0,
+          "output": 310,
+          "reasoning": 239
+        },
+        "cost": 0.0012795,
+        "duration_ms": 1722,
+        "status": "success",
+        "finished_at": "2026-09-26T13:46:56.895Z",
+        "raw_usage": {
+          "prompt_tokens": 6277,
+          "completion_tokens": 310,
+          "prompt_tokens_details": {
+            "cached_tokens": 4065
+          },
+          "cache_creation_input_tokens": 0,
+          "completion_tokens_details": {
+            "thinking_tokens": 239,
+            "reasoning_tokens": 239
+          }
+        },
+        "output_cache_tokens": null
+      },
+      {
+        "call_index": 13,
+        "started_at": "2026-09-26T13:46:57.558Z",
+        "usage": {
+          "input": 4102,
+          "cache_read": 6277,
+          "cache_write": 0,
+          "output": 544,
+          "reasoning": 464
+        },
+        "cost": 0.0022600199999999997,
+        "duration_ms": 3900,
+        "status": "success",
+        "finished_at": "2026-09-26T13:47:01.458Z",
+        "raw_usage": {
+          "prompt_tokens": 10379,
+          "completion_tokens": 544,
+          "prompt_tokens_details": {
+            "cached_tokens": 6277
+          },
+          "cache_creation_input_tokens": 0,
+          "completion_tokens_details": {
+            "thinking_tokens": 464,
+            "reasoning_tokens": 464
+          }
+        },
+        "output_cache_tokens": null
+      },
+      {
+        "call_index": 14,
+        "started_at": "2026-09-26T13:47:01.777Z",
+        "usage": {
+          "input": 1258,
+          "cache_read": 6620,
+          "cache_write": 0,
+          "output": 109,
+          "reasoning": 55
+        },
+        "cost": 0.0009053999999999999,
+        "duration_ms": 1071,
+        "status": "success",
+        "finished_at": "2026-09-26T13:47:02.848Z",
+        "raw_usage": {
+          "prompt_tokens": 7878,
+          "completion_tokens": 109,
+          "prompt_tokens_details": {
+            "cached_tokens": 6620
+          },
+          "cache_creation_input_tokens": 0,
+          "completion_tokens_details": {
+            "thinking_tokens": 55,
+            "reasoning_tokens": 55
+          }
+        },
+        "output_cache_tokens": null
+      },
+      {
+        "call_index": 15,
+        "started_at": "2026-09-26T13:47:12.886Z",
+        "usage": {
+          "input": 193,
+          "cache_read": 7878,
+          "cache_write": 0,
+          "output": 176,
+          "reasoning": 123
+        },
+        "cost": 0.00074178,
+        "duration_ms": 1788,
+        "status": "success",
+        "finished_at": "2026-09-26T13:47:14.674Z",
+        "raw_usage": {
+          "prompt_tokens": 8071,
+          "completion_tokens": 176,
+          "prompt_tokens_details": {
+            "cached_tokens": 7878
+          },
+          "cache_creation_input_tokens": 0,
+          "completion_tokens_details": {
+            "thinking_tokens": 123,
+            "reasoning_tokens": 123
+          }
+        },
+        "output_cache_tokens": null
+      },
+      {
+        "call_index": 16,
+        "started_at": "2026-09-26T13:47:24.708Z",
+        "usage": {
+          "input": 260,
+          "cache_read": 8071,
+          "cache_write": 0,
+          "output": 53,
+          "reasoning": 24
+        },
+        "cost": 0.00062586,
+        "duration_ms": 968,
+        "status": "success",
+        "finished_at": "2026-09-26T13:47:25.676Z",
+        "raw_usage": {
+          "prompt_tokens": 8331,
+          "completion_tokens": 53,
+          "prompt_tokens_details": {
+            "cached_tokens": 8071
+          },
+          "cache_creation_input_tokens": 0,
+          "completion_tokens_details": {
+            "thinking_tokens": 24,
+            "reasoning_tokens": 24
+          }
+        },
+        "output_cache_tokens": null
+      },
+      {
+        "call_index": 17,
+        "started_at": "2026-09-26T13:47:28.746Z",
+        "usage": {
+          "input": 88,
+          "cache_read": 8331,
+          "cache_write": 0,
+          "output": 20,
+          "reasoning": 0
+        },
+        "cost": 0.00055026,
+        "duration_ms": 718,
+        "status": "success",
+        "finished_at": "2026-09-26T13:47:29.464Z",
+        "raw_usage": {
+          "prompt_tokens": 8419,
+          "completion_tokens": 20,
+          "prompt_tokens_details": {
+            "cached_tokens": 8331
+          },
+          "cache_creation_input_tokens": 0,
+          "completion_tokens_details": {
+            "reasoning_tokens": 0
+          }
+        },
+        "output_cache_tokens": null
+      },
+      {
+        "call_index": 18,
+        "started_at": "2026-09-26T13:50:29.934Z",
+        "usage": {
+          "input": 113,
+          "cache_read": 8419,
+          "cache_write": 0,
+          "output": 52,
+          "reasoning": 23
+        },
+        "cost": 0.00060144,
+        "duration_ms": 1859,
+        "status": "success",
+        "finished_at": "2026-09-26T13:50:31.793Z",
+        "raw_usage": {
+          "prompt_tokens": 8532,
+          "completion_tokens": 52,
+          "prompt_tokens_details": {
+            "cached_tokens": 8419
+          },
+          "cache_creation_input_tokens": 0,
+          "completion_tokens_details": {
+            "thinking_tokens": 23,
+            "reasoning_tokens": 23
+          }
+        },
+        "output_cache_tokens": null
+      },
+      {
+        "call_index": 19,
+        "started_at": "2026-09-26T13:50:36.835Z",
+        "usage": {
+          "input": 87,
+          "cache_read": 8532,
+          "cache_write": 0,
+          "output": 20,
+          "reasoning": 0
+        },
+        "cost": 0.0005620199999999999,
+        "duration_ms": 797,
+        "status": "success",
+        "finished_at": "2026-09-26T13:50:37.632Z",
+        "raw_usage": {
+          "prompt_tokens": 8619,
+          "completion_tokens": 20,
+          "prompt_tokens_details": {
+            "cached_tokens": 8532
+          },
+          "cache_creation_input_tokens": 0,
+          "completion_tokens_details": {
+            "reasoning_tokens": 0
+          }
+        },
+        "output_cache_tokens": null
+      },
+      {
+        "call_index": 20,
+        "started_at": "2026-09-26T13:53:38.070Z",
+        "usage": {
+          "input": 113,
+          "cache_read": 8619,
+          "cache_write": 0,
+          "output": 35,
+          "reasoning": 15
+        },
+        "cost": 0.00059304,
+        "duration_ms": 2147,
+        "status": "success",
+        "finished_at": "2026-09-26T13:53:40.217Z",
+        "raw_usage": {
+          "prompt_tokens": 8732,
+          "completion_tokens": 35,
+          "prompt_tokens_details": {
+            "cached_tokens": 8619
+          },
+          "cache_creation_input_tokens": 0,
+          "completion_tokens_details": {
+            "thinking_tokens": 15,
+            "reasoning_tokens": 15
+          }
+        },
+        "output_cache_tokens": null
+      },
+      {
+        "call_index": 21,
+        "started_at": "2026-09-26T13:53:53.595Z",
+        "usage": {
+          "input": 3355,
+          "cache_read": 4835,
+          "cache_write": 0,
+          "output": 653,
+          "reasoning": 590
+        },
+        "cost": 0.0020802,
+        "duration_ms": 2740,
+        "status": "success",
+        "finished_at": "2026-09-26T13:53:56.335Z",
+        "raw_usage": {
+          "prompt_tokens": 8190,
+          "completion_tokens": 653,
+          "prompt_tokens_details": {
+            "cached_tokens": 4835
+          },
+          "cache_creation_input_tokens": 0,
+          "completion_tokens_details": {
+            "thinking_tokens": 590,
+            "reasoning_tokens": 590
+          }
+        },
+        "output_cache_tokens": null
+      },
+      {
+        "call_index": 22,
+        "started_at": "2026-09-26T13:53:56.891Z",
+        "usage": {
+          "input": 1221,
+          "cache_read": 8190,
+          "cache_write": 0,
+          "output": 358,
+          "reasoning": 317
+        },
+        "cost": 0.0012873,
+        "duration_ms": 1521,
+        "status": "success",
+        "finished_at": "2026-09-26T13:53:58.412Z",
+        "raw_usage": {
+          "prompt_tokens": 9411,
+          "completion_tokens": 358,
+          "prompt_tokens_details": {
+            "cached_tokens": 8190
+          },
+          "cache_creation_input_tokens": 0,
+          "completion_tokens_details": {
+            "thinking_tokens": 317,
+            "reasoning_tokens": 317
+          }
+        },
+        "output_cache_tokens": null
+      },
+      {
+        "call_index": 23,
+        "started_at": "2026-09-26T13:53:58.810Z",
+        "usage": {
+          "input": 4150,
+          "cache_read": 9411,
+          "cache_write": 0,
+          "output": 809,
+          "reasoning": 684
+        },
+        "cost": 0.00278046,
+        "duration_ms": 5713,
+        "status": "success",
+        "finished_at": "2026-09-26T13:54:04.523Z",
+        "raw_usage": {
+          "prompt_tokens": 13561,
+          "completion_tokens": 809,
+          "prompt_tokens_details": {
+            "cached_tokens": 9411
+          },
+          "cache_creation_input_tokens": 0,
+          "completion_tokens_details": {
+            "thinking_tokens": 684,
+            "reasoning_tokens": 684
+          }
+        },
+        "output_cache_tokens": null
+      },
+      {
+        "call_index": 24,
+        "started_at": "2026-09-26T13:54:05.187Z",
+        "usage": {
+          "input": 1326,
+          "cache_read": 9802,
+          "cache_write": 0,
+          "output": 71,
+          "reasoning": 26
+        },
+        "cost": 0.00107112,
+        "duration_ms": 855,
+        "status": "success",
+        "finished_at": "2026-09-26T13:54:06.042Z",
+        "raw_usage": {
+          "prompt_tokens": 11128,
+          "completion_tokens": 71,
+          "prompt_tokens_details": {
+            "cached_tokens": 9802
+          },
+          "cache_creation_input_tokens": 0,
+          "completion_tokens_details": {
+            "thinking_tokens": 26,
+            "reasoning_tokens": 26
+          }
+        },
+        "output_cache_tokens": null
+      }
+    ],
+    "model_rounds": 24,
+    "model_steps": 24,
+    "retry_count": 0,
+    "error_kind": "worker_exit",
+    "attempt_number": 1,
+    "attempt_directory": "Google Map--26",
+    "judge_mode": "reference",
+    "metrics": {
+      "metrics_version": 1,
+      "input_tokens": 173603,
+      "output_tokens": 4041,
+      "uncached_input_tokens": 28836,
+      "cache_hit_tokens": 144767,
+      "cache_miss_tokens": 28836,
+      "cache_write_tokens": 0,
+      "output_cache_tokens": null,
+      "reasoning_tokens": 3014,
+      "total_tokens": 177644,
+      "cache_hit_rate": 0.8338968796622178,
+      "agent_cost_usd": 0.02218602,
+      "judge_cost_usd": 0.00062808,
+      "total_cost_usd": 0.0228141,
+      "observed_cost_usd": 0.0228141,
+      "agent_duration_ms": 620800,
+      "judge_duration_ms": 2945,
+      "active_duration_ms": 623745
+    },
+    "judge_result": {
+      "task_id": "Google Map--26",
+      "mode": "reference",
+      "rubric_version": "opencode-browser-856867996e73f7dcc5e39827bf2af7555bd63d40-judge-prompt.md",
+      "pass": false,
+      "reason": "The agent timed out with an empty final_answer, failing to print the map as PDF or summarize any information about Los Angeles on the map.",
+      "status": "judged",
+      "model": "MiniMax-M3",
+      "request_count": 1,
+      "usage_missing_calls": 0,
+      "unpriced_calls": 0,
+      "tokens": {
+        "input": 1460,
+        "output": 152,
+        "cache_read": 128,
+        "cache_write": 0,
+        "reasoning": 0
+      },
+      "tokens_observed": {
+        "input": 1460,
+        "output": 152,
+        "cache_read": 128,
+        "cache_write": 0,
+        "reasoning": 0
+      },
+      "usage_metrics": {
+        "input_tokens": 1588,
+        "output_tokens": 152,
+        "uncached_input_tokens": 1460,
+        "cache_hit_tokens": 128,
+        "cache_miss_tokens": 1460,
+        "cache_write_tokens": 0,
+        "output_cache_tokens": null,
+        "reasoning_tokens": 0,
+        "total_tokens": 1740,
+        "cache_hit_rate": 0.08060453400503778
+      },
+      "usage_observed": {
+        "input_tokens": 1588,
+        "output_tokens": 152,
+        "uncached_input_tokens": 1460,
+        "cache_hit_tokens": 128,
+        "cache_miss_tokens": 1460,
+        "cache_write_tokens": 0,
+        "output_cache_tokens": null,
+        "reasoning_tokens": 0,
+        "total_tokens": 1740,
+        "cache_hit_rate": 0.08060453400503778
+      },
+      "cost": 0.00062808,
+      "cost_observed": 0.00062808,
+      "model_duration_ms": 2936,
+      "requests": 1,
+      "model_calls": [
+        {
+          "call_index": 1,
+          "started_at": "2026-09-26T13:56:04.782Z",
+          "usage": {
+            "input": 1460,
+            "cache_read": 128,
+            "cache_write": 0,
+            "output": 152,
+            "reasoning": 0
+          },
+          "cost": 0.00062808,
+          "status": "success",
+          "output_cache_tokens": null,
+          "raw_usage": {
+            "prompt_tokens": 1588,
+            "completion_tokens": 152,
+            "prompt_tokens_details": {
+              "cached_tokens": 128
+            },
+            "cache_creation_input_tokens": 0,
+            "completion_tokens_details": {
+              "reasoning_tokens": 0
+            }
+          },
+          "finished_at": "2026-09-26T13:56:07.718Z",
+          "duration_ms": 2936
+        }
+      ],
+      "started_at": "2026-09-26T13:56:04.782Z",
+      "finished_at": "2026-09-26T13:56:07.727Z",
+      "duration_ms": 2945,
+      "prompt_sha256": "bcdf403484823037eaeb6cec7918b966fe90ee31a30bc8d69094d2ff42747ccf"
+    },
+    "evaluation_finished_at": "2026-09-26T13:56:07.727Z"
+  }
+}
