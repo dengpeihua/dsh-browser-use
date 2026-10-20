@@ -1,3 +1,4 @@
+import { hostMessage } from "./host-compat.js"
 /** DeepSeek Harness bundle entry for the native Chromium browser Agent tools. */
 
 import type { Context } from "@deepseek-ai/cordis"
@@ -58,7 +59,7 @@ export const apply = (ctx: Context, config: ConfigInput = {}) => {
     if (decision.kind === "enter") {
       if (accessFailureCount(agent.session, evidenceTurn(agent.session)) >= 3) throw new Error("BROWSER_ACCESS_BLOCKED: Repeated website access failures; stop this task and report the limitation.")
       const meter = ctx.get("tokenMeter")
-      runtime.prepareContext(agent.session, meter ? message => meter.estimateMessage(message) : undefined)
+      runtime.prepareContext(agent.session, meter ? message => meter.estimateMessage(hostMessage(agent.session, message)) : undefined)
     }
     return decision
   })

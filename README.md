@@ -79,6 +79,8 @@ npm install --global pnpm
 
 ### 从桌面端插件市场安装
 
+已验证 DSH `0.2.1-rc.2` 桌面宿主，并保留 `0.1.2-alpha.2` 支持；插件会适配两版的工具结果消息和上下文替换接口。
+
 搜索 `dsh-browser-use`，确认仓库为 `dengpeihua/dsh-browser-use` 后安装。仓库附带预构建的 `lib/`，pnpm 无需在安装时编译本插件或授权其构建脚本。安装仍需联网下载运行依赖。
 
 评测归档 `output/` 保留在 Git 仓库中，通过 `.gitattributes` 排除在源码下载包之外，避免安装插件时下载数 GB 的评测记录；需要完整记录时请浏览 GitHub 或使用 `git clone`。
@@ -535,6 +537,8 @@ npm install --global pnpm
 ```
 
 ### Install the current local build
+
+The plugin supports the verified DSH `0.2.1-rc.2` desktop host and `0.1.2-alpha.2`. It adapts tool-result messages and context-replacement bounds to each host contract.
 
 The package has not been published to npm yet. Obtain this repository's source, build a standard npm tarball, and add it to the DSH `web` profile:
 

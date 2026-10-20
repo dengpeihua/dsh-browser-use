@@ -1,9 +1,10 @@
+import { appendBrowserEvent } from "./host-compat.js"
 /** Host-side context policy: append replayable surface replacements before model requests. */
 import type { Session, SessionEvent } from "@deepseek-ai/dsh-session"
 import { createUserMessage, type Message } from "@deepseek-ai/dsh-llm"
 import type {} from "@deepseek-ai/dsh-compaction"
 import type { BrowserContextMeta, BrowserObservation } from "./browser-observation.js"
-import { browserObservationId } from "./browser-observation.js"
+import { browserObservationId, browserSessionEvents } from "./browser-observation.js"
 import { TOOL_IDS } from "./tool-schemas.js"
 
 type Result = SessionEvent<"tool/result">
@@ -41,15 +42,14 @@ export function prepareBrowserContext(session: Session, runtimeId?: string, esti
   // The host's bounded token projections need an adjacent price for every replacement.
   const priceReplacement = (seq: number, message: Message) => {
     if (!estimateMessage) return
-    session.append("compaction/prune", {
+    appendBrowserEvent(session, "compaction/prune", {
       shadowedRange: { start: seq, end: seq }, shadowedSeqs: [seq],
       shadowedTokenCount: estimateMessage(message),
     })
   }
   const entries: Entry[] = []
   // Current hosts expose snapshots; the pinned 0.1.2 host exposes the events getter.
-  const reader = session as Session & { snapshotEvents?: () => readonly SessionEvent[] }
-  const events = typeof reader.snapshotEvents === "function" ? reader.snapshotEvents() : session.events
+  const events = browserSessionEvents(session)
   const browserCalls = new Set(events.flatMap(event => event.type === "tool/call" && (TOOL_IDS as readonly string[]).includes(event.data.name) ? [event.data.callId] : []))
   for (const seq of session.surface.nodes) {
     const event = events[seq]
@@ -85,7 +85,7 @@ export function prepareBrowserContext(session: Session, runtimeId?: string, esti
   if (needsSnapshot || existingRecovery) {
     if (existingRecovery?.data.content.length !== 1 || existingRecovery.data.content[0]?.type !== "text" || existingRecovery.data.content[0].text !== recoveryText) {
       if (existingRecovery) priceReplacement(existingRecovery.seq, existingRecovery.data)
-      session.append("user/message", createUserMessage({
+      appendBrowserEvent(session, "user/message", createUserMessage({
         source: { kind: "plugin", plugin: RECOVERY_SOURCE, form: "snapshot", sections: [{ name: "browser-state", text: recoveryText }] },
         content: [{ type: "text", text: recoveryText }],
       }), existingRecovery ? {
@@ -156,7 +156,7 @@ export function prepareBrowserContext(session: Session, runtimeId?: string, esti
     if (!changed) continue
     if (recovered) report.recoveredBaselines++
     priceReplacement(event.seq, event.data.message)
-    session.append("tool/result", {
+    appendBrowserEvent(session, "tool/result", {
       ...event.data,
       message: { ...event.data.message, content: [{ ...result, content }] },
     }, { surfaceOp: { op: "replace", start: event.seq, end: event.seq }, sourceEventSeqs: [event.seq] })

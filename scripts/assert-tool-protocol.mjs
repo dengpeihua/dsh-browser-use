@@ -4,6 +4,10 @@ import assert from "node:assert/strict"
 export function assertToolProtocol(messages) {
   const pending = new Set()
   for (const message of messages) {
+    if (message.role === "tool") {
+      assert.ok(pending.delete(message.toolCallId), `Unexpected tool result: ${message.toolCallId}`)
+      continue
+    }
     if (message.role === "assistant") {
       assert.equal(pending.size, 0, "Assistant message interrupts pending tool results")
       for (const block of message.content) {

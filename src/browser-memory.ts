@@ -1,3 +1,4 @@
+import { appendBrowserEvent } from "./host-compat.js"
 /** Session-local task facts, grounded in archived observations and replayed independently of DOM retention. */
 import { createHash } from "node:crypto"
 import { createUserMessage, type Message, type UserMessage } from "@deepseek-ai/dsh-llm"
@@ -144,7 +145,7 @@ export function recordBrowserFacts(session: Session, input: unknown, deferContex
     // During a tool call, the host commits deferred contexts after all tool results.
     // Appending here would split tool_use from tool_result on Messages API providers.
     if (deferContext) deferContext(message)
-    else session.append("user/message", message, {
+    else appendBrowserEvent(session, "user/message", message, {
       surfaceOp: "append", sourceEventSeqs: [...new Set(reviews.map(r => archive.get(r.observationId)!.source.eventSeq))],
     })
   }
@@ -211,10 +212,10 @@ export function prepareBrowserMemory(session: Session, estimateMessage?: (messag
   for (const seq of session.surface.nodes) {
     const event = originalEvents[seq]
     if (!event || !factRecord(event) || event.type !== "user/message") continue
-    if (estimateMessage) session.append("compaction/prune", {
+    if (estimateMessage) appendBrowserEvent(session, "compaction/prune", {
       shadowedRange: { start: seq, end: seq }, shadowedSeqs: [seq], shadowedTokenCount: estimateMessage(event.data),
     })
-    session.append("user/message", createUserMessage({
+    appendBrowserEvent(session, "user/message", createUserMessage({
       source: { kind: "plugin", plugin: FACT_SOURCE, form: "notice", summary: "Browser task facts stored" },
       content: [{ type: "text", text: "[Browser task facts stored; use the task memory snapshot or browser_recall.]" }],
     }), { surfaceOp: { op: "replace", start: seq, end: seq }, sourceEventSeqs: [seq] })
@@ -233,10 +234,10 @@ export function prepareBrowserMemory(session: Session, estimateMessage?: (messag
   const events = browserSessionEvents(session)
   const previous = session.surface.nodes.map(seq => events[seq]).find(e => e?.type === "user/message" && e.data.source.kind === "plugin" && e.data.source.plugin === MEMORY_SOURCE)
   if (previous?.type === "user/message" && previous.data.content.length === 1 && previous.data.content[0]?.type === "text" && previous.data.content[0].text === text) return
-  if (previous?.type === "user/message" && estimateMessage) session.append("compaction/prune", {
+  if (previous?.type === "user/message" && estimateMessage) appendBrowserEvent(session, "compaction/prune", {
     shadowedRange: { start: previous.seq, end: previous.seq }, shadowedSeqs: [previous.seq], shadowedTokenCount: estimateMessage(previous.data),
   })
-  session.append("user/message", createUserMessage({
+  appendBrowserEvent(session, "user/message", createUserMessage({
     source: { kind: "plugin", plugin: MEMORY_SOURCE, form: "snapshot", sections: [{ name: "browser-task-memory", text }] }, content: [{ type: "text", text }],
   }), previous ? { surfaceOp: { op: "replace", start: previous.seq, end: previous.seq }, sourceEventSeqs: [previous.seq] } : { surfaceOp: "append" })
 }

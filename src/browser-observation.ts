@@ -1,3 +1,4 @@
+import { legacyEvent } from "./host-compat.js"
 import { createHash } from "node:crypto"
 import type { Session, SessionEvent } from "@deepseek-ai/dsh-session"
 
@@ -27,7 +28,7 @@ export function browserObservationId(observation: Pick<BrowserObservation, "runt
 
 export function browserSessionEvents(session: Session): readonly SessionEvent[] {
   const reader = session as Session & { snapshotEvents?: () => readonly SessionEvent[] }
-  return typeof reader.snapshotEvents === "function" ? reader.snapshotEvents() : session.events
+  return typeof reader.snapshotEvents === "function" ? reader.snapshotEvents().map(legacyEvent) : session.events
 }
 
 export interface BrowserContextMeta {

@@ -12,6 +12,9 @@ import TokenMeter from "@deepseek-ai/dsh-token-meter"
 import * as browserPlugin from "../lib/index.js"
 import { assertToolProtocol } from "./assert-tool-protocol.mjs"
 
+const sessionEvents = session => typeof session.snapshotEvents === "function" ? session.snapshotEvents() : session.events
+const resultFailed = event => event.data.message.role === "tool" ? event.data.message.isError : event.data.message.content[0].isError
+
 const html = `<title>Host browser test</title><style>p{margin:0;line-height:16px}</style><main>${Array.from({ length: 40 }, (_, i) => `<p>Stable row ${i}</p>`).join("")}<svg width="64" height="32" aria-label="chart"><rect width="64" height="32" fill="navy"/></svg></main>`
 const url = `data:text/html,${encodeURIComponent(html)}`
 const actions = [
@@ -83,16 +86,16 @@ try {
   const browserFiber = ctx.plugin(browserPlugin, { approvalMode: "off", headless: true, maxContextDeltas: 2 })
   await browserFiber
   disposeBrowser = () => browserFiber.dispose()
-  const agent = ctx.agentLoop.create(SessionId("host-browser-smoke"), { provider: "fixture", model: "fixture" })
+  const agent = await ctx.agentLoop.create(SessionId("host-browser-smoke"), { provider: "fixture", model: "fixture" })
   agent.followup(createUserMessage({ source: { kind: "user" }, content: [{ type: "text", text: "Inspect the local fixture and preserve extracted facts." }] }))
   await agent.whenIdle()
-  assert.equal(adapter.requests.length, actions.length + 1, JSON.stringify(agent.session.events.slice(-4)))
-  const allResults = agent.session.events.filter(e => e.type === "tool/result" && e.surfaceOp === "append")
-  assert.ok(!agent.session.events.some(e => e.type === "tool/call" && ["browser_define_task", "browser_record_facts", "browser_check_coverage"].includes(e.data.name)))
-  assert.ok(allResults.every(e => !e.data.message.content[0].isError), JSON.stringify(allResults))
+  assert.equal(adapter.requests.length, actions.length + 1, JSON.stringify(sessionEvents(agent.session).slice(-4)))
+  const allResults = sessionEvents(agent.session).filter(e => e.type === "tool/result" && e.surfaceOp === "append")
+  assert.ok(!sessionEvents(agent.session).some(e => e.type === "tool/call" && ["browser_define_task", "browser_record_facts", "browser_check_coverage"].includes(e.data.name)))
+  assert.ok(allResults.every(e => !resultFailed(e)), JSON.stringify(allResults))
   const results = allResults.filter(e => e.data.meta?.browserContext)
   assert.equal(results.length, actions.length)
-  assert.ok(results.every(e => !e.data.message.content[0].isError), JSON.stringify(results))
+  assert.ok(results.every(e => !resultFailed(e)), JSON.stringify(results))
   const observed = results.filter(e => e.data.meta?.browserContext?.observation)
   assert.equal(observed[0].data.meta.browserContext.observation.mode, "full")
   assert.equal(observed[1].data.meta.browserContext.observation.mode, "incremental")
@@ -105,19 +108,19 @@ try {
   assert.match(JSON.stringify(adapter.requests.at(-1)), /fact: selected item 42/)
   assert.match(JSON.stringify(adapter.requests.at(-1)), /runtime is no longer live/)
   assert.equal(imageCount, 2)
-  assert.ok(agent.session.events.some(e => typeof e.surfaceOp === "object"))
-  const replay = Session.create(agent.id, JSON.parse(JSON.stringify(agent.session.events)))
+  assert.ok(sessionEvents(agent.session).some(e => typeof e.surfaceOp === "object"))
+  const replay = Session.create(agent.id, JSON.parse(JSON.stringify(sessionEvents(agent.session))))
   assert.deepEqual(replay.deriveMessages(), agent.session.deriveMessages())
-  assert.ok(agent.session.events.some(e => e.type === "compaction/prune"), "browser replacements price the old content for host token projections")
+  assert.ok(sessionEvents(agent.session).some(e => e.type === "compaction/prune"), "browser replacements price the old content for host token projections")
   const { logRevision: replayRevision, ...replayMeter } = ctx.tokenMeter.measure(replay)
   const { logRevision: liveRevision, ...liveMeter } = ctx.tokenMeter.measure(agent.session)
   // Revision is a live-object cache key; replay must reproduce prices and nodes.
   assert.deepEqual(replayMeter, liveMeter)
   const breakdown = ctx.sessionProjections.snapshot(agent.session, ["contextBreakdown"]).values.contextBreakdown
-  assert.equal(breakdown.messageTokens, agent.session.deriveMessages().reduce((sum, message) => sum + ctx.tokenMeter.estimateMessage(message), 0))
+  assert.equal(breakdown.messageTokens, agent.session.deriveMessages().filter(message => message.role !== "system").reduce((sum, message) => sum + ctx.tokenMeter.estimateMessage(message), 0))
   const otherAdapter = new ScriptedAdapter([["browser_start", { url: "data:text/html,<title>Independent session</title><h1>Other agent</h1>" }]])
   ctx.llm.registerAdapter(["other"], otherAdapter)
-  const other = ctx.agentLoop.create(SessionId("host-browser-other"), { provider: "other", model: "fixture" })
+  const other = await ctx.agentLoop.create(SessionId("host-browser-other"), { provider: "other", model: "fixture" })
   other.followup(createUserMessage({ source: { kind: "user" }, content: [{ type: "text", text: "Open the other browser" }] }))
   await other.whenIdle()
   assert.equal(otherAdapter.requests.length, 2)

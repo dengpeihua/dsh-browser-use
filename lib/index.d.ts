@@ -434,15 +434,6 @@ declare function recallEvidence(session: Session, input: Record<string, unknown>
   total?: undefined;
 } | {
   [input.mode]: {
-    recordId: string;
-    fields: {
-      value: string | number | boolean | null;
-      sourceRef: SourceRef;
-      source: FactSource;
-      bundleId: string;
-      name: string;
-    }[];
-  }[] | {
     observationIds: undefined;
     observationCount: number;
     latestObservationId: string | undefined;
@@ -453,6 +444,15 @@ declare function recallEvidence(session: Session, input: Record<string, unknown>
     url: string;
     firstEventSeq: number;
     lastEventSeq: number;
+  }[] | {
+    recordId: string;
+    fields: {
+      value: string | number | boolean | null;
+      sourceRef: SourceRef;
+      source: FactSource;
+      bundleId: string;
+      name: string;
+    }[];
   }[];
   total: number;
   nextOffset: number | null;

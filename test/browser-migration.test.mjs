@@ -1,5 +1,6 @@
 import assert from "node:assert/strict"
 import test from "node:test"
+import { snapshotSession } from "./modern-session-fixture.mjs"
 import { EventEmitter } from "node:events"
 import { CDPClient, CDPTape, CDPStats, DomService, PageSettleMonitor, replayDomTape } from "../lib/diagnostics.js"
 import { apply, BrowserRuntime } from "../lib/index.js"
@@ -134,12 +135,7 @@ test("URL notices are session-scoped, deduplicated, clearable and work with snap
   let changes = [{ tabId: "tab0", lastUrl: "https://a.test", currentUrl: "https://b.test" }]
   manager.detectStateChanges = () => changes
   try {
-    const host = new Proxy(first, { get(target, key) {
-      if (key === "events") throw new Error("snapshot-only")
-      if (key === "snapshotEvents") return () => first.events
-      const value = Reflect.get(target, key)
-      return typeof value === "function" ? value.bind(target) : value
-    } })
+    const host = snapshotSession(first)
     runtime.prepareContext(host)
     const length = first.events.length
     runtime.prepareContext(host)

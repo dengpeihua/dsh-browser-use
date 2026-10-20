@@ -1,4 +1,5 @@
 import test from "node:test"
+import { snapshotSession } from "./modern-session-fixture.mjs"
 import assert from "node:assert/strict"
 import { createUserMessage } from "@deepseek-ai/dsh-llm"
 import { prepareBrowserContext } from "../lib/index.js"
@@ -25,18 +26,6 @@ function append(session, o, extra = {}) {
 }
 const texts = session => JSON.stringify(session.deriveMessages())
 const fresh = () => Session.create(SessionId("context-test"))
-
-// Exercise the current host API while retaining the published host's real Session behavior.
-function snapshotSession(session) {
-  return new Proxy(session, {
-    get(target, key) {
-      if (key === "events") throw new Error("Current hosts do not expose Session.events")
-      if (key === "snapshotEvents") return () => [...sessionEvents(target)]
-      const value = Reflect.get(target, key, target)
-      return typeof value === "function" ? value.bind(target) : value
-    },
-  })
-}
 
 test("a fresh snapshot-only host session prepares its first request without browser history", () => {
   const session = fresh()

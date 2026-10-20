@@ -1,3 +1,4 @@
+import { appendBrowserEvent } from "./host-compat.js"
 /** Replayable visit bundles, source references and turn-scoped field coverage. */
 import { createHash } from "node:crypto"
 import { createUserMessage, type UserMessage } from "@deepseek-ai/dsh-llm"
@@ -140,7 +141,7 @@ function entries(session: Session): EvidenceEvent[] {
 function save(session: Session, payload: EvidenceEvent, defer?: (m: UserMessage) => void): void {
   const message = createUserMessage({ source: { kind: "plugin", plugin: SOURCE, form: "notice", summary: "Browser evidence updated" }, content: [{ type: "text", text: JSON.stringify({ version: 1, payload }) }] })
   if (defer) defer(message)
-  else session.append("user/message", message, { surfaceOp: "append" })
+  else appendBrowserEvent(session, "user/message", message, { surfaceOp: "append" })
 }
 export function evidenceTask(session: Session, turn = evidenceTurn(session)): EvidenceTask | undefined {
   return entries(session).flatMap(e => e.kind === "task" && e.task.turn === turn ? [e.task] : []).at(-1)
