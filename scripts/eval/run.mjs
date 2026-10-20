@@ -31,7 +31,7 @@ const { values: flags } = parseArgs({ options: {
   headed: { type: "boolean" }, help: { type: "boolean" },
 } })
 if (flags.help) {
-  console.log("Defaults: headed Chromium, 600000 ms per task, opencode-compatible reference judge. --resume retries service failures and rejudges unresolved completed answers. --retry-from OLD_RUN requires a new --out and preserves prior results with mixed provenance.")
+  console.log("Defaults: output/evals/webvoyager, headed Chromium, 600000 ms per task, opencode-compatible reference judge. --resume retries service failures and rejudges unresolved completed answers. --retry-from OLD_RUN requires a new --out and preserves prior results with mixed provenance.")
   console.log("Usage: npm run eval -- [--data assets/benchmark/webvoyager-126.json] [--out output/evals/NAME] [--site allrecipes|apple|amazon] [--ids Allrecipes--0,Apple--0,Amazon--0] [--count N] [--concurrency 1] [--timeout 600000] [--preflight-timeout 60000] [--max-rounds 50] [--reasoning-effort off|minimal|low|medium|high|xhigh|max] [--judge reference|evidence|none] [--resume] [--judge-only] [--backfill-missing] [--rerun-ids Allrecipes--30] [--new-rerun] [--dry-run] [--headed]\nReference mode follows the pinned opencode-browser judge-prompt.md rubric, including grading error/timeout results when they contain an answer; evidence mode retains this project's stricter observation-backed rubric for historical compatibility. Reads the active DSH model/key/reasoning effort from settings and credential refs; optional EVAL_* environment overrides. MiniMax uses the DSH Anthropic protocol mapping. Every new run uses fresh per-task Chromium. Resume requires identical dataset/config/code. Judge-only reuses saved attempts without re-running browsers. Backfill-missing extends an existing run only after protecting and verifying every prior trajectory. Rerun-ids is an owner-requested replacement that preserves the prior attempt and updates the current result view; new-rerun explicitly starts another replacement request for the same IDs.")
   process.exit(0)
 }
@@ -107,12 +107,12 @@ if (flags["dry-run"]) {
     summarize(rows, tasks)
     recoveryPlan = buildRecoveryPlan(tasks, rows, flags.judge)
   }
-  console.log(JSON.stringify({ total: tasks.length, ids: tasks.map(t => t.task_id), settings, reasoning_effort: reasoningEffortOverride ?? "from DSH settings", judge: flags.judge, backfill: backfill ? { protected: backfill.protected, missing_task_ids: backfill.missing_task_ids, pending: backfill.pending } : undefined, recovery_plan: recoveryPlan, note: "Read-only plan; no credentials loaded, provider request, browser launch, or output mutation" }, null, 2))
+  console.log(JSON.stringify({ output_directory: resolve(root, flags.out || "output/evals/webvoyager"), total: tasks.length, ids: tasks.map(t => t.task_id), settings, reasoning_effort: reasoningEffortOverride ?? "from DSH settings", judge: flags.judge, backfill: backfill ? { protected: backfill.protected, missing_task_ids: backfill.missing_task_ids, pending: backfill.pending } : undefined, recovery_plan: recoveryPlan, note: "Read-only plan; no credentials loaded, provider request, browser launch, or output mutation" }, null, 2))
   process.exit(0)
 }
 const config = loadConfig({ ...process.env, ...(reasoningEffortOverride ? { EVAL_REASONING_EFFORT: reasoningEffortOverride } : {}) })
 const pricing = { currency: "USD", unit: "per million tokens", basis: "configured or historical list-price estimate, not an invoice", agent: config.agent.pricing ?? (config.agent.model === "MiniMax-M3" ? DEFAULT_PRICING : null), judge: config.judge.pricing ?? (config.judge.model === "MiniMax-M3" ? DEFAULT_PRICING : null) }
-const directory = resolve(root, flags.out || `output/evals/${new Date().toISOString().replace(/[:.]/g, "-")}`)
+const directory = resolve(root, flags.out || "output/evals/webvoyager")
 const directoryExisted = existsSync(directory)
 if (flags["retry-from"] && directoryExisted) throw new Error("--retry-from output must be a new directory")
 const releaseRunLock = acquireRunLock(directory)

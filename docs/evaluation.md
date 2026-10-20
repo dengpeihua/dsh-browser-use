@@ -4,6 +4,9 @@
 
 ## 完整评测结果
 
+未指定 `--out` 时，评测默认输出到 `output/evals/webvoyager`；仍可用 `--out` 指定其他目录。若目录已有评测记录，程序会拒绝直接覆盖；继续旧运行须显式指定 `--out` 和 `--resume`，并通过原有的数据、配置与代码一致性检查。
+
+
 WebVoyager 126 tasks / 3 站点：成功率 88.9%（AllRecipes 86.7%、Apple 90.5%、Amazon 89.7%），平均 27.1 步、176.3s。
 
 | 站点 | 题数 | 通过 | 成功率 |
@@ -15,7 +18,7 @@ WebVoyager 126 tasks / 3 站点：成功率 88.9%（AllRecipes 86.7%、Apple 90.
 
 我们用 `MiniMax-M3` High、`--concurrency 1`、`--headed --timeout 600000 --judge reference` 运行并重新评分。原 109 题轨迹被保护不重跑，随后按 126 题数据集原序补齐 17 题，因此这是混合时间批次，而不是一次全新受控的 126 题运行。重评分前已删除旧 evidence Judge 的结果、日志、费用、耗时和汇总；最终 126 题全部由 LLM-as-a-Judge 依照 `judge-prompt.md` 判定，包括 11 个 `step_limit` 结果。`missing=0`、`unjudged=0`，每题均保留 `session.json` 和非空 `trace.ndjson`。
 
-当前 126 条结果的 Agent 成本估算为 $12.126323，Judge 为 $0.243535，合计 $12.369858；126 题用量均有记录。另有 4 个被替换的历史 Agent attempt，其已观测成本 $0.360453 单独保留，不计入当前结果总额。这些仍是配置单价下的 USD 等价估算，不是 Token Plan 实际账单。可读报告位于 `output/evals/webvoyager-109-20260916-concurrency1/report.md`；目录名保留历史名称，实际任务数以 manifest 的 126 题为准。
+当前 126 条结果的 Agent 成本估算为 $12.126323，Judge 为 $0.243535，合计 $12.369858；126 题用量均有记录。另有 4 个被替换的历史 Agent attempt，其已观测成本 $0.360453 单独保留，不计入当前结果总额。这些仍是配置单价下的 USD 等价估算，不是 Token Plan 实际账单。该旧批次归档已移除；当前评测归档位于 `output/evals/webvoyager/`，最新统计见其 `summary.json`。
 
 ## 参考结果核查
 
@@ -43,7 +46,7 @@ npm run eval:test
 npm run eval:smoke
 npm run eval -- --dry-run --reasoning-effort high --headed --timeout 600000 --judge reference
 npm run eval -- --out output/evals/pilot --ids Allrecipes--0,Apple--0,Amazon--0 --reasoning-effort high --concurrency 1 --headed --timeout 600000 --judge reference
-npm run eval -- --out output/evals/webvoyager-126 --reasoning-effort high --concurrency 1 --headed --timeout 600000 --judge reference
+npm run eval -- --out output/evals/webvoyager --reasoning-effort high --concurrency 1 --headed --timeout 600000 --judge reference
 ```
 
 `eval:smoke` 使用真实浏览器和 DSH AgentLoop，但模型与 Judge 是确定性测试替身，不调用收费 API，不计入 benchmark。普通 `eval` 使用 DSH 当前配置中的真实模型。
@@ -59,8 +62,8 @@ MiniMax 五小时额度耗尽时，失败任务进入 `recovery.json` 待重测�
 额度恢复后，用原来的选题、模型和运行参数加 `--resume`；可先加 `--dry-run` 查看重测顺序（不调用模型）：
 
 ```powershell
-npm run eval -- --out output/evals/webvoyager-126 --reasoning-effort high --concurrency 1 --headed --timeout 600000 --judge reference --resume --dry-run
-npm run eval -- --out output/evals/webvoyager-126 --reasoning-effort high --concurrency 1 --headed --timeout 600000 --judge reference --resume
+npm run eval -- --out output/evals/webvoyager --reasoning-effort high --concurrency 1 --headed --timeout 600000 --judge reference --resume --dry-run
+npm run eval -- --out output/evals/webvoyager --reasoning-effort high --concurrency 1 --headed --timeout 600000 --judge reference --resume
 ```
 
 程序保存恢复状态后退出，不自行固定睡眠五小时；具体刷新时刻以提供方为准。代码更新后的旧运行请使用下文的 `--retry-from` 新目录恢复，仍会重测额度失败项并保留其他结果。
@@ -172,11 +175,11 @@ npm run eval:backfill -- --out output/evals/OLD_RUN --data assets/benchmark/webv
 
 ```powershell
 # 普通中断续跑：参数、代码、模型与原运行完全一致，跳过已完成题
-npm run eval -- --out output/evals/webvoyager-126 --reasoning-effort high --concurrency 1 --headed --timeout 600000 --judge reference --resume
+npm run eval -- --out output/evals/webvoyager --reasoning-effort high --concurrency 1 --headed --timeout 600000 --judge reference --resume
 # 完全更换评分规则：先清除旧 Judge 内容，再对包括 error/timeout 在内的全部已保存 Agent 结果重新评分
-npm run eval:reset-judge -- --out output/evals/webvoyager-126
-npm run eval:reset-judge -- --out output/evals/webvoyager-126 --execute
-npm run eval -- --out output/evals/webvoyager-126 --reasoning-effort high --judge-only --judge reference
+npm run eval:reset-judge -- --out output/evals/webvoyager
+npm run eval:reset-judge -- --out output/evals/webvoyager --execute
+npm run eval -- --out output/evals/webvoyager --reasoning-effort high --judge-only --judge reference
 ```
 
 `eval:reset-judge` 只删除 Judge 字段、`judge-*.ndjson`、旧评分 revisions 和评分派生汇总；先把 revision 链中最新的 Agent 尝试重建为不含 Judge 内容的新链，保留 `session.json`、`trace.ndjson`、截图、任务结果和尝试目录。重新评分写 `judged-reference.json`，并逐题提交到新的 `result-revisions/00000001.json` 等文件。修订带前一结果哈希，重启按序校验恢复当前视图。服务失败补跑写入 `TASK_ID/attempts/2/` 等新目录；子进程结果已落盘而父进程未登记时直接恢复该结果。Ctrl+C 会停止队列并清理子进程。不要同时向同一目录启动多个调度器。
