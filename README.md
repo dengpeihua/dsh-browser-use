@@ -81,6 +81,8 @@ npm install --global pnpm
 
 搜索 `dsh-browser-use`，确认仓库为 `dengpeihua/dsh-browser-use` 后安装。仓库附带预构建的 `lib/`，pnpm 无需在安装时编译本插件或授权其构建脚本。安装仍需联网下载运行依赖。
 
+评测归档 `output/` 保留在 Git 仓库中，通过 `.gitattributes` 排除在源码下载包之外，避免安装插件时下载数 GB 的评测记录；需要完整记录时请浏览 GitHub 或使用 `git clone`。
+
 若之前停在“正在安装”或出现 `ERR_PNPM_GIT_DEP_PREPARE_NOT_ALLOWED`，取消旧任务并刷新市场后重新安装，确保拉取当前提交。开发者修改源码后应运行 `npm run build`，将生成的 `lib/` 一起提交。
 
 ### 安装当前本地版本
