@@ -1,5 +1,5 @@
 import assert from "node:assert/strict"
-import { readFile, readdir } from "node:fs/promises"
+import { readFile, readdir, access } from "node:fs/promises"
 import { spawnSync } from "node:child_process"
 import test from "node:test"
 import { satisfies } from "semver"
@@ -46,6 +46,22 @@ test("package dependencies never point at a local Harness checkout", () => {
     for (const [name, specifier] of Object.entries(packageJson[field] ?? {})) {
       assert.doesNotMatch(specifier, /^(?:file:|link:|workspace:)/, `${field}.${name}`)
     }
+  }
+})
+
+test("GitHub installs ship every exported entry without a prepare hook", async () => {
+  assert.equal(packageJson.scripts.prepare, undefined)
+  const tracked = spawnSync("git", ["ls-files", "lib"], {
+    cwd: new URL("..", import.meta.url),
+    encoding: "utf8",
+  })
+  assert.equal(tracked.status, 0, tracked.stderr)
+  for (const entry of [packageJson.main, packageJson.types,
+    packageJson.exports["./diagnostics"].default,
+    packageJson.exports["./diagnostics"].types]) {
+    const relative = entry.replace(/^\.\//, "")
+    assert.ok(tracked.stdout.split(/\r?\n/).includes(relative), `${relative} must be tracked`)
+    await access(new URL(`../${relative}`, import.meta.url))
   }
 })
 

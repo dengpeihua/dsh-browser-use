@@ -24,6 +24,8 @@ This file is the operating guide for coding agents working in this repository. K
 
 Do not hand-edit `lib/`, packaged `.tgz` files, or dependency directories. They are generated artifacts. `output/` is ignored by default because it can be large and may contain page text, screenshots, model traces, or usage data.
 
+Commit the generated `lib/` alongside source changes after `npm run build`. GitHub marketplace installs need these prebuilt entry points to avoid pnpm's Git dependency build-approval gate. Keep `prepack` for maintainer packaging; do not add a `prepare` lifecycle script.
+
 ## Environment and common commands
 
 Use Node.js 22.19 or newer. npm is the primary package runner; `pnpm` is also needed by the installed-package verification path.

@@ -27,7 +27,7 @@
 
 我们将 `dsh-browser-plugin` 作为可独立安装的 [DeepSeek Harness（DSH）](https://github.com/deepseek-ai/deepseek-harness) Web profile 插件。它直接启动本机 Chrome 或 Chromium，通过 Puppeteer、Chrome DevTools Protocol（CDP）和增量 DOM 快照向 Agent 提供 16 个浏览器操作与 1 个归档回读工具。
 
-本仓库只包含浏览器插件自身的源码，不包含 DeepSeek Harness 源码，也不要求用户克隆 Harness 仓库。
+本仓库包含浏览器插件源码和预构建的 `lib/`，不包含 DeepSeek Harness 源码，也不要求用户克隆 Harness 仓库。
 
 本版本通过 DSH 的原生扩展点，把浏览器运行时与上下文策略接入 Agent Harness。这里的 Host 是 DSH 的 Agent/Session 运行时；插件仍可独立打包安装，不需要复制或修改 DSH 源码。
 
@@ -76,6 +76,12 @@ pnpm --version
 ```powershell
 npm install --global pnpm
 ```
+
+### 从桌面端插件市场安装
+
+搜索 `dsh-browser-use`，确认仓库为 `dengpeihua/dsh-browser-use` 后安装。仓库附带预构建的 `lib/`，pnpm 无需在安装时编译本插件或授权其构建脚本。安装仍需联网下载运行依赖。
+
+若之前停在“正在安装”或出现 `ERR_PNPM_GIT_DEP_PREPARE_NOT_ALLOWED`，取消旧任务并刷新市场后重新安装，确保拉取当前提交。开发者修改源码后应运行 `npm run build`，将生成的 `lib/` 一起提交。
 
 ### 安装当前本地版本
 
