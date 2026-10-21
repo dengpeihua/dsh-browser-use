@@ -479,6 +479,8 @@ Remove-Item Env:DSH_TEST_SESSION_MODULE
 
 感谢 [opencode-browser](https://github.com/oktton/opencode-browser) 项目的作者与贡献者，慷慨分享他们的代码与见解。
 
+感谢 [dsh-market](https://github.com/dsh-market/dsh-market) 项目的作者与贡献者，为 DeepSeek Harness 构建可视化插件市场，让用户能够便捷地发现、浏览和安装社区插件。
+
 ## 许可证
 
 本项目使用 [MIT License](LICENSE)。
@@ -753,6 +755,8 @@ Our opt-in `dom:regression` capture/verify workflow and the separate `/diagnosti
 ## 🙏 Acknowledgements
 
 We thank the authors and contributors of [opencode-browser](https://github.com/oktton/opencode-browser) for generously sharing their code and insights.
+
+We also thank the authors and contributors of [dsh-market](https://github.com/dsh-market/dsh-market) for building a visual plugin marketplace for DeepSeek Harness, making it easy to discover, browse, and install community plugins.
 
 ## License
 
