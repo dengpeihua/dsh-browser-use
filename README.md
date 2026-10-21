@@ -475,6 +475,10 @@ Remove-Item Env:DSH_TEST_SESSION_MODULE
 
 贡献流程见 [CONTRIBUTING.md](CONTRIBUTING.md)，安全边界和漏洞报告方式见 [SECURITY.md](SECURITY.md)。我们将动态列表、动作后置条件、检查点恢复、证据记录和 Host 上下文管理视为项目的常规能力，其行为契约分别写在[可靠性文档](docs/reliability.md)和[证据文档](docs/evidence.md)中。
 
+## 🙏 致谢
+
+感谢 [opencode-browser](https://github.com/oktton/opencode-browser) 项目的作者与贡献者，慷慨分享他们的代码与见解。
+
 ## 许可证
 
 本项目使用 [MIT License](LICENSE)。
@@ -745,6 +749,10 @@ The working-memory flow is **observe → write important findings in the same as
 `browser_observe` creates a current full baseline without reloading, with optional Markdown action references. Script helpers include `__data`, `__records`, `__skeleton`, and browser-free `guide: true`. Child-frame CDP routing, frame-scoped references, URL-change notices, and bounded script evidence extend the same execution contract.
 
 Our opt-in `dom:regression` capture/verify workflow and the separate `/diagnostics` export provide socket-free DOM regression and CDP statistics. Recordings contain local page data and are not general Agent evaluation. See [reliability and verification](docs/reliability.md) and [the evidence state model](docs/evidence.md).
+
+## 🙏 Acknowledgements
+
+We thank the authors and contributors of [opencode-browser](https://github.com/oktton/opencode-browser) for generously sharing their code and insights.
 
 ## License
 
