@@ -1,3 +1,4 @@
+import { isBrowserSource } from "./browser-message-source.js"
 import { appendBrowserEvent } from "./host-compat.js"
 /** Host-side context policy: append replayable surface replacements before model requests. */
 import type { Session, SessionEvent } from "@deepseek-ai/dsh-session"
@@ -79,14 +80,14 @@ export function prepareBrowserContext(session: Session, runtimeId?: string, esti
     : "[Browser runtime is no longer live; call browser_start and observe again before using element references.]"
   const recoveryNodes = session.surface.nodes.flatMap(seq => {
     const e = events[seq]
-    return e?.type === "user/message" && e.data.source.kind === "plugin" && e.data.source.plugin === RECOVERY_SOURCE ? [e] : []
+    return e?.type === "user/message" && isBrowserSource(e.data.source, RECOVERY_SOURCE) ? [e] : []
   })
   const existingRecovery = recoveryNodes.at(-1)
   if (needsSnapshot || existingRecovery) {
     if (existingRecovery?.data.content.length !== 1 || existingRecovery.data.content[0]?.type !== "text" || existingRecovery.data.content[0].text !== recoveryText) {
       if (existingRecovery) priceReplacement(existingRecovery.seq, existingRecovery.data)
       appendBrowserEvent(session, "user/message", createUserMessage({
-        source: { kind: "plugin", plugin: RECOVERY_SOURCE, form: "snapshot", sections: [{ name: "browser-state", text: recoveryText }] },
+        source: { kind: RECOVERY_SOURCE, form: "snapshot", sections: [{ name: "browser-state", text: recoveryText }] },
         content: [{ type: "text", text: recoveryText }],
       }), existingRecovery ? {
         surfaceOp: { op: "replace", start: existingRecovery.seq, end: existingRecovery.seq },

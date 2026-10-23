@@ -1,5 +1,6 @@
 // Real Cordis + published DSH AgentLoop + Chromium. Only model decisions are deterministic.
 import assert from "node:assert/strict"
+import { createServer } from "node:http"
 import { Context } from "@deepseek-ai/cordis"
 import AgentRegistry from "@deepseek-ai/dsh-agent"
 import AgentLoop from "@deepseek-ai/dsh-agent-loop"
@@ -127,7 +128,38 @@ try {
   assert.notEqual(ctx.browserRuntime.getManager(String(other.id)), ctx.browserRuntime.getManager(String(agent.id)))
   await ctx.browserRuntime.cleanupSession(String(agent.id))
   assert.equal(await ctx.browserRuntime.getManager(String(other.id)).getActiveTab().page.title(), "Independent session")
-  console.log(JSON.stringify({ status: "success", hostRequests: adapter.totalRequests + otherAdapter.totalRequests, browserOperations: results.length + 1, images: imageCount, replayExact: true, isolatedSessions: true }))
+  // Reproduce #1: a failed refresh changes the URL after the last DOM snapshot.
+  const server = createServer((_req, res) => res.end("<title>Refresh fixture</title><h1>Online</h1>"))
+  await new Promise(resolve => server.listen(0, "127.0.0.1", resolve))
+  try {
+    const failureAdapter = new ScriptedAdapter([
+      ["browser_start", { url: `http://127.0.0.1:${server.address().port}/` }],
+      ["browser_refresh", {}],
+      ["browser_observe", {}],
+    ])
+    const stream = failureAdapter.stream.bind(failureAdapter)
+    failureAdapter.stream = async function* (options) {
+      if (this.totalRequests === 1) await new Promise((resolve, reject) => server.close(error => error ? reject(error) : resolve()))
+      yield* stream(options)
+    }
+    ctx.llm.registerAdapter(["failed-refresh"], failureAdapter)
+    const failureAgent = await ctx.agentLoop.create(SessionId("host-browser-failed-refresh"), { provider: "failed-refresh", model: "fixture" })
+    failureAgent.followup(createUserMessage({ source: { kind: "user" }, content: [{ type: "text", text: "Refresh the local fixture, then observe and finish even if navigation fails." }] }))
+    await failureAgent.whenIdle()
+    assert.equal(failureAdapter.totalRequests, 4, "the Agent Loop continues after the failed refresh")
+    const failureEvents = sessionEvents(failureAgent.session)
+    const notice = failureEvents.find(e => e.type === "user/message" && e.data.source.kind === "dsh-browser:state-change" && JSON.stringify(e.data).includes("chrome-error://chromewebdata/"))
+    assert.ok(notice, "the error-page URL is injected as a producer-owned state notice")
+    assert.ok(failureEvents.some(e => e.type === "step/start" && e.seq > notice.seq), "a new step starts after context injection")
+    assert.ok(failureEvents.some(e => e.type === "tool/result" && resultFailed(e)), "the failed navigation remains observable")
+    if (process.env.DSH_TEST_V4_CODEC) {
+      const { releasedV4SessionFormatCodec } = await import(process.env.DSH_TEST_V4_CODEC)
+      for (const session of [agent.session, other.session, failureAgent.session]) {
+        for (const event of sessionEvents(session)) releasedV4SessionFormatCodec.encodeEvent(event)
+      }
+    }
+    console.log(JSON.stringify({ status: "success", hostRequests: adapter.totalRequests + otherAdapter.totalRequests + failureAdapter.totalRequests, browserOperations: results.length + 4, images: imageCount, replayExact: true, isolatedSessions: true, failedRefreshContinues: true, v4Encoded: !!process.env.DSH_TEST_V4_CODEC }))
+  } finally { if (server.listening) await new Promise(resolve => server.close(resolve)) }
 } finally {
   if (disposeBrowser) await disposeBrowser()
   await ctx.fiber.dispose()

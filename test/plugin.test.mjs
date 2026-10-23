@@ -282,6 +282,30 @@ test("host context policy runs after downstream pre-step work and respects cance
   assert.throws(() => runtime.getManager("late-session"), /runtime is closing/)
 })
 
+test("context failures warn and allow the step while cancellation and downstream errors propagate", async () => {
+  const { context, listeners } = harnessContext()
+  const warnings = []
+  context.logger.warn = text => warnings.push(text)
+  const dispose = apply(context, { approvalMode: "off" })
+  const controller = new AbortController()
+  const payload = { agent: { session: Session.create(SessionId("context-failure")) }, signal: controller.signal }
+  const enter = { kind: "enter" }
+  const hook = listeners.get("agent/pre-step")
+  try {
+    context.browserRuntime.prepareContext = () => { throw new Error("context unavailable") }
+    assert.equal(await hook(payload, async () => enter), enter)
+    assert.equal(warnings.length, 1)
+    assert.match(warnings[0], /Browser context preparation failed.*context unavailable/)
+    await assert.rejects(hook(payload, async () => { throw new Error("downstream failed") }), /downstream failed/)
+    context.browserRuntime.prepareContext = () => {
+      controller.abort(new Error("cancel during context"))
+      throw new Error("context unavailable")
+    }
+    await assert.rejects(hook(payload, async () => enter), /cancel during context/)
+    assert.equal(warnings.length, 1)
+  } finally { await dispose() }
+})
+
 test("mutating tools fail closed when the DSH approval service is absent", async () => {
   const { context, registered } = harnessContext()
   const dispose = apply(context, { approvalMode: "mutating", headless: true })

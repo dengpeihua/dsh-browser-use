@@ -1,3 +1,4 @@
+import { isBrowserSource } from "./browser-message-source.js"
 import { appendBrowserEvent } from "./host-compat.js"
 /** Replayable visit bundles, source references and turn-scoped field coverage. */
 import { createHash } from "node:crypto"
@@ -130,7 +131,7 @@ interface TaskRecord { recordId: string; fields: Array<{ name: string; sourceRef
 type EvidenceEvent = { kind: "task"; task: EvidenceTask } | { kind: "records"; turn: number; records: TaskRecord[] }
 function entries(session: Session): EvidenceEvent[] {
   return browserSessionEvents(session).flatMap(event => {
-    if (event.type !== "user/message" || event.surfaceOp !== "append" || event.data.source.kind !== "plugin" || event.data.source.plugin !== SOURCE) return []
+    if (event.type !== "user/message" || event.surfaceOp !== "append" || !isBrowserSource(event.data.source, SOURCE)) return []
     const content = event.data.content[0]
     if (content?.type !== "text") throw new Error("Malformed evidence record")
     const data = JSON.parse(content.text)
@@ -139,7 +140,7 @@ function entries(session: Session): EvidenceEvent[] {
   })
 }
 function save(session: Session, payload: EvidenceEvent, defer?: (m: UserMessage) => void): void {
-  const message = createUserMessage({ source: { kind: "plugin", plugin: SOURCE, form: "notice", summary: "Browser evidence updated" }, content: [{ type: "text", text: JSON.stringify({ version: 1, payload }) }] })
+  const message = createUserMessage({ source: { kind: SOURCE, form: "notice", summary: "Browser evidence updated" }, content: [{ type: "text", text: JSON.stringify({ version: 1, payload }) }] })
   if (defer) defer(message)
   else appendBrowserEvent(session, "user/message", message, { surfaceOp: "append" })
 }

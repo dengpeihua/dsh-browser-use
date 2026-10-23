@@ -59,7 +59,12 @@ export const apply = (ctx: Context, config: ConfigInput = {}) => {
     if (decision.kind === "enter") {
       if (accessFailureCount(agent.session, evidenceTurn(agent.session)) >= 3) throw new Error("BROWSER_ACCESS_BLOCKED: Repeated website access failures; stop this task and report the limitation.")
       const meter = ctx.get("tokenMeter")
-      runtime.prepareContext(agent.session, meter ? message => meter.estimateMessage(hostMessage(agent.session, message)) : undefined)
+      try {
+        runtime.prepareContext(agent.session, meter ? message => meter.estimateMessage(hostMessage(agent.session, message)) : undefined)
+      } catch (error) {
+        signal.throwIfAborted()
+        ctx.logger?.warn?.(`[dsh-browser] Browser context preparation failed: ${String(error)}`)
+      }
     }
     return decision
   })

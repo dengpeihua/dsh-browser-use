@@ -1,3 +1,4 @@
+import { isBrowserSource } from "./browser-message-source.js"
 import { appendBrowserEvent } from "./host-compat.js"
 /** Session-local task facts, grounded in archived observations and replayed independently of DOM retention. */
 import { createHash } from "node:crypto"
@@ -33,7 +34,7 @@ function string(value: unknown, name: string, max: number): string {
 }
 
 function factRecord(event: SessionEvent): { version: 1; reviews: unknown } | undefined {
-  if (event.type !== "user/message" || event.surfaceOp !== "append" || event.data.source.kind !== "plugin" || event.data.source.plugin !== FACT_SOURCE) return
+  if (event.type !== "user/message" || event.surfaceOp !== "append" || !isBrowserSource(event.data.source, FACT_SOURCE)) return
   const block = event.data.content[0]
   if (event.data.content.length !== 1 || block?.type !== "text") throw new Error("Malformed browser fact record")
   const data: unknown = JSON.parse(block.text)
@@ -139,7 +140,7 @@ export function recordBrowserFacts(session: Session, input: unknown, deferContex
   // Use a host-native event envelope: unknown custom event types cannot cold-load on the pinned host.
   if (!duplicate) {
     const message = createUserMessage({
-      source: { kind: "plugin", plugin: FACT_SOURCE, form: "notice", summary: "Browser task facts recorded" },
+      source: { kind: FACT_SOURCE, form: "notice", summary: "Browser task facts recorded" },
       content: [{ type: "text", text: JSON.stringify({ version: 1, reviews }) }],
     })
     // During a tool call, the host commits deferred contexts after all tool results.
@@ -216,7 +217,7 @@ export function prepareBrowserMemory(session: Session, estimateMessage?: (messag
       shadowedRange: { start: seq, end: seq }, shadowedSeqs: [seq], shadowedTokenCount: estimateMessage(event.data),
     })
     appendBrowserEvent(session, "user/message", createUserMessage({
-      source: { kind: "plugin", plugin: FACT_SOURCE, form: "notice", summary: "Browser task facts stored" },
+      source: { kind: FACT_SOURCE, form: "notice", summary: "Browser task facts stored" },
       content: [{ type: "text", text: "[Browser task facts stored; use the task memory snapshot or browser_recall.]" }],
     }), { surfaceOp: { op: "replace", start: seq, end: seq }, sourceEventSeqs: [seq] })
   }
@@ -232,12 +233,12 @@ export function prepareBrowserMemory(session: Session, estimateMessage?: (messag
   lines.push("Visit bundles and task field coverage are in the browser evidence snapshot; browser_recall mode bundles lists archived visits. No per-observation review is required.")
   const text = lines.join("\n")
   const events = browserSessionEvents(session)
-  const previous = session.surface.nodes.map(seq => events[seq]).find(e => e?.type === "user/message" && e.data.source.kind === "plugin" && e.data.source.plugin === MEMORY_SOURCE)
+  const previous = session.surface.nodes.map(seq => events[seq]).find(e => e?.type === "user/message" && isBrowserSource(e.data.source, MEMORY_SOURCE))
   if (previous?.type === "user/message" && previous.data.content.length === 1 && previous.data.content[0]?.type === "text" && previous.data.content[0].text === text) return
   if (previous?.type === "user/message" && estimateMessage) appendBrowserEvent(session, "compaction/prune", {
     shadowedRange: { start: previous.seq, end: previous.seq }, shadowedSeqs: [previous.seq], shadowedTokenCount: estimateMessage(previous.data),
   })
   appendBrowserEvent(session, "user/message", createUserMessage({
-    source: { kind: "plugin", plugin: MEMORY_SOURCE, form: "snapshot", sections: [{ name: "browser-task-memory", text }] }, content: [{ type: "text", text }],
+    source: { kind: MEMORY_SOURCE, form: "snapshot", sections: [{ name: "browser-task-memory", text }] }, content: [{ type: "text", text }],
   }), previous ? { surfaceOp: { op: "replace", start: previous.seq, end: previous.seq }, sourceEventSeqs: [previous.seq] } : { surfaceOp: "append" })
 }

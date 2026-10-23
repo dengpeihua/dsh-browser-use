@@ -209,7 +209,7 @@ test("memory output is paginated without deleting old facts and rejects invalid 
   const updated = observe(s, "Product0", 999)
   browser.recordBrowserFacts(s, { observations: [review(updated, "Product0", 999)] })
   browser.prepareBrowserMemory(s)
-  const snapshot = s.deriveMessages().find(m => m.source.kind === "plugin" && m.source.plugin === "dsh-browser:task-memory")
+  const snapshot = s.deriveMessages().find(m => m.source.kind === "dsh-browser:task-memory")
   assert.match(snapshot.content[0].text, /"entity":"Product0".*"value":"999 yuan"/, "updated facts must return to the recent working-memory preview")
 })
 
