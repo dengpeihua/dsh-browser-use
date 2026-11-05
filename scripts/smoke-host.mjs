@@ -10,8 +10,12 @@ import LlmRuntime, { LlmAdapter, createUserMessage } from "@deepseek-ai/dsh-llm"
 import SystemPrompt from "@deepseek-ai/dsh-system-prompt"
 import ToolRuntime from "@deepseek-ai/dsh-tools"
 import TokenMeter from "@deepseek-ai/dsh-token-meter"
-import * as browserPlugin from "../lib/index.js"
+import { pathToFileURL } from "node:url"
 import { assertToolProtocol } from "./assert-tool-protocol.mjs"
+
+const browserPlugin = await import(process.env.DSH_TEST_PLUGIN_ROOT
+  ? pathToFileURL(`${process.env.DSH_TEST_PLUGIN_ROOT}/lib/index.js`).href
+  : "../lib/index.js")
 
 const sessionEvents = session => typeof session.snapshotEvents === "function" ? session.snapshotEvents() : session.events
 const resultFailed = event => event.data.message.role === "tool" ? event.data.message.isError : event.data.message.content[0].isError
@@ -77,6 +81,11 @@ let imageCount = 0
 let disposeBrowser
 try {
   for (const plugin of [LlmRuntime, SessionStore, SessionProjections, SystemPrompt, ToolRuntime, AgentRegistry, TokenMeter]) await ctx.plugin(plugin)
+  // DSH 0.2.2 separates executor selection from the tool registry. Older hosts
+  // execute natively without this service; never swallow a missing modern executor.
+  if (typeof ctx.tools.setExecutor === "function") {
+    await ctx.plugin(await import("@deepseek-ai/dsh-tool-executor-native"))
+  }
   await ctx.plugin(AgentLoop, { agents: [] })
   ctx.llm.registerAdapter(["fixture"], adapter)
   ctx.provide("attachments", {

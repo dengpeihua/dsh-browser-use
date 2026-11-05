@@ -7,7 +7,7 @@ import { satisfies } from "semver"
 const packageJson = JSON.parse(await readFile(new URL("../package.json", import.meta.url), "utf8"))
 const readme = await readFile(new URL("../README.md", import.meta.url), "utf8")
 const patch = await readFile(new URL("../cordis.patch.yml", import.meta.url), "utf8")
-const expectedPackageDocumentation = ["AGENTS.md", "CONTRIBUTING.md", "LICENSE", "README.md", "SECURITY.md", "assets/benchmark/judge-prompt.md", "docs/evaluation.md", "docs/evidence.md", "docs/reliability.md"]
+const expectedPackageDocumentation = ["AGENTS.md", "CONTRIBUTING.md", "LICENSE", "README.md", "SECURITY.md", "assets/benchmark/judge-prompt.md", "docs/evaluation.md", "docs/evidence.md", "docs/host-compatibility.md", "docs/reliability.md"]
 const expectedRepositoryDocumentation = expectedPackageDocumentation
 
 async function findDocumentation(directory, prefix = "") {
@@ -74,10 +74,14 @@ test("DSH peers require the verified host surface-replacement contract", () => {
     "@deepseek-ai/dsh-user-approval",
     "@deepseek-ai/dsh-agent",
     "@deepseek-ai/dsh-llm",
+    "@deepseek-ai/dsh-compaction",
+    "@deepseek-ai/dsh-token-meter",
   ]
   for (const name of dshPeers) {
     const range = packageJson.peerDependencies[name]
     assert.equal(satisfies("0.1.1-rc.2", range), false, `${name} must not advertise an unverified old host`)
+    assert.equal(satisfies("0.2.2-rc.1", range), true, `${name} must support the verified current desktop host`)
+    assert.equal(satisfies("0.2.2-rc.2", range), false, `${name} must not advertise unverified prereleases`)
     assert.equal(satisfies("0.2.1-rc.2", range), true, `${name} must support the verified desktop host`)
     assert.equal(satisfies("0.1.2-alpha.2", range), true, `${name} must support the locked host`)
   }

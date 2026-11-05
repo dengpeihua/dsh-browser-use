@@ -79,7 +79,9 @@ npm install --global pnpm
 
 ### 从桌面端插件市场安装
 
-已验证 DSH `0.2.1-rc.2` 桌面宿主，并保留 `0.1.2-alpha.2` 支持；插件会适配两版的工具结果消息和上下文替换接口。
+已验证 DSH `0.2.2-rc.1` 桌面宿主，并保留 `0.2.1-rc.2` 和 `0.1.2-alpha.2` 支持；插件会适配宿主的工具结果消息和上下文替换接口。`0.2.2-rc.1` 的验证包含真实 Agent Loop、Chromium 和 v4 事件编码，具体范围见[宿主兼容性文档](docs/host-compatibility.md)。
+
+如果已安装版本显示“与当前 dsh 不兼容”，请在市场中更新此插件，确认来源指向最新 GitHub 提交，然后在当前任务结束后重启 DSH。旧安装固定在原提交，仅重启不会更新兼容范围。
 
 搜索 `dsh-browser-use`，确认仓库为 `dengpeihua/dsh-browser-use` 后安装。仓库附带预构建的 `lib/`，pnpm 无需在安装时编译本插件或授权其构建脚本。安装仍需联网下载运行依赖。
 
@@ -547,7 +549,7 @@ npm install --global pnpm
 
 ### Install the current local build
 
-The plugin supports the verified DSH `0.2.1-rc.2` desktop host and `0.1.2-alpha.2`. It adapts tool-result messages and context-replacement bounds to each host contract.
+The plugin supports the verified DSH `0.2.2-rc.1` desktop host, `0.2.1-rc.2`, and `0.1.2-alpha.2`. It adapts tool-result messages and context-replacement bounds to each host contract. Verification on `0.2.2-rc.1` covers the real Agent Loop, Chromium, and v4 event encoding; see [host compatibility](docs/host-compatibility.md).
 
 The package has not been published to npm yet. Obtain this repository's source, build a standard npm tarball, and add it to the DSH `web` profile:
 

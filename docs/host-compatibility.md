@@ -41,3 +41,26 @@ modify desktop conversations, call a paid model, or exercise desktop UI interact
 
 After rebuilding a locally linked plugin, restart the host when no task is running
 to load the new code in the desktop process.
+
+## DSH 0.2.2-rc.1 desktop (2026-11-05)
+
+The manifest explicitly accepts `0.2.2-rc.1` for every DSH peer, alongside
+`0.2.1-rc.2` and `0.1.2-alpha.2`. Other prereleases remain unadvertised.
+The marketplace checks this manifest before activating the plugin; an installation
+pinned to an older GitHub commit must be updated before restarting the host.
+
+This host separates the native tool executor from the tool registry. Its desktop
+composition already supplies that executor. The standalone smoke harness loads
+`@deepseek-ai/dsh-tool-executor-native` when `tools.setExecutor` is available;
+it does not change the executor selected by a running desktop.
+
+The installed desktop packages passed the source regressions and real Chromium
+Agent Loop smoke: 18 model requests, 15 browser operations, two images, exact
+Session replay, Session isolation, failed-refresh continuation, and v4 encoding
+of all generated events. Model decisions are deterministic; this is not a paid
+provider or external-website reliability claim.
+
+To exercise an installed plugin rather than the checkout, set `DSH_TEST_PLUGIN_ROOT`
+to its package directory before running `scripts/smoke-host.mjs` with the loader
+above. Leave it unset to test the checkout. Package metadata regression tests also
+reject the original incompatible range and unverified future prereleases.
