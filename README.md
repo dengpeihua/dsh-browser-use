@@ -1,4 +1,4 @@
-![dsh-browser — Native browser agent for DeepSeek Harness](assets/dsh-browser-banner-v3.png)
+![dsh-browser — Native browser agent for DeepSeek Harness](assets/dsh-browser-banner.png)
 
 <h1 align="center">dsh-browser-use</h1>
 
